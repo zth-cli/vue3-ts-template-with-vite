@@ -1,0 +1,8 @@
+{
+  "Version": "1.0.0",
+  "Title": "ZerotoHeroAdmin",
+  "FixedHeader": true,
+  "HiddenSideBar": false,
+  "KeepAlive": true,
+  "Layout": "vertical-dark"
+}
