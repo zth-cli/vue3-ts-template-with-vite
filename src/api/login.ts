@@ -1,5 +1,5 @@
 import qs from "qs";
-import { http } from "../utils/http";
+import { http } from "@/utils/http";
 
 // 获取验证码
 export const getVerify = (): Promise<IRes<IGiftInfo>> => {

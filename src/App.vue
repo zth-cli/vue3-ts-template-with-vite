@@ -1,5 +1,5 @@
 <script setup lang="ts">
-console.log("hello script setup");
+console.log('hello script setup')
 </script>
 
 <template>
@@ -10,5 +10,9 @@ console.log("hello script setup");
   font-family: Avenir, Helvetica, Arial, sans-serif;
   width: 100%;
   height: 100vh;
+  .content {
+    height: 100%;
+    width: 100%;
+  }
 }
 </style>

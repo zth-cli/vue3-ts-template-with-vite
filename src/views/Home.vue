@@ -1,7 +1,7 @@
 <!--
  * @Author: 阮志雄
  * @Date: 2021-10-25 14:25:11
- * @LastEditTime: 2021-11-22 17:29:52
+ * @LastEditTime: 2021-11-23 16:46:26
  * @LastEditors: 阮志雄
  * @Description: In User Settings Edit
  * @FilePath: \vue3-template-with-ts\src\views\Home.vue
@@ -24,7 +24,7 @@ onMounted(() => {
   console.log(getConfig());
   
   
-  console.log(childRef.value.theme);
+  console.log(childRef.value);
 })
 const childRef = ref<InstanceType<typeof child>>(null)
 const getData = (id: number) => {

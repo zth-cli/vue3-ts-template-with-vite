@@ -1,7 +1,7 @@
 <template>
   <div class="curd_view">
-    <div class=" curd_tree_view" v-if="treeOptions">
-      <lazy-tree
+    <div class="curd_tree_view" v-if="treeOptions">
+      <!-- <lazy-tree
         v-if="treeOptions.isLazyLoad"
         @changeSatus="trigger"
         @nodeClick="treeNodeClick"
@@ -17,31 +17,32 @@
         <template v-slot:searchselect>
           <slot name="searchselect"></slot>
         </template>
-      </lazy-tree>
+      </lazy-tree> -->
       <Tree
-        v-else
-        @changeSatus="trigger"
+        @changeSatus="triggerTree"
         @nodeClick="treeNodeClick"
-        :renderFunction="treeOptions.renderContent"
         :dataUrl="treeOptions.dataUrl"
         :search="treeOptions.search"
-      ></Tree>
+      >
+        <template #default="{ node, data }">
+          <slot v-bind="{ node, data }">
+            <i class="el-icon-folder"> </i>
+            <span>{{ node[treeOptions.treeProps['label']] }}</span>
+          </slot>
+        </template>
+      </Tree>
     </div>
 
     <div class="curd_table_view">
-      <div
-        :class="[
-          { boxShadow: tableOptions.mode !== 'simple' },
-          { mb: tableOptions.mode !== 'simple' },
-        ]"
-      >
-        <FromDynamic
+      <div :class="[{ boxShadow: tableOptions.mode !== 'simple' }, { mb: tableOptions.mode !== 'simple' }]">
+        <ConditionBar
           v-if="showSearchDynamic"
           :width="fromWidth"
           :mode="tableOptions.mode"
-          :searchDynamic="fromOptions"
+          :fromOptions="fromOptions"
           @query="query"
-          @params-change="paramsChange">
+          @params-change="paramsChange"
+        >
           <template v-slot:tool>
             <slot name="tool"></slot>
           </template>
@@ -51,7 +52,7 @@
           <template v-slot:ltool>
             <slot name="ltool"></slot>
           </template>
-        </FromDynamic>
+        </ConditionBar>
       </div>
       <div :class="{ boxShadow: tableOptions.mode !== 'simple' }">
         <CurdTable
@@ -60,10 +61,9 @@
           :columns="tableOptions.columns"
           :lazy="tableOptions.lazy"
           :dataUrl="tableOptions.dataUrl"
-          :limit="tableOptions.limit"
+          :limit="tableOptions.pageSize"
           :isPrivate="tableOptions.isPrivate"
           :params="tableOptions.params"
-          :local="tableOptions.local"
           :height="tableOptions.height"
           :rowKey="tableOptions.rowKey"
           :stripe="tableOptions.stripe"
@@ -91,13 +91,10 @@
           <!-- 自定义表格slot -->
           <template v-for="item in slotArr" v-slot:[item.slot]="Props">
             <!--  父组件调用  老版本为：slot-scope="{ row, index }" -->
-            <slot :name="item.slot" :rowData="Props.rowData"></slot>
+            <slot :name="item.slot" v-bind="Props"></slot>
           </template>
-          <template
-            v-for="item in headerSlotArr"
-            v-slot:[item.headerSlot]="Props"
-          >
-            <slot :name="item.headerSlot" :rowData="Props.rowData"></slot>
+          <template v-for="item in headerSlotArr" v-slot:[item.headerSlot]="Props">
+            <slot :name="item.headerSlot" v-bind="Props"></slot>
           </template>
           <template v-slot:panel>
             <slot name="panel"></slot>
@@ -108,158 +105,141 @@
   </div>
 </template>
 
-<script lang='ts'>
-import Tree from './Tree'
-import LazyTree from './LazyTree'
-import CurdTable from './CurdTable'
-import FromDynamic from './FromDynamic'
+<script lang="ts" setup>
+import { Tree } from './Tree'
+import LazyTree from './LazyTree.vue'
+import { CurdTable } from './CurdTable'
+import { ConditionBar } from './ConditionBar'
+import { emits } from './CurdTable/enums'
+import { reactive, ref } from 'vue'
 
-export default {
-  data () {
+const tableView = ref(null)
+let toggle = ref<boolean>(false)
+let slotArr = ref<Array<any>>([])
+let headerSlotArr = ref<Array<any>>([])
+
+interface IcurdView {
+  treeOptions?: ItreeProps
+  tableOptions?: ItableProps
+  fromOptions?: Array<formItem>
+  fromWidth?: string
+  showSearchDynamic?: boolean
+}
+const props = withDefaults(defineProps<IcurdView>(), {
+  showSearchDynamic: true,
+  treeOptions: () => {
     return {
-      slotArr: [],
-      headerSlotArr: [],
-      toggle: true
-    }
-  },
-  props: {
-    treeOptions: {},
-    tableOptions: {},
-    fromOptions: {
-      type: Array,
-      default: function () {
-        return []
-      }
-    }, // 查询条件item，Array类型
-    fromWidth: {}, // 查询框得长度，String类型
-    showSearchDynamic: { // 是否显示查询框，提供某些情况下查询完全自定义
-      type: Boolean,
-      default: true
-    }
-  },
-  components: {
-    CurdTable,
-    Tree,
-    FromDynamic,
-    LazyTree
-  },
-  created () {
-    this.getSlot()
-    this.getHeaderSlot()
-  },
-  methods: {
-    // 获取table数据,推荐此做法获取tableData
-    getTableData (rows) {
-      this.$emit('getTableData', rows)
-    },
-    tableData () {
-      // 此方法会直接暴露tableData，可对表格数据直接增删操作，建议在getTableData事件之后获取数据
-      return this.$refs.tableView.tableData
-    },
-    rowClick (row) {
-      this.$emit('row-click', row)
-    },
-    rowDblclick (row) {
-      this.$emit('row-dblclick', row)
-    },
-    selectionChange (selection) {
-      if (selection) {
-        this.$emit('selection-change', selection)
-      }
-    },
-    toggleRowSelection (rows) {
-      this.$refs.tableView.toggleRowSelection(rows)
-    },
-    toggleAllSelection () {
-      // 全选
-      this.$refs.tableView.toggleAllSelection()
-    },
-    handleCurrentChange (row) {
-      this.$emit('current-change', row)
-    },
-    deleteRows (rows) {
-      this.$emit('row-delete', rows)
-    },
-    editRow (row) {
-      this.$emit('row-edit', row)
-    },
-    addRow (bool) {
-      this.$emit('row-add', bool)
-    },
-    paramsChange (params) {
-      this.$emit('params-change', params)
-      this.tableOptions.params = Object.assign(
-        {},
-        this.tableOptions.params,
-        params
-      )
-      console.log(this.tableOptions.params)
-    },
-    trigger (toggle) {
-      this.toggle = toggle
-    },
-    treeNodeClick ({ data, node }) {
-      this.$emit('node-click', { data, node })
-    },
-    query () {
-      this.$refs.tableView.queryData()
-    },
-    refresh () {
-      this.$refs.tableView.queryData()
-    },
-    getSlot () {
-      var that = this
-      const mColumns = this.tableOptions.columns
-      function Maps (mColumns) {
-        mColumns.forEach((item) => {
-          const keys = Object.keys(item)
-          if (keys.includes('slot')) {
-            that.slotArr.push(item)
-            // console.log("slot=", that.slotArr);
-          }
-          if (item.children && item.children.length > 0) {
-            Maps(item.children)
-          }
-        })
-      }
-      Maps(mColumns)
-    },
-    getHeaderSlot () {
-      var that = this
-      const mColumns = this.tableOptions.columns
-      function Maps (mColumns) {
-        mColumns.forEach((item) => {
-          const keys = Object.keys(item)
-          if (keys.includes('headerSlot')) {
-            that.headerSlotArr.push(item)
-          }
-          if (item.children && item.children.length > 0) {
-            Maps(item.children)
-          }
-        })
-      }
-      Maps(mColumns)
-    },
-    nodeExpand (data, node) {
-      this.$emit('node-expand', data, node)
-    },
-    tabClick (val) {
-      this.$emit('tab-click', val)
+      search: true,
+      treeProps: { children: 'children', label: 'label', disabled: false },
+      defaultExpandAll: false,
+      expandOnclickNode: true,
+      dataUrl: ''
     }
   }
-  // watch: {
-  //   tableOptions: {
-  //     handler: function (val) {
-  //       console.log(val.params,'默认参数改变')
-  //       this.$refs.tableView.queryData();
-  //     },
-  //     deep: true,
-  //   },
+})
 
-  // },
+const emit = defineEmits(emits)
+
+// 获取table数据,推荐此做法获取tableData
+const getTableData = (rows) => {
+  emit('getTableData', rows)
 }
+const tableData = () => {
+  // 此方法会直接暴露tableData，可对表格数据直接增删操作，建议在getTableData事件之后获取数据
+  return tableView.value.tableData
+}
+const rowClick = (row) => {
+  emit('row-click', row)
+}
+const rowDblclick = (row) => {
+  emit('row-dblclick', row)
+}
+const selectionChange = (selection) => {
+  if (selection) {
+    emit('selection-change', selection)
+  }
+}
+const toggleRowSelection = (rows) => {
+  tableView.value.toggleRowSelection(rows)
+}
+const toggleAllSelection = () => {
+  // 全选
+  tableView.value.toggleAllSelection()
+}
+defineExpose({
+  toggleRowSelection,
+  toggleAllSelection
+})
+const handleCurrentChange = (row) => {
+  emit('current-change', row)
+}
+const deleteRows = (rows) => {
+  emit('row-delete', rows)
+}
+const editRow = (row) => {
+  emit('row-edit', row)
+}
+const addRow = (bool) => {
+  emit('row-add', bool)
+}
+const paramsChange = (params) => {
+  emit('params-change', params)
+  props.tableOptions.params = Object.assign({}, props.tableOptions.params, params)
+  console.log(props.tableOptions.params)
+}
+const triggerTree = (bool: boolean) => {
+  toggle.value = bool
+}
+const treeNodeClick = ({ data, node }) => {
+  emit('node-click', { data, node })
+}
+const query = () => {
+  tableView.value.queryData()
+}
+const refresh = () => {
+  tableView.value.queryData()
+}
+const getSlot = () => {
+  const mColumns = props.tableOptions.columns
+  function Maps(mColumns) {
+    mColumns.forEach((item) => {
+      const keys = Object.keys(item)
+      if (keys.includes('slot')) {
+        slotArr.value.push(item)
+        // console.log("slot=", that.slotArr);
+      }
+      if (item.childrens && item.childrens.length > 0) {
+        Maps(item.childrens)
+      }
+    })
+  }
+  Maps(mColumns)
+}
+const getHeaderSlot = () => {
+  const mColumns = props.tableOptions.columns
+  function Maps(mColumns) {
+    mColumns.forEach((item) => {
+      const keys = Object.keys(item)
+      if (keys.includes('headerSlot')) {
+        headerSlotArr.value.push(item)
+      }
+      if (item.childrens && item.childrens.length > 0) {
+        Maps(item.childrens)
+      }
+    })
+  }
+  Maps(mColumns)
+}
+const nodeExpand = (data, node) => {
+  emit('node-expand', data, node)
+}
+const tabClick = (val) => {
+  emit('tab-click', val)
+}
+getSlot()
+getHeaderSlot()
 </script>
-<style lang='scss'>
+<style lang="scss">
 .curd_view {
   display: flex;
   height: 100%;
