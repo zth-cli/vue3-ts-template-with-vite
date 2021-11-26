@@ -12,7 +12,7 @@ const Menus = {
     routes: JSON.parse(localStorage.getItem("menu")) || [],
   }),
   mutations: {
-    [SET_USERMENU]: (state, menu) => {
+    [SET_USERMENU]: (state: { routes: any; }, menu: any) => {
       state.routes = menu;
       // localStorage.setItem('menu', JSON.stringify(menu))
     },

@@ -1,32 +1,26 @@
 <template>
   <el-container class="layout">
     <el-aside width="auto">
-      <Slidebar></Slidebar>
+      <Menu></Menu>
     </el-aside>
-    <el-container style="overflow: hidden;position: relative;">
+    <el-container style="overflow: hidden; position: relative">
       <el-header class="zth-header">
         <Header></Header>
       </el-header>
       <el-main class="zth-main">
         <!-- <Tags></Tags> -->
-        <router-view v-slot="{ Component }">
-          <transition name="slide-fade">
-            <component class="child-view" :is="Component" />
-            <!-- <keep-alive>
-              
-            </keep-alive> -->
-          </transition>
-        </router-view>
+       <MainView/>
       </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script lang="ts" setup>
-import { RouterView } from "vue-router"
-import Slidebar from "./Slidebar.vue";
-import Header from "./Header.vue";
-import Tags from "./Tags.vue";
+import { RouterView } from 'vue-router'
+import { Menu } from './Menu'
+import { Header } from './Header'
+import { MainView } from './Main'
+import { Tags } from './Tags'
 </script>
 <style lang="scss">
 .layout {

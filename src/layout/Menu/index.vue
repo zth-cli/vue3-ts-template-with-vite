@@ -41,7 +41,7 @@
 import { ref, computed } from 'vue';
 import { useStore } from 'vuex';
 // import routeArr from '../mock/router'
-import bus from '../utils/bus'
+import bus from '../../utils/bus'
 const isCollapse = ref<boolean>(false)
 const store = useStore()
 const routeArr = computed(()=> store.getters.routes)

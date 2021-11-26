@@ -9,6 +9,8 @@ import axios, {
 } from "axios";
 import { genConfig } from "./config";
 import { transformConfigByMethod } from "./utils";
+import { httpStatus } from './httpStatus'
+import { ElMessage } from 'element-plus'
 
 type cancelTokenItem = {
   cancelKey: string;
@@ -113,6 +115,12 @@ class FetchHttp {
         }
         $error.isCancelRequest = axios.isCancel($error);
         // 所有的响应异常 区分来源为取消请求/非取消请求
+        // httpStatus
+        if (!$error.isCancelRequest) {
+          httpStatus(error.response && error.response.status, '', ElMessage);
+        } else {
+          console.warn(error, '请求被取消！');
+        }
         return Promise.reject($error);
       }
     );
