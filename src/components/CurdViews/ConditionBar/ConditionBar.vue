@@ -157,10 +157,10 @@
           type="primary"
           icon="el-icon-search"
           v-if="fromOptions.length > 0 && mode !== 'simple'"
-          size="mini"
           @click="query()"
           >查询</el-button
         >
+        <el-button>重置</el-button>
         <slot name="tool"></slot>
       </div>
     </div>
@@ -226,12 +226,8 @@ watch(fromData, (params) => {
 .curd_tool_bar {
   // background-color: #fff;
   @include content-background();
-  @include border-color();
-  @include box-shadow();
-  padding: 10px;
-  border-radius: 4px;
-  border: 1px solid #ebeef5;
-  margin-bottom: 10px;
+  padding: 14px;
+  border-radius: 4px 4px 0 0;
 }
 
 .curd_tool_content {

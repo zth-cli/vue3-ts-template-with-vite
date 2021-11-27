@@ -1,12 +1,17 @@
 <template>
-  <div class="horizontal-menu-main vertical-menu-main" :class="{ isCollapse: isCollapse }">
-    <div class="slide-logo">
-      <!-- <img src="@/assets/img/logo.png" /> -->
+  <div
+    class="horizontal-menu-main"
+    :class="{ isCollapse: isCollapse, 'vertical-menu-main': props.menuMode === 'vertical' }"
+  >
+    <div class="slide-logo" v-if=" props.menuMode === 'vertical'">
+      <img src="@/assets/img/logo.png" />
     </div>
     <el-menu
       class="sidebar-el-menu"
+      :mode="props.menuMode"
       unique-opened
       :collapse="isCollapse"
+      background-color="#275050"
       active-text-color="#ffd04b"
       text-color="#fff"
       router
@@ -18,11 +23,9 @@
               <i class="icons" :class="item.icon"></i>
               <span slot="title">{{ item.title }}</span>
             </template>
-            <el-menu-item
-              v-for="(subItem, i) in item.children"
-              :key="i"
-              :index="subItem.path"
-            >{{ subItem.title }}</el-menu-item>
+            <el-menu-item v-for="(subItem, i) in item.children" :key="i" :index="subItem.path">{{
+              subItem.title
+            }}</el-menu-item>
           </el-sub-menu>
         </template>
         <template v-else>
@@ -38,17 +41,24 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-import { useStore } from 'vuex';
-// import routeArr from '../mock/router'
-import bus from '../../utils/bus'
-const isCollapse = ref<boolean>(false)
+import { BuildPropType } from 'element-plus/lib/utils/props'
+import { ref, computed } from 'vue'
+import { useStore } from 'vuex'
+import bus from '@/utils/bus'
+
 const store = useStore()
-const routeArr = computed(()=> store.getters.routes)
+const isCollapse = ref<boolean>(false)
+
+const routeArr = computed(() => store.getters.routes)
+
+const props = withDefaults(
+  defineProps<{ menuMode?: BuildPropType<StringConstructor, 'horizontal' | 'vertical', unknown> }>(),
+  { menuMode: 'vertical' }
+)
+
 bus.on('swithCollapse', (bool: boolean) => {
-  isCollapse.value = bool
+  props.menuMode === 'vertical' ? (isCollapse.value = bool) : ''
 })
-// const props = withDefaults(defineProps<{ isCollapse: boolean }>(), { isCollapse: false })
 </script>
 
 <style lang="scss">
@@ -83,10 +93,10 @@ bus.on('swithCollapse', (bool: boolean) => {
   }
   .el-menu--horizontal > .el-sub-menu .el-sub-menu__title,
   .el-menu--horizontal > .el-menu-item {
-    height: 50px !important;
-    line-height: 50px !important;
+    // height: 50px !important;
+    // line-height: 50px !important;
     padding: 0 12px !important;
-    font-size: 12px;
+    font-size: 14px;
   }
   .el-menu.el-menu--horizontal {
     border-bottom: none !important;

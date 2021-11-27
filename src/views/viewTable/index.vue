@@ -1,24 +1,22 @@
 <template>
-  <div class="content">
-    <CurdView
-      :tableOptions="tableOptions"
-      :fromOptions="fromOptions"
-      :treeOptions="treeOptions"
-      @selection-change="selectionChange"
-      @node-click="treeNodeClick"
-      @row-add="rowAdd"
-    >
-      <template v-slot:action="{ row }">
-        <el-button size="small" @click="getRow(row)">action</el-button>
-      </template>
-      <template v-slot:proflies="{ row }">
-        <el-button size="small" @click="getRow(row)">proflies</el-button>
-      </template>
-      <template v-slot:operation="{ row }">
-        <el-button size="small" @click="getRow(row)">operation</el-button>
-      </template>
-    </CurdView>
-  </div>
+  <CurdView
+    :tableOptions="tableOptions"
+    :fromOptions="fromOptions"
+    :treeOptions="treeOptions"
+    @selection-change="selectionChange"
+    @node-click="treeNodeClick"
+    @row-add="rowAdd"
+  >
+    <template v-slot:action="{ row }">
+      <el-button size="small" @click="getRow(row)">action</el-button>
+    </template>
+    <template v-slot:proflies="{ row }">
+      <el-button size="small" @click="getRow(row)">proflies</el-button>
+    </template>
+    <template v-slot:operation="{ row }">
+      <el-button size="small" @click="getRow(row)">operation</el-button>
+    </template>
+  </CurdView>
 </template>
 
 <script lang="ts">
@@ -63,7 +61,7 @@ const fromOptions: formItem[] = [
   }
 ]
 const treeOptions: ItreeProps = {
-  dataUrl: '',
+  dataUrl: '/esdaw0',
   search: true,
   treeProps: { children: 'children', label: 'label', disable: 'false' }
 }

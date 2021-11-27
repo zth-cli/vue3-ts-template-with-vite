@@ -228,13 +228,7 @@ ul {
   color: #f6726c;
 }
 
-// 路由动画
-.child-view {
-  position: absolute;
-  width: 100%;
-  overflow: hidden;
-  transition: all 0.8s cubic-bezier(0.55, 0, 0.1, 1);
-}
+
 
 /* 离开 */
 .slide-fade-leave-to {
@@ -244,5 +238,5 @@ ul {
 /* 进入 */
 .slide-fade-enter-from {
   opacity: 0;
-  transform: translateX(-50px);
+  // transform: translateX(-50px);
 }

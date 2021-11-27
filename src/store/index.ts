@@ -1,7 +1,7 @@
 import { InjectionKey } from "vue";
 import { createStore, Store } from "vuex";
 import menuPermission from './modules/permissionMenus'
-import appSetting from './modules/appSetting'
+import appSettings from './modules/appSetting'
 import getters from './getters'
 
 export interface State {
@@ -26,7 +26,7 @@ export const store = createStore({
   },
   modules: {
     menuPermission,
-    appSetting
+    appSettings
   },
   getters
 });

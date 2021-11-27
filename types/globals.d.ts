@@ -1,7 +1,7 @@
 /*
  * @Author: 阮志雄
  * @Date: 2021-10-31 02:16:09
- * @LastEditTime: 2021-11-24 00:17:00
+ * @LastEditTime: 2021-11-27 17:45:28
  * @LastEditors: 阮志雄
  * @Description: In User Settings Edit
  * @FilePath: \vue3-template-with-ts\types\globals.d.ts
@@ -21,7 +21,7 @@ interface IrouteItem {
   componentPath?: string;
   icon?: String;
   parentId: number;
-  id: string;
+  id: number;
   type: number;
   path?: string;
   children?: Array<IrouteItem>;

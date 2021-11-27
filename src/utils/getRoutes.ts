@@ -1,15 +1,15 @@
-import { RouteRecordRaw } from "vue-router";
-const modules = import.meta.glob("../views/**/**.vue"); // 导出views所有的文件
+import { RouteRecordRaw } from 'vue-router'
+const modules = import.meta.glob('../views/**/**.vue') // 导出views所有的文件
 // console.log(modules);
 
-var addRoutes: Array<RouteRecordRaw> = [];
+var addRoutes: Array<RouteRecordRaw> = []
 function addRouter(routeArr: Array<IrouteItem>): RouteConfig[] {
   if (routeArr.length < 1) {
-    return;
+    return
   }
   routeArr.forEach((item) => {
     if (item.type === 1 && item?.children?.length > 0) {
-      addRouter(item.children);
+      addRouter(item.children)
     } else if (item.type !== 1) {
       addRoutes.push({
         path: item.path,
@@ -18,14 +18,16 @@ function addRouter(routeArr: Array<IrouteItem>): RouteConfig[] {
         // component: () => import(/* webpackChunkName: "[request]" */ `@/views/${item.componentPath}.vue`),
         component: modules[`../views/${item.componentPath}.vue`],
         meta: {
+          parentId: item.parentId,
+          rId: item.id,
           title: item.title,
           isCache: false,
-          requiresAuth: true,
-        },
-      });
+          requiresAuth: true
+        }
+      })
     }
-  });
-  return addRoutes;
+  })
+  return addRoutes
 }
 // 处理加载状态
 // function lazyLoad(component: Promise<any>) {
@@ -57,4 +59,4 @@ function addRouter(routeArr: Array<IrouteItem>): RouteConfig[] {
 //     },
 //   });
 // }
-export default addRouter;
+export default addRouter

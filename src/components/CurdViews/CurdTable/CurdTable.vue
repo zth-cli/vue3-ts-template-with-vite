@@ -259,9 +259,7 @@ interface ItableProp {
   background-color: #fff;
   @include content-background();
   padding: 10px;
-  /* margin-top: 20px; */
   border-radius: 4px;
-  @include box-shadow();
   .panel_tool_left {
     float: left;
     color: #666;

@@ -7,11 +7,13 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@element-plus/icons": "^0.0.11",
     "axios": "^0.23.0",
     "dayjs": "^1.10.7",
     "element-plus": "^1.1.0-beta.24",
     "mitt": "^3.0.0",
     "mockjs": "^1.1.0",
+    "nprogress": "^0.2.0",
     "vue": "^3.2.16",
     "vue-router": "^4.0.11",
     "vuex": "^4.0.2"

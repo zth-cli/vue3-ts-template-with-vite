@@ -37,16 +37,18 @@ const Menus = {
               children: routes,
             });
             router.options.routes.push(
+             
               {
-                component: () => import("../../views/error/404.vue"),
+                component: () => import("../../views/Error/404.vue"),
                 meta: { title: "404", isCache: false, requiresAuth: true },
-                name: "404",
-                path: "/404",
+                name: "404error",
+                path: "/404error",
               },
               {
-                path: "/:pathMatch(.*)*",
-                redirect: "/404",
-              }
+                path: "/:path(.*)*",
+                redirect: "/404error",
+              },
+              
             );
             router.options.routes.forEach((item) => {
               router.addRoute(item);

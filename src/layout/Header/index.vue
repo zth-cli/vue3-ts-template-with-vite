@@ -1,12 +1,20 @@
 <template>
-  <div class="header light-header">
+  <div class="header" :class="{ 'light-header': menuMode !== 'horizontal' }">
     <!-- 折叠按钮 -->
-    <div class="collapse-btn">
-      <i @click="handleCollapse()" :class="[collapse ? 'el-icon-s-unfold' : 'el-icon-s-fold']"></i>
+    <div class="collapse-btn" v-if="menuMode !== 'horizontal'">
+      <i
+        @click="handleCollapse()"
+        :class="[collapse ? 'el-icon-s-unfold' : 'el-icon-s-fold']"
+        style="font-size: 20px"
+      ></i>
     </div>
-    <div class="logo ellipsis" title="首页">ZeroToHero</div>
+    <Breadcrumb v-if="menuMode !== 'horizontal'"></Breadcrumb>
+    <!-- <div class="solgan ellipsis" title="首页">ZeroToHero</div> -->
+    <div class="logo" v-if="menuMode === 'horizontal'"><img src="@/assets/img/logo.png" /></div>
     <div class="header-menu">
-      <slot></slot>
+      <slot>
+        <Menu menuMode="horizontal" v-if="menuMode === 'horizontal'"></Menu>
+      </slot>
     </div>
     <div class="header-right">
       <div class="header-user-con">
@@ -14,10 +22,13 @@
         <el-tooltip :content="fullscreen ? `取消全屏` : `全屏`" placement="bottom">
           <i class="el-icon-rank icon-cammand" @click="handleFullScreen"></i>
         </el-tooltip>
-        <el-tooltip content="主题切换" placement="bottom">
-          <i class="el-icon-orange icon-cammand" @click="settingBarStatus = true" v-if="props.showThemeBar"></i>
+        <el-tooltip content="系统设置" placement="bottom">
+          <i class="el-icon-setting icon-cammand" @click="settingBarStatus = true" v-if="props.showThemeBar"></i>
         </el-tooltip>
-        <el-avatar icon="el-icon-user-solid" style="margin-left: 10px"></el-avatar>
+        <el-tooltip content="重载" placement="bottom">
+          <i class="el-icon-refresh-right icon-cammand" @click="reloadPage"></i>
+        </el-tooltip>
+        <el-avatar icon="el-icon-user-solid" :size="36" style="margin-left: 10px"></el-avatar>
         <!-- 用户名下拉菜单 -->
         <el-dropdown class="user-name" trigger="click" @command="handleCommand">
           <span class="el-dropdown-link">
@@ -37,12 +48,16 @@
   </div>
 </template>
 <script setup lang="ts">
+import { Menu } from '../Menu'
+import { Breadcrumb } from '../Breadcrumb'
 import AppSettingBar from './AppSettingBar.vue'
 import { removeAllStorge } from '@/utils/auth'
 import { useRouter, useRoute } from 'vue-router'
-import { Ref, ref, unref } from 'vue'
+import { Ref, ref, unref, computed } from 'vue'
 import bus from '@/utils/bus'
+import { useStore } from 'vuex'
 
+const store = useStore()
 const router = useRouter()
 const route = useRoute()
 
@@ -53,6 +68,8 @@ const collapse: Ref<boolean> = ref(false)
 const props = withDefaults(defineProps<{ showThemeBar?: boolean }>(), {
   showThemeBar: true
 })
+
+const menuMode = computed(() => store.getters.menuMode)
 
 // 收起展开侧边菜单
 const handleCollapse = () => {
@@ -99,9 +116,14 @@ const reloadPage = () => {
   display: flex;
   align-items: center;
   width: 100%;
-  height: 50px;
+  height: 60px;
   font-size: 20px;
   @include font_color(#fff);
+  i {
+    // @include font_color(#fff);
+    font-size: 16px;
+    cursor: pointer;
+  }
   .collapse-btn {
     margin-right: 12px;
     cursor: pointer;
@@ -109,7 +131,7 @@ const reloadPage = () => {
       color: #d66a57;
     }
   }
-  .logo {
+  .solgan {
     cursor: pointer;
     max-width: 250px;
     line-height: 50px;
@@ -117,44 +139,35 @@ const reloadPage = () => {
     // @include font_color(#fff);
     font-weight: bolder;
   }
-  i {
-    // @include font_color(#fff);
-    font-size: 20px;
-    cursor: pointer;
-  }
   .header-menu {
     flex: 1;
   }
   .header-right {
     padding-right: 20px;
-  }
-  .header-user-con {
-    display: flex;
-    height: 50px;
-    align-items: center;
-  }
-  .icon-cammand {
-    transform: rotate(45deg);
-    margin-left: 10px;
-    font-weight: lighter;
-  }
-  .user-name {
-    margin-left: 10px;
-  }
-  .el-dropdown-link {
-    @include font_color(#fff);
-    cursor: pointer;
-  }
-  .el-dropdown-menu__item {
-    text-align: center;
+    .header-user-con {
+      display: flex;
+      align-items: center;
+    }
+    .icon-cammand {
+      transform: rotate(45deg);
+      margin-left: 12px;
+      font-weight: lighter;
+    }
+    .user-name {
+      margin-left: 10px;
+    }
+    .el-dropdown-link {
+      @include font_color(#fff);
+      cursor: pointer;
+    }
+    .el-dropdown-menu__item {
+      text-align: center;
+    }
   }
 }
-
 .light-header {
   @include content-background();
   @include font_color(null);
-  border-bottom: 3px solid transparent;
-  @include border-color();
   .el-dropdown-link {
     @include font_color(null);
     cursor: pointer;

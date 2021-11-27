@@ -127,15 +127,6 @@ interface IcurdView {
 }
 const props = withDefaults(defineProps<IcurdView>(), {
   showSearchDynamic: true,
-  treeOptions: () => {
-    return {
-      search: true,
-      treeProps: { children: 'children', label: 'label', disabled: false },
-      defaultExpandAll: false,
-      expandOnclickNode: true,
-      dataUrl: ''
-    }
-  }
 })
 
 const emit = defineEmits(emits)
@@ -259,8 +250,5 @@ getHeaderSlot()
   // .boxShadow {
   //   @include box-shadow();
   // }
-  .mb {
-    margin-bottom: 12px;
-  }
 }
 </style>

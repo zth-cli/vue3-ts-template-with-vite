@@ -5,7 +5,7 @@ interface IrouteItem {
   componentPath?: string
   icon?: String
   parentId: number
-  id: string
+  id: number
   type: number
   path?: string
   children?: Array<IrouteItem>
@@ -14,10 +14,10 @@ interface IrouteItem {
 }
 const routeArr: Array<IrouteItem> = [
   {
-    title: 'dashboard',
+    title: 'Dashboard',
     icon: 'el-icon-coffee-cup',
     parentId: 0,
-    id: '05',
+    id: 5,
     type: 1,
     children: [
       {
@@ -25,8 +25,8 @@ const routeArr: Array<IrouteItem> = [
         componentName: 'Home',
         componentPath: 'Home',
         icon: 'el-icon-house',
-        parentId: 0,
-        id: '0501',
+        parentId: 5,
+        id: 501,
         type: 3,
         path: '/home',
         mate: {
@@ -38,8 +38,8 @@ const routeArr: Array<IrouteItem> = [
         componentName: 'Analysis',
         componentPath: 'Analysis/index',
         icon: 'el-icon-house',
-        parentId: 0,
-        id: '0502',
+        parentId: 5,
+        id: 502,
         type: 3,
         path: '/analysis'
       }
@@ -49,7 +49,7 @@ const routeArr: Array<IrouteItem> = [
     title: '列表页面',
     icon: 'el-icon-s-grid',
     parentId: 0,
-    id: '06',
+    id: 6,
     type: 1,
     children: [
       {
@@ -58,7 +58,7 @@ const routeArr: Array<IrouteItem> = [
         componentPath: 'BasicTable/index',
         icon: 'el-icon-house',
         parentId: 6,
-        id: '0601',
+        id: 601,
         type: 3,
         path: '/basci-table'
       },
@@ -68,9 +68,36 @@ const routeArr: Array<IrouteItem> = [
         componentPath: 'viewTable/index',
         icon: 'el-icon-house',
         parentId: 6,
-        id: '0602',
+        id: 602,
         type: 3,
         path: '/view-table'
+      }
+    ]
+  },
+  {
+    title: '异常界面',
+    icon: 'el-icon-error',
+    parentId: 0,
+    id: 7,
+    type: 1,
+    children: [
+      {
+        title: '404页面',
+        componentName: '404',
+        componentPath: 'Error/404',
+        parentId: 7,
+        id: 701,
+        type: 3,
+        path: '/404'
+      },
+      {
+        title: '500页面',
+        componentName: '500',
+        componentPath: 'Error/500',
+        parentId: 7,
+        id: 702,
+        type: 3,
+        path: '/500'
       }
     ]
   }

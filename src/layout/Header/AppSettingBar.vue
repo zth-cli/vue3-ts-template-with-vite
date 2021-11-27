@@ -1,52 +1,49 @@
 <template>
-   <el-drawer title="主题配置" :append-to-body='true' v-model="visible"  @close="change" size="300px">
-      <ul class="theme-list">
-        <li class="theme-item">
-          <p>菜单布局</p>
-          <div class="drawer-block-checkbox">
+  <el-drawer title="系统配置" :append-to-body="true" v-model="visible" @close="change" size="300px">
+    <ul class="theme-list">
+      <li class="theme-item">
+        <el-divider><p>菜单布局</p></el-divider>
+        <div class="drawer-block-checkbox">
+          <div
+            class="drawer-block-checkbox-item drawer-block-checkbox-item-slide"
+            @click=" layout.menuMode = 'vertical'; saveTheme('menuMode') ">
+            <i class="selectIcon el-icon-check" v-show="layout.menuMode==='vertical'" />
+          </div>
+          <div
+            class="drawer-block-checkbox-item drawer-block-checkbox-item-top"
+            @click=" layout.menuMode = 'horizontal'; saveTheme('menuMode')" >
+            <i class="selectIcon el-icon-check" v-show="layout.menuMode ==='horizontal'" />
+          </div>
+        </div>
+      </li>
+      <li class="theme-item">
+        <el-divider><p>主题颜色</p></el-divider>
+        <div class="drawer-block-checkbox">
+          <template v-for="(item, index) in colors" :key="index">
             <div
-              class="drawer-block-checkbox-item drawer-block-checkbox-item-slide"
+              class="theme-color-block"
+              :style="{ background: item.color }"
               @click="
-                layout.menuModeisVertical = true;
-                saveTheme()
+                changeTheme(item.theme);
+                themeName = item.theme
               "
             >
-              <i class="selectIcon el-icon-check" v-show="layout.menuModeisVertical" />
+              <i class="selectIcon el-icon-check" v-show="themeName === item.theme" />
             </div>
-            <div
-              class="drawer-block-checkbox-item drawer-block-checkbox-item-top"
-              @click="
-                layout.menuModeisVertical = false;
-                saveTheme()
-              "
-            >
-              <i class="selectIcon el-icon-check" v-show="!layout.menuModeisVertical" />
-            </div>
-          </div>
-        </li>
-        <li class="theme-item">
-          <p>主题颜色</p>
-          <div class="drawer-block-checkbox">
-            <template v-for="(item, index) in colors" :key="index">
-              <div
-                class="theme-color-block"
-                :style="{ background: item.color }"
-                @click="
-                  changeTheme(item.theme);
-                  themeName = item.theme
-                "
-              >
-                <i class="selectIcon el-icon-check" v-show="themeName === item.theme" />
-              </div>
-            </template>
-          </div>
-        </li>
-        <li class="theme-item">
-          <span>多标签</span>
-          <el-checkbox v-model="layout.tagsBar" @change="saveTheme()"></el-checkbox>
-        </li>
-      </ul>
-    </el-drawer>
+          </template>
+        </div>
+      </li>
+      <li class="theme-item">
+        <el-divider><p>界面显示</p></el-divider>
+        <div class="theme-item-sub">
+          <span>多标签:</span>
+          <el-switch v-model="layout.tagsBar" inline-prompt @change="saveTheme('tagsBar')" ></el-switch>
+        </div>
+        
+        <!-- <el-checkbox v-model="layout.tagsBar" @change="saveTheme('tagsBar')"></el-checkbox> -->
+      </li>
+    </ul>
+  </el-drawer>
 </template>
 
 <script lang="ts" setup>
@@ -64,7 +61,7 @@ const colors = ref<any[]>([
 ])
 const themeName = ref<string>(localStorage.getItem('theme') || 'theme2')
 const layout = reactive({
-  menuModeisVertical: localStorage.getItem('menuModeisVertical') === 'true',
+  menuMode: localStorage.getItem('menuMode'),
   tagsBar: localStorage.getItem('tagsBar') === 'true'
 })
 const styles = reactive({
@@ -81,17 +78,10 @@ const emit = defineEmits(['visibleChange'])
 const change = () => {
   emit('visibleChange', false)
 }
-const saveTheme = () => {
-  for (const key in layout) {
-    // eslint-disable-next-line no-prototype-builtins
-    if (layout.hasOwnProperty(key)) {
-      const element = Boolean(layout[key])
-      console.log(element)
-      store.dispatch('changeSetting', { key, value: element })
-    }
-  }
+const saveTheme = (key: string) => {
+  store.dispatch('changeSetting', { key, value: layout[key] })
 }
-const changeTheme = (theme) => {
+const changeTheme = (theme: string) => {
   const { VITE_PUBLIC_PATH: publicPath } = import.meta.env
   document.documentElement.setAttribute('data-theme', theme)
   document.getElementById('theme').setAttribute('href', `${publicPath}theme/${theme}/index.css`)
@@ -112,9 +102,13 @@ watch(
   padding: 0 18px;
   @include font-color(null);
   .theme-item {
-    margin-bottom: 18px;
+    margin-bottom: 40px;
+    .theme-item-sub {
+      display: flex;
+      justify-content: space-between;
+    }
     p {
-      margin-block: 12px;
+      font-size: 16px;
     }
     .drawer-block-checkbox {
       display: flex;

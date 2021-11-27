@@ -34,7 +34,7 @@ export const defaultProps = {
   dataUrl: {},
   params: {},
   height: {
-    default: '63vh'
+    default: '66vh'
   },
   border: {
     type: Boolean,
