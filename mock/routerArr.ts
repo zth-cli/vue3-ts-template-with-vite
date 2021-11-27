@@ -4,6 +4,7 @@ interface IrouteItem {
   componentName?: string
   componentPath?: string
   icon?: String
+  frameSrc?:string,
   parentId: number
   id: number
   type: number
@@ -98,6 +99,35 @@ const routeArr: Array<IrouteItem> = [
         id: 702,
         type: 3,
         path: '/500'
+      }
+    ]
+  },
+  {
+    title: '外部界面',
+    icon: 'el-icon-link',
+    parentId: 0,
+    id: 8,
+    type: 1,
+    children: [
+      {
+        title: 'Vue3',
+        componentName: 'Vue3',
+        componentPath: 'Iframe/index',
+        frameSrc:'https://v3.cn.vuejs.org/guide/introduction.html',
+        parentId: 8,
+        id: 801,
+        type: 3,
+        path: '/Vue3'
+      },
+      {
+        title: 'Vuex',
+        componentName: 'Vuex',
+        componentPath: 'Iframe/index',
+        frameSrc:'https://next.vuex.vuejs.org/zh/',
+        parentId: 8,
+        id: 802,
+        type: 3,
+        path: '/Vuex'
       }
     ]
   }

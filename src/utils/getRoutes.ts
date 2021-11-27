@@ -18,6 +18,7 @@ function addRouter(routeArr: Array<IrouteItem>): RouteConfig[] {
         // component: () => import(/* webpackChunkName: "[request]" */ `@/views/${item.componentPath}.vue`),
         component: modules[`../views/${item.componentPath}.vue`],
         meta: {
+          frameSrc: item.frameSrc ? item.frameSrc : '',
           parentId: item.parentId,
           rId: item.id,
           title: item.title,

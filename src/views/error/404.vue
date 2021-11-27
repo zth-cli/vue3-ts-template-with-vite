@@ -17,5 +17,6 @@ const router = useRouter()
     display: flex;
     justify-content: center;
     align-items: center;
+    @include content-background();
   }
 </style>
