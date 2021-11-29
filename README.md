@@ -26,7 +26,7 @@ git clone http://10.172.246.235/rzx100/ZeroToHeroAdmin.git
 - 安装依赖
 
 ```bash
-cd naive-ui-admin
+cd ZeroToHeroAdmin
 
 yarn install
 # or
