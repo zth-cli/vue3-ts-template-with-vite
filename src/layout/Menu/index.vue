@@ -11,8 +11,8 @@
       :mode="props.menuMode"
       unique-opened
       :collapse="isCollapse"
-      background-color="#275050"
-      active-text-color="#ffd04b"
+      background-color="#001428"
+      active-text-color="#409EFF"
       text-color="#fff"
       router
     >
@@ -63,12 +63,13 @@ bus.on('swithCollapse', (bool: boolean) => {
 
 <style lang="scss">
 .horizontal-menu-main {
-  @include header-background();
+  // @include header-background();
+  background-color: #001428;
   height: 100%;
   width: auto;
   overflow-y: auto;
   .el-menu {
-    @include header-background();
+    // @include header-background();
     border-right: none;
   }
   .icons {
@@ -79,18 +80,18 @@ bus.on('swithCollapse', (bool: boolean) => {
     vertical-align: middle;
     // color: rgb(214, 106, 87);
   }
-  .el-menu .el-sub-menu__title .el-sub-menu__icon-arrow {
-    @include font_color(#fff);
-  }
-  .el-menu .el-sub-menu__title:hover {
-    @include header-active-background();
-  }
-  .el-menu .el-menu-item:hover {
-    @include header-active-background();
-  }
-  .el-menu .el-menu-item.is-active {
-    @include header-active-background();
-  }
+  // .el-menu .el-sub-menu__title .el-sub-menu__icon-arrow {
+  //   @include font_color(#fff);
+  // }
+  // .el-menu .el-sub-menu__title:hover {
+  //   @include header-active-background();
+  // }
+  // .el-menu .el-menu-item:hover {
+  //   @include header-active-background();
+  // }
+  // .el-menu .el-menu-item.is-active {
+  //   @include header-active-background();
+  // }
   .el-menu--horizontal > .el-sub-menu .el-sub-menu__title,
   .el-menu--horizontal > .el-menu-item {
     // height: 50px !important;
