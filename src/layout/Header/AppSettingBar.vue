@@ -16,7 +16,7 @@
           </div>
         </div>
       </li>
-      <li class="theme-item">
+      <!-- <li class="theme-item">
         <el-divider><p>主题颜色</p></el-divider>
         <div class="drawer-block-checkbox">
           <template v-for="(item, index) in colors" :key="index">
@@ -32,7 +32,7 @@
             </div>
           </template>
         </div>
-      </li>
+      </li> -->
       <li class="theme-item">
         <el-divider><p>界面显示</p></el-divider>
         <div class="theme-item-sub">
