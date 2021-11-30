@@ -1,6 +1,14 @@
+<!--
+ * @Author: 阮志雄
+ * @Date: 2021-10-25 14:25:11
+ * @LastEditTime: 2021-11-30 21:58:23
+ * @LastEditors: 阮志雄
+ * @Description: In User Settings Edit
+ * @FilePath: \vue3-template-with-ts\src\views\Home.vue
+-->
 <template>
-  <child @change="getData" id="123" ref="childRef">
-    <h4>默认内容</h4>
+  <child @change="getData" id="123" ref="childRef" v-dialogDrag>
+    <h4 >默认内容</h4>
   </child>
 </template>
 

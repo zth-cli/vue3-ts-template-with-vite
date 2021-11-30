@@ -31,7 +31,7 @@
             type="primary"
             :loading="isLoging"
             class="login_btn"
-            @click="loginajax"
+            v-debounce="loginajax"
             >登录</el-button
           >
           <p class="login-tips">
