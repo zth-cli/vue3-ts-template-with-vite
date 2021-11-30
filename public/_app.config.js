@@ -1,0 +1,3 @@
+window.api = {
+  baseUrl:'localhost'
+}

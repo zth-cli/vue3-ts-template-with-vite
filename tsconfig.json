@@ -16,6 +16,10 @@
     "types": [
       "element-plus/global"
     ],
+    "typeRoots": [
+      "./node_modules/@types/",
+      "./types"
+    ],
     "paths": {
       "@/*": [
         "./src/*"
