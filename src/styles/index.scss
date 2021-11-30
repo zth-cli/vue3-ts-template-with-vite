@@ -1,5 +1,5 @@
 @charset "utf-8";
-@import "./mixin.scss";
+@import './mixin.scss';
 $font_default_color: $font-color-theme;
 $font_default_size: 14px;
 
@@ -45,21 +45,6 @@ ul {
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
-}
-
-.el-progress-bar__outer {
-  background-color: #ebeef5 !important;
-}
-
-.sub-page {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  width: 100%;
-  background: #fff;
-  right: 0;
-  left: 0;
-  z-index: 5;
 }
 
 .ellipsis {
@@ -144,7 +129,7 @@ ul {
 
 .clear::after {
   /*原理： overflow!=visible ;display!=block;float!=none;position!=static||relative 都可为元素创建BFC；消除边距重叠或者浮动产生的影响*/
-  content: "";
+  content: '';
   display: block;
   height: 0;
   clear: both;
@@ -227,8 +212,6 @@ ul {
 .color_warning :hover {
   color: #f6726c;
 }
-
-
 
 /* 离开 */
 .slide-fade-leave-to {

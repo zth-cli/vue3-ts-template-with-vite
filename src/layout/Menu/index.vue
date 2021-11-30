@@ -21,7 +21,7 @@
           <el-sub-menu :index="item.title" :key="item.index">
             <template #title>
               <i class="icons" :class="item.icon"></i>
-              <span slot="title">{{ item.title }}</span>
+              <span>{{ item.title }}</span>
             </template>
             <el-menu-item v-for="(subItem, i) in item.children" :key="i" :index="subItem.path">{{
               subItem.title
@@ -32,7 +32,7 @@
           <el-menu-item :index="item.path" :key="item.index">
             <template #title>
               <i class="icons" :class="item.icon"></i>
-              <span slot="title">{{ item.title }}</span>
+              <span>{{ item.title }}</span>
             </template>
           </el-menu-item>
         </template>
@@ -63,13 +63,13 @@ bus.on('swithCollapse', (bool: boolean) => {
 
 <style lang="scss">
 .horizontal-menu-main {
-  // @include header-background();
-  background-color: #001428;
+  @include header-background();
+  // background-color: #001428;
   height: 100%;
   width: auto;
   overflow-y: auto;
   .el-menu {
-    // @include header-background();
+    @include header-background();
     border-right: none;
   }
   .icons {
@@ -83,15 +83,15 @@ bus.on('swithCollapse', (bool: boolean) => {
   // .el-menu .el-sub-menu__title .el-sub-menu__icon-arrow {
   //   @include font_color(#fff);
   // }
-  // .el-menu .el-sub-menu__title:hover {
-  //   @include header-active-background();
-  // }
-  // .el-menu .el-menu-item:hover {
-  //   @include header-active-background();
-  // }
-  // .el-menu .el-menu-item.is-active {
-  //   @include header-active-background();
-  // }
+  .el-menu .el-sub-menu__title:hover {
+    @include header-active-background();
+  }
+  .el-menu .el-menu-item:hover {
+    @include header-active-background();
+  }
+  .el-menu .el-menu-item.is-active {
+    @include header-active-background();
+  }
   .el-menu--horizontal > .el-sub-menu .el-sub-menu__title,
   .el-menu--horizontal > .el-menu-item {
     // height: 50px !important;
