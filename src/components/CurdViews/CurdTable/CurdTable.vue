@@ -221,6 +221,7 @@ const toggleAllSelection = () => {
   tableView.value.toggleAllSelection()
 }
 defineExpose({
+  queryData,
   toggleRowSelection,
   toggleAllSelection
 })

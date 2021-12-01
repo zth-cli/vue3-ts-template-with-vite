@@ -25,7 +25,7 @@ const tableOptions: ItableProps = {
   pageSize: 20,
   showPanelTool: true,
   params: {}, // params的改变都会触发，表格的重新查询
-  dataUrl: '',
+  dataUrl: '/orderlyElectricityConsumption/XDAnalysis/getXDUserReport',
   columns: [
     { type: 'selection', width: 70, align: 'center' },
     { type: 'index', label: '序号', align: 'center', width: 80 },
