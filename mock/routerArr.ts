@@ -128,6 +128,16 @@ const routeArr: Array<IrouteItem> = [
         id: 802,
         type: 3,
         path: '/Vuex'
+      },
+      {
+        title: '掘金',
+        componentName: 'juejin',
+        componentPath: 'Iframe/index',
+        frameSrc:'https://juejin.cn/',
+        parentId: 8,
+        id: 803,
+        type: 3,
+        path: '/juejin'
       }
     ]
   }

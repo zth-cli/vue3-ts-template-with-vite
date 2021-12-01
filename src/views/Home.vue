@@ -1,21 +1,19 @@
-<!--
- * @Author: 阮志雄
- * @Date: 2021-10-25 14:25:11
- * @LastEditTime: 2021-11-30 21:58:23
- * @LastEditors: 阮志雄
- * @Description: In User Settings Edit
- * @FilePath: \vue3-template-with-ts\src\views\Home.vue
--->
 <template>
-  <child @change="getData" id="123" ref="childRef" v-dialogDrag>
+  <div>
+    <child @change="getData" id="123" ref="childRef" v-dialogDrag>
     <h4 >默认内容</h4>
   </child>
+  <overlay v-model='close' title="弹框" oheight="50vh"></overlay>
+  </div>
 </template>
 
 <script lang="ts" setup>
 import { getConfig } from '@/config'
 import child from '@/components/child.vue'
+import { overlay } from '@/components/Overlay'
 import { ref, onMounted } from 'vue'
+
+let close = ref<boolean>(false)
 onMounted(() => {
   console.log(import.meta.env.MODE)
   console.log(import.meta.env)
@@ -25,7 +23,7 @@ onMounted(() => {
 })
 const childRef = ref<InstanceType<typeof child>>(null)
 const getData = (id: number) => {
-  alert(id)
+  close.value = !close.value
 }
 </script>
 <style></style>

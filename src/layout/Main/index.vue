@@ -2,7 +2,7 @@
   <div class="zth-route-view">
     <router-view>
       <template #default="{ Component, route }">
-        <transition name="slide-fade">
+        <transition :name="menuMode==='horizontal'?'slide-fade-Y':'slide-fade-X'">
           <keep-alive v-if="route.meta.isCache">
             <component class="child-view" :is="Component" :key="route.fullPath" />
           </keep-alive>
@@ -14,9 +14,14 @@
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue'
 import { RouterView } from 'vue-router'
 import { useRoute } from 'vue-router'
+import { useStore } from 'vuex'
+
+const store = useStore()
 const route = useRoute()
+const menuMode = computed(() => store.getters.menuMode)
 console.log(route.fullPath)
 </script>
 <style lang="scss">

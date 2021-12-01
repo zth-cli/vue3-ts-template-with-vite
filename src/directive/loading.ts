@@ -19,21 +19,12 @@ const loading = {
       el.instance.visible = binding.value
     })
   },
-  /**
-   * 所在组件的 VNode 更新时调用
-   * @param {*} el
-   * @param {*} binding
-   */
   update(el: any, binding: any) {
     // 通过对比值的变化判断loading是否显示
     if (binding.oldValue !== binding.value) {
       el.instance.visible = binding.value
     }
   },
-  /**
-   * 只调用一次，在 指令与元素解绑时调用
-   * @param {*} el
-   */
   unmounted(el: any) {
     const mask = el.instance.$el
     if (mask.parentNode) {
