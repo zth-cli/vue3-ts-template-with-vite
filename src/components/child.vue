@@ -1,24 +1,36 @@
-<!--
- * @Author: 阮志雄
- * @Date: 2021-10-25 14:25:11
- * @LastEditTime: 2021-12-17 10:15:35
- * @LastEditors: 阮志雄
- * @Description: In User Settings Edit
- * @FilePath: \vue3-template-with-ts\src\components\child.vue
--->
 <template>
   <div>
     <h1>{{ title }}</h1>
     <h2>{{ props.name }}</h2>
     <el-button type="primary" size="mini" @click="clickHandle">点击</el-button>
     <el-button type="primary" size="mini" @click="clickHandles">点击</el-button>
+    <el-button type="primary" size="mini" @click="debHandler">防抖</el-button>
     <slot name="default"></slot>
+    {{ result }}
   </div>
 </template>
 
 <script lang="ts" setup>
-import { Ref, ref, useAttrs, getCurrentInstance } from 'vue'
+import { Ref, ref, useAttrs, getCurrentInstance, onMounted } from 'vue'
+import { useRequest } from '@/hooks/useRequest'
+import { useDebounce } from '@/hooks/useDebounce'
+import { getAsyncRoutes } from '@/api'
 
+const { loading, error, result, fetchResource } = useRequest(getAsyncRoutes)
+
+const handler = () => {
+  console.log(1)
+}
+
+const { debHandler } = useDebounce(handler)
+onMounted(() => {
+  fetchResource().then((result) => {
+    console.log(result);
+    
+  }).catch((err) => {
+    
+  });
+})
 // 定义ref响应式变量
 let title: Ref<string> = ref('home page')
 
