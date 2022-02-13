@@ -6,6 +6,7 @@
     <el-button type="primary" size="mini" @click="clickHandles">点击</el-button>
     <el-button type="primary" size="mini" @click="debHandler">防抖</el-button>
     <slot name="default"></slot>
+    {{ loading }}
     {{ result }}
   </div>
 </template>
@@ -24,12 +25,11 @@ const handler = () => {
 
 const { debHandler } = useDebounce(handler)
 onMounted(() => {
-  fetchResource().then((result) => {
-    console.log(result);
-    
-  }).catch((err) => {
-    
-  });
+  fetchResource()
+    .then((result) => {
+      console.log(result)
+    })
+    .catch((err) => {})
 })
 // 定义ref响应式变量
 let title: Ref<string> = ref('home page')

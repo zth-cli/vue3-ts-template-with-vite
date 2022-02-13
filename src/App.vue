@@ -1,5 +1,9 @@
 <script setup lang="ts">
 console.log('hello script setup')
+// window.addEventListener('click', (event:Event)=> {
+//   console.log(event);
+  
+// }, false)
 </script>
 
 <template>
