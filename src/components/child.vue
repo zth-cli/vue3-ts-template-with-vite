@@ -2,9 +2,9 @@
   <div>
     <h1>{{ title }}</h1>
     <h2>{{ props.name }}</h2>
-    <el-button type="primary" size="mini" @click="clickHandle">点击</el-button>
-    <el-button type="primary" size="mini" @click="clickHandles">点击</el-button>
-    <el-button type="primary" size="mini" @click="debHandler">防抖</el-button>
+    <el-button type="primary" size="small" @click="clickHandle">点击</el-button>
+    <el-button type="primary" size="small" @click="clickHandles">点击</el-button>
+    <el-button type="primary" size="small" @click="debHandler">防抖</el-button>
     <slot name="default"></slot>
     {{ loading }}
     {{ result }}

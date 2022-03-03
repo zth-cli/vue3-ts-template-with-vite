@@ -21,13 +21,13 @@
       <Tree
         @changeSatus="triggerTree"
         @nodeClick="treeNodeClick"
-        :dataUrl="treeOptions.dataUrl"
-        :search="treeOptions.search"
+        :dataUrl="props.treeOptions.dataUrl"
+        :search="props.treeOptions.search"
       >
         <template #default="{ node, data }">
           <slot v-bind="{ node, data }">
             <i class="el-icon-folder"> </i>
-            <span>{{ node[treeOptions.treeProps['label']] }}</span>
+            <span>{{ node[props.treeOptions.treeProps['label']] }}</span>
           </slot>
         </template>
       </Tree>

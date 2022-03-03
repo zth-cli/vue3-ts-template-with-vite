@@ -3,7 +3,7 @@
     <div class="panel_tool_left" v-if="props.showPanelTool && props.mode !== 'simple'">
       <el-button
         icon="el-icon-plus"
-        size="mini"
+        size="small"
         v-if="props.defaultPanel.includes('add')"
         type="primary"
         @click="addRow()"
@@ -11,7 +11,7 @@
       >
       <el-button
         icon="el-icon-edit"
-        size="mini"
+        size="small"
         v-if="props.defaultPanel.includes('edit')"
         type="primary"
         :disabled="isSingle"
@@ -21,8 +21,8 @@
       <el-popover placement="bottom" :width="160" v-model:visible="visible">
         <p>确定删除吗？</p>
         <div style="text-align: right; margin: 0">
-          <el-button size="mini" type="text" @click="visible = false">取消</el-button>
-          <el-button type="primary" size="mini" @click="deleteRows()">确定</el-button>
+          <el-button size="small" type="text" @click="visible = false">取消</el-button>
+          <el-button type="primary" size="small" @click="deleteRows()">确定</el-button>
         </div>
         <template #reference>
           <el-button
@@ -31,7 +31,7 @@
             type="danger"
             class="warning"
             :disabled="isMultiple"
-            size="mini"
+            size="small"
             >删除
           </el-button>
         </template>
@@ -39,7 +39,7 @@
       <slot name="panel"></slot>
     </div>
     <div class="panel_tool_right" v-if="props.showSettingTool && props.mode !== 'simple'">
-      <el-button type="primary" icon="el-icon-refresh" size="mini" @click="queryData"></el-button>
+      <el-button type="primary" icon="el-icon-refresh" size="small" @click="queryData"></el-button>
       <el-popover placement="bottom-end" :width="200" trigger="click">
         <div style="margin: 5px 0">
           <div v-for="(col, index) in props.columns" :key="index">
@@ -49,7 +49,7 @@
           </div>
         </div>
         <template #reference>
-          <el-button size="mini" icon="el-icon-caret-bottom"></el-button>
+          <el-button size="small" icon="el-icon-caret-bottom"></el-button>
         </template>
       </el-popover>
     </div>

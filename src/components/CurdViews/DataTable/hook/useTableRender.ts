@@ -137,7 +137,7 @@ export default function renderFunc(props: any, slots: any) {
                   // @ts-ignore
                   ElTag,
                   {
-                    size: 'mini',
+                    size: 'small',
                     type: element.type ? element.type : ''
                   },
                   {

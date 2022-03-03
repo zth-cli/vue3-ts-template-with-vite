@@ -6,7 +6,7 @@
       @tab-remove="closeTags"
       type="card"
       v-model="activeValue"
-      size="mini"
+      size="small"
     >
       <el-tab-pane
         :key="item.path"

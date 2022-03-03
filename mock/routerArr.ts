@@ -138,6 +138,26 @@ const routeArr: Array<IrouteItem> = [
         id: 803,
         type: 3,
         path: '/juejin'
+      },
+      {
+        title: 'VueUse',
+        componentName: 'vueuse',
+        componentPath: 'Iframe/index',
+        frameSrc:'https://vueuse.org/',
+        parentId: 8,
+        id: 804,
+        type: 3,
+        path: '/vueuse'
+      },
+      {
+        title: '百度',
+        componentName: 'baidu',
+        componentPath: 'Iframe/index',
+        frameSrc:'http://10.172.246.206:8095/baidu',
+        parentId: 8,
+        id: 805,
+        type: 3,
+        path: '/baidu'
       }
     ]
   }

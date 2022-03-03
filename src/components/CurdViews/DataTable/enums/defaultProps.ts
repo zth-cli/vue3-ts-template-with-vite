@@ -7,7 +7,7 @@ export const defaultProps = {
     type: Array
   },
   tableSize: {
-    default: 'mini'
+    default: 'small'
   },
   pageSize: {
     default: 20
@@ -35,6 +35,9 @@ export const defaultProps = {
   params: {},
   height: {
     default: '66vh'
+  },
+  maxHeight: {
+    type: String,
   },
   border: {
     type: Boolean,

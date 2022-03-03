@@ -4,13 +4,13 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
+    "build:auto": "vite build",
     "serve": "vite preview"
   },
   "dependencies": {
-    "@element-plus/icons": "^0.0.11",
     "axios": "^0.23.0",
     "dayjs": "^1.10.7",
-    "element-plus": "^1.1.0-beta.24",
+    "element-plus": "^2.0.4",
     "mitt": "^3.0.0",
     "mockjs": "^1.1.0",
     "nprogress": "^0.2.0",

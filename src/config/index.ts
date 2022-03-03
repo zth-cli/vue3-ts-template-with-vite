@@ -32,7 +32,7 @@ export const getServerConfig = async (app: App): Promise<undefined> => {
     method: "get",
     url:
       process.env.NODE_ENV === "production"
-        ? "/manages/serverConfig.json"
+        ? "./serverConfig.json"
         : "/serverConfig.json",
   })
     .then(({ data: config }) => {
@@ -44,8 +44,6 @@ export const getServerConfig = async (app: App): Promise<undefined> => {
         // 设置全局配置
         setConfig($config);
       }
-      // 设置全局baseURL
-      app.config.globalProperties.$baseUrl = $config.baseURL;
       return $config;
     })
     .catch(() => {

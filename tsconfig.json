@@ -13,9 +13,7 @@
       "esnext",
       "dom"
     ],
-    "types": [
-      "element-plus/global"
-    ],
+    "types": ["element-plus/global"],
     "typeRoots": [
       "./node_modules/@types/",
       "./types"

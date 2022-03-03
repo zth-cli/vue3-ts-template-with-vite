@@ -41,7 +41,6 @@
   </div>
 </template>
 <script setup lang="ts">
-import { BuildPropType } from 'element-plus/lib/utils/props'
 import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
 import bus from '@/utils/bus'
@@ -52,7 +51,7 @@ const isCollapse = ref<boolean>(false)
 const routeArr = computed(() => store.getters.routes)
 
 const props = withDefaults(
-  defineProps<{ menuMode?: BuildPropType<StringConstructor, 'horizontal' | 'vertical', unknown> }>(),
+  defineProps<{ menuMode?:'horizontal' | 'vertical' }>(),
   { menuMode: 'vertical' }
 )
 

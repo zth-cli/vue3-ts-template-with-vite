@@ -4,7 +4,7 @@
       <i :class="[toggle ? 'el-icon-arrow-left' : 'el-icon-arrow-right']" @click="changeSatus"></i>
     </span>
     <div class="tree_main" v-show="toggle">
-      <el-input v-if="search" placeholder="输入关键字进行过滤" size="mini" v-model="filterText"></el-input>
+      <el-input v-if="search" placeholder="输入关键字进行过滤" size="small" v-model="filterText"></el-input>
       <div class="tree_list" v-loading="loading">
         <el-tree
           class="filter-tree"
@@ -34,7 +34,6 @@
 import { http } from '@/utils/http'
 import { ref, watch, h } from 'vue'
 import { defaultTreeData, defaultProps } from './enums'
-import { ItreeProps } from './type'
 
 let loading = ref<boolean>(false)
 let treeData = ref<Array<any>>(defaultTreeData)

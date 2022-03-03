@@ -22,7 +22,7 @@
       <el-input
         v-if="search && !isLazyLoad"
         placeholder="输入关键字进行过滤"
-        size="mini"
+        size="small"
         v-model="filterText"
       ></el-input>
       <slot v-else name="searchselect"></slot>

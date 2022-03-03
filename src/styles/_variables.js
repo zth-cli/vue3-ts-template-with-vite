@@ -1,11 +1,3 @@
-/*
- * @Author: 阮志雄
- * @Date: 2021-07-08 14:29:08
- * @LastEditTime: 2021-10-08 13:52:05
- * @LastEditors: 阮志雄
- * @Description: In User Settings Edit
- * @FilePath: \vue-template-with-elementui\src\assets\scss\_variables.js
- */
 // 特殊样式，Echarts表格颜色
 var chartColorObj = {
   theme1: ['#045762', '#70af85', '#16c79a'],
