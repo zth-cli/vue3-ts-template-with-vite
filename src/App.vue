@@ -1,13 +1,17 @@
 <script setup lang="ts">
+import zhCn from 'element-plus/lib/locale/lang/zh-cn'
+const locale = zhCn
 console.log('hello script setup')
 // window.addEventListener('click', (event:Event)=> {
 //   console.log(event);
-  
+
 // }, false)
 </script>
 
 <template>
-  <router-view />
+  <el-config-provider :locale="locale">
+    <router-view />
+  </el-config-provider>
 </template>
 <style lang="scss">
 #app {

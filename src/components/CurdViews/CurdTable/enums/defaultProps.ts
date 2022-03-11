@@ -1,14 +1,6 @@
-/*
- * @Author: 阮志雄
- * @Date: 2021-11-24 11:06:25
- * @LastEditTime: 2022-03-03 12:16:45
- * @LastEditors: 阮志雄
- * @Description: In User Settings Edit
- * @FilePath: \vue3-template-with-ts\src\components\CurdViews\CurdTable\enums\defaultProps.ts
- */
 export const defaulltProps = {
   columns: () => [{ label: '菜单名称', prop: 'id', align: 'center' }],
-  tableSize: 'small',
+  tableSize: 'default',
   mode: 'normal',
   defaultPanel: () => ['add', 'edit', 'delete'],
   pageAlign: 'right',

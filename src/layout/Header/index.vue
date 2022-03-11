@@ -2,15 +2,19 @@
   <div class="header" :class="{ 'light-header': menuMode !== 'horizontal' }">
     <!-- 折叠按钮 -->
     <div class="collapse-btn" v-if="menuMode !== 'horizontal'">
-      <i
-        @click="handleCollapse()"
-        :class="[collapse ? 'el-icon-s-unfold' : 'el-icon-s-fold']"
-        style="font-size: 20px"
-      ></i>
+      <el-icon :size="20">
+        <component
+          style="font-size: 20px"
+          @click="handleCollapse()"
+          :is="collapse ? 'fold' : 'expand'"
+        />
+      </el-icon>
     </div>
     <Breadcrumb v-if="menuMode !== 'horizontal'"></Breadcrumb>
     <!-- <div class="solgan ellipsis" title="首页">ZeroToHero</div> -->
-    <div class="logo" v-if="menuMode === 'horizontal'"><img src="@/assets/img/logo.png" /></div>
+    <div class="logo" v-if="menuMode === 'horizontal'">
+      <img src="@/assets/img/logo.png" />
+    </div>
     <div class="header-menu">
       <slot>
         <Menu menuMode="horizontal" v-if="menuMode === 'horizontal'"></Menu>
@@ -20,25 +24,33 @@
       <div class="header-user-con">
         <!-- 全屏显示 -->
         <el-tooltip :content="fullscreen ? `取消全屏` : `全屏`" placement="bottom">
-          <i class="el-icon-rank icon-cammand" @click="handleFullScreen"></i>
+          <el-icon :size="20" class="icon-cammand">
+            <component @click="handleFullScreen()" is="rank" />
+          </el-icon>
         </el-tooltip>
         <el-tooltip content="系统设置" placement="bottom">
-          <i class="el-icon-setting icon-cammand" @click="settingBarStatus = true" v-if="props.showThemeBar"></i>
+          <el-icon :size="20" v-if="props.showThemeBar" class="icon-cammand">
+            <component @click="settingBarStatus = true" is="setting" />
+          </el-icon>
         </el-tooltip>
         <el-tooltip content="重载" placement="bottom">
-          <i class="el-icon-refresh-right icon-cammand" @click="reloadPage"></i>
+          <el-icon :size="20" v-if="props.showThemeBar" class="icon-cammand">
+            <component @click="reloadPage" is="refresh-right" />
+          </el-icon>
         </el-tooltip>
         <el-avatar icon="el-icon-user-solid" :size="36" style="margin-left: 10px"></el-avatar>
         <!-- 用户名下拉菜单 -->
         <el-dropdown class="user-name" trigger="click" @command="handleCommand">
           <span class="el-dropdown-link">
             管理员
-            <i f class="el-icon-caret-bottom"></i>
+            <el-icon>
+              <arrow-down />
+            </el-icon>
           </span>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item icon="el-icon-mouse" command="updataPassword">密码修改</el-dropdown-item>
-              <el-dropdown-item icon="el-icon-switch-button" command="loginout">注销</el-dropdown-item>
+              <el-dropdown-item icon="mouse" command="updataPassword">密码修改</el-dropdown-item>
+              <el-dropdown-item icon="switch-button" command="loginout">注销</el-dropdown-item>
             </el-dropdown-menu>
           </template>
         </el-dropdown>
@@ -127,6 +139,8 @@ const reloadPage = () => {
   .collapse-btn {
     margin-right: 12px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
     &:hover {
       color: #d66a57;
     }

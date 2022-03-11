@@ -1,10 +1,11 @@
-import { h, resolveComponent, toRefs } from 'vue'
+import { h, toRefs } from 'vue'
+import { ElTag, ElTableColumn } from 'element-plus/es'
+import 'element-plus/es/components/tag/style/css'
+import 'element-plus/es/components/table-column/style/css'
 type Iscope = { row?: { [x: string]: any }; column?: any; $index?: number }
 
 export default function renderFunc(props: any, slots: any) {
   const { columns, showPage, pageIndex, pageSize } = toRefs(props)
-  const ElTag = resolveComponent('el-tag')
-  const ElTableColumn = resolveComponent('el-table-column')
 
   // let elememtArr = []
   function renders(columns: Icolumns[]) {
@@ -35,6 +36,7 @@ export default function renderFunc(props: any, slots: any) {
         })
       }
       if (item.type === 'selection') {
+        // @ts-ignore
         return h(ElTableColumn, {
           ...columnProps,
           type: item.type
@@ -168,7 +170,7 @@ export default function renderFunc(props: any, slots: any) {
                 return [childrenEle]
               }
             }
-          )
+          ) // @ts-ignore
         : h(ElTableColumn, { prop: item.prop, ...columnProps })
     })
     return elememtArr

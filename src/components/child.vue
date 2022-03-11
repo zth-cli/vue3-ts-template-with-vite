@@ -1,6 +1,17 @@
+<!--
+ * @Author: 阮志雄
+ * @Date: 2022-03-10 22:12:48
+ * @LastEditTime: 2022-03-11 11:45:43
+ * @LastEditors: 阮志雄
+ * @Description: In User Settings Edit
+ * @FilePath: \oec-model-related-jiangsu\src\components\child.vue
+-->
 <template>
   <div>
     <h1>{{ title }}</h1>
+      <el-icon color="red">
+      <edit></edit>
+    </el-icon>
     <h2>{{ props.name }}</h2>
     <el-button type="primary" size="small" @click="clickHandle">点击</el-button>
     <el-button type="primary" size="small" @click="clickHandles">点击</el-button>

@@ -13,11 +13,9 @@
                 :placeholder="usePlaceholder(item)"
                 clearable
                 v-model="fromData[item.name]"
-                size="small"
                 :style="{ width: width }"
                 :value-format="item.format"
-              >
-              </el-date-picker>
+              ></el-date-picker>
             </div>
           </template>
           <template v-else-if="item.type === 'datetime'">
@@ -29,12 +27,10 @@
                 :placeholder="usePlaceholder(item)"
                 clearable
                 v-model="fromData[item.name]"
-                size="small"
                 :style="{ width: width }"
                 :format="item.format"
                 :value-format="item.format"
-              >
-              </el-date-picker>
+              ></el-date-picker>
             </div>
           </template>
           <template v-else-if="!item.dateSwitch && item.type === 'daterange'">
@@ -50,9 +46,7 @@
                 range-separator="至"
                 start-placeholder="开始日期"
                 end-placeholder="结束日期"
-                size="small"
-              >
-              </el-date-picker>
+              ></el-date-picker>
             </div>
           </template>
           <template v-else-if="item.type === 'select'">
@@ -66,26 +60,24 @@
                 filterable
                 clearable
                 :multiple="item.multiple ? true : false"
-                size="small"
               >
-                <el-option v-for="(ele, i) in item.options" :value="ele.value" :label="ele.label" :key="ele.label + i">
-                </el-option>
+                <el-option v-for="(ele, i) in item.options" :value="ele.value" :label="ele.label" :key="ele.label + i"></el-option>
               </el-select>
             </div>
           </template>
           <template v-else-if="item.type === 'checkbox'">
             <div class="curd_tool_item" :ref="setItemRef">
               <template v-if="item.options && item.options.length > 0">
-                <el-checkbox-group size="small" v-model="fromData[item.name]">
+                <el-checkbox-group v-model="fromData[item.name]">
                   <template v-for="ele in item.options" :key="ele.value">
                     <el-checkbox :disabled="item.disabled" :label="ele.value">{{ ele.label }}</el-checkbox>
                   </template>
                 </el-checkbox-group>
               </template>
               <template v-else>
-                <el-checkbox size="small" v-model="fromData[item.name]" true-label="1" false-label="0">{{
-                  item.label
-                }}</el-checkbox>
+                <el-checkbox v-model="fromData[item.name]" true-label="1" false-label="0">
+                  {{ item.label }}
+                </el-checkbox>
               </template>
             </div>
           </template>
@@ -94,7 +86,6 @@
               <el-button
                 class="mini_btns"
                 v-for="(el, i) in item.dateSwitch"
-                size="small"
                 @click="
                   switchIndex = i;
                   switchDate(item.name, el, item.dateTypeParamName)
@@ -102,17 +93,7 @@
                 :type="switchIndex === i ? 'danger' : 'primary'"
                 :key="i"
               >
-                {{
-                  el.type === 'date'
-                    ? '日'
-                    : el.type === 'month'
-                    ? '月'
-                    : el.type === 'year'
-                    ? '年'
-                    : el.type === 'dates'
-                    ? '多日'
-                    : '时间'
-                }}
+                {{ el.type === 'date' ? '日' : el.type === 'month' ? '月' : el.type === 'year' ? '年' : el.type === 'dates' ? '多日' : '时间' }}
               </el-button>
               <el-date-picker
                 :style="{ width: width }"
@@ -121,7 +102,6 @@
                 :placeholder="usePlaceholder(item)"
                 clearable
                 v-model="fromData[item.name]"
-                size="small"
                 :value-format="
                   item.dateSwitch[switchIndex].type === 'date'
                     ? 'YYYY-MM-DD'
@@ -137,12 +117,7 @@
           <template v-else>
             <div class="curd_tool_item" :ref="setItemRef">
               <label class="label" v-if="mode !== 'simple'">{{ item.label }}：</label>
-              <el-input
-                :style="{ width: width }"
-                v-model="fromData[item.name]"
-                :placeholder="usePlaceholder(item)"
-                size="small"
-              ></el-input>
+              <el-input :style="{ width: width }" v-model="fromData[item.name]" :placeholder="usePlaceholder(item)"></el-input>
             </div>
           </template>
         </template>
@@ -153,13 +128,7 @@
         <i :class="[expend ? 'el-icon-arrow-up' : 'el-icon-arrow-down']"></i>
       </div>
       <div class="btns">
-        <el-button
-          type="primary"
-          icon="el-icon-search"
-          v-if="fromOptions.length > 0 && mode !== 'simple'"
-          @click="query()"
-          >查询</el-button
-        >
+        <el-button type="primary" icon="search" v-if="fromOptions.length > 0 && mode !== 'simple'" @click="query()">查询</el-button>
         <el-button>重置</el-button>
         <slot name="tool"></slot>
       </div>
@@ -184,7 +153,6 @@ interface IconProps {
   width?: string
 }
 const props = withDefaults(defineProps<IconProps>(), { mode: 'normal', toolAlign: 'left', width: '200px' })
-
 
 const { fromData, typeArr } = useDefaultData(props) // 初始化默认值
 const { switchDate } = useTimeSwitch(fromData) // 时间切换
@@ -238,7 +206,7 @@ watch(fromData, (params) => {
 .curd_tools {
   flex: 1;
   text-align: end;
-  height: 28px;
+  height: 32px;
   overflow: hidden;
   transition: all 0.5s;
   /* display: flex;

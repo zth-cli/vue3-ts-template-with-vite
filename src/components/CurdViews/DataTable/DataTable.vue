@@ -1,15 +1,17 @@
 <script lang="ts">
-import { h, toRefs, resolveComponent, defineComponent, ref } from 'vue'
+import { ElTable } from 'element-plus/es'
+import 'element-plus/es/components/table/style/css'
+import { h, toRefs, defineComponent, ref } from 'vue'
 import { defaultProps } from './enums'
 import useTableRender from './hook/useTableRender'
 
 export default defineComponent({
   name: 'DataTable',
   props: defaultProps,
+
   emits: ['row-click', 'row-dblclick', 'selection-change', 'current-change', 'header-click'],
   setup(props, { emit, slots, expose }) {
     const tableInstance = ref(null)
-    const ElTable = resolveComponent('el-table')
     const tableColumns = useTableRender(props, slots)
     const { rowKey } = toRefs(props)
     const toggleRowSelection = (rows: any[]) => {

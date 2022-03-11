@@ -7,7 +7,7 @@ export const defaultProps = {
     type: Array
   },
   tableSize: {
-    default: 'small'
+    default: 'default'
   },
   pageSize: {
     default: 20

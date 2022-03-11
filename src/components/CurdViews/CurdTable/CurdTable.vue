@@ -2,54 +2,51 @@
   <div class="curd_table">
     <div class="panel_tool_left" v-if="props.showPanelTool && props.mode !== 'simple'">
       <el-button
-        icon="el-icon-plus"
-        size="small"
+        icon="plus"
         v-if="props.defaultPanel.includes('add')"
         type="primary"
         @click="addRow()"
-        >新增</el-button
-      >
+      >新增</el-button>
       <el-button
-        icon="el-icon-edit"
-        size="small"
+        icon="edit"
         v-if="props.defaultPanel.includes('edit')"
         type="primary"
         :disabled="isSingle"
         @click="editRow()"
-        >修改</el-button
-      >
+      >修改</el-button>
       <el-popover placement="bottom" :width="160" v-model:visible="visible">
         <p>确定删除吗？</p>
         <div style="text-align: right; margin: 0">
-          <el-button size="small" type="text" @click="visible = false">取消</el-button>
-          <el-button type="primary" size="small" @click="deleteRows()">确定</el-button>
+          <el-button type="text" @click="visible = false">取消</el-button>
+          <el-button type="primary" @click="deleteRows()">确定</el-button>
         </div>
         <template #reference>
           <el-button
             v-if="props.defaultPanel.includes('delete')"
-            icon="el-icon-circle-close"
+            icon="circle-close"
             type="danger"
             class="warning"
             :disabled="isMultiple"
-            size="small"
-            >删除
-          </el-button>
+          >删除</el-button>
         </template>
       </el-popover>
       <slot name="panel"></slot>
     </div>
     <div class="panel_tool_right" v-if="props.showSettingTool && props.mode !== 'simple'">
-      <el-button type="primary" icon="el-icon-refresh" size="small" @click="queryData"></el-button>
+      <el-button type="primary" icon="refresh" @click="queryData"></el-button>
       <el-popover placement="bottom-end" :width="200" trigger="click">
         <div style="margin: 5px 0">
           <div v-for="(col, index) in props.columns" :key="index">
-            <el-checkbox @change="columnsChange" v-if="col.label" v-model="col.show" :label="col.label">
-              {{ col.label }}
-            </el-checkbox>
+            <el-checkbox
+              @change="columnsChange"
+              v-if="col.label"
+              v-model="col.show"
+              :label="col.label"
+            >{{ col.label }}</el-checkbox>
           </div>
         </div>
         <template #reference>
-          <el-button size="small" icon="el-icon-caret-bottom"></el-button>
+          <el-button icon="caret-bottom"></el-button>
         </template>
       </el-popover>
     </div>
@@ -86,9 +83,10 @@
           <slot :name="item.headerSlot" v-bind="Props"></slot>
         </template>
         <template v-slot:index="Props">
-          <slot name="index" v-if="props.showPage">
-            {{ Props.index + (pageParam.pageIndex - 1) * pageParam.pageSize + 1 }}
-          </slot>
+          <slot
+            name="index"
+            v-if="props.showPage"
+          >{{ Props.index + (pageParam.pageIndex - 1) * pageParam.pageSize + 1 }}</slot>
           <slot name="index" v-else>{{ Props.index + 1 }}</slot>
         </template>
       </DataTable>

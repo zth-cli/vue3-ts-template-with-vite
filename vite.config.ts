@@ -1,18 +1,35 @@
-import { defineConfig, loadEnv } from 'vite'
+import { defineConfig, loadEnv, UserConfigExport, ConfigEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { configMockPlugin } from './build/configMockPlugin'
 import { configHtmlPlugin } from './build/configHtmlPlugin'
 import path from 'path'
 
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+
 const resolve = (dir: string) => path.join(__dirname, dir)
 
-export default defineConfig(({ command, mode }) => {
+export default ({ command, mode }: ConfigEnv): UserConfigExport => {
   const isBuild = command === 'build'
   const root = process.cwd()
   // console.log(loadEnv(mode, process.cwd())); // 获取当前环境的.nev.${mode}的值
   const { VITE_PORT, VITE_PUBLIC_PATH, VITE_PROXY } = loadEnv(mode, root)
   return {
-    plugins: [vue(), configMockPlugin(command), configHtmlPlugin(loadEnv(mode, root), isBuild)],
+    plugins: [
+      vue(),
+      configMockPlugin(command),
+      configHtmlPlugin(loadEnv(mode, root), isBuild),
+      AutoImport({
+        resolvers: [ElementPlusResolver()]
+      }),
+      //
+      Components({
+        dirs: ['src/components'],
+        deep: true,
+        resolvers: [ElementPlusResolver()]
+      }),
+    ],
     base: isBuild ? './' : VITE_PUBLIC_PATH,
     server: {
       port: Number(VITE_PORT),
@@ -52,4 +69,4 @@ export default defineConfig(({ command, mode }) => {
       }
     }
   }
-})
+}

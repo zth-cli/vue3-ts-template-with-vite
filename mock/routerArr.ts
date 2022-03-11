@@ -4,7 +4,7 @@ interface IrouteItem {
   componentName?: string
   componentPath?: string
   icon?: String
-  frameSrc?:string,
+  frameSrc?: string
   parentId: number
   id: number
   type: number
@@ -16,7 +16,7 @@ interface IrouteItem {
 const routeArr: Array<IrouteItem> = [
   {
     title: 'Dashboard',
-    icon: 'el-icon-coffee-cup',
+    icon: 'house',
     parentId: 0,
     id: 5,
     type: 1,
@@ -25,7 +25,7 @@ const routeArr: Array<IrouteItem> = [
         title: '首页',
         componentName: 'Home',
         componentPath: 'Home',
-        icon: 'el-icon-house',
+        icon: 'house',
         parentId: 5,
         id: 501,
         type: 3,
@@ -48,7 +48,7 @@ const routeArr: Array<IrouteItem> = [
   },
   {
     title: '列表页面',
-    icon: 'el-icon-s-grid',
+    icon: 'document',
     parentId: 0,
     id: 6,
     type: 1,
@@ -77,7 +77,7 @@ const routeArr: Array<IrouteItem> = [
   },
   {
     title: '异常界面',
-    icon: 'el-icon-error',
+    icon: 'circle-close',
     parentId: 0,
     id: 7,
     type: 1,
@@ -104,7 +104,7 @@ const routeArr: Array<IrouteItem> = [
   },
   {
     title: '外部界面',
-    icon: 'el-icon-link',
+    icon: 'connection',
     parentId: 0,
     id: 8,
     type: 1,
@@ -113,7 +113,7 @@ const routeArr: Array<IrouteItem> = [
         title: 'Vue3',
         componentName: 'Vue3',
         componentPath: 'Iframe/index',
-        frameSrc:'https://v3.cn.vuejs.org/guide/introduction.html',
+        frameSrc: 'https://v3.cn.vuejs.org/guide/introduction.html',
         parentId: 8,
         id: 801,
         type: 3,
@@ -123,7 +123,7 @@ const routeArr: Array<IrouteItem> = [
         title: 'Vuex',
         componentName: 'Vuex',
         componentPath: 'Iframe/index',
-        frameSrc:'https://next.vuex.vuejs.org/zh/',
+        frameSrc: 'https://next.vuex.vuejs.org/zh/',
         parentId: 8,
         id: 802,
         type: 3,
@@ -133,7 +133,7 @@ const routeArr: Array<IrouteItem> = [
         title: '掘金',
         componentName: 'juejin',
         componentPath: 'Iframe/index',
-        frameSrc:'https://juejin.cn/',
+        frameSrc: 'https://juejin.cn/',
         parentId: 8,
         id: 803,
         type: 3,
@@ -143,7 +143,7 @@ const routeArr: Array<IrouteItem> = [
         title: 'VueUse',
         componentName: 'vueuse',
         componentPath: 'Iframe/index',
-        frameSrc:'https://vueuse.org/',
+        frameSrc: 'https://vueuse.org/',
         parentId: 8,
         id: 804,
         type: 3,
@@ -153,7 +153,7 @@ const routeArr: Array<IrouteItem> = [
         title: '百度',
         componentName: 'baidu',
         componentPath: 'Iframe/index',
-        frameSrc:'http://10.172.246.206:8095/baidu',
+        frameSrc: 'http://10.172.246.206:8095/baidu',
         parentId: 8,
         id: 805,
         type: 3,
