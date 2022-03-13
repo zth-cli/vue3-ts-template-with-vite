@@ -1,5 +1,6 @@
 <template>
   <div class="curd_table">
+    
     <div class="panel_tool_left" v-if="props.showPanelTool && props.mode !== 'simple'">
       <el-button
         icon="plus"

@@ -3,7 +3,7 @@
     class="horizontal-menu-main"
     :class="{ isCollapse: isCollapse, 'vertical-menu-main': props.menuMode === 'vertical' }"
   >
-    <div class="slide-logo" v-if=" props.menuMode === 'vertical'">
+    <div class="slide-logo" v-if="props.menuMode === 'vertical'">
       <img src="@/assets/img/logo.png" />
     </div>
     <el-menu
@@ -20,18 +20,24 @@
         <template v-if="item.children">
           <el-sub-menu :index="item.title" :key="item.index">
             <template #title>
-              <i class="icons" :class="item.icon"></i>
+              <el-icon :size="20">
+                <component :is="item.icon" />
+              </el-icon>
               <span>{{ item.title }}</span>
             </template>
-            <el-menu-item v-for="(subItem, i) in item.children" :key="i" :index="subItem.path">{{
-              subItem.title
-            }}</el-menu-item>
+            <el-menu-item v-for="(subItem, i) in item.children" :key="i" :index="subItem.path">
+              {{
+                subItem.title
+              }}
+            </el-menu-item>
           </el-sub-menu>
         </template>
         <template v-else>
           <el-menu-item :index="item.path" :key="item.index">
+            <el-icon :size="20">
+              <component :is="item.icon" />
+            </el-icon>
             <template #title>
-              <i class="icons" :class="item.icon"></i>
               <span>{{ item.title }}</span>
             </template>
           </el-menu-item>
@@ -51,7 +57,7 @@ const isCollapse = ref<boolean>(false)
 const routeArr = computed(() => store.getters.routes)
 
 const props = withDefaults(
-  defineProps<{ menuMode?:'horizontal' | 'vertical' }>(),
+  defineProps<{ menuMode?: 'horizontal' | 'vertical' }>(),
   { menuMode: 'vertical' }
 )
 

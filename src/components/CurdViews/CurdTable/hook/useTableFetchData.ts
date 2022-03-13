@@ -1,11 +1,7 @@
 import { reactive, Ref, ref } from 'vue'
 import { http } from '@/utils/http'
 import { defaultTableData } from '../enums'
-export function useTableFetchData(
-  props,
-  emit: (arg0: string, arg1: any[] | Ref<any[]>) => void,
-  selection: Ref<any[]>
-) {
+export function useTableFetchData(props, emit: (arg0: string, arg1: any[] | Ref<any[]>) => void, selection: Ref<any[]>) {
   const loading = ref<boolean>(false)
   let tableData = ref<any[]>(defaultTableData)
   const pageParam = reactive<{ pageSize: number; pageIndex: number }>({
@@ -37,13 +33,15 @@ export function useTableFetchData(
           if (res.code === 0) {
             let data = res.list
             total.value = data.total
-            if (Array.isArray(props.responseName)) {
-              props.responseName.forEach((item) => {
-                // @ts-ignore
-                data = data[item]
-              })
-            } else {
-              data = res.data[props.responseName]
+            if (props.responseName) {
+              if (Array.isArray(props.responseName)) {
+                props.responseName.forEach((item) => {
+                  // @ts-ignore
+                  data = data[item]
+                })
+              } else {
+                data = res.data[props.responseName]
+              }
             }
 
             if (props.isPrivate) {
@@ -52,7 +50,9 @@ export function useTableFetchData(
                 item._disabled = 0
               })
             }
-            tableData = data
+
+            tableData.value = data
+
             emit('getTableData', tableData)
           }
         })

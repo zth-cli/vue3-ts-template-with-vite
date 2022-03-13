@@ -13,10 +13,15 @@
           {{ title }}
           <div class="fr close_btn">
             <span @click="fullScreen()">
-              <i class="ol_icon el-icon-full-screen"></i>
+              <el-icon class="ol_icon" :size="size">
+                <full-screen />
+              </el-icon>
+              <i class="el-icon-full-screen"></i>
             </span>
             <span @click="switchs(); changeSatus()">
-              <i class="ol_icon el-icon-close"></i>
+              <el-icon class="ol_icon" :size="size">
+                <close />
+              </el-icon>
             </span>
           </div>
         </div>
@@ -30,7 +35,7 @@
 
 <script lang="ts">
 import { ref, toRefs, reactive, computed, defineComponent } from "vue"
-export default defineComponent( {
+export default defineComponent({
   name: "overlay",
   emits: ["update:modelValue"],
   props: {
