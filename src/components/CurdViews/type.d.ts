@@ -47,7 +47,7 @@ interface ItableProps {
   highlightCurrentRow?: boolean
   lazy?: boolean
   dataUrl?: string
-  params?: object
+  params?: { [x: string]: any }
   height?: string
   maxHeight?: string
   border?: boolean

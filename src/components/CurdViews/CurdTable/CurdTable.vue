@@ -1,20 +1,8 @@
 <template>
   <div class="curd_table">
-    
     <div class="panel_tool_left" v-if="props.showPanelTool && props.mode !== 'simple'">
-      <el-button
-        icon="plus"
-        v-if="props.defaultPanel.includes('add')"
-        type="primary"
-        @click="addRow()"
-      >新增</el-button>
-      <el-button
-        icon="edit"
-        v-if="props.defaultPanel.includes('edit')"
-        type="primary"
-        :disabled="isSingle"
-        @click="editRow()"
-      >修改</el-button>
+      <el-button icon="plus" v-if="props.defaultPanel.includes('add')" type="primary" @click="addRow()">新增</el-button>
+      <el-button icon="edit" v-if="props.defaultPanel.includes('edit')" type="primary" :disabled="isSingle" @click="editRow()">修改</el-button>
       <el-popover placement="bottom" :width="160" v-model:visible="visible">
         <p>确定删除吗？</p>
         <div style="text-align: right; margin: 0">
@@ -22,13 +10,7 @@
           <el-button type="primary" @click="deleteRows()">确定</el-button>
         </div>
         <template #reference>
-          <el-button
-            v-if="props.defaultPanel.includes('delete')"
-            icon="circle-close"
-            type="danger"
-            class="warning"
-            :disabled="isMultiple"
-          >删除</el-button>
+          <el-button v-if="props.defaultPanel.includes('delete')" icon="circle-close" type="danger" class="warning" :disabled="isMultiple">删除</el-button>
         </template>
       </el-popover>
       <slot name="panel"></slot>
@@ -38,12 +20,7 @@
       <el-popover placement="bottom-end" :width="200" trigger="click">
         <div style="margin: 5px 0">
           <div v-for="(col, index) in props.columns" :key="index">
-            <el-checkbox
-              @change="columnsChange"
-              v-if="col.label"
-              v-model="col.show"
-              :label="col.label"
-            >{{ col.label }}</el-checkbox>
+            <el-checkbox @change="columnsChange" v-if="col.label" v-model="col.show" :label="col.label">{{ col.label }}</el-checkbox>
           </div>
         </div>
         <template #reference>
@@ -84,10 +61,7 @@
           <slot :name="item.headerSlot" v-bind="Props"></slot>
         </template>
         <template v-slot:index="Props">
-          <slot
-            name="index"
-            v-if="props.showPage"
-          >{{ Props.index + (pageParam.pageIndex - 1) * pageParam.pageSize + 1 }}</slot>
+          <slot name="index" v-if="props.showPage">{{ Props.index + (pageParam.pageIndex - 1) * pageParam.pageSize + 1 }}</slot>
           <slot name="index" v-else>{{ Props.index + 1 }}</slot>
         </template>
       </DataTable>
@@ -238,7 +212,7 @@ interface ItableProp {
   highlightCurrentRow?: boolean
   lazy?: boolean
   dataUrl?: string
-  params?: object
+  params?: { [x: string]: any }
   height?: string
   maxHeight?: string
   border?: boolean
