@@ -1,7 +1,14 @@
 <template>
   <transition name="toast" @after-leave="afterLeave" @after-enter="afterEnter">
     <!-- 弹窗 -->
-    <div ref="container" class="toast-container" :style="toastStyle" v-show="visible" @mouseenter="clearTimer" @mouseleave="createTimer">
+    <div
+      ref="container"
+      class="toast-container"
+      :style="toastStyle"
+      v-show="visible"
+      @mouseenter="clearTimer"
+      @mouseleave="createTimer"
+    >
       <!-- icon -->
       <template v-if="type || type != 'custom' || type != 'img'">
         <div class="toast-icon success" v-if="type === 'success'">
@@ -15,7 +22,12 @@
           <i class="fi fi-br-cross-small"></i>
         </div>
       </template>
-      <div :style="{ backgroundColor: customIconBackground }" class="toast-icon" v-if="type === 'custom'" v-html="customIcon"></div>
+      <div
+        :style="{ backgroundColor: customIconBackground }"
+        class="toast-icon"
+        v-if="type === 'custom'"
+        v-html="customIcon"
+      ></div>
       <img class="toast-custom-img" :src="customImg" v-if="type === 'img'" />
       <!-- content -->
       <div class="toast-content">
@@ -33,8 +45,7 @@
           <a
             class="toast-button-confirm"
             :class="[{ success: type === 'success' }, { warning: type === 'warning' }, { info: type === 'info' }, { error: type === 'error' }]"
-            >{{ confirmText }}</a
-          >
+          >{{ confirmText }}</a>
         </div>
       </div>
       <!-- 关闭 -->
@@ -45,10 +56,10 @@
   </transition>
 </template>
 
-<script>
+<script lang="ts">
 import Bus from './toastsBus'
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
-export default {
+import { ref, computed, onMounted, onBeforeUnmount, defineComponent } from 'vue'
+export default defineComponent({
   props: {
     title: String,
     closeIcon: {
@@ -154,7 +165,7 @@ export default {
       id
     }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>

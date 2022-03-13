@@ -50,7 +50,7 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, watch, nextTick } from 'vue';
+import { reactive, ref, watch, nextTick, toRaw } from 'vue';
 import {ConditionBar} from '@/components/CurdViews/ConditionBar'
 
 const categorys = ref(null)
@@ -111,8 +111,17 @@ const setActive = (item, index, i) => {
       anchor.splice(i, 1)
     }
   } else {
-    anchor = [id]
+    let ind = null;
+   const isExiste = anchor.some((item, i)=>{
+     if ( Number(item.split('~')[0]) === index) {
+       ind = i
+     }
+     return Number(item.split('~')[0]) === index
+    })
+   isExiste ? anchor[ind] = id : anchor.push(id)
   }
+  // console.log(anchor);
+  
 }
 const resetItemActive = (index) => {
   const arr = anchor.filter((ele, indx) => {
@@ -130,7 +139,7 @@ const paramsChange = (params) => {
   emit('params-change', fromDatas)
 }
 const query = (params) => {
-  emit('query', { ...params, ...fromData })
+  emit('query', { ...params, ...toRaw(fromData) })
 }
 
 initFromData()

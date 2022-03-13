@@ -11,7 +11,7 @@ export const useItemRefs = () => {
     itemRefs = []
   })
   onUpdated(() => {
-    console.log(itemRefs)
+    // console.log(itemRefs)
   })
   return {
     itemRefs,

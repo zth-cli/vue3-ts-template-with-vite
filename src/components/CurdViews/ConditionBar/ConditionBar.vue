@@ -195,7 +195,6 @@ onMounted(() => {
 })
 
 watch(fromData, (params) => {
-  console.log(params)
   const fromData = {}
   for (const key in params) {
     if (params[key] instanceof Array) {
@@ -205,7 +204,7 @@ watch(fromData, (params) => {
       fromData[key] = params[key]
     }
   }
-  emit('params-change', fromData)
+  emit('params-change',  fromData )
 })
 </script>
 <style lang="scss">

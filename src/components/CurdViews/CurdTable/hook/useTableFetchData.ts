@@ -10,8 +10,9 @@ export function useTableFetchData(props, emit: (arg0: string, arg1: any[] | Ref<
   })
   const total = ref<number>(0)
   const lazyLoad = ref<boolean>(props.lazy)
-  let timeout: any
+
   const queryData = () => {
+    let timeout: any
     if (!props.dataUrl || loading.value) {
       return
     }
@@ -30,9 +31,9 @@ export function useTableFetchData(props, emit: (arg0: string, arg1: any[] | Ref<
         .get<any>(props.dataUrl, params)
         .then((res) => {
           loading.value = false
-          if (res.code === 0) {
-            let data = res.list
-            total.value = data.total
+          if (res.code === 1) {
+            let data = res.data
+            total.value = res.pojoTotalCount
             if (props.responseName) {
               if (Array.isArray(props.responseName)) {
                 props.responseName.forEach((item) => {
@@ -50,9 +51,7 @@ export function useTableFetchData(props, emit: (arg0: string, arg1: any[] | Ref<
                 item._disabled = 0
               })
             }
-
             tableData.value = data
-
             emit('getTableData', tableData)
           }
         })

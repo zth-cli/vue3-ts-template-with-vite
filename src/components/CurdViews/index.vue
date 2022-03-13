@@ -174,6 +174,8 @@ const addRow = (bool) => {
   emit('row-add', bool)
 }
 const paramsChange = (params) => {
+  console.log(params,'接收params');
+
   emit('params-change', params)
   props.tableOptions.params = Object.assign({}, props.tableOptions.params, params)
   console.log(props.tableOptions.params)
