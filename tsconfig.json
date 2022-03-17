@@ -9,9 +9,11 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "lib": [
       "esnext",
-      "dom"
+      "dom",
+      "ES6"
     ],
     "types": ["element-plus/global"],
     "typeRoots": [
@@ -35,6 +37,7 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "types/*.d.ts",
-    "src/**/*.vue"
+    "src/**/*.vue",
+    "axiosConfig/"
   ]
 }
