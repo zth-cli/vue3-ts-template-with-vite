@@ -9,6 +9,8 @@ declare module 'vue' {
     CurdTable: typeof import('./src/components/CurdViews/CurdTable/CurdTable.vue')['default']
     CurdViews: typeof import('./src/components/CurdViews/index.vue')['default']
     DataTable: typeof import('./src/components/CurdViews/DataTable/DataTable.vue')['default']
+    EditTable: typeof import('./src/components/CurdViews/EditTable/index.vue')['default']
+    EditTale: typeof import('./src/components/CurdViews/EditTale/index.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
