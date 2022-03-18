@@ -1,14 +1,14 @@
 <template>
   <div>
     <FlowBar :options="fromOptions" :multiple="true"></FlowBar>
-    <CurdView :tableOptions="tableOptions" :fromOptions="fromOptions" @selection-change="selectionChange" @row-add="rowAdd">
-      <template v-slot:action="{ row }">
+    <CurdView :table-options="tableOptions" :from-options="fromOptions" @selection-change="selectionChange" @row-add="rowAdd">
+      <template #action="{ row }">
         <el-button size="small" @click="getRow(row)">action</el-button>
       </template>
-      <template v-slot:proflies="{ row }">
+      <template #proflies="{ row }">
         <el-button size="small" @click="getRow(row)">proflies</el-button>
       </template>
-      <template v-slot:operation="{ row }">
+      <template #operation="{ row }">
         <el-button size="small" @click="getRow(row)">operation</el-button>
       </template>
     </CurdView>
@@ -23,8 +23,8 @@ import { FlowBar } from '@/components/CurdViews/FlowBar'
 import CurdView from '@/components/CurdViews/index.vue'
 import { reactive, ref } from 'vue'
 import Overlay from '@/components/Overlay/index.vue'
-let close = ref<boolean>(false)
-let tableOptions = reactive({
+const close = ref<boolean>(false)
+const tableOptions = reactive({
   pageSize: 20,
   showPanelTool: true,
   params: {}, // params的改变都会触发，表格的重新查询
@@ -47,7 +47,7 @@ let tableOptions = reactive({
     { label: 'Action', slot: 'action', width: 150, align: 'center' }
   ]
 }) as ItableProps
-let fromOptions = reactive([
+const fromOptions = reactive([
   { name: 'description', label: '角色描述', span: 6, type: 'text' },
   {
     name: 'occurTime',
@@ -72,7 +72,7 @@ let fromOptions = reactive([
   }
 ]) as formItem[]
 
-let fromDataOptions = {
+const fromDataOptions = {
   postParams: {},
   postUrl: '/api/modifyComment/create',
   contentType: 'form-data',
@@ -173,7 +173,7 @@ let fromDataOptions = {
       label: '用户评分',
       type: 'text',
       span: 8
-    },
+    }
   ])
 }
 const rowAdd = () => {
@@ -186,9 +186,9 @@ const getRow = (row) => {
   console.log(row)
 }
 
-const beforeSubmit = (params)=> {
-  console.log(params);
-  
+const beforeSubmit = (params) => {
+  console.log(params)
+
   return params
 }
 </script>

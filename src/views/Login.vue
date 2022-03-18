@@ -6,34 +6,13 @@
         <div class="formbox">
           <div class="sub-title">账号登录</div>
           <div class="bdbox">
-            <el-input
-              placeholder="请输入11位手机号码"
-              prefix-icon="el-icon-user"
-              autocomplete="off"
-              v-model="mobile"
-            ></el-input>
-            <span
-              v-show="!isValidPhone"
-              class="color_warning"
-              style="font-size: 12px"
-              >*请输入有效号码</span
-            >
+            <el-input v-model="mobile" placeholder="请输入11位手机号码" prefix-icon="el-icon-user" autocomplete="off"></el-input>
+            <span v-show="!isValidPhone" class="color_warning" style="font-size: 12px">*请输入有效号码</span>
           </div>
           <div class="bdbox">
-            <el-input
-              v-model="passwords"
-              placeholder="请输入密码"
-              prefix-icon="el-icon-c-scale-to-original"
-            >
-            </el-input>
+            <el-input v-model="passwords" placeholder="请输入密码" prefix-icon="el-icon-c-scale-to-original"> </el-input>
           </div>
-          <el-button
-            type="primary"
-            :loading="isLoging"
-            class="login_btn"
-            v-debounce="loginajax"
-            >登录</el-button
-          >
+          <el-button v-debounce="loginajax" type="primary" :loading="isLoging" class="login_btn">登录</el-button>
           <p class="login-tips">
             <span @click="loginByPwd = !loginByPwd">{{ loginByPwd ? '短信登录' : '密码登录' }}</span>
             <span>没有账号? 立即注册</span>
@@ -47,35 +26,34 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { getConfig } from "@/config";
-import { ref, Ref, computed, getCurrentInstance } from "vue";
-import { useStore } from "vuex";
-import { useRouter } from "vue-router";
-import { setStorge } from "@/utils/auth";
+import { getConfig } from '@/config'
+import { ref, Ref, computed, getCurrentInstance } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
+import { setStorge } from '@/utils/auth'
 const internalInstance = getCurrentInstance()
-const slogan =  internalInstance.appContext.config.globalProperties.$config['Title']
-const mobile: Ref<string> = ref("");
-const passwords: Ref<string> = ref("");
-const isLoging: Ref<boolean> = ref(false);
-const loginByPwd: Ref<boolean> = ref(true);
-const store = useStore();
-const router = useRouter();
+const slogan = internalInstance.appContext.config.globalProperties.$config.Title
+const mobile: Ref<string> = ref('')
+const passwords: Ref<string> = ref('')
+const isLoging: Ref<boolean> = ref(false)
+const loginByPwd: Ref<boolean> = ref(true)
+const store = useStore()
+const router = useRouter()
 const loginajax = () => {
-  getUserMenu();
-};
+  getUserMenu()
+}
 const getUserMenu = () => {
-  store.dispatch("GetUserMenu").then((routes) => {
-    setStorge("token", "2321314dqdqf21");
-    console.log(routes);
-    router.replace("/");
-  });
-};
+  store.dispatch('GetUserMenu').then((routes) => {
+    setStorge('token', '2321314dqdqf21')
+    console.log(routes)
+    router.replace('/')
+  })
+}
 console.log(getConfig('Title'))
 const isValidPhone = computed(() => {
-  const phoneReg =
-    /^(?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-79])|(?:5[0-35-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[189]))\d{8}$/;
-  return !phoneReg.test(mobile.value) && mobile.value ? false : true;
-});
+  const phoneReg = /^(?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-79])|(?:5[0-35-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[189]))\d{8}$/
+  return !phoneReg.test(mobile.value) && mobile.value ? false : true
+})
 // https://www.showdoc.com.cn/1647563843342425/7782842647927484
 </script>
 <style lang="scss">
@@ -93,7 +71,7 @@ const isValidPhone = computed(() => {
   position: relative;
 
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     bottom: 0;
@@ -116,7 +94,7 @@ const isValidPhone = computed(() => {
     overflow: hidden;
     position: relative;
     &:after {
-      content: "";
+      content: '';
       position: absolute;
       width: 200%;
       height: 200%;

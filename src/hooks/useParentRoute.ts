@@ -9,8 +9,8 @@ export default function useParentRoute() {
 
   const routeArr = computed(() => store.getters.routes)
 
-  let parentRoute = ref<Array<any>>([])
-  const findRouteById = (routeArrs:Array<IrouteItem>, id: number) => {
+  const parentRoute = ref<Array<any>>([])
+  const findRouteById = (routeArrs: Array<IrouteItem>, id: number) => {
     for (let index = 0; index < routeArrs.length; index++) {
       const element = routeArrs[index]
       if (element.id === id) {
@@ -27,7 +27,7 @@ export default function useParentRoute() {
   watch(
     () => route.path,
     () => {
-      findRouteById(routeArr.value, route.meta.rId)      
+      findRouteById(routeArr.value, route.meta.rId)
     }
   )
 

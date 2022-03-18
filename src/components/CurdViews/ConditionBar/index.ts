@@ -1,3 +1,3 @@
-import ConditionBar from './ConditionBar.vue';
+import ConditionBar from './ConditionBar.vue'
 
-export { ConditionBar };
+export { ConditionBar }

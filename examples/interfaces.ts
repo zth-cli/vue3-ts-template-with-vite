@@ -16,6 +16,6 @@ NonNullable<T> - 用于从类型T中去除undefined和null类型
 ReturnType<T> - 获取函数类型的返回类型
 InstanceType<T> - 获取构造函数的实例类型
 */
-type T09 = Exclude<"a" | "b" | "c" | "d", "c" | "d" | "h">; //"a"|"b"
+type T09 = Exclude<'a' | 'b' | 'c' | 'd', 'c' | 'd' | 'h'> //"a"|"b"
 
-type T10 = Extract<"a" | "b" | "c" | "d", "c" | "d" | "h">; //"c|"d"
+type T10 = Extract<'a' | 'b' | 'c' | 'd', 'c' | 'd' | 'h'> //"c|"d"

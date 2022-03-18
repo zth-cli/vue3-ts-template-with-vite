@@ -1,11 +1,10 @@
 // 节流
-export function useThrottle(cb:Function, duration = 100) {
+export function useThrottle(cb: Function, duration = 100) {
   let start = +new Date()
-  return function () {
-    let args = arguments, context = this
-    let now = +new Date()
+  return function (...args) {
+    const now = +new Date()
     if (now - start >= duration) {
-      cb.apply(context, args)
+      cb.apply(this, args)
       start = now
     }
   }

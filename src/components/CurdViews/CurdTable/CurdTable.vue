@@ -1,48 +1,28 @@
 <template>
   <div class="curd_table">
-    <div class="panel_tool_left" v-if="props.showPanelTool && props.mode !== 'simple'">
-      <el-button
-        icon="plus"
-        v-if="props.defaultPanel.includes('add')"
-        type="primary"
-        @click="addRow()"
-      >新增</el-button>
-      <el-button
-        icon="edit"
-        v-if="props.defaultPanel.includes('edit')"
-        type="primary"
-        :disabled="isSingle"
-        @click="editRow()"
-      >修改</el-button>
-       <el-popover v-model:visible="visible" placement="top" :width="160">
+    <div v-if="props.showPanelTool && props.mode !== 'simple'" class="panel_tool_left">
+      <el-button v-if="props.defaultPanel.includes('add')" icon="plus" type="primary" @click="addRow()">新增</el-button>
+      <el-button v-if="props.defaultPanel.includes('edit')" icon="edit" type="primary" :disabled="isSingle" @click="editRow()">修改</el-button>
+      <el-popover v-model:visible="visible" placement="top" :width="160">
         <p>确定删除吗？</p>
         <div style="text-align: right; margin: 0">
           <el-button type="text" @click="visible = false">取消</el-button>
           <el-button type="primary" @click="deleteRows()">确定</el-button>
         </div>
         <template #reference>
-          <el-button
-            @click="visible = true"
-            v-if="props.defaultPanel.includes('delete')"
-            icon="circle-close"
-            type="danger"
-            :disabled="isMultiple"
-          >删除</el-button>
+          <el-button v-if="props.defaultPanel.includes('delete')" icon="circle-close" type="danger" :disabled="isMultiple" @click="visible = true"
+            >删除</el-button
+          >
         </template>
       </el-popover>
       <slot name="panel"></slot>
     </div>
-    <div class="panel_tool_right" v-if="props.showSettingTool && props.mode !== 'simple'">
+    <div v-if="props.showSettingTool && props.mode !== 'simple'" class="panel_tool_right">
       <el-button type="primary" icon="refresh" @click="queryData"></el-button>
       <el-popover placement="bottom-end" :width="200" trigger="click">
         <div style="margin: 5px 0">
           <div v-for="(col, index) in props.columns" :key="index">
-            <el-checkbox
-              @change="columnsChange"
-              v-if="col.label"
-              v-model="col.show"
-              :label="col.label"
-            >{{ col.label }}</el-checkbox>
+            <el-checkbox v-if="col.label" v-model="col.show" :label="col.label" @change="columnsChange">{{ col.label }}</el-checkbox>
           </div>
         </div>
         <template #reference>
@@ -53,56 +33,53 @@
     <div class="curd_table_main">
       <DataTable
         ref="tableView"
+        :key="key"
+        v-loading="loading"
         :columns="mColumns"
-        :tableData="tableData"
+        :table-data="tableData"
         :border="props.border"
         :size="props.tableSize"
         :height="props.height"
-        :rowKey="props.rowKey"
+        :row-key="props.rowKey"
         :stripe="props.stripe"
-        :treeProps="props.treeProps"
-        :showSummary="props.showSummary"
-        :summaryMethod="props.summaryMethod"
-        :spanMethod="props.spanMethod"
-        :pageSize="pageParam.pageSize"
-        :pageIndex="pageParam.pageIndex"
-        :showPage="props.showPage"
+        :tree-props="props.treeProps"
+        :show-summary="props.showSummary"
+        :summary-method="props.summaryMethod"
+        :span-method="props.spanMethod"
+        :page-size="pageParam.pageSize"
+        :page-index="pageParam.pageIndex"
+        :show-page="props.showPage"
         :highlight-current-row="props.highlightCurrentRow"
+        style="width: 100%"
         @row-click="rowClick"
         @row-dblclick="rowDblclick"
         @selection-change="selectionChange"
         @current-change="handleCurrentChange"
-        style="width: 100%"
-        v-loading="loading"
-        :key="key"
       >
-        <template v-for="item in slotArr" v-slot:[item.slot]="Props">
+        <template v-for="item in slotArr" #[item.slot]="Props">
           <slot :name="item.slot" v-bind="Props"></slot>
         </template>
-        <template v-for="item in headerSlotArr" v-slot:[item.headerSlot]="Props">
+        <template v-for="item in headerSlotArr" #[item.headerSlot]="Props">
           <slot :name="item.headerSlot" v-bind="Props"></slot>
         </template>
-        <template v-slot:index="Props">
-          <slot
-            name="index"
-            v-if="props.showPage"
-          >{{ Props.index + (pageParam.pageIndex - 1) * pageParam.pageSize + 1 }}</slot>
-          <slot name="index" v-else>{{ Props.index + 1 }}</slot>
+        <template #index="Props">
+          <slot v-if="props.showPage" name="index">{{ Props.index + (pageParam.pageIndex - 1) * pageParam.pageSize + 1 }}</slot>
+          <slot v-else name="index">{{ Props.index + 1 }}</slot>
         </template>
       </DataTable>
     </div>
     <div v-if="props.showPage" style="margin: 10px 10px 0 10px; overflow: hidden">
       <div :style="'text-align: ' + props.pageAlign">
-        <el-pagination 
+        <el-pagination
           :total="total"
-          :page-sizes="[20, 40,80, 100]"
+          :page-sizes="[20, 40, 80, 100]"
           :page-size="pageParam.pageSize"
           :current-page="pageParam.pageIndex"
-          @current-change="changePage"
-          @size-change="changePageSize"
           small
           layout="total, sizes, prev, pager, next"
           background
+          @current-change="changePage"
+          @size-change="changePageSize"
         ></el-pagination>
       </div>
     </div>
@@ -110,22 +87,23 @@
 </template>
 
 <script lang="ts" setup>
+/*global Icolumns*/
 import DataTable from '@/components/CurdViews/DataTable/DataTable.vue'
 import { emits, defaulltProps } from './enums'
 import { useTableSlot, useTableHeaderSlot, useTableFetchData } from './hook'
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, toRaw } from 'vue'
 const tableView = ref<InstanceType<typeof DataTable>>(null)
- 
+
 const props = withDefaults(defineProps<ItableProp>(), { ...defaulltProps })
 const visible = ref<boolean>(false)
-let mColumns = ref<Icolumns[]>(props.columns)
-let selection = ref<any[]>([])
+const mColumns = ref<Icolumns[]>(props.columns)
+const selection = ref<any[]>([])
 const key = ref<number>(0)
 
 const emit = defineEmits(emits) // 事件
 
 const isSingle = computed(() => !(selection.value !== null && selection.value.length === 1))
-const isMultiple = computed(() => !(selection.value != null && selection.value.length > 0))
+const isMultiple = computed(() => !(selection.value !== null && selection.value.length > 0))
 
 const { queryData, loading, tableData, pageParam, total, lazyLoad } = useTableFetchData(props, emit, selection)
 
@@ -180,8 +158,8 @@ if (!props.showPage) {
 const { slotArr } = useTableSlot(mColumns)
 const { headerSlotArr } = useTableHeaderSlot(mColumns)
 
-if (props.pageSize != null && props.showPage) {
-  pageParam.pageSize = props.pageSize
+if (props.pageSize !== null && props.showPage) {
+  pageParam.pageSize = toRaw(props.pageSize)
 }
 props.columns.forEach((item: { show: boolean }) => {
   item.show = true
@@ -238,7 +216,7 @@ interface ItableProp {
   highlightCurrentRow?: boolean
   lazy?: boolean
   dataUrl?: string
-  params?: {[x:string] :any}
+  params?: { [x: string]: any }
   height?: string
   maxHeight?: string
   border?: boolean

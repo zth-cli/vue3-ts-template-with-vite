@@ -1,10 +1,10 @@
 import { RouteRecordRaw } from 'vue-router'
-import { defineAsyncComponent } from 'vue';
+import { defineAsyncComponent } from 'vue'
 import NotError from '@/views/Error/404.vue'
 const modules = import.meta.glob('../views/**/**.vue') // 导出views所有的文件
 // console.log(modules);
 
-var addRoutes: Array<RouteRecordRaw> = []
+const addRoutes: Array<RouteRecordRaw> = []
 function addRouter(routeArr: Array<IrouteItem>): RouteConfig[] {
   if (routeArr.length < 1) {
     return
@@ -34,17 +34,16 @@ function addRouter(routeArr: Array<IrouteItem>): RouteConfig[] {
   return addRoutes
 }
 // 处理加载状态
-function lazyLoad(componentPath:string) {
-
+function lazyLoad(componentPath: string) {
   return defineAsyncComponent({
     // 加载函数
     loader: () => import(`../views/${componentPath}.vue`),
-  
+
     // 加载异步组件时使用的组件
     loadingComponent: NotError,
     // 展示加载组件前的延迟时间，默认为 200ms
     delay: 200,
-  
+
     // 加载失败后展示的组件
     errorComponent: NotError,
     // 如果提供了一个 timeout 时间限制，并超时了

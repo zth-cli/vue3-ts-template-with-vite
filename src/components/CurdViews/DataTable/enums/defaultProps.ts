@@ -37,7 +37,7 @@ export const defaultProps = {
     default: '66vh'
   },
   maxHeight: {
-    type: String,
+    type: String
   },
   border: {
     type: Boolean,
@@ -53,8 +53,7 @@ export const defaultProps = {
   },
   spanMethod: {
     // 合并单元格
-    type: Function,
-    default: function () {}
+    type: Function
   },
   rowKey: { type: String, default: 'id' }, // 支持树类型的数据的显示,rowKey不为空时生效
   treeProps: {

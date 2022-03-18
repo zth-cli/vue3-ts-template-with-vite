@@ -1,15 +1,7 @@
-<!--
- * @Author: 阮志雄
- * @Date: 2022-03-10 22:12:48
- * @LastEditTime: 2022-03-11 11:45:43
- * @LastEditors: 阮志雄
- * @Description: In User Settings Edit
- * @FilePath: \oec-model-related-jiangsu\src\components\child.vue
--->
 <template>
   <div>
     <h1>{{ title }}</h1>
-      <el-icon color="red">
+    <el-icon color="red">
       <edit></edit>
     </el-icon>
     <h2>{{ props.name }}</h2>
@@ -36,14 +28,12 @@ const handler = () => {
 
 const { debHandler } = useDebounce(handler)
 onMounted(() => {
-  fetchResource()
-    .then((result) => {
-      console.log(result)
-    })
-    .catch((err) => {})
+  fetchResource().then((result) => {
+    console.log(result)
+  })
 })
 // 定义ref响应式变量
-let title: Ref<string> = ref('home page')
+const title: Ref<string> = ref('home page')
 
 // 定义常量(非响应式),可直接在模板使用
 const theme = {

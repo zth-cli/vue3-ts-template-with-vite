@@ -1,12 +1,4 @@
-import axios, {
-  AxiosInstance,
-  AxiosRequestConfig,
-  AxiosResponse,
-  CancelTokenStatic,
-  Canceler,
-  AxiosError,
-  Method
-} from 'axios'
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, CancelTokenStatic, Canceler, AxiosError, Method } from 'axios'
 import { genConfig } from './config'
 import { transformConfigByMethod } from './utils'
 import { httpStatus } from './httpStatus'
@@ -39,27 +31,21 @@ class FetchHttp {
   }
   // 清除唯一标识
   deleteCancelTokenString(cancelKey: string): void {
-    this.sourceTokenList =
-      this.sourceTokenList.length < 1
-        ? this.sourceTokenList.filter((cancelToken) => cancelToken.cancelKey !== cancelKey)
-        : []
+    this.sourceTokenList = this.sourceTokenList.length < 1 ? this.sourceTokenList.filter((cancelToken) => cancelToken.cancelKey !== cancelKey) : []
   }
   // 移除重复多余的请求
   cancelRepeatRequest(): void {
     const temp: Array<string> = []
-    this.sourceTokenList = this.sourceTokenList.reduce<Array<cancelTokenItem>>(
-      (res: Array<cancelTokenItem>, cancelToken: cancelTokenItem) => {
-        const { cancelKey, cancelHandler } = cancelToken
-        if (temp.indexOf(cancelKey) == -1) {
-          temp.push(cancelKey)
-          res.push(cancelToken)
-        } else {
-          cancelHandler()
-        }
-        return res
-      },
-      []
-    )    
+    this.sourceTokenList = this.sourceTokenList.reduce<Array<cancelTokenItem>>((res: Array<cancelTokenItem>, cancelToken: cancelTokenItem) => {
+      const { cancelKey, cancelHandler } = cancelToken
+      if (temp.indexOf(cancelKey) === -1) {
+        temp.push(cancelKey)
+        res.push(cancelToken)
+      } else {
+        cancelHandler()
+      }
+      return res
+    }, [])
   }
 
   // 请求拦截器
@@ -99,13 +85,9 @@ class FetchHttp {
         const $error = error
         // 判断当前的请求中是否在 取消token数组理存在，如果存在则移除（单次请求流程）
         if (this.currentCabcelToken) {
-          const haskey = this.sourceTokenList.filter(
-            (cancelToken) => cancelToken.cancelKey === this.currentCabcelToken
-          ).length
+          const haskey = this.sourceTokenList.filter((cancelToken) => cancelToken.cancelKey === this.currentCabcelToken).length
           if (haskey) {
-            this.sourceTokenList = this.sourceTokenList.filter(
-              (cancelToken) => cancelToken.cancelKey !== this.currentCabcelToken
-            )
+            this.sourceTokenList = this.sourceTokenList.filter((cancelToken) => cancelToken.cancelKey !== this.currentCabcelToken)
             this.currentCabcelToken = ''
           }
         }

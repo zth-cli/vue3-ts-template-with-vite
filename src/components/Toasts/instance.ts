@@ -2,17 +2,17 @@ import { createApp, App } from 'vue'
 import Toasts from './toasts.vue'
 import Bus from './toastsBus'
 
-let instances = []
+const instances = []
 let seed = 1
 
 const toasts = (options) => {
   // 创建父容器
-  const id:string = `toasts_${seed++}`
-  let root:HTMLDivElement = document.createElement('div')
+  const id = `toasts_${seed++}`
+  const root: HTMLDivElement = document.createElement('div')
   root.setAttribute('data-id', id)
   document.body.appendChild(root)
-  let ToastsConstructor: App = createApp(Toasts, options)
-  let instance = ToastsConstructor.mount(root)
+  const ToastsConstructor: App = createApp(Toasts, options)
+  const instance = ToastsConstructor.mount(root)
   //@ts-ignore
   instance.id = id
   //@ts-ignore
@@ -28,7 +28,7 @@ const toasts = (options) => {
 
   Bus.on('closed', (id) => {
     //@ts-ignore
-    if (instance.id == id) {
+    if (instance.id === id) {
       removeInstance(instance)
       document.body.removeChild(root)
       ToastsConstructor.unmount()
@@ -41,13 +41,17 @@ const toasts = (options) => {
 export default toasts
 
 const removeInstance = (instance) => {
-  if (!instance) return
-  let len = instances.length
+  if (!instance) {
+    return
+  }
+  const len = instances.length
   const index = instances.findIndex((item) => {
     return item.id === instance.id
   })
   instances.splice(index, 1)
-  if (len <= 1) return
+  if (len <= 1) {
+    return
+  }
   const h = instance.height
   for (let i = index; i < len - 1; i++) {
     //@ts-ignore

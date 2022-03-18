@@ -1,10 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
 import type { AxiosInstance, AxiosRequestConfig } from 'axios'
-import type {
-  RequestConfig,
-  RequestInterceptors,
-  CancelRequestSource,
-} from './types'
+import type { RequestConfig, RequestInterceptors, CancelRequestSource } from './types'
 
 class Request {
   // axios 实例
@@ -35,25 +31,19 @@ class Request {
     // 拦截器执行顺序 接口请求 -> 实例请求 -> 全局请求 -> 实例响应 -> 全局响应 -> 接口响应
     this.instance.interceptors.request.use(
       (res: AxiosRequestConfig) => res,
-      (err: any) => err,
+      (err: any) => err
     )
 
     // 使用实例拦截器
-    this.instance.interceptors.request.use(
-      this.interceptorsObj?.requestInterceptors,
-      this.interceptorsObj?.requestInterceptorsCatch,
-    )
-    this.instance.interceptors.response.use(
-      this.interceptorsObj?.responseInterceptors,
-      this.interceptorsObj?.responseInterceptorsCatch,
-    )
+    this.instance.interceptors.request.use(this.interceptorsObj?.requestInterceptors, this.interceptorsObj?.requestInterceptorsCatch)
+    this.instance.interceptors.response.use(this.interceptorsObj?.responseInterceptors, this.interceptorsObj?.responseInterceptorsCatch)
     // 全局响应拦截器保证最后执行
     this.instance.interceptors.response.use(
       // 因为我们接口的数据都在res.data下，所以我们直接返回res.data
       (res: AxiosResponse) => {
         return res.data
       },
-      (err: any) => err,
+      (err: any) => err
     )
   }
   /**
@@ -62,11 +52,9 @@ class Request {
    * @returns {number} 索引位置
    */
   private getSourceIndex(url: string): number {
-    return this.cancelRequestSourceList?.findIndex(
-      (item: CancelRequestSource) => {
-        return Object.keys(item)[0] === url
-      },
-    ) as number
+    return this.cancelRequestSourceList?.findIndex((item: CancelRequestSource) => {
+      return Object.keys(item)[0] === url
+    }) as number
   }
   /**
    * @description: 删除 requestUrlList 和 cancelRequestSourceList
@@ -74,12 +62,11 @@ class Request {
    * @returns {*}
    */
   private delUrl(url: string) {
-    const urlIndex = this.requestUrlList?.findIndex(u => u === url)
+    const urlIndex = this.requestUrlList?.findIndex((u) => u === url)
     const sourceIndex = this.getSourceIndex(url)
     // 删除url和cancel方法
     urlIndex !== -1 && this.requestUrlList?.splice(urlIndex as number, 1)
-    sourceIndex !== -1 &&
-      this.cancelRequestSourceList?.splice(sourceIndex as number, 1)
+    sourceIndex !== -1 && this.cancelRequestSourceList?.splice(sourceIndex as number, 1)
   }
   request<T>(config: RequestConfig): Promise<T> {
     return new Promise((resolve, reject) => {
@@ -91,15 +78,15 @@ class Request {
       // url存在保存取消请求方法和当前请求url
       if (url) {
         this.requestUrlList?.push(url)
-        config.cancelToken = new axios.CancelToken(c => {
+        config.cancelToken = new axios.CancelToken((c) => {
           this.cancelRequestSourceList?.push({
-            [url]: c,
+            [url]: c
           })
         })
       }
       this.instance
         .request<any, T>(config)
-        .then(res => {
+        .then((res) => {
           // 如果我们为单个响应设置拦截器，这里使用单个响应的拦截器
           if (config.interceptors?.responseInterceptors) {
             res = config.interceptors.responseInterceptors<T>(res)
@@ -123,7 +110,7 @@ class Request {
       sourceIndex >= 0 && this.cancelRequestSourceList?.[sourceIndex][url]()
     } else {
       // 存在多个需要取消请求的地址
-      url.forEach(u => {
+      url.forEach((u) => {
         const sourceIndex = this.getSourceIndex(u)
         sourceIndex >= 0 && this.cancelRequestSourceList?.[sourceIndex][u]()
       })
@@ -131,7 +118,7 @@ class Request {
   }
   // 取消全部请求
   cancelAllRequest() {
-    this.cancelRequestSourceList?.forEach(source => {
+    this.cancelRequestSourceList?.forEach((source) => {
       const key = Object.keys(source)[0]
       source[key]()
     })

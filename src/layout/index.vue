@@ -1,6 +1,6 @@
 <template>
   <el-container class="layout">
-    <el-aside width="auto" v-if="menuMode === 'vertical'">
+    <el-aside v-if="menuMode === 'vertical'" width="auto">
       <Menu></Menu>
     </el-aside>
     <el-container style="overflow: hidden; position: relative">

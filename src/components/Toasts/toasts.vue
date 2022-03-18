@@ -1,51 +1,40 @@
 <template>
   <transition name="toast" @after-leave="afterLeave" @after-enter="afterEnter">
     <!-- 弹窗 -->
-    <div
-      ref="container"
-      class="toast-container"
-      :style="toastStyle"
-      v-show="visible"
-      @mouseenter="clearTimer"
-      @mouseleave="createTimer"
-    >
+    <div v-show="visible" ref="container" class="toast-container" :style="toastStyle" @mouseenter="clearTimer" @mouseleave="createTimer">
       <!-- icon -->
       <template v-if="type || type != 'custom' || type != 'img'">
-        <div class="toast-icon success" v-if="type === 'success'">
+        <div v-if="type === 'success'" class="toast-icon success">
           <i class="fi fi-br-check"></i>
         </div>
-        <div class="toast-icon warning" v-if="type === 'warning'">?</div>
-        <div class="toast-icon info" v-if="type === 'info'">
+        <div v-if="type === 'warning'" class="toast-icon warning">?</div>
+        <div v-if="type === 'info'" class="toast-icon info">
           <i class="fi fi-sr-bell-ring"></i>
         </div>
-        <div class="toast-icon error" v-if="type === 'error'">
+        <div v-if="type === 'error'" class="toast-icon error">
           <i class="fi fi-br-cross-small"></i>
         </div>
       </template>
-      <div
-        :style="{ backgroundColor: customIconBackground }"
-        class="toast-icon"
-        v-if="type === 'custom'"
-        v-html="customIcon"
-      ></div>
-      <img class="toast-custom-img" :src="customImg" v-if="type === 'img'" />
+      <div v-if="type === 'custom'" :style="{ backgroundColor: customIconBackground }" class="toast-icon" v-html="customIcon"></div>
+      <img v-if="type === 'img'" class="toast-custom-img" :src="customImg" />
       <!-- content -->
       <div class="toast-content">
         <!-- head -->
-        <div class="toast-head" v-if="title">
+        <div v-if="title" class="toast-head">
           <!-- title -->
           <span class="toast-title">{{ title }}</span>
           <!-- time -->
           <span class="toast-countdown">{{ countDown }}</span>
         </div>
         <!-- body -->
-        <div class="toast-body" v-if="message" v-html="message"></div>
+        <div v-if="message" class="toast-body" v-html="message"></div>
         <!-- operate -->
         <div class="toast-operate">
           <a
             class="toast-button-confirm"
             :class="[{ success: type === 'success' }, { warning: type === 'warning' }, { info: type === 'info' }, { error: type === 'error' }]"
-          >{{ confirmText }}</a>
+            >{{ confirmText }}</a
+          >
         </div>
       </div>
       <!-- 关闭 -->
@@ -60,6 +49,7 @@
 import Bus from './toastsBus'
 import { ref, computed, onMounted, onBeforeUnmount, defineComponent } from 'vue'
 export default defineComponent({
+  name: 'toasts',
   props: {
     title: String,
     closeIcon: {
@@ -125,7 +115,9 @@ export default defineComponent({
 
     // 鼠标进入
     function clearTimer() {
-      if (timer.value) clearTimeout(timer.value)
+      if (timer.value) {
+        clearTimeout(timer.value)
+      }
     }
     // 鼠标移出
     function createTimer() {
@@ -146,7 +138,9 @@ export default defineComponent({
     })
 
     onBeforeUnmount(() => {
-      if (timer.value) clearTimeout(timer.value)
+      if (timer.value) {
+        clearTimeout(timer.value)
+      }
     })
 
     return {

@@ -6,7 +6,9 @@
  */
 const dialogDrag = (el: HTMLElement, binding: { [x: string]: any }) => {
   const isDragable = binding.value?.dialogDrag === undefined ? true : binding.value.dialogDrag // 缺醒dialogDrag时 默认可以拖拽
-  if (!isDragable) return
+  if (!isDragable) {
+    return
+  }
   const dialogHeaderEl = binding.value?.handle ? el.querySelector(binding.value.handle) : el
   const dragDom = el
   dialogHeaderEl.style.cssText += ';cursor:move;'
@@ -17,10 +19,9 @@ const dialogDrag = (el: HTMLElement, binding: { [x: string]: any }) => {
     // @ts-ignore
     if (window.document.currentStyle) {
       return (dom, attr) => dom.currentStyle[attr]
-    } else {
-      // @ts-ignore
-      return (dom, attr) => getComputedStyle(dom, false)[attr]
     }
+    // @ts-ignore
+    return (dom, attr) => getComputedStyle(dom, false)[attr]
   })()
 
   dialogHeaderEl.onmousedown = (e) => {
@@ -46,8 +47,8 @@ const dialogDrag = (el: HTMLElement, binding: { [x: string]: any }) => {
 
     // 注意在ie中 第一次获取到的值为组件自带50% 移动之后赋值为px
     if (styL.includes('%')) {
-      styL = +document.body.clientWidth * (+styL.replace(/\%/g, '') / 100)
-      styT = +document.body.clientHeight * (+styT.replace(/\%/g, '') / 100)
+      styL = +document.body.clientWidth * (+styL.replace(/\\%/g, '') / 100)
+      styT = +document.body.clientHeight * (+styT.replace(/\\%/g, '') / 100)
     } else {
       styL = +styL.replace(/\px/g, '')
       styT = +styT.replace(/\px/g, '')

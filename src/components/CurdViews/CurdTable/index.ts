@@ -1,3 +1,3 @@
-import CurdTable from "./CurdTable.vue";
+import CurdTable from './CurdTable.vue'
 
-export { CurdTable };
+export { CurdTable }

@@ -1,3 +1,3 @@
-import FlowBar from './FlowBar.vue';
+import FlowBar from './FlowBar.vue'
 
-export { FlowBar };
+export { FlowBar }

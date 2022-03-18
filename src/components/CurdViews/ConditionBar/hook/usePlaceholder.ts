@@ -3,7 +3,7 @@ export const usePlaceholder = (item: formItem) => {
     return item.label
   }
   let result
-  if (item.placeholder == null) {
+  if (item.placeholder === null) {
     switch (item.type) {
       case 'text':
         result = item.disabled || item.readonly ? '' : item.label

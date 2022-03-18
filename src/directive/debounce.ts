@@ -3,8 +3,8 @@
  *  例：<el-button v-antiSnake>刷新</el-button>
  *  也可简写成：<el-button v-debounce>刷新</el-button>
  */
-const debounce = (el:HTMLElement, binding: { arg: any; value: () => void }) => {
-  var deTime = binding.arg ? binding.arg : 1000
+const debounce = (el: HTMLElement, binding: { arg: any; value: () => void }) => {
+  const deTime = binding.arg ? binding.arg : 1000
   let timer
   el.addEventListener('click', () => {
     if (timer) {

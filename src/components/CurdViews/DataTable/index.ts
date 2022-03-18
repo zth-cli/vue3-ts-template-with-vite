@@ -1,3 +1,3 @@
-import DataTable from './DataTable.vue';
+import DataTable from './DataTable.vue'
 
-export { DataTable };
+export { DataTable }

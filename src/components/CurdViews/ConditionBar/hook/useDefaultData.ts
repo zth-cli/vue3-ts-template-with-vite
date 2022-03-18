@@ -1,17 +1,8 @@
 import { reactive } from 'vue'
 import day from 'dayjs'
 export const useDefaultData = (props) => {
-  let fromData = reactive<{ [x: string]: any }>({})
-  const typeArr: Array<string> = [
-    'date',
-    'daterange',
-    'datetime',
-    'datetimerange',
-    'year',
-    'month',
-    'time',
-    'timerange'
-  ]
+  const fromData = reactive<{ [x: string]: any }>({})
+  const typeArr: Array<string> = ['date', 'daterange', 'datetime', 'datetimerange', 'year', 'month', 'time', 'timerange']
 
   if (props.fromOptions.length) {
     props.fromOptions.forEach((item: formItem) => {

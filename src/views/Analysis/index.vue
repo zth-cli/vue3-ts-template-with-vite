@@ -4,7 +4,5 @@
   </div>
 </template>
 
-<script lang="ts" setup>
-</script>
-<style lang='scss'>
-</style>
+<script lang="ts" setup></script>
+<style lang="scss"></style>

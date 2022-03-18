@@ -1,6 +1,6 @@
 <template>
   <div class="curd_view">
-    <div class="curd_tree_view" v-if="treeOptions">
+    <div v-if="treeOptions" class="curd_tree_view">
       <!-- <lazy-tree
         v-if="treeOptions.isLazyLoad"
         @changeSatus="trigger"
@@ -18,12 +18,7 @@
           <slot name="searchselect"></slot>
         </template>
       </lazy-tree> -->
-      <Tree
-        @changeSatus="triggerTree"
-        @nodeClick="treeNodeClick"
-        :dataUrl="props.treeOptions.dataUrl"
-        :search="props.treeOptions.search"
-      >
+      <Tree :data-url="props.treeOptions.dataUrl" :search="props.treeOptions.search" @change-satus="triggerTree" @node-click="treeNodeClick">
         <template #default="{ node, data }">
           <slot v-bind="{ node, data }">
             <i class="el-icon-folder"> </i>
@@ -39,17 +34,17 @@
           v-if="showSearchDynamic"
           :width="fromWidth"
           :mode="tableOptions.mode"
-          :fromOptions="fromOptions"
+          :from-options="fromOptions"
           @query="query"
           @params-change="paramsChange"
         >
-          <template v-slot:tool>
+          <template #tool>
             <slot name="tool"></slot>
           </template>
-          <template v-slot:rtool>
+          <template #rtool>
             <slot name="rtool"></slot>
           </template>
-          <template v-slot:ltool>
+          <template #ltool>
             <slot name="ltool"></slot>
           </template>
         </ConditionBar>
@@ -57,46 +52,46 @@
       <div :class="{ boxShadow: tableOptions.mode !== 'simple' }">
         <CurdTable
           ref="tableView"
-          :highlightCurrentRow="tableOptions.highlightCurrentRow"
+          :highlight-current-row="tableOptions.highlightCurrentRow"
           :columns="tableOptions.columns"
           :lazy="tableOptions.lazy"
-          :dataUrl="tableOptions.dataUrl"
+          :data-url="tableOptions.dataUrl"
           :limit="tableOptions.pageSize"
-          :isPrivate="tableOptions.isPrivate"
+          :is-private="tableOptions.isPrivate"
           :params="tableOptions.params"
           :height="tableOptions.height"
-          :rowKey="tableOptions.rowKey"
+          :row-key="tableOptions.rowKey"
           :stripe="tableOptions.stripe"
-          :treeProps="tableOptions.treeProps"
-          :maxHeight="tableOptions.maxHeight"
-          :showPage="tableOptions.showPage"
-          :showPanelTool="tableOptions.showPanelTool"
+          :tree-props="tableOptions.treeProps"
+          :max-height="tableOptions.maxHeight"
+          :show-page="tableOptions.showPage"
+          :show-panel-tool="tableOptions.showPanelTool"
           :mode="tableOptions.mode"
-          :defaultPanel="tableOptions.defaultPanel"
+          :default-panel="tableOptions.defaultPanel"
           :border="tableOptions.border"
-          :showSummary="tableOptions.showSummary"
-          :summaryMethod="tableOptions.summaryMethod"
-          :spanMethod="tableOptions.spanMethod"
-          :showSettingTool="tableOptions.showSettingTool"
-          :responseName="tableOptions.responseName"
+          :show-summary="tableOptions.showSummary"
+          :summary-method="tableOptions.summaryMethod"
+          :span-method="tableOptions.spanMethod"
+          :show-setting-tool="tableOptions.showSettingTool"
+          :response-name="tableOptions.responseName"
           @row-click="rowClick"
           @row-dblclick="rowDblclick"
           @row-add="addRow"
           @row-edit="editRow"
           @row-delete="deleteRows"
           @selection-change="selectionChange"
-          @getTableData="getTableData"
+          @get-table-data="getTableData"
           @current-change="handleCurrentChange"
         >
           <!-- 自定义表格slot -->
-          <template v-for="item in slotArr" v-slot:[item.slot]="Props">
+          <template v-for="item in slotArr" #[item.slot]="Props">
             <!--  父组件调用  老版本为：slot-scope="{ row, index }" -->
             <slot :name="item.slot" v-bind="Props"></slot>
           </template>
-          <template v-for="item in headerSlotArr" v-slot:[item.headerSlot]="Props">
+          <template v-for="item in headerSlotArr" #[item.headerSlot]="Props">
             <slot :name="item.headerSlot" v-bind="Props"></slot>
           </template>
-          <template v-slot:panel>
+          <template #panel>
             <slot name="panel"></slot>
           </template>
         </CurdTable>
@@ -114,9 +109,9 @@ import { emits } from './CurdTable/enums'
 import { reactive, ref } from 'vue'
 
 const tableView = ref(null)
-let toggle = ref<boolean>(false)
-let slotArr = ref<Array<any>>([])
-let headerSlotArr = ref<Array<any>>([])
+const toggle = ref<boolean>(false)
+const slotArr = ref<Array<any>>([])
+const headerSlotArr = ref<Array<any>>([])
 
 interface IcurdView {
   treeOptions?: ItreeProps
@@ -126,7 +121,7 @@ interface IcurdView {
   showSearchDynamic?: boolean
 }
 const props = withDefaults(defineProps<IcurdView>(), {
-  showSearchDynamic: true,
+  showSearchDynamic: true
 })
 
 const emit = defineEmits(emits)
@@ -174,9 +169,10 @@ const addRow = (bool) => {
   emit('row-add', bool)
 }
 const paramsChange = (params) => {
-  console.log(params,'接收params');
+  console.log(params, '接收params')
 
   emit('params-change', params)
+  // eslint-disable-next-line vue/no-mutating-props
   props.tableOptions.params = Object.assign({}, props.tableOptions.params, params)
   console.log(props.tableOptions.params)
 }
