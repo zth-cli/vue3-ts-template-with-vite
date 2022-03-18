@@ -1,3 +1,3 @@
-import FormData from './index.vue';
+import FormData from './index.vue'
 
-export { FormData };
+export { FormData }

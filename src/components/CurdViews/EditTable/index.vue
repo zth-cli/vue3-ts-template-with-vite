@@ -1,8 +1,8 @@
 <template>
   <div class="_Edit_table">
     <el-table :data="TableData" border stripe>
-      <el-table-column v-for="col in columns" :prop="col.name" :key="col.name" :label="col.label">
-        <template v-slot="Scope">
+      <el-table-column v-for="col in columns" :key="col.name" :prop="col.name" :label="col.label">
+        <template #default="Scope">
           <template v-if="col.type === 'text'">
             <el-input v-model="Scope.row[col.name]" :placeholder="col.label" clearable></el-input>
           </template>
@@ -17,7 +17,7 @@
         </template>
       </el-table-column>
       <el-table-column label="操作" width="120" align="center">
-        <template v-slot="scope">
+        <template #default="scope">
           <el-button type="danger" @click="TableData.splice(scope.$index, 1)">移除</el-button>
         </template>
       </el-table-column>
@@ -38,8 +38,8 @@ interface Icolumns {
   [x: string]: any
 }
 
-let TableData = ref<Array<any>>([])
-let rowData = ref<any>({})
+const TableData = ref<Array<any>>([])
+const rowData = ref<any>({})
 
 const props = withDefaults(
   defineProps<{
@@ -73,7 +73,7 @@ const addInitData = () => {
   TableData.value.push(rowDatas)
 }
 watch(
-  ()=>TableData.value,
+  () => TableData.value,
   (newData) => {
     emit('update:propData', newData)
   },

@@ -1,25 +1,12 @@
 <template>
-  <div class="tags" v-if="showTags">
-    <el-tabs
-      :closable="!(tagsList.length == 1)"
-      @tab-click="changeTab"
-      @tab-remove="closeTags"
-      type="card"
-      v-model="activeValue"
-      size="small"
-    >
-      <el-tab-pane
-        :key="item.path"
-        :label="item.title"
-        :name="item.title"
-        :tab="item"
-        v-for="item in tagsList"
-      ></el-tab-pane>
+  <div v-if="showTags" class="tags">
+    <el-tabs v-model="activeValue" :closable="!(tagsList.length == 1)" type="card" size="small" @tab-click="changeTab" @tab-remove="closeTags">
+      <el-tab-pane v-for="item in tagsList" :key="item.path" :label="item.title" :name="item.title" :tab="item"></el-tab-pane>
     </el-tabs>
     <div class="tags-close-box">
-      <el-dropdown @command="handleTags" placement="bottom">
+      <el-dropdown placement="bottom" @command="handleTags">
         <!-- <i class="el-icon-arrow-down drop-icon"></i> -->
-        <el-button icon="el-icon-arrow-down" style="border: none;"></el-button>
+        <el-button icon="el-icon-arrow-down" style="border: none"></el-button>
         <template #dropdown>
           <el-dropdown-menu size="small">
             <el-dropdown-item command="other">关闭其他</el-dropdown-item>
@@ -60,7 +47,7 @@ const setTags = (route: RouteLocationNormalizedLoaded) => {
 }
 // 关闭单个标签
 const closeTags = (tabName: string) => {
-  const index = tagsList.value.findIndex((item) => item.title == tabName)
+  const index = tagsList.value.findIndex((item) => item.title === tabName)
   const delItem = tagsList.value.splice(index, 1)[0]
   // 剩余的tags
   const item = tagsList.value[index] ? tagsList.value[index] : tagsList.value[index - 1]

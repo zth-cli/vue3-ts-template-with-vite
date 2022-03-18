@@ -4,8 +4,8 @@ import debounce from './debounce'
 import dialogDrag from './dialogdrag'
 const directives = { debounce, dialogDrag }
 export default {
-  install:(app)=> {
-    Object.keys(directives).forEach(key => {
+  install: (app) => {
+    Object.keys(directives).forEach((key) => {
       app.directive(key, directives[key])
     })
   }

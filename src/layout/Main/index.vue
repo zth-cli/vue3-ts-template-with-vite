@@ -1,12 +1,12 @@
 <template>
   <div class="zth-route-view">
     <router-view>
-      <template #default="{ Component, route }">
-        <transition :name="menuMode==='horizontal'?'slide-fade-Y':'slide-fade-X'">
+      <template #default="{ Component }">
+        <transition :name="menuMode === 'horizontal' ? 'slide-fade-Y' : 'slide-fade-X'">
           <keep-alive v-if="route.meta.isCache">
-            <component class="child-view" :is="Component" :key="route.fullPath" />
+            <component :is="Component" :key="route.fullPath" class="child-view" />
           </keep-alive>
-          <component class="child-view" v-else :is="Component" :key="route.fullPath" />
+          <component :is="Component" v-else :key="route.fullPath" class="child-view" />
         </transition>
       </template>
     </router-view>

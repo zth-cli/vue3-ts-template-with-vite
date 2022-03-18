@@ -3,10 +3,10 @@ import { typeArr, dateType } from '../enum/index'
 import dayjs from 'dayjs'
 export const useDefaultData = (props) => {
   type formDataType = { [x: string]: any }
-  let formData: formDataType = reactive({})
+  const formData: formDataType = reactive({})
   let rules = reactive({})
-  let invaildArr = ref<string[]>([])
-  
+  const invaildArr = ref<string[]>([])
+
   rules = props.rules
   props.formItem.forEach((item) => {
     for (const key in item) {

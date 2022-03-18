@@ -3,10 +3,11 @@
     <span class="toggle">
       <i :class="[toggle ? 'el-icon-arrow-left' : 'el-icon-arrow-right']" @click="changeSatus"></i>
     </span>
-    <div class="tree_main" v-show="toggle">
-      <el-input v-if="search" placeholder="输入关键字进行过滤" size="small" v-model="filterText"></el-input>
-      <div class="tree_list" v-loading="loading">
+    <div v-show="toggle" class="tree_main">
+      <el-input v-if="search" v-model="filterText" placeholder="输入关键字进行过滤" size="small"></el-input>
+      <div v-loading="loading" class="tree_list">
         <el-tree
+          ref="tree"
           class="filter-tree"
           :data="treeData"
           :props="treeProps"
@@ -16,7 +17,6 @@
           node-key="id"
           highlight-current
           @node-click="nodeClick"
-          ref="tree"
         >
           <template #default="{ node, data }">
             <slot v-bind="{ node, data }">
@@ -35,10 +35,10 @@ import { http } from '@/utils/http'
 import { ref, watch, h } from 'vue'
 import { defaultTreeData, defaultProps } from './enums'
 
-let loading = ref<boolean>(false)
-let treeData = ref<Array<any>>(defaultTreeData)
-let toggle = ref<boolean>(true)
-let filterText = ref<string>('')
+const loading = ref<boolean>(false)
+const treeData = ref<Array<any>>(defaultTreeData)
+const toggle = ref<boolean>(true)
+const filterText = ref<string>('')
 const tree = ref(null)
 
 interface ItreeProp {
@@ -51,7 +51,7 @@ interface ItreeProp {
   resDataName?: string
 }
 
-const props = withDefaults(defineProps<ItreeProp>(), {...defaultProps})
+const props = withDefaults(defineProps<ItreeProp>(), { ...defaultProps })
 
 const emit = defineEmits(['changeSatus', 'nodeClick'])
 
@@ -77,39 +77,41 @@ const changeSatus = () => {
   emit('changeSatus', toggle.value) // 触发自定义事件
 }
 const filterNode = (value: any, data: { label: string | any[] }) => {
-  if (!value) return true
+  if (!value) {
+    return true
+  }
   return data.label.indexOf(value) !== -1
 }
 const nodeClick = (data: any, node: any) => {
   emit('nodeClick', { data, node })
 }
-const renderContent = ({ node, data, store }) => {
-  return h(
-    'span',
-    {
-      class: 'custom-tree-node'
-    },
-    [
-      h('span', null, node.label),
-      h('span', null, [
-        h(
-          'a',
-          {
-            onClick: () => {}
-          },
-          'Append '
-        ),
-        h(
-          'a',
-          {
-            onClick: () => {}
-          },
-          'Delete'
-        )
-      ])
-    ]
-  )
-}
+// const renderContent = ({ node, data, store }) => {
+//   return h(
+//     'span',
+//     {
+//       class: 'custom-tree-node'
+//     },
+//     [
+//       h('span', null, node.label),
+//       h('span', null, [
+//         h(
+//           'a',
+//           {
+//             onClick: () => {}
+//           },
+//           'Append '
+//         ),
+//         h(
+//           'a',
+//           {
+//             onClick: () => {}
+//           },
+//           'Delete'
+//         )
+//       ])
+//     ]
+//   )
+// }
 queryData()
 watch(filterText, (neeVal) => {
   tree.value.filter(neeVal)

@@ -1,3 +1,3 @@
-import Tags from './index.vue';
+import Tags from './index.vue'
 
-export { Tags };
+export { Tags }

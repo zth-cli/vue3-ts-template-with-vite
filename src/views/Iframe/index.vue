@@ -1,6 +1,6 @@
 <template>
-  <div class="frame" v-loading="loading">
-    <iframe :src="frameSrc" class="frame-iframe" ref="frameRef"></iframe>
+  <div v-loading="loading" class="frame">
+    <iframe ref="frameRef" :src="frameSrc" class="frame-iframe"></iframe>
   </div>
 </template>
 <script lang="ts" setup>
@@ -20,10 +20,12 @@ function hideLoading() {
   loading.value = false
 }
 
-const init = ()=> {
+const init = () => {
   nextTick(() => {
     const iframe = unref(frameRef)
-    if (!iframe) return
+    if (!iframe) {
+      return
+    }
     const _frame = iframe as any
     if (_frame.attachEvent) {
       _frame.addEventListener('onload', () => {

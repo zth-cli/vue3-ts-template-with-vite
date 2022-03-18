@@ -2,15 +2,13 @@ import { ref } from 'vue'
 
 //  防抖
 
-export function useDebounce(cb:Function, delay = 100) {
+export function useDebounce(cb: Function, delay = 100) {
   const timer = ref<any>(null)
 
-  const debHandler = () => {
+  const debHandler = (...args) => {
     clearInterval(timer)
-    let args = arguments,
-      context = this
     timer.value = setTimeout(() => {
-      cb.apply(context, args)
+      cb.apply(this, args)
     }, delay)
   }
   const debCancel = () => {

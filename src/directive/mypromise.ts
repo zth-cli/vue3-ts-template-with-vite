@@ -4,25 +4,27 @@ class MyPromise {
   fulfilledCallbacks = [] // 成功的函数队列
   rejectedCallbacks = [] // 失败的函数队列
   constructor(executor: {
-      (resolve: any, reject: any): void; (arg0: (value: any) => void // 成功或失败的参数
-        , arg1: (value: any) => void): void
-    }) {
+    (resolve: any, reject: any): void
+    (
+      arg0: (value: any) => void, // 成功或失败的参数
+      arg1: (value: any) => void
+    ): void
+  }) {
     // executor执行器
-    const that = this
     function resolve(value: any) {
       // 成功的方法
-      if (that.status === 'pending') {
-        that.status = 'resolved'
-        that.value = value
-        that.fulfilledCallbacks.forEach((myFn) => myFn(that.value)) //执行回调方法
+      if (this.status === 'pending') {
+        this.status = 'resolved'
+        this.value = value
+        this.fulfilledCallbacks.forEach((myFn) => myFn(this.value)) //执行回调方法
       }
     }
     function reject(value: any) {
       //失败的方法
-      if (that.status === 'pending') {
-        that.status = 'rejected'
-        that.value = value
-        that.rejectedCallbacks.forEach((myFn) => myFn(that.value)) //执行回调方法
+      if (this.status === 'pending') {
+        this.status = 'rejected'
+        this.value = value
+        this.rejectedCallbacks.forEach((myFn) => myFn(this.value)) //执行回调方法
       }
     }
     try {

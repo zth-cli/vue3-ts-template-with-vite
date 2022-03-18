@@ -1,12 +1,12 @@
 <template>
   <transition name="slide-fade">
-    <div class="overlay" v-show="modelValue">
+    <div v-show="modelValue" class="overlay">
       <div
+        ref="overlayMain"
         v-dialogDrag="{ dialogDrag: isDialogDrag, handle: '.overlay_head' }"
-        ref="overlay_main"
         :style="{ height: oheight, width: width }"
         :class="{ full_screen: isFullScreen }"
-        class="overlay_main"
+        class="overlayMain"
         @click.stop
       >
         <div class="overlay_head" @dblclick.stop="fullScreen()">
@@ -18,7 +18,7 @@
               </el-icon>
               <i class="el-icon-full-screen"></i>
             </span>
-            <span @click="switchs(); changeSatus()">
+            <span @click="switchs()">
               <el-icon class="ol_icon" :size="size">
                 <close />
               </el-icon>
@@ -34,10 +34,9 @@
 </template>
 
 <script lang="ts">
-import { ref, toRefs, reactive, computed, defineComponent } from "vue"
+import { ref, toRefs, reactive, computed, defineComponent } from 'vue'
 export default defineComponent({
-  name: "overlay",
-  emits: ["update:modelValue"],
+  name: 'OverLay',
   props: {
     modelValue: {
       type: Boolean,
@@ -45,11 +44,11 @@ export default defineComponent({
     },
     oheight: {
       type: String,
-      default: ""
+      default: ''
     },
     owidth: {
       type: String,
-      default: ""
+      default: ''
     },
     title: String,
     isDialogDrag: {
@@ -59,36 +58,33 @@ export default defineComponent({
     },
     size: {
       type: String,
-      default: "small"
+      default: 'small'
     }
   },
+  emits: ['update:modelValue'],
   setup(props: any, context: { emit: any }) {
     const { emit } = context
     const { owidth, size, modelValue } = toRefs(props)
     const isFullScreen = ref(false)
-    const sizeArr = reactive({ mini: "30vw", small: "60vw", large: "90vw" })
-    const overlay_main = ref<HTMLElement>(null)
+    const sizeArr = reactive({ mini: '30vw', small: '60vw', large: '90vw' })
+    const overlayMain = ref<HTMLElement>(null)
     const fullScreen = () => {
       isFullScreen.value = !isFullScreen.value
       if (isFullScreen.value) {
-        overlay_main.value.style.left = "0px"
-        overlay_main.value.style.top = "0px"
+        overlayMain.value.style.left = '0px'
+        overlayMain.value.style.top = '0px'
       }
     }
     const switchs = () => {
-      emit("update:modelValue", false)
-    }
-    const changeSatus = () => {
-      emit("changeSatus", modelValue.value) // 触发自定义事件
+      emit('update:modelValue', false)
     }
     const width = computed(() => (owidth.value ? owidth.value : sizeArr[size.value]))
     return {
-      overlay_main,
+      overlayMain,
       isFullScreen,
       width,
       fullScreen,
-      switchs,
-      changeSatus
+      switchs
     }
   }
 })
@@ -112,7 +108,7 @@ export default defineComponent({
     width: 100vw !important;
     height: 100vh !important;
   }
-  .overlay_main {
+  .overlayMain {
     position: relative;
     @include base-background();
     box-shadow: 0 2px 5px 5px rgba(0, 0, 0, 0.1);

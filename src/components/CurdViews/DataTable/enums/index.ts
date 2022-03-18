@@ -1,1 +1,1 @@
-export * from "./defaultProps"
+export * from './defaultProps'

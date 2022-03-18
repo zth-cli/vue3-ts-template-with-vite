@@ -1,18 +1,14 @@
 <template>
-  <el-drawer title="系统配置" :append-to-body="true" v-model="visible" @close="change" size="300px">
+  <el-drawer v-model="visible" title="系统配置" :append-to-body="true" size="300px" @close="change">
     <ul class="theme-list">
       <li class="theme-item">
         <el-divider><p>菜单布局</p></el-divider>
         <div class="drawer-block-checkbox">
-          <div
-            class="drawer-block-checkbox-item drawer-block-checkbox-item-slide"
-            @click=" layout.menuMode = 'vertical'; saveTheme('menuMode') ">
-            <i class="selectIcon el-icon-check" v-show="layout.menuMode==='vertical'" />
+          <div class="drawer-block-checkbox-item drawer-block-checkbox-item-slide" @click="saveTheme('menuMode', 'vertical')">
+            <i v-show="layout.menuMode === 'vertical'" class="selectIcon el-icon-check" />
           </div>
-          <div
-            class="drawer-block-checkbox-item drawer-block-checkbox-item-top"
-            @click=" layout.menuMode = 'horizontal'; saveTheme('menuMode')" >
-            <i class="selectIcon el-icon-check" v-show="layout.menuMode ==='horizontal'" />
+          <div class="drawer-block-checkbox-item drawer-block-checkbox-item-top" @click="saveTheme('menuMode', 'horizontal')">
+            <i v-show="layout.menuMode === 'horizontal'" class="selectIcon el-icon-check" />
           </div>
         </div>
       </li>
@@ -37,9 +33,9 @@
         <el-divider><p>界面显示</p></el-divider>
         <div class="theme-item-sub">
           <span>多标签:</span>
-          <el-switch v-model="layout.tagsBar" inline-prompt @change="saveTheme('tagsBar')" ></el-switch>
+          <el-switch v-model="layout.tagsBar" inline-prompt @change="saveTheme('tagsBar')"></el-switch>
         </div>
-        
+
         <!-- <el-checkbox v-model="layout.tagsBar" @change="saveTheme('tagsBar')"></el-checkbox> -->
       </li>
     </ul>
@@ -73,12 +69,13 @@ const styles = reactive({
 const visible = ref<boolean>(false)
 
 const props = withDefaults(defineProps<{ status: boolean }>(), { status: false })
-const emit = defineEmits(['visibleChange'])
+const emit = defineEmits(['visible-change'])
 
 const change = () => {
-  emit('visibleChange', false)
+  emit('visible-change', false)
 }
-const saveTheme = (key: string) => {
+const saveTheme = (key: string, menuMode?: string) => {
+  menuMode ? (layout.menuMode = menuMode) : ''
   store.dispatch('changeSetting', { key, value: layout[key] })
 }
 const changeTheme = (theme: string) => {

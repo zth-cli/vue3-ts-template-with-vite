@@ -3,7 +3,7 @@ import { http } from '@/utils/http'
 import { defaultTableData } from '../enums'
 export function useTableFetchData(props, emit: (arg0: string, arg1: any[] | Ref<any[]>) => void, selection: Ref<any[]>) {
   const loading = ref<boolean>(false)
-  let tableData = ref<any[]>(defaultTableData)
+  const tableData = ref<any[]>(defaultTableData)
   const pageParam = reactive<{ pageSize: number; pageIndex: number }>({
     pageSize: 20,
     pageIndex: 1
@@ -12,7 +12,7 @@ export function useTableFetchData(props, emit: (arg0: string, arg1: any[] | Ref<
   const lazyLoad = ref<boolean>(props.lazy)
 
   const queryData = () => {
-    let timeout: any
+    let timeout: any = {}
     if (!props.dataUrl || loading.value) {
       return
     }

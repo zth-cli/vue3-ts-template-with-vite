@@ -1,45 +1,44 @@
 <template>
-  <div class="from_data_main" ref="data_ref">
-    <el-form :model="formData" :rules="rules" ref="ruleForm" size="default" label-width="100px">
+  <div ref="data_ref" class="from_data_main">
+    <el-form ref="ruleForm" :model="formData" :rules="rules" size="default" label-width="100px">
       <el-row>
         <template v-for="item in fromItems">
           <template v-if="item.type === 'date' || item.type === 'datetime'">
-            <el-col :span="item.span || 12" :key="item.name">
+            <el-col :key="item.name" :span="item.span || 12">
               <el-form-item class="from_item" :label="item.label" :prop="item.name">
                 <el-date-picker
+                  v-model="formData[item.name]"
                   style="width: 100%"
                   :type="item.type"
                   :disabled="item.disabled"
                   :placeholder="getPlaceholder(item)"
                   clearable
-                  v-model="formData[item.name]"
                   :value-format="item.format || 'yyyy-MM-dd'"
-                  default-time="12:00:00"
                 ></el-date-picker>
               </el-form-item>
             </el-col>
           </template>
           <template v-else-if="item.type === 'month' || item.type === 'year'">
-            <el-col :span="item.span || 12" :key="item.name">
+            <el-col :key="item.name" :span="item.span || 12">
               <el-form-item :key="item.name" class="from_item" :label="item.label" :prop="item.name">
                 <el-date-picker
+                  v-model="formData[item.name]"
                   style="width: 100%"
                   :type="item.type"
                   :disabled="item.disabled"
                   :placeholder="getPlaceholder(item)"
                   clearable
-                  v-model="formData[item.name]"
                   :value-format="item.format"
                 ></el-date-picker>
               </el-form-item>
             </el-col>
           </template>
           <template v-else-if="item.type === 'daterange'">
-            <el-col :span="item.span || 12" :key="item.name">
+            <el-col :key="item.name" :span="item.span || 12">
               <el-form-item :key="item.name" class="from_item" :label="item.label" :prop="item.name">
                 <el-date-picker
-                  style="width: 100%"
                   v-model="formData[item.name]"
+                  style="width: 100%"
                   :type="item.type"
                   :disabled="item.disabled"
                   :value-format="item.format"
@@ -52,11 +51,11 @@
             </el-col>
           </template>
           <template v-else-if="item.type === 'select'">
-            <el-col :span="item.span || 12" :key="item.name">
+            <el-col :key="item.name" :span="item.span || 12">
               <el-form-item :key="item.name" class="from_item" :label="item.label" :prop="item.name">
                 <el-select
-                  style="width: 100%"
                   v-model="formData[item.name]"
+                  style="width: 100%"
                   filterable
                   :disabled="item.disabled"
                   clearable
@@ -66,9 +65,9 @@
                 >
                   <el-option
                     v-for="ele in item.options ? item.options : []"
+                    :key="ele.value"
                     :value="item.isValueKey ? ele : ele.value"
                     :label="ele.label"
-                    :key="ele.value"
                     :disabled="ele.disabled"
                   >
                   </el-option>
@@ -77,7 +76,7 @@
             </el-col>
           </template>
           <template v-else-if="item.type === 'radio'">
-            <el-col :span="item.span || 12" :key="item.name">
+            <el-col :key="item.name" :span="item.span || 12">
               <el-form-item :key="item.name" class="from_item" :label="item.label" :prop="item.name">
                 <el-radio-group v-model="formData[item.name]">
                   <template v-for="ele in item.options" :key="ele.value">
@@ -88,7 +87,7 @@
             </el-col>
           </template>
           <template v-else-if="item.type === 'checkbox'">
-            <el-col :span="item.span || 12" :key="item.name">
+            <el-col :key="item.name" :span="item.span || 12">
               <el-form-item :key="item.name" class="from_item" :label="item.label" :prop="item.name">
                 <el-checkbox-group v-model="formData[item.name]">
                   <template v-for="ele in item.options" :key="ele.value">
@@ -99,16 +98,16 @@
             </el-col>
           </template>
           <template v-else-if="item.type === 'editTable'">
-            <el-col :span="item.span || 12" :key="item.name">
+            <el-col :key="item.name" :span="item.span || 12">
               <el-form-item :key="item.name" class="from_item" :label="item.label" :prop="item.name">
-                <EditTable :columns="item.columns" v-model:propData="formData[item.name]"></EditTable>
+                <EditTable v-model:propData="formData[item.name]" :columns="item.columns"></EditTable>
               </el-form-item>
             </el-col>
           </template>
           <template v-else-if="item.type === 'input'">
-            <el-col :span="item.span || 12" :key="item.name">
-              <el-form-item class="from_item" :key="item.name" :label="item.label" :prop="item.name">
-                <el-input :disabled="item.disabled" :type="item.type" v-model="formData[item.name]" :placeholder="getPlaceholder(item)">
+            <el-col :key="item.name" :span="item.span || 12">
+              <el-form-item :key="item.name" class="from_item" :label="item.label" :prop="item.name">
+                <el-input v-model="formData[item.name]" :disabled="item.disabled" :type="item.type" :placeholder="getPlaceholder(item)">
                   <template v-if="item.append" #append>
                     <slot :name="item.append" :formData="{ data: formData, key: item.name }"></slot>
                   </template>
@@ -120,9 +119,9 @@
             </el-col>
           </template>
           <template v-else>
-            <el-col :span="item.span || 12" :key="item.name">
-              <el-form-item class="from_item" :key="item.name" :label="item.label" :prop="item.name">
-                <el-input :disabled="item.disabled" :type="item.type" v-model="formData[item.name]" :placeholder="getPlaceholder(item)">
+            <el-col :key="item.name" :span="item.span || 12">
+              <el-form-item :key="item.name" class="from_item" :label="item.label" :prop="item.name">
+                <el-input v-model="formData[item.name]" :disabled="item.disabled" :type="item.type" :placeholder="getPlaceholder(item)">
                   <template v-if="item.append" #append>
                     <slot :name="item.append" :formData="{ data: formData, key: item.name }"></slot>
                   </template>
@@ -136,9 +135,9 @@
         </template>
       </el-row>
     </el-form>
-    <div class="btns" v-show="postUrl ? true : false">
+    <div v-show="postUrl ? true : false" class="btns">
       <el-button type="primary" @click="submitForm(ruleForm)">提交</el-button>
-      <el-button @click="resetForm(ruleForm)" class="warning">重置</el-button>
+      <el-button class="warning" @click="resetForm(ruleForm)">重置</el-button>
     </div>
   </div>
 </template>
@@ -152,7 +151,7 @@ import { useDefaultData } from './hook/useDefaultData'
 import { ElMessage } from 'element-plus'
 import qs from 'qs'
 const ruleForm = ref(null)
-let fromItems = ref<Array<any>>([])
+const fromItems = ref<Array<any>>([])
 
 //  定义props
 interface IformProps {
@@ -185,16 +184,18 @@ const props = withDefaults(defineProps<IformProps>(), {
 const emit = defineEmits(['submit', 'from-change'])
 
 // 初始化赋值
-fromItems.value = props.formItem
+fromItems.value = toRaw(props.formItem)
 const { getPlaceholder } = usePlaceholder(props)
 const { formData, rules, invaildArr } = useDefaultData(props)
 
 // 提交
 const submitForm = async (formEl) => {
-  if (!formEl) return
+  if (!formEl) {
+    return
+  }
   await formEl.validate(async (valid, fields) => {
     if (valid) {
-      var formDatas = Object.assign({}, props.postParams, toRaw(formData))
+      let formDatas = Object.assign({}, props.postParams, toRaw(formData))
       for (const key in formDatas) {
         if (invaildArr.value.includes(key)) {
           delete formDatas[key]
@@ -222,7 +223,9 @@ const submitForm = async (formEl) => {
 }
 // 重置
 const resetForm = (formEl) => {
-  if (!formEl) return
+  if (!formEl) {
+    return
+  }
   formEl.resetFields()
 }
 

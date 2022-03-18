@@ -1,26 +1,25 @@
 <template>
   <div class="curd-condition-bar">
     <template v-for="(item, index) in options">
-      <section class="condition-item" v-if="!item.type || item.type === 'list'" :key="index">
+      <section v-if="!item.type || item.type === 'list'" :key="index" class="condition-item">
         <div class="category-title ellipsis">{{ item.title }}：</div>
-        <div
-          ref="categorys"
-          :class="[switchData[item.name] ? 'category-content-auto' : '', 'category-content']"
-        >
+        <div ref="categorys" :class="[switchData[item.name] ? 'category-content-auto' : '', 'category-content']">
           <el-button
             v-if="item.options.length > 1"
             size="small"
             style="margin-top: 10px"
-            @click="resetItemActive(index);fromData[item.name] = []"
             :type="fromData[item.name].length ? 'text' : 'primary'"
-          >全部</el-button>
+            @click="resetItemActive(item, index)"
+            >全部</el-button
+          >
           <ul class="item-ul">
-            <li class="item-li" v-for="(ele, inde) in item.options" :key="ele.value">
+            <li v-for="(ele, inde) in item.options" :key="ele.value" class="item-li">
               <el-button
                 size="small"
-                @click="setActive(item, index, inde);setValue(item, ele.value)"
                 :type="item.options.length < 2 ? 'primary' : isActive(index, inde) ? 'primary' : 'text'"
-              >{{ ele.label }}</el-button>
+                @click="setFlowSatus(item, index, inde, ele.value)"
+                >{{ ele.label }}</el-button
+              >
             </li>
           </ul>
         </div>
@@ -28,21 +27,22 @@
           <el-button
             size="small"
             style="margin-top: 6px"
-            @click="switchData[item.name] = !switchData[item.name]"
             type="text"
             :icon="!switchData[item.name] ? 'arrow-down' : 'arrow-up'"
-          >{{ !switchData[item.name] ? '展开' : '收起' }}</el-button>
+            @click="switchData[item.name] = !switchData[item.name]"
+            >{{ !switchData[item.name] ? '展开' : '收起' }}</el-button
+          >
         </div>
       </section>
     </template>
-    <ConditionBar :fromOptions="options" @query="query" @params-change="paramsChange">
-      <template v-slot:tool>
+    <ConditionBar :from-options="options" @query="query" @params-change="paramsChange">
+      <template #tool>
         <slot name="tool"></slot>
       </template>
-      <template v-slot:ltool>
+      <template #ltool>
         <slot name="ltool"></slot>
       </template>
-      <template v-slot:rtool>
+      <template #rtool>
         <slot name="rtool"></slot>
       </template>
     </ConditionBar>
@@ -50,13 +50,13 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, watch, nextTick, toRaw } from 'vue';
-import {ConditionBar} from '@/components/CurdViews/ConditionBar'
+import { reactive, ref, watch, nextTick, toRaw } from 'vue'
+import { ConditionBar } from '@/components/CurdViews/ConditionBar'
 
 const categorys = ref(null)
 let anchor = reactive([])
-let fromData: { [key: string]: any } = reactive({})
-let switchData = reactive({})
+const fromData: { [key: string]: any } = reactive({})
+const switchData = reactive({})
 
 const emit = defineEmits(['params-change', 'query'])
 interface Props {
@@ -80,9 +80,13 @@ const initFromData = () => {
     }
   })
 }
+const setFlowSatus = (item, index, i, val) => {
+  setValue(item, val)
+  setActive(item, index, i)
+}
 const setValue = (item, val) => {
   if (props.multiple) {
-    let index = fromData[item.name].indexOf(val)
+    const index = fromData[item.name].indexOf(val)
     if (index > -1) {
       // 多选存在，删除值
       fromData[item.name].splice(index, 1)
@@ -102,7 +106,7 @@ const setActive = (item, index, i) => {
   //     }
   //   })
   // }
-  let id = String(index) + '~' + String(i)
+  const id = String(index) + '~' + String(i)
   if (props.multiple) {
     if (anchor.indexOf(id) < 0) {
       anchor.push(id)
@@ -111,23 +115,23 @@ const setActive = (item, index, i) => {
       anchor.splice(i, 1)
     }
   } else {
-    let ind = null;
-   const isExiste = anchor.some((item, i)=>{
-     if ( Number(item.split('~')[0]) === index) {
-       ind = i
-     }
-     return Number(item.split('~')[0]) === index
+    let ind = null
+    const isExiste = anchor.some((item, i) => {
+      if (Number(item.split('~')[0]) === index) {
+        ind = i
+      }
+      return Number(item.split('~')[0]) === index
     })
-   isExiste ? anchor[ind] = id : anchor.push(id)
+    isExiste ? (anchor[ind] = id) : anchor.push(id)
   }
   // console.log(anchor);
-  
 }
-const resetItemActive = (index) => {
+const resetItemActive = (item, index) => {
   const arr = anchor.filter((ele, indx) => {
     return ele.split('~')[0] !== String(index)
   })
   anchor = arr
+  fromData[item.name] = []
 }
 const isActive = (index, i) => {
   return anchor.includes(String(index) + '~' + String(i))
@@ -143,16 +147,18 @@ const query = (params) => {
 }
 
 initFromData()
-watch(()=>props.options, () => {
-  initFromData()
-})
+watch(
+  () => props.options,
+  () => {
+    initFromData()
+  }
+)
 watch(switchData, async () => {
   await nextTick()
   categorys.value.forEach((element) => {
     element.scrollTop = 0
   })
 })
-
 </script>
 <style lang="scss">
 $linehieht: 40px;
@@ -173,7 +179,7 @@ $linehieht: 40px;
     .category-title {
       @include font_color(null);
       width: 130px;
-     line-height: 46px;
+      line-height: 46px;
     }
     .category-more {
       @include font_color(null);

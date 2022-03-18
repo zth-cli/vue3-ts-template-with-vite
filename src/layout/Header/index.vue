@@ -1,23 +1,19 @@
 <template>
   <div class="header" :class="{ 'light-header': menuMode !== 'horizontal' }">
     <!-- 折叠按钮 -->
-    <div class="collapse-btn" v-if="menuMode !== 'horizontal'">
+    <div v-if="menuMode !== 'horizontal'" class="collapse-btn">
       <el-icon :size="20">
-        <component
-          style="font-size: 20px"
-          @click="handleCollapse()"
-          :is="collapse ? 'fold' : 'expand'"
-        />
+        <component :is="collapse ? 'fold' : 'expand'" style="font-size: 20px" @click="handleCollapse()" />
       </el-icon>
     </div>
     <Breadcrumb v-if="menuMode !== 'horizontal'"></Breadcrumb>
     <!-- <div class="solgan ellipsis" title="首页">ZeroToHero</div> -->
-    <div class="logo" v-if="menuMode === 'horizontal'">
+    <div v-if="menuMode === 'horizontal'" class="logo">
       <img src="@/assets/img/logo.png" />
     </div>
     <div class="header-menu">
       <slot>
-        <Menu menuMode="horizontal" v-if="menuMode === 'horizontal'"></Menu>
+        <Menu v-if="menuMode === 'horizontal'" menu-mode="horizontal"></Menu>
       </slot>
     </div>
     <div class="header-right">
@@ -25,17 +21,17 @@
         <!-- 全屏显示 -->
         <el-tooltip :content="fullscreen ? `取消全屏` : `全屏`" placement="bottom">
           <el-icon :size="20" class="icon-cammand">
-            <component @click="handleFullScreen()" is="rank" />
+            <component is="rank" @click="handleFullScreen()" />
           </el-icon>
         </el-tooltip>
         <el-tooltip content="系统设置" placement="bottom">
-          <el-icon :size="20" v-if="props.showThemeBar" class="icon-cammand">
-            <component @click="settingBarStatus = true" is="setting" />
+          <el-icon v-if="props.showThemeBar" :size="20" class="icon-cammand">
+            <component is="setting" @click="settingBarStatus = true" />
           </el-icon>
         </el-tooltip>
         <el-tooltip content="重载" placement="bottom">
-          <el-icon :size="20" v-if="props.showThemeBar" class="icon-cammand">
-            <component @click="reloadPage" is="refresh-right" />
+          <el-icon v-if="props.showThemeBar" :size="20" class="icon-cammand">
+            <component is="refresh-right" @click="reloadPage" />
           </el-icon>
         </el-tooltip>
         <el-avatar icon="el-icon-user-solid" :size="36" style="margin-left: 10px"></el-avatar>
@@ -56,7 +52,7 @@
         </el-dropdown>
       </div>
     </div>
-    <AppSettingBar :status="settingBarStatus" @visibleChange="toggleThemeBar"></AppSettingBar>
+    <AppSettingBar :status="settingBarStatus" @visible-change="toggleThemeBar"></AppSettingBar>
   </div>
 </template>
 <script setup lang="ts">
@@ -94,6 +90,7 @@ const handleCommand = (command: string) => {
     removeAllStorge()
     router.replace('/login')
   } else if (command === 'updataPassword') {
+    // TODO
   }
 }
 const handleFullScreen = () => {
@@ -102,10 +99,8 @@ const handleFullScreen = () => {
     if (document.exitFullscreen) {
       document.exitFullscreen()
     }
-  } else {
-    if (element.requestFullscreen) {
-      element.requestFullscreen()
-    }
+  } else if (element.requestFullscreen) {
+    element.requestFullscreen()
   }
   fullscreen.value = !fullscreen.value
 }

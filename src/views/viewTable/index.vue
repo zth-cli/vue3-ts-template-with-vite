@@ -1,19 +1,19 @@
 <template>
   <CurdView
-    :tableOptions="tableOptions"
-    :fromOptions="fromOptions"
-    :treeOptions="treeOptions"
+    :table-options="tableOptions"
+    :from-options="fromOptions"
+    :tree-options="treeOptions"
     @selection-change="selectionChange"
     @node-click="treeNodeClick"
     @row-add="rowAdd"
   >
-    <template v-slot:action="{ row }">
+    <template #action="{ row }">
       <el-button size="small" @click="getRow(row)">action</el-button>
     </template>
-    <template v-slot:proflies="{ row }">
+    <template #proflies="{ row }">
       <el-button size="small" @click="getRow(row)">proflies</el-button>
     </template>
-    <template v-slot:operation="{ row }">
+    <template #operation="{ row }">
       <el-button size="small" @click="getRow(row)">operation</el-button>
     </template>
   </CurdView>
@@ -21,6 +21,7 @@
 
 <script lang="ts">
 import CurdView from '@/components/CurdViews/index.vue'
+import { defineComponent } from 'vue'
 const tableOptions: ItableProps = {
   pageSize: 20,
   showPanelTool: true,
@@ -65,7 +66,9 @@ const treeOptions: ItreeProps = {
   search: true,
   treeProps: { children: 'children', label: 'label', disable: 'false' }
 }
-export default {
+export default defineComponent({
+  name: 'ViewTable',
+  components: { CurdView },
   data() {
     return {
       tableOptions,
@@ -74,7 +77,6 @@ export default {
       close: false
     }
   },
-  components: { CurdView },
   methods: {
     rowAdd() {
       this.close = true
@@ -93,6 +95,6 @@ export default {
       })
     }
   }
-}
+})
 </script>
 <style lang="scss"></style>

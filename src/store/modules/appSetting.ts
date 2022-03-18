@@ -15,7 +15,7 @@ const env = import.meta.env
 
 function checkStorange(key: string) {
   const temp = env['VITE_' + key]
-  return localStorage.getItem(key) != null ? localStorage.getItem(key) : temp
+  return localStorage.getItem(key) !== null ? localStorage.getItem(key) : temp
 }
 
 const appSettings = {
@@ -28,7 +28,7 @@ const appSettings = {
 
   mutations: {
     CHANGE_SETTING: (state: AppSettingState, { key, value }: any) => {
-      if (state.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(state, key)) {
         state[key] = value
         localStorage.setItem(key, value)
       }

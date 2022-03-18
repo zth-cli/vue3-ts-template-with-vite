@@ -1,34 +1,38 @@
 <template>
   <el-popover v-model:visible="visible" placement="top" :width="160">
-    <p>{{ content }}</p>
+    <p>{{ props.content }}</p>
     <div style="text-align: right; margin: 0">
-      <el-button size="small" type="text" @click="visible = false; cancelBtn()">取消</el-button>
-      <el-button size="small" type="primary" @click="visible = false; confirmBtn()">确认</el-button>
+      <el-button size="small" type="text" @click="cancelBtn()">取消</el-button>
+      <el-button size="small" type="primary" @click="confirmBtn()">确认</el-button>
     </div>
     <template #reference>
-      <el-button size="small" type="danger" @click="visible = true;">{{ subContent }}</el-button>
+      <el-button size="small" type="danger" @click="visible = true">{{ props.subContent }}</el-button>
     </template>
   </el-popover>
 </template>
 
 <script lang="ts" setup>
-import { stringify } from 'querystring';
 import { ref } from 'vue'
 const emit = defineEmits(['on-confirm', 'on-cancel']) // 事件
-const { content, subContent } = withDefaults(defineProps<{
-  content?: string,
-  subContent?: string,
-  size?: string
-}>(), {
-  content: '确定删除吗？',
-  subContent: '删除',
-  size: 'samll'
-})
+const props = withDefaults(
+  defineProps<{
+    content?: string
+    subContent?: string
+    size?: string
+  }>(),
+  {
+    content: '确定删除吗？',
+    subContent: '删除',
+    size: 'samll'
+  }
+)
+const visible = ref(false)
 const confirmBtn = () => {
+  visible.value = false
   emit('on-confirm')
 }
 const cancelBtn = () => {
+  visible.value = false
   emit('on-cancel')
 }
-const visible = ref(false)
 </script>

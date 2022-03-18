@@ -1,8 +1,7 @@
 import { createApp, defineComponent, nextTick } from 'vue'
 // 使用 Vue.extend构造组件子类
-const Comp = defineComponent({ name:'Loading', template: '<p>loading</p>' })
+const Comp = defineComponent({ name: 'Loading', template: '<p>loading</p>' })
 const app = createApp(Comp)
-
 
 // 定义一个名为loading的指令
 const loading = {

@@ -1,8 +1,8 @@
 function indentity(value, msg) {
-    var indentities = {
-        value: value,
-        message: msg
-    };
-    return indentities;
+  var indentities = {
+    value: value,
+    message: msg
+  }
+  return indentities
 }
-console.log(indentity(12, 'hello'));
+console.log(indentity(12, 'hello'))

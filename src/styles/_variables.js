@@ -1,5 +1,5 @@
 // 特殊样式，Echarts表格颜色
-var chartColorObj = {
+const chartColorObj = {
   theme1: ['#045762', '#70af85', '#16c79a'],
   theme2: ['#588da8', '#ccafaf', '#e58a8a'],
   theme3: ['#2e73ff', '#60e4c2', '#36c57d'],
@@ -7,7 +7,7 @@ var chartColorObj = {
   theme5: ['#583d72', '#19456b', '#ef4f4f']
 }
 // 地图颜色
-var mapColorObj = {
+const mapColorObj = {
   theme1: {
     areaColor: '#525078',
     borderColor: '#03002f',
@@ -36,7 +36,7 @@ var mapColorObj = {
 }
 
 // 导航菜单颜色
-var menuColorObj = {
+const menuColorObj = {
   theme1: {
     textColor: '#d66a57',
     activeTextColor: '#fff',

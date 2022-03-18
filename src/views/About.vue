@@ -13,8 +13,8 @@
 <script lang="ts">
 export default {
   data() {
-    return {};
-  },
-};
+    return {}
+  }
+}
 </script>
 <style lang="scss"></style>
