@@ -4,3 +4,4 @@ dist
 axiosConfig
 dist-ssr
 *.local
+examples
