@@ -15,6 +15,7 @@
           >
         </template>
       </el-popover>
+      <el-button v-if="props.defaultPanel.includes('export')" icon="download" type="primary" @click="exportData()">导出</el-button>
       <slot name="panel"></slot>
     </div>
     <div v-if="props.showSettingTool && props.mode !== 'simple'" class="panel_tool_right">
@@ -90,7 +91,7 @@
 /*global Icolumns*/
 import DataTable from '@/components/CurdViews/DataTable/DataTable.vue'
 import { emits, defaulltProps } from './enums'
-import { useTableSlot, useTableHeaderSlot, useTableFetchData } from './hook'
+import { useTableSlot, useTableHeaderSlot, useTableFetchData, useExportTable } from './hook'
 import { ref, computed, watch, toRaw } from 'vue'
 const tableView = ref<InstanceType<typeof DataTable>>(null)
 
@@ -106,6 +107,8 @@ const isSingle = computed(() => !(selection.value !== null && selection.value.le
 const isMultiple = computed(() => !(selection.value !== null && selection.value.length > 0))
 
 const { queryData, loading, tableData, pageParam, total, lazyLoad } = useTableFetchData(props, emit, selection)
+
+const { exportData } = useExportTable(props)
 
 const changePage = (page: number) => {
   pageParam.pageIndex = page
@@ -215,6 +218,7 @@ interface ItableProp {
   showPage?: boolean
   highlightCurrentRow?: boolean
   lazy?: boolean
+  exportUrl?: string
   dataUrl?: string
   params?: { [x: string]: any }
   height?: string

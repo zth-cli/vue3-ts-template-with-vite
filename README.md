@@ -51,12 +51,16 @@ yarn build
 # or
 npm run build
 ```
+
 ## 约束代码风格
+
 ![eslint](./images/eslint.png)
 ![eslint1](./images/eslint1.png)
+
 > 参考[https://juejin.cn/post/7036745610954801166](https://juejin.cn/post/7036745610954801166)
 
 > 一个 Vue 请求库[https://www.attojs.com/](https://www.attojs.com/)
+
 ## 浏览器支持
 
 本地开发推荐使用`Chrome 80+` 浏览器

@@ -87,10 +87,7 @@
                   :key="i"
                   class="mini_btns"
                   :type="switchIndex === i ? 'danger' : 'primary'"
-                  @click="
-                    switchIndex = i
-                    switchDate(item.name, el, item.dateTypeParamName)
-                  "
+                  @click="switchDate(item.name, el, item.dateTypeParamName, i)"
                   >{{ el.type === 'date' ? '日' : el.type === 'month' ? '月' : el.type === 'year' ? '年' : el.type === 'dates' ? '多日' : '时间' }}</el-button
                 >
                 <el-date-picker
@@ -128,7 +125,7 @@
       </div>
       <div class="btns">
         <el-button v-if="fromOptions.length > 0 && mode !== 'simple'" type="primary" icon="search" @click="query()">查询</el-button>
-        <el-button>重置</el-button>
+        <el-button @click="flowBarResetData">重置</el-button>
         <slot name="tool"></slot>
       </div>
     </div>
@@ -141,10 +138,9 @@ import { allowType } from './enum/allowType'
 import { usePlaceholder, useTimeSwitch, useDefaultData, useQuery, useItemRefs, useMediaQuery } from './hook'
 
 const expend = ref<boolean>(false)
-const switchIndex = ref<number>(0)
 const tools = ref(null)
 
-const emit = defineEmits(['query', 'resize', 'params-change'])
+const emit = defineEmits(['query', 'resize', 'params-change', 'reset-data'])
 
 interface IconProps {
   mode?: string
@@ -154,8 +150,8 @@ interface IconProps {
 }
 const props = withDefaults(defineProps<IconProps>(), { mode: 'normal', toolAlign: 'left', width: '200px' })
 
-const { fromData, typeArr } = useDefaultData(props) // 初始化默认值
-const { switchDate } = useTimeSwitch(fromData) // 时间切换
+const { fromData, typeArr, resetData } = useDefaultData(props) // 初始化默认值
+const { switchDate, switchIndex } = useTimeSwitch(fromData) // 时间切换
 const { itemRefs, setItemRef } = useItemRefs() // 获取for循环ref
 const { query } = useQuery(emit, fromData) // 点击查询
 const { toolsMediaQuery, ellipsis } = useMediaQuery(tools, itemRefs) // 布局自适应
@@ -168,6 +164,11 @@ const debounce = (fn: () => void, wait: number) => {
     }
     timeout = setTimeout(fn, wait)
   }
+}
+
+const flowBarResetData = () => {
+  resetData()
+  emit('reset-data', fromData)
 }
 
 onMounted(() => {

@@ -47,7 +47,14 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       sourcemap: false,
       brotliSize: false,
       // 消除打包大小超过500kb警告
-      chunkSizeWarningLimit: 2000
+      chunkSizeWarningLimit: 2000,
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: isBuild,
+          drop_debugger: isBuild
+        }
+      }
     },
     resolve: {
       alias: {

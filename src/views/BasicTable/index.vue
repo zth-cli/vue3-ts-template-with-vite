@@ -28,6 +28,7 @@ const tableOptions = reactive({
   pageSize: 20,
   showPanelTool: true,
   params: {}, // params的改变都会触发，表格的重新查询
+  exportUrl: '/exportAsyncRoutes',
   dataUrl: '/getAsyncRoutes',
   columns: [
     { type: 'selection', width: 70, align: 'center' },
