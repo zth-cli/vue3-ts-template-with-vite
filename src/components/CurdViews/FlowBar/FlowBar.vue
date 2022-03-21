@@ -35,7 +35,7 @@
         </div>
       </section>
     </template>
-    <ConditionBar :from-options="options" @query="query" @params-change="paramsChange">
+    <ConditionBar :from-options="options" @query="query" @params-change="paramsChange" @reset-data="resetData">
       <template #tool>
         <slot name="tool"></slot>
       </template>
@@ -57,6 +57,7 @@ const categorys = ref(null)
 let anchor = reactive([])
 const fromData: { [key: string]: any } = reactive({})
 const switchData = reactive({})
+let orignalFromData = {}
 
 const emit = defineEmits(['params-change', 'query'])
 interface Props {
@@ -76,6 +77,7 @@ const initFromData = () => {
   props.options.forEach((item) => {
     if (item.type === 'list' || !item.type) {
       fromData[item.name] = []
+      orignalFromData[item.name] = []
       switchData[item.name] = false
     }
   })
@@ -135,6 +137,13 @@ const resetItemActive = (item, index) => {
 }
 const isActive = (index, i) => {
   return anchor.includes(String(index) + '~' + String(i))
+}
+
+const resetData = () => {
+  for (const key in fromData) {
+    fromData[key] = orignalFromData[key]
+  }
+  anchor = []
 }
 
 // 输入框

@@ -55,6 +55,7 @@
           :highlight-current-row="tableOptions.highlightCurrentRow"
           :columns="tableOptions.columns"
           :lazy="tableOptions.lazy"
+          :export-url="tableOptions.exportUrl"
           :data-url="tableOptions.dataUrl"
           :limit="tableOptions.pageSize"
           :is-private="tableOptions.isPrivate"
@@ -169,12 +170,9 @@ const addRow = (bool) => {
   emit('row-add', bool)
 }
 const paramsChange = (params) => {
-  console.log(params, '接收params')
-
   emit('params-change', params)
   // eslint-disable-next-line vue/no-mutating-props
   props.tableOptions.params = Object.assign({}, props.tableOptions.params, params)
-  console.log(props.tableOptions.params)
 }
 const triggerTree = (bool: boolean) => {
   toggle.value = bool

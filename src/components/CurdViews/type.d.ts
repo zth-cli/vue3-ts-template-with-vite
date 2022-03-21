@@ -46,6 +46,7 @@ interface ItableProps {
   showPage?: boolean
   highlightCurrentRow?: boolean
   lazy?: boolean
+  exportUrl?: string
   dataUrl?: string
   params?: { [x: string]: any }
   height?: string

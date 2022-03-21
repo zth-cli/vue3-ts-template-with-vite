@@ -9,7 +9,6 @@ export default function renderFunc(props: any, slots: any) {
 
   // let elememtArr = []
   function renders(columns: Icolumns[]) {
-    let childrenEle = []
     const elememtArr = columns.map((item: Icolumns) => {
       // 参照elementui Table-column Attributes
       const columnProps: Icolumns = item
@@ -155,26 +154,25 @@ export default function renderFunc(props: any, slots: any) {
           }
         })
       }
-      if (item.childrens && item.childrens.length) {
-        childrenEle = renders(item.childrens) // 嵌套表头，递归、
-      } else {
-        childrenEle = []
-      }
-      return childrenEle.length
-        ? h(
-            // @ts-ignore
-            ElTableColumn,
-            { prop: item.prop, ...columnProps },
-            {
-              default: () => {
-                return [childrenEle]
-              }
+      if (item.childrens?.length > 0) {
+        return h(
+          // @ts-ignore
+          ElTableColumn,
+          { prop: item.prop, ...columnProps },
+          {
+            default: () => {
+              return renders(item.childrens)
             }
-          ) // @ts-ignore
-        : h(ElTableColumn, { prop: item.prop, ...columnProps })
+          }
+        )
+      } else {
+        // @ts-ignore
+        return h(ElTableColumn, { prop: item.prop, ...columnProps })
+      }
     })
     return elememtArr
   }
+
   return renders(columns.value)
 }
 export function filterHandler(value: any, row: { [x: string]: any }, column: { property: any }) {

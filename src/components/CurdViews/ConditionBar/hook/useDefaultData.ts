@@ -1,6 +1,7 @@
 import { reactive } from 'vue'
 import day from 'dayjs'
 export const useDefaultData = (props) => {
+  const orignalFormData: { [x: string]: any } = {}
   const fromData = reactive<{ [x: string]: any }>({})
   const typeArr: Array<string> = ['date', 'daterange', 'datetime', 'datetimerange', 'year', 'month', 'time', 'timerange']
 
@@ -18,14 +19,21 @@ export const useDefaultData = (props) => {
         }
       }
       fromData[item.name] = item.default ? item.default : ''
+      orignalFormData[item.name] = item.default ? item.default : ''
       if (typeArr.includes(item.type)) {
         fromData[item.name] = item.default ? item.default : day().format(item.format.toUpperCase())
+        orignalFormData[item.name] = item.default ? item.default : day().format(item.format.toUpperCase())
       }
     })
   }
-
+  const resetData = () => {
+    for (const key in orignalFormData) {
+      fromData[key] = orignalFormData[key]
+    }
+  }
   return {
     fromData,
-    typeArr
+    typeArr,
+    resetData
   }
 }
