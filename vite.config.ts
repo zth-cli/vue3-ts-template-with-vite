@@ -34,6 +34,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     server: {
       port: Number(VITE_PORT),
       host: '0.0.0.0',
+      open: true,
       proxy: {
         '/api': {
           target: VITE_PROXY, // 目标地址

@@ -8,13 +8,19 @@
     <el-button type="primary" size="small" @click="clickHandle">点击</el-button>
     <el-button type="primary" size="small" @click="clickHandles">点击</el-button>
     <el-button type="primary" size="small" @click="debHandler">防抖</el-button>
+    <el-button v-permission="{ action: ['admin'], effect: 'disabled' }" type="primary" size="small">鉴权</el-button>
+    <el-button type="warning" size="small" @click="warn('控制台抛异常')">控制台抛异常</el-button>
+    <el-button type="primary" size="small" @click="downloadByUrl({ url: 'http://192.168.3.165:8888/index.html', fileName: 'a.html' })">下载</el-button>
     <slot name="default"></slot>
     {{ loading }}
+    <p></p>
     {{ result }}
   </div>
 </template>
 
 <script lang="ts" setup>
+import { warn } from '@/utils/log'
+import { downloadByUrl } from '@/utils/downloadFile'
 import { Ref, ref, useAttrs, getCurrentInstance, onMounted } from 'vue'
 import { useRequest } from '@/hooks/useRequest'
 import { useDebounce } from '@/hooks/useDebounce'

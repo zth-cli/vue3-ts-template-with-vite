@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts" setup>
-import useParentRoute from '@/hooks/useParentRoute'
+import { useParentRoute } from '@/hooks'
 import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()

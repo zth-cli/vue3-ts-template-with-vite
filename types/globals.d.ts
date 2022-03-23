@@ -1,7 +1,7 @@
 /*
  * @Author: 阮志雄
  * @Date: 2021-10-31 02:16:09
- * @LastEditTime: 2021-11-27 17:45:28
+ * @LastEditTime: 2022-03-23 14:02:10
  * @LastEditors: 阮志雄
  * @Description: In User Settings Edit
  * @FilePath: \vue3-template-with-ts\types\globals.d.ts
@@ -49,4 +49,8 @@ declare interface IGiftInfo {
   pageNum: number
   pageSize: number
   total: number
+}
+
+declare interface Fn<T = any, R = T> {
+  (...arg: T[]): R
 }

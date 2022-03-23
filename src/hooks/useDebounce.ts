@@ -5,7 +5,7 @@ import { ref } from 'vue'
 export function useDebounce(cb: Function, delay = 100) {
   const timer = ref<any>(null)
 
-  const debHandler = (...args) => {
+  const debHandler = (...args: any[]) => {
     clearInterval(timer)
     timer.value = setTimeout(() => {
       cb.apply(this, args)
