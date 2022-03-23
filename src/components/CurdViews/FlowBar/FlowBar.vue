@@ -57,7 +57,7 @@ const categorys = ref(null)
 let anchor = reactive([])
 const fromData: { [key: string]: any } = reactive({})
 const switchData = reactive({})
-let orignalFromData = {}
+const orignalFromData = {}
 
 const emit = defineEmits(['params-change', 'query'])
 interface Props {
