@@ -1,7 +1,7 @@
 <script lang="ts">
 import { ElTable } from 'element-plus/es'
 import 'element-plus/es/components/table/style/css'
-import { h, toRefs, defineComponent, ref } from 'vue'
+import { h, toRefs, defineComponent, ref, watch } from 'vue'
 import { defaultProps } from './enums'
 import useTableRender from './hook/useTableRender'
 
@@ -12,7 +12,7 @@ export default defineComponent({
   emits: ['row-click', 'row-dblclick', 'selection-change', 'current-change', 'header-click'],
   setup(props, { emit, slots, expose }) {
     const tableInstance = ref(null)
-    const tableColumns = useTableRender(props, slots)
+    let tableColumns = useTableRender(props, slots)
     const { rowKey } = toRefs(props)
     const toggleRowSelection = (rows: any[]) => {
       if (rows) {
@@ -28,6 +28,13 @@ export default defineComponent({
     const toggleAllSelection = () => {
       tableInstance.value.toggleAllSelection()
     }
+    watch(
+      () => props.columns,
+      () => {
+        tableColumns = useTableRender(props, slots)
+      },
+      { deep: true }
+    )
     expose({
       // 对父级暴露方法和属性
       toggleRowSelection,

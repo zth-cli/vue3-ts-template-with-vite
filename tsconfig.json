@@ -19,5 +19,5 @@
       "api/*": ["./src/api/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "types/*.d.ts", "src/**/*.vue", "axiosConfig/"]
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/**/*.d.ts", "src/**/*.tsx", "types/*.d.ts", "src/**/*.vue", "axiosConfig/"]
 }

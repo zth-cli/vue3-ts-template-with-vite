@@ -1,39 +1,38 @@
 <template>
   <div class="curd-condition-bar">
     <template v-for="(item, index) in options">
-      <section v-if="!item.type || item.type === 'list'" :key="index" class="condition-item">
-        <div class="category-title ellipsis">{{ item.title }}：</div>
-        <div ref="categorys" :class="[switchData[item.name] ? 'category-content-auto' : '', 'category-content']">
-          <el-button
-            v-if="item.options.length > 1"
-            size="small"
-            style="margin-top: 10px"
-            :type="fromData[item.name].length ? 'text' : 'primary'"
-            @click="resetItemActive(item, index)"
-            >全部</el-button
-          >
-          <ul class="item-ul">
-            <li v-for="(ele, inde) in item.options" :key="ele.value" class="item-li">
-              <el-button
-                size="small"
-                :type="item.options.length < 2 ? 'primary' : isActive(index, inde) ? 'primary' : 'text'"
-                @click="setFlowSatus(item, index, inde, ele.value)"
-                >{{ ele.label }}</el-button
-              >
-            </li>
-          </ul>
-        </div>
-        <div class="category-more">
-          <el-button
-            size="small"
-            style="margin-top: 6px"
-            type="text"
-            :icon="!switchData[item.name] ? 'arrow-down' : 'arrow-up'"
-            @click="switchData[item.name] = !switchData[item.name]"
-            >{{ !switchData[item.name] ? '展开' : '收起' }}</el-button
-          >
-        </div>
-      </section>
+      <template v-if="!item.type || item.type === 'flow'">
+        <section v-if="!item.disabled" :key="index" class="condition-item">
+          <div class="category-title ellipsis">{{ item.label }}：</div>
+          <div ref="categorys" :class="[switchData[item.name] ? 'category-content-auto' : '', 'category-content']">
+            <el-button
+              size="small"
+              style="margin-top: 10px"
+              :disabled="item.disabledAll"
+              :type="formData[item.name].length ? 'text' : 'primary'"
+              @click="resetItemActive(item, index)"
+              >全部</el-button
+            >
+            <ul class="item-ul">
+              <li v-for="(ele, inde) in item.options" :key="ele.value" class="item-li">
+                <el-button size="small" :type="isActive(index, inde) ? 'primary' : 'text'" @click="setFlowSatus(item, index, inde, ele.value)">{{
+                  ele.label
+                }}</el-button>
+              </li>
+            </ul>
+          </div>
+          <div class="category-more">
+            <el-button
+              size="small"
+              style="margin-top: 6px"
+              type="text"
+              :icon="!switchData[item.name] ? 'arrow-down' : 'arrow-up'"
+              @click="switchData[item.name] = !switchData[item.name]"
+              >{{ !switchData[item.name] ? '展开' : '收起' }}</el-button
+            >
+          </div>
+        </section>
+      </template>
     </template>
     <ConditionBar :from-options="options" @query="query" @params-change="paramsChange" @reset-data="resetData">
       <template #tool>
@@ -52,55 +51,75 @@
 <script lang="ts" setup>
 import { reactive, ref, watch, nextTick, toRaw } from 'vue'
 import { ConditionBar } from '@/components/CurdViews/ConditionBar'
+import { toArray } from '@/utils/toArray'
+import { IformItem } from '../type'
 
 const categorys = ref(null)
 let anchor = reactive([])
-const fromData: { [key: string]: any } = reactive({})
+const formData: { [key: string]: any } = reactive({})
 const switchData = reactive({})
 const orignalFromData = {}
 
 const emit = defineEmits(['params-change', 'query'])
 interface Props {
-  options: Array<any>
+  options: Array<IformItem>
+  initParams?: any // 初始参数集合,优先级比default高
   multiple?: boolean
 }
 const props = withDefaults(defineProps<Props>(), {
+  initParams: {},
   options: () => [
     {
       name: 'area',
-      title: '接入电网',
+      label: '接入电网',
       options: [{ label: '省调公司', value: '1232213213' }]
     }
   ]
 })
 const initFromData = () => {
-  props.options.forEach((item) => {
-    if (item.type === 'list' || !item.type) {
-      fromData[item.name] = []
-      orignalFromData[item.name] = []
-      switchData[item.name] = false
+  anchor = []
+  props.options.forEach((item, index) => {
+    if (item.type === 'flow' || !item.type) {
+      if (!item.disabled) {
+        const defaultValue = item.default ? toArray(item.default) : []
+        formData[item.name] = props.initParams[item.name] ? toArray(props.initParams[item.name]) : defaultValue
+        orignalFromData[item.name] = props.initParams[item.name] ? toArray(props.initParams[item.name]) : defaultValue
+        switchData[item.name] = false
+        // 默认选中状态
+        if (formData[item.name].length > 0) {
+          if (props.multiple) {
+            formData[item.name].forEach((element: any) => {
+              const i = item.options.findIndex((ele) => ele.value === element)
+              setActive(item, index, i)
+            })
+          } else {
+            const i = item.options.findIndex((ele) => ele.value === formData[item.name][0])
+            setActive(item, index, i)
+          }
+        }
+      }
     }
   })
 }
-const setFlowSatus = (item, index, i, val) => {
+const setFlowSatus = (item: IformItem, index: number, i: number, val: any) => {
   setValue(item, val)
   setActive(item, index, i)
 }
-const setValue = (item, val) => {
+const setValue = (item: IformItem, val: any) => {
   if (props.multiple) {
-    const index = fromData[item.name].indexOf(val)
+    const index = formData[item.name].indexOf(val)
     if (index > -1) {
       // 多选存在，删除值
-      fromData[item.name].splice(index, 1)
+      formData[item.name].splice(index, 1)
     } else {
-      fromData[item.name].push(val)
+      formData[item.name].push(val)
     }
   } else {
-    fromData[item.name] = [val]
+    formData[item.name] = [val]
   }
-  emit('params-change', { fromData })
+  emit('params-change', { formData })
 }
-const setActive = (item, index, i) => {
+const setActive = (item: IformItem, index: number, i: number) => {
   // if (!item.multiple) {
   //   this.anchor.forEach((ele, indx) => {
   //     if (ele.split('~')[0] === String(index)) {
@@ -128,45 +147,44 @@ const setActive = (item, index, i) => {
   }
   // console.log(anchor);
 }
-const resetItemActive = (item, index) => {
+const resetItemActive = (item: { name: string | number }, index: any) => {
   const arr = anchor.filter((ele, indx) => {
     return ele.split('~')[0] !== String(index)
   })
   anchor = arr
-  fromData[item.name] = []
+  formData[item.name] = []
 }
-const isActive = (index, i) => {
+const isActive = (index: any, i: any) => {
   return anchor.includes(String(index) + '~' + String(i))
 }
 
 const resetData = () => {
-  for (const key in fromData) {
-    fromData[key] = orignalFromData[key]
+  for (const key in formData) {
+    formData[key] = orignalFromData[key]
   }
   anchor = []
 }
 
 // 输入框
-const paramsChange = (params) => {
-  const fromDatas = Object.assign({}, params, fromData)
-  emit('params-change', fromDatas)
+const paramsChange = (params: any) => {
+  const formDatas = Object.assign({}, params, formData)
+  emit('params-change', formDatas)
 }
-const query = (params) => {
-  emit('query', { ...params, ...toRaw(fromData) })
+const query = (params: any) => {
+  emit('query', { ...params, ...toRaw(formData) })
 }
 
-initFromData()
+// initFromData()
 watch(
   () => props.options,
   () => {
     initFromData()
-  }
+  },
+  { deep: true, immediate: true }
 )
 watch(switchData, async () => {
   await nextTick()
-  categorys.value.forEach((element) => {
-    element.scrollTop = 0
-  })
+  categorys.value.scrollTop = 0
 })
 </script>
 <style lang="scss">

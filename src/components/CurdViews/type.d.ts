@@ -1,3 +1,5 @@
+import { IDatePickerType } from 'element-plus/es/components/date-picker/src/date-picker.type'
+
 interface ItreeProps {
   dataUrl?: string
   param?: { [x: string]: any }
@@ -21,6 +23,7 @@ interface Icolumns {
   childrens?: Array<Icolumns>
   width?: number
   minWidth?: string
+  disabled?: boolean
   fixed?: string | boolean
   showOverflowTooltip?: boolean
   resizable?: boolean
@@ -64,16 +67,17 @@ interface ItableProps {
   treeProps?: { children: string; hasChildren: string }
 }
 
-interface formItem {
-  name: string
-  label: string
-  type: string
-  default?: any
-  disabled?: boolean
-  options?: any[]
+interface IformItem {
+  name: string // key值
+  label: string // label 名称
+  type?: string // 条件类型
+  default?: any // 默认值
+  disabled?: boolean // 是否禁用
+  disabledAll?: boolean // 是否禁用'全部'按钮
+  options?: Array<{ label: string; value: any }>
   format?: string
   remoteMethod?: Promise<any>
-  dateSwitch?: Array<{ type: string; typeName: string }>
+  dateSwitch?: Array<{ type: IDatePickerType; typeName: string }>
   dateTypeParamName?: string
   [key: string]: any
 }

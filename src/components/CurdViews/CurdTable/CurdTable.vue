@@ -93,16 +93,18 @@ import DataTable from '@/components/CurdViews/DataTable/DataTable.vue'
 import { emits, defaulltProps } from './enums'
 import { useTableSlot, useTableHeaderSlot, useTableFetchData, useExportTable } from './hook'
 import { ref, computed, watch, toRaw } from 'vue'
+import { Icolumns } from '../type'
 const tableView = ref<InstanceType<typeof DataTable>>(null)
 
 const props = withDefaults(defineProps<ItableProp>(), { ...defaulltProps })
 const visible = ref<boolean>(false)
-const mColumns = ref<Icolumns[]>(props.columns)
+const mColumns = ref<Icolumns[]>([])
 const selection = ref<any[]>([])
 const key = ref<number>(0)
 
 const emit = defineEmits(emits) // 事件
 
+mColumns.value = props.columns.filter((item) => !item.disabled)
 const isSingle = computed(() => !(selection.value !== null && selection.value.length === 1))
 const isMultiple = computed(() => !(selection.value !== null && selection.value.length > 0))
 
@@ -180,9 +182,13 @@ watch(
     lazyLoad.value = false
   }
 )
-watch(props.columns, (curVal: Icolumns[], _oldVal) => {
-  mColumns.value = curVal
-})
+watch(
+  () => props.columns,
+  (curVal: Icolumns[], _oldVal) => {
+    mColumns.value = curVal.filter((item) => !item.disabled)
+  },
+  { deep: true }
+)
 watch(
   () => props.dataUrl,
   (_curVal, _oldVal) => {
