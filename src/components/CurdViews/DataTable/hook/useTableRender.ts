@@ -165,10 +165,9 @@ export default function renderFunc(props: any, slots: any) {
             }
           }
         )
-      } else {
-        // @ts-ignore
-        return h(ElTableColumn, { prop: item.prop, ...columnProps })
       }
+      // @ts-ignore
+      return h(ElTableColumn, { prop: item.prop, ...columnProps })
     })
     return elememtArr
   }

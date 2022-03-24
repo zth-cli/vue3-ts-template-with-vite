@@ -134,6 +134,7 @@
 
 <script lang="ts" setup>
 import { ref, onMounted, watch } from 'vue'
+import { IformItem } from '../type'
 import { allowType } from './enum/allowType'
 import { usePlaceholder, useTimeSwitch, useDefaultData, useQuery, useItemRefs, useMediaQuery } from './hook'
 
@@ -144,7 +145,7 @@ const emit = defineEmits(['query', 'resize', 'params-change', 'reset-data'])
 
 interface IconProps {
   mode?: string
-  fromOptions: Array<any>
+  fromOptions: Array<IformItem>
   toolAlign?: string
   width?: string
 }

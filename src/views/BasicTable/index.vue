@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FlowBar :options="fromOptions" :multiple="true"></FlowBar>
+    <FlowBar :options="fromOptions" :multiple="false"></FlowBar>
     <CurdView :table-options="tableOptions" :from-options="fromOptions" @selection-change="selectionChange" @row-add="rowAdd">
       <template #action="{ row }">
         <el-button size="small" @click="getRow(row)">action</el-button>
@@ -23,6 +23,7 @@ import { FlowBar } from '@/components/CurdViews/FlowBar'
 import CurdView from '@/components/CurdViews/index.vue'
 import { reactive, ref } from 'vue'
 import Overlay from '@/components/Overlay/index.vue'
+import { IformItem, ItableProps } from '@/components/CurdViews/type'
 const close = ref<boolean>(false)
 const tableOptions = reactive({
   pageSize: 20,
@@ -65,13 +66,15 @@ const fromOptions = reactive([
   },
   {
     name: 'area',
-    title: '接入电网',
+    label: '接入电网',
+    disabledAll: true,
+    default: '423',
     options: [
       { label: '省调公司', value: '1232213213' },
       { label: '省调公司', value: '423' }
     ]
   }
-]) as formItem[]
+]) as IformItem[]
 
 const fromDataOptions = {
   postParams: {},
