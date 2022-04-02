@@ -1,4 +1,4 @@
-import { reactive, Ref, ref } from 'vue'
+import { reactive, Ref, ref, unref } from 'vue'
 import { http } from '@/utils/http'
 import { defaultTableData } from '../enums'
 export function useTableFetchData(props, emit: (arg0: string, arg1: any[] | Ref<any[]>) => void, selection: Ref<any[]>) {
@@ -52,7 +52,7 @@ export function useTableFetchData(props, emit: (arg0: string, arg1: any[] | Ref<
               })
             }
             tableData.value = data
-            emit('getTableData', tableData)
+            emit('getTableData', unref(tableData))
           }
         })
         .catch(() => {

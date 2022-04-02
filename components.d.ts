@@ -52,6 +52,7 @@ declare module 'vue' {
     ElTree: typeof import('element-plus/es')['ElTree']
     FlowBar: typeof import('./src/components/CurdViews/FlowBar/FlowBar.vue')['default']
     FormData: typeof import('./src/components/CurdViews/FormData/index.vue')['default']
+    FormGenerate: typeof import('./src/components/CurdViews/FormGenerate/FormGenerate.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     LazyTree: typeof import('./src/components/CurdViews/LazyTree.vue')['default']
     Loading: typeof import('element-plus/es')['ElLoadingDirective']

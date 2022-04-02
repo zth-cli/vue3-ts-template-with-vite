@@ -14,6 +14,7 @@
           :filter-node-method="filterNode"
           :default-expand-all="defaultExpandAll"
           :expand-on-click-node="expandOnclickNode"
+          :render-content="renderContent"
           node-key="id"
           highlight-current
           @node-click="nodeClick"
@@ -32,7 +33,9 @@
 
 <script lang="ts" setup>
 import { http } from '@/utils/http'
-import { ref, watch, h } from 'vue'
+import { TreeOptionProps } from 'element-plus/lib/components/tree/src/tree.type'
+import type Node from 'element-plus/es/components/tree/src/model/node'
+import { ref, watch, h, VNode } from 'vue'
 import { defaultTreeData, defaultProps } from './enums'
 
 const loading = ref<boolean>(false)
@@ -45,10 +48,11 @@ interface ItreeProp {
   dataUrl?: string
   param?: { [x: string]: any }
   search?: boolean
-  treeProps?: any
+  treeProps?: TreeOptionProps
   defaultExpandAll?: boolean
   expandOnclickNode?: boolean
   resDataName?: string
+  renderContent?: (node: Node, data: any, store: Node['store']) => VNode
 }
 
 const props = withDefaults(defineProps<ItreeProp>(), { ...defaultProps })
@@ -85,7 +89,7 @@ const filterNode = (value: any, data: { label: string | any[] }) => {
 const nodeClick = (data: any, node: any) => {
   emit('nodeClick', { data, node })
 }
-// const renderContent = ({ node, data, store }) => {
+// const renderContent = (h, { node, data, store }): VNode => {
 //   return h(
 //     'span',
 //     {
@@ -116,35 +120,6 @@ queryData()
 watch(filterText, (neeVal) => {
   tree.value.filter(neeVal)
 })
-
-// function renderContent(h, { node, data }) {
-//   // console.log(data.label)
-//   var icon = 'el-icon-folder'
-//   switch (node.level) {
-//     case 1:
-//       icon = 'el-icon-folder'
-//       break
-//     case 2:
-//       icon = 'el-icon-document'
-//       break
-//     case 3:
-//       icon = 'el-icon-collection-tag'
-//       break
-//     case 4:
-//       icon = 'el-icon-coin'
-//       break
-//     default:
-//       icon = 'el-icon-document'
-//       break
-//   }
-//   return (
-//     <span class="custom-tree-node">
-//       <span>
-//         <i class={icon}> </i> {data.label}{' '}
-//       </span>{' '}
-//     </span>
-//   )
-// }
 </script>
 <style lang="scss">
 .curd_tree_wrap {

@@ -274,21 +274,6 @@ watch(
   min-width: 100px;
   text-align: end;
 }
-
-.from_data_content_lg {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 33.3%);
-  justify-content: space-around;
-  /* flex-wrap: wrap; */
-  box-sizing: border-box;
-  padding: 12px;
-}
-.from_data_content_md {
-  grid-template-columns: repeat(auto-fill, 50%);
-}
-.from_data_content_sm {
-  grid-template-columns: repeat(auto-fill, 100%);
-}
 .from_data_main .btns {
   margin-top: 18px;
   text-align: center;

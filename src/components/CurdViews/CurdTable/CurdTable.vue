@@ -237,7 +237,7 @@ interface ItableProp {
   responseName?: string | Array<string>
   isPrivate?: boolean
   summaryMethod?: (value: any, row: { [x: string]: any }, column: { property: any }) => void
-  spanMethod?: () => void
+  spanMethod?: ({ row, column, rowIndex, columnIndex }) => Array<number> | object
   rowKey?: string
   treeProps?: { children: string; hasChildren: string }
 }

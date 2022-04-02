@@ -1,6 +1,8 @@
 export const defaultProps = {
   search: true,
-  treeProps: { children: 'children', label: 'label', disabled: false },
+  treeProps: () => {
+    return { children: 'children', label: 'label'}
+  },
   defaultExpandAll: false,
   expandOnclickNode: true
 }
