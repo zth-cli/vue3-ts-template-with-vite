@@ -6,7 +6,7 @@
     </el-icon>
     <h2>{{ props.name }}</h2>
     <el-button type="primary" size="small" @click="clickHandle">点击</el-button>
-    <el-button type="primary" size="small" @click="clickHandles">点击</el-button>
+    <el-button type="primary" size="small" @click="clickHandles">提示</el-button>
     <el-button type="primary" size="small" @click="debHandler">防抖</el-button>
     <el-button v-permission="{ action: ['admin'], effect: 'disabled' }" type="primary" size="small">鉴权</el-button>
     <el-button type="warning" size="small" @click="warn('控制台抛异常')">控制台抛异常</el-button>
@@ -73,11 +73,10 @@ const clickHandle = () => {
 
 const instance = getCurrentInstance()
 const clickHandles = () => {
-  // 这里调用 vue3 的全局变量时比较羞耻, 不知道各位大佬有没有其他好办法
   instance.appContext.config.globalProperties.$Toast({
     type: 'info',
     title: '这是一句标题',
-    message: '本文就是梳理mount函数的主要逻辑，旨在理清基本的处理流程（Vue 3.1.1版本）。'
+    message: 'mount函数的主要逻辑。'
   })
 }
 

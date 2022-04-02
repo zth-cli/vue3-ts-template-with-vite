@@ -1,8 +1,8 @@
-import { createApp, App } from 'vue'
+import { createApp, App, ComponentPublicInstance } from 'vue'
 import Toasts from './toasts.vue'
-import Bus from './toastsBus'
 
-const instances = []
+type publicInstance = ComponentPublicInstance & { id?: string; visible?: boolean }
+const instances: publicInstance[] = []
 let seed = 1
 
 const toasts = (options) => {
@@ -11,11 +11,21 @@ const toasts = (options) => {
   const root: HTMLDivElement = document.createElement('div')
   root.setAttribute('data-id', id)
   document.body.appendChild(root)
-  const ToastsConstructor: App = createApp(Toasts, options)
-  const instance = ToastsConstructor.mount(root)
-  //@ts-ignore
+  const ToastsApp: App = createApp(Toasts, {
+    ...options,
+    close: (id: string) => {
+      if (instance.id === id) {
+        removeInstance(instance)
+        document.body.removeChild(root)
+        ToastsApp.unmount()
+      }
+    }
+  })
+  const instance: publicInstance = ToastsApp.mount(root) // 返回根组件实例
+  console.log(instance)
+
   instance.id = id
-  //@ts-ignore
+
   instance.visible = true
   // 重制高度
   let verticalOffset = 0
@@ -26,14 +36,6 @@ const toasts = (options) => {
   //@ts-ignore
   instance.toastPosition.y = verticalOffset
 
-  Bus.on('closed', (id) => {
-    //@ts-ignore
-    if (instance.id === id) {
-      removeInstance(instance)
-      document.body.removeChild(root)
-      ToastsConstructor.unmount()
-    }
-  })
   instances.push(instance)
   return instance
 }

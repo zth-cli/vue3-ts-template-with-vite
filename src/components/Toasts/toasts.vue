@@ -3,7 +3,7 @@
     <!-- 弹窗 -->
     <div v-show="visible" ref="container" class="toast-container" :style="toastStyle" @mouseenter="clearTimer" @mouseleave="createTimer">
       <!-- icon -->
-      <template v-if="type || type != 'custom' || type != 'img'">
+      <template v-if="type || type != 'custom'">
         <div v-if="type === 'success'" class="toast-icon success">
           <i class="fi fi-br-check"></i>
         </div>
@@ -45,121 +45,117 @@
   </transition>
 </template>
 
-<script lang="ts">
-import Bus from './toastsBus'
+<script lang="ts" setup>
 import { ref, computed, onMounted, onBeforeUnmount, defineComponent } from 'vue'
-export default defineComponent({
-  name: 'toasts',
-  props: {
-    title: String,
-    closeIcon: {
-      type: Boolean,
-      default: true
-    },
-    message: String,
-    type: {
-      type: String,
-      validator: function (val) {
-        return ['success', 'warning', 'info', 'error', 'custom', 'img'].includes(val)
-      }
-    },
-    confirmText: String,
-    customIcon: String,
-    customIconBackground: String,
-    customImg: String,
-    autoClose: {
-      type: Number,
-      default: 4500
-    }
-  },
-  setup(props) {
-    // 显示
-    const visible = ref(false)
 
-    // 容器实例
-    const container = ref(null)
+interface Itoasts {
+  title: string
+  closeIcon?: boolean
+  message?: string
+  type?: 'success' | 'warning' | 'info' | 'error' | 'custom' | 'img'
+  confirmText?: string
+  customIcon?: string
+  customIconBackground?: string
+  customImg?: string
+  autoClose?: number
+  close: (id: string) => void
+}
+const props = withDefaults(defineProps<Itoasts>(), { closeIcon: true, autoClose: 4500 })
+// 显示
+const visible = ref(false)
 
-    // 高度
-    const height = ref(0)
+// 容器实例
+const container = ref(null)
 
-    // 位置
-    const toastPosition = ref({
-      x: 16,
-      y: 16
-    })
-    const toastStyle = computed(() => {
-      return {
-        top: `${toastPosition.value.y}px`,
-        right: `${toastPosition.value.x}px`
-      }
-    })
+// 高度
+const height = ref(0)
 
-    // 倒计时
-    const countDown = computed(() => {
-      return '2 seconds ago'
-    })
-
-    const id = ref('')
-
-    // 离开以后
-    function afterLeave() {
-      Bus.emit('closed', id.value)
-    }
-    // 进入以后
-    function afterEnter() {
-      height.value = container.value.offsetHeight
-    }
-
-    // 定时器
-    const timer = ref(null)
-
-    // 鼠标进入
-    function clearTimer() {
-      if (timer.value) {
-        clearTimeout(timer.value)
-      }
-    }
-    // 鼠标移出
-    function createTimer() {
-      if (props.autoClose) {
-        timer.value = setTimeout(() => {
-          visible.value = false
-        }, props.autoClose)
-      }
-    }
-
-    // 销毁
-    function destruction() {
-      visible.value = false
-    }
-
-    onMounted(() => {
-      createTimer()
-    })
-
-    onBeforeUnmount(() => {
-      if (timer.value) {
-        clearTimeout(timer.value)
-      }
-    })
-
-    return {
-      visible,
-      toastPosition,
-      toastStyle,
-      countDown,
-      afterLeave,
-      afterEnter,
-      clearTimer,
-      createTimer,
-      timer,
-      destruction,
-      container,
-      height,
-      id
-    }
+// 位置
+const toastPosition = ref({
+  x: 16,
+  y: 16
+})
+const toastStyle = computed(() => {
+  return {
+    top: `${toastPosition.value.y}px`,
+    right: `${toastPosition.value.x}px`
   }
 })
+
+// 倒计时
+const countDown = computed(() => {
+  return '2 seconds ago'
+})
+
+const id = ref('')
+
+// 离开以后
+function afterLeave() {
+  // Bus.emit('closed', id.value)
+  props.close(id.value)
+}
+// 进入以后
+function afterEnter() {
+  height.value = container.value.offsetHeight
+}
+
+// 定时器
+const timer = ref(null)
+
+// 鼠标进入
+function clearTimer() {
+  if (timer.value) {
+    clearTimeout(timer.value)
+  }
+}
+// 鼠标移出
+function createTimer() {
+  if (props.autoClose) {
+    timer.value = setTimeout(() => {
+      visible.value = false
+    }, props.autoClose)
+  }
+}
+
+// 销毁
+function destruction() {
+  visible.value = false
+}
+
+onMounted(() => {
+  createTimer()
+})
+
+onBeforeUnmount(() => {
+  if (timer.value) {
+    clearTimeout(timer.value)
+  }
+})
+
+// 暴露属性方法给实力
+defineExpose({
+  id,
+  visible,
+  container,
+  height,
+  toastPosition,
+  toastStyle
+})
+// return {
+//   visible,
+//   toastPosition,
+//   toastStyle,
+//   countDown,
+//   afterLeave,
+//   afterEnter,
+//   clearTimer,
+//   createTimer,
+//   timer,
+//   destruction,
+//   container,
+//   height,
+//   id
+// }
 </script>
 
 <style lang="scss" scoped>
