@@ -64,10 +64,10 @@
                   value-key="value"
                 >
                   <el-option
-                    v-for="ele in item.options ? item.options : []"
-                    :key="ele.value"
-                    :value="item.isValueKey ? ele : ele.value"
-                    :label="ele.label"
+                    v-for="(ele, i) in item.options ? item.options : []"
+                    :key="i"
+                    :value="item.prop && item.prop['value'] ? ele[item.prop['value']] : ele.value"
+                    :label="item.prop && item.prop['label'] ? ele[item.prop['label']] : ele.label"
                     :disabled="ele.disabled"
                   >
                   </el-option>

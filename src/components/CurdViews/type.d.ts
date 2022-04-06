@@ -75,6 +75,7 @@ interface IformItem {
   disabled?: boolean // 是否禁用
   disabledAll?: boolean // 是否禁用'全部'按钮
   options?: Array<{ label: string; value: any }>
+  prop?: { label: string; value: string }
   format?: string
   remoteMethod?: Promise<any>
   dateSwitch?: Array<{ type: IDatePickerType; typeName: string }>

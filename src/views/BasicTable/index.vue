@@ -59,10 +59,11 @@ const fromOptions = reactive([
     format: 'yyyy-MM-dd'
   },
   {
-    name: 'code',
+    name: 'bvId',
     label: '电压等级',
     type: 'select',
-    options: []
+    prop: { label: 'bvName', value: 'bvId' },
+    options: [{ bvId: 1, bvName: '220kV' }]
   },
   {
     name: 'area',
