@@ -7,7 +7,11 @@
     "build:auto": "vite build",
     "serve": "vite preview",
     "lint": "eslint src --fix --ext .ts,.tsx,.vue,.js,.jsx",
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{vue,js,ts}": "eslint --fix"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^1.1.1",
@@ -42,6 +46,7 @@
     "vite-plugin-html": "^2.1.1",
     "vite-plugin-mock": "^2.9.6",
     "vite-plugin-style-import": "^2.0.0",
-    "vue-tsc": "^0.3.0"
+    "vue-tsc": "^0.3.0",
+    "husky": "^7.0.0"
   }
 }
