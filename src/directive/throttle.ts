@@ -25,6 +25,6 @@ const throttle = {
       },
       true
     )
-  }
+  },
 }
 export default throttle

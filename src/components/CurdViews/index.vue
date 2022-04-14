@@ -18,7 +18,12 @@
           <slot name="searchselect"></slot>
         </template>
       </lazy-tree> -->
-      <Tree :data-url="props.treeOptions.dataUrl" :search="props.treeOptions.search" @change-satus="triggerTree" @node-click="treeNodeClick">
+      <Tree
+        :data-url="props.treeOptions.dataUrl"
+        :search="props.treeOptions.search"
+        @change-satus="triggerTree"
+        @node-click="treeNodeClick"
+      >
         <template #default="{ node, data }">
           <slot v-bind="{ node, data }">
             <i class="el-icon-folder"> </i>
@@ -29,7 +34,12 @@
     </div>
 
     <div class="curd_table_view">
-      <div :class="[{ boxShadow: tableOptions.mode !== 'simple' }, { mb: tableOptions.mode !== 'simple' }]">
+      <div
+        :class="[
+          { boxShadow: tableOptions.mode !== 'simple' },
+          { mb: tableOptions.mode !== 'simple' },
+        ]"
+      >
         <ConditionBar
           v-if="showSearchDynamic"
           :width="fromWidth"
@@ -122,7 +132,7 @@ interface IcurdView {
   showSearchDynamic?: boolean
 }
 const props = withDefaults(defineProps<IcurdView>(), {
-  showSearchDynamic: true
+  showSearchDynamic: true,
 })
 
 const emit = defineEmits(emits)
@@ -155,7 +165,7 @@ const toggleAllSelection = () => {
 }
 defineExpose({
   toggleRowSelection,
-  toggleAllSelection
+  toggleAllSelection,
 })
 const handleCurrentChange = (row) => {
   emit('current-change', row)

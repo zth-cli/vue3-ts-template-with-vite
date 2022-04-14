@@ -15,6 +15,6 @@ export const useItemRefs = () => {
   })
   return {
     itemRefs,
-    setItemRef
+    setItemRef,
   }
 }

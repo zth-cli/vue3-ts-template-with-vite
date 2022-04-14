@@ -20,7 +20,12 @@
           </template>
           <template v-else-if="item.type === 'month' || item.type === 'year'">
             <el-col :key="item.name" :span="item.span || 12">
-              <el-form-item :key="item.name" class="from_item" :label="item.label" :prop="item.name">
+              <el-form-item
+                :key="item.name"
+                class="from_item"
+                :label="item.label"
+                :prop="item.name"
+              >
                 <el-date-picker
                   v-model="formData[item.name]"
                   style="width: 100%"
@@ -35,7 +40,12 @@
           </template>
           <template v-else-if="item.type === 'daterange'">
             <el-col :key="item.name" :span="item.span || 12">
-              <el-form-item :key="item.name" class="from_item" :label="item.label" :prop="item.name">
+              <el-form-item
+                :key="item.name"
+                class="from_item"
+                :label="item.label"
+                :prop="item.name"
+              >
                 <el-date-picker
                   v-model="formData[item.name]"
                   style="width: 100%"
@@ -52,7 +62,12 @@
           </template>
           <template v-else-if="item.type === 'select'">
             <el-col :key="item.name" :span="item.span || 12">
-              <el-form-item :key="item.name" class="from_item" :label="item.label" :prop="item.name">
+              <el-form-item
+                :key="item.name"
+                class="from_item"
+                :label="item.label"
+                :prop="item.name"
+              >
                 <el-select
                   v-model="formData[item.name]"
                   style="width: 100%"
@@ -77,10 +92,17 @@
           </template>
           <template v-else-if="item.type === 'radio'">
             <el-col :key="item.name" :span="item.span || 12">
-              <el-form-item :key="item.name" class="from_item" :label="item.label" :prop="item.name">
+              <el-form-item
+                :key="item.name"
+                class="from_item"
+                :label="item.label"
+                :prop="item.name"
+              >
                 <el-radio-group v-model="formData[item.name]">
                   <template v-for="ele in item.options" :key="ele.value">
-                    <el-radio :disabled="item.disabled" :label="ele.value">{{ ele.label }}</el-radio>
+                    <el-radio :disabled="item.disabled" :label="ele.value">{{
+                      ele.label
+                    }}</el-radio>
                   </template>
                 </el-radio-group>
               </el-form-item>
@@ -88,10 +110,17 @@
           </template>
           <template v-else-if="item.type === 'checkbox'">
             <el-col :key="item.name" :span="item.span || 12">
-              <el-form-item :key="item.name" class="from_item" :label="item.label" :prop="item.name">
+              <el-form-item
+                :key="item.name"
+                class="from_item"
+                :label="item.label"
+                :prop="item.name"
+              >
                 <el-checkbox-group v-model="formData[item.name]">
                   <template v-for="ele in item.options" :key="ele.value">
-                    <el-checkbox :disabled="item.disabled" :label="ele.value">{{ ele.label }}</el-checkbox>
+                    <el-checkbox :disabled="item.disabled" :label="ele.value">{{
+                      ele.label
+                    }}</el-checkbox>
                   </template>
                 </el-checkbox-group>
               </el-form-item>
@@ -99,20 +128,41 @@
           </template>
           <template v-else-if="item.type === 'editTable'">
             <el-col :key="item.name" :span="item.span || 12">
-              <el-form-item :key="item.name" class="from_item" :label="item.label" :prop="item.name">
-                <EditTable v-model:propData="formData[item.name]" :columns="item.columns"></EditTable>
+              <el-form-item
+                :key="item.name"
+                class="from_item"
+                :label="item.label"
+                :prop="item.name"
+              >
+                <EditTable
+                  v-model:propData="formData[item.name]"
+                  :columns="item.columns"
+                ></EditTable>
               </el-form-item>
             </el-col>
           </template>
           <template v-else-if="item.type === 'input'">
             <el-col :key="item.name" :span="item.span || 12">
-              <el-form-item :key="item.name" class="from_item" :label="item.label" :prop="item.name">
-                <el-input v-model="formData[item.name]" :disabled="item.disabled" :type="item.type" :placeholder="getPlaceholder(item)">
+              <el-form-item
+                :key="item.name"
+                class="from_item"
+                :label="item.label"
+                :prop="item.name"
+              >
+                <el-input
+                  v-model="formData[item.name]"
+                  :disabled="item.disabled"
+                  :type="item.type"
+                  :placeholder="getPlaceholder(item)"
+                >
                   <template v-if="item.append" #append>
                     <slot :name="item.append" :formData="{ data: formData, key: item.name }"></slot>
                   </template>
                   <template v-if="item.prepend" #prepend>
-                    <slot :name="item.prepend" :formData="{ data: formData, key: item.name }"></slot>
+                    <slot
+                      :name="item.prepend"
+                      :formData="{ data: formData, key: item.name }"
+                    ></slot>
                   </template>
                 </el-input>
               </el-form-item>
@@ -120,13 +170,26 @@
           </template>
           <template v-else>
             <el-col :key="item.name" :span="item.span || 12">
-              <el-form-item :key="item.name" class="from_item" :label="item.label" :prop="item.name">
-                <el-input v-model="formData[item.name]" :disabled="item.disabled" :type="item.type" :placeholder="getPlaceholder(item)">
+              <el-form-item
+                :key="item.name"
+                class="from_item"
+                :label="item.label"
+                :prop="item.name"
+              >
+                <el-input
+                  v-model="formData[item.name]"
+                  :disabled="item.disabled"
+                  :type="item.type"
+                  :placeholder="getPlaceholder(item)"
+                >
                   <template v-if="item.append" #append>
                     <slot :name="item.append" :formData="{ data: formData, key: item.name }"></slot>
                   </template>
                   <template v-if="item.prepend" #prepend>
-                    <slot :name="item.prepend" :formData="{ data: formData, key: item.name }"></slot>
+                    <slot
+                      :name="item.prepend"
+                      :formData="{ data: formData, key: item.name }"
+                    ></slot>
                   </template>
                 </el-input>
               </el-form-item>
@@ -177,7 +240,7 @@ const props = withDefaults(defineProps<IformProps>(), {
       }
     }
     return formData
-  }
+  },
 })
 
 // 自定义事件
@@ -204,15 +267,20 @@ const submitForm = async (formEl) => {
       formDatas = await props.beforeSubmit(formDatas)
       if (props.postUrl && props.postUrl !== 'simulationdata') {
         const params = props.contentType === 'json' ? formDatas : qs.stringify(formDatas)
-        const headers = props.contentType === 'form-data' ? { headers: { 'content-type': 'application/x-www-form-urlencoded' } } : {}
-        http.request<{ data: any; code: number }>('post', props.postUrl, params, headers).then((res) => {
-          if (res.code === 1) {
-            emit('submit', formDatas, res.data)
-            ElMessage.success('已提交')
-          } else {
-            ElMessage.error('提交异常')
-          }
-        })
+        const headers =
+          props.contentType === 'form-data'
+            ? { headers: { 'content-type': 'application/x-www-form-urlencoded' } }
+            : {}
+        http
+          .request<{ data: any; code: number }>('post', props.postUrl, params, headers)
+          .then((res) => {
+            if (res.code === 1) {
+              emit('submit', formDatas, res.data)
+              ElMessage.success('已提交')
+            } else {
+              ElMessage.error('提交异常')
+            }
+          })
       } else {
         emit('submit', formDatas)
       }

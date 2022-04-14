@@ -8,7 +8,7 @@ export const defaultTableData =
           projectName: 'name',
           createDate: '12-11',
           description: 'w21',
-          _disabled: 0
+          _disabled: 0,
         },
         {
           creator: 'rzx007',
@@ -16,6 +16,6 @@ export const defaultTableData =
           projectName: 'name',
           createDate: '12-11',
           description: 'w21',
-          _disabled: 0
-        }
+          _disabled: 0,
+        },
       ]

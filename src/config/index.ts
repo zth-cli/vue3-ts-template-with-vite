@@ -30,7 +30,7 @@ export const getServerConfig = async (app: App): Promise<undefined> => {
   return axios({
     baseURL: '',
     method: 'get',
-    url: process.env.NODE_ENV === 'production' ? './serverConfig.json' : '/serverConfig.json'
+    url: process.env.NODE_ENV === 'production' ? './serverConfig.json' : '/serverConfig.json',
   })
     .then(({ data: config }) => {
       let $config = app.config.globalProperties.$config

@@ -1,7 +1,12 @@
 <template>
   <div>
     <FlowBar :options="fromOptions" :multiple="false"></FlowBar>
-    <CurdView :table-options="tableOptions" :from-options="fromOptions" @selection-change="selectionChange" @row-add="rowAdd">
+    <CurdView
+      :table-options="tableOptions"
+      :from-options="fromOptions"
+      @selection-change="selectionChange"
+      @row-add="rowAdd"
+    >
       <template #action="{ row }">
         <el-button size="small" @click="getRow(row)">action</el-button>
       </template>
@@ -43,11 +48,11 @@ const tableOptions = reactive({
         { prop: 'creator', label: '角色名', align: 'center', width: 180 },
         { prop: 'creator', label: '用户年龄', align: 'center' },
         { label: '用户', slot: 'proflies', align: 'center' },
-        { label: '操作', slot: 'operation', width: 150, align: 'center' }
-      ]
+        { label: '操作', slot: 'operation', width: 150, align: 'center' },
+      ],
     },
-    { label: 'Action', slot: 'action', width: 150, align: 'center' }
-  ]
+    { label: 'Action', slot: 'action', width: 150, align: 'center' },
+  ],
 }) as ItableProps
 const fromOptions = reactive([
   { name: 'description', label: '角色描述', span: 6, type: 'text' },
@@ -56,14 +61,14 @@ const fromOptions = reactive([
     label: '日期',
     span: 6,
     type: 'date',
-    format: 'yyyy-MM-dd'
+    format: 'yyyy-MM-dd',
   },
   {
     name: 'bvId',
     label: '电压等级',
     type: 'select',
     prop: { label: 'bvName', value: 'bvId' },
-    options: [{ bvId: 1, bvName: '220kV' }]
+    options: [{ bvId: 1, bvName: '220kV' }],
   },
   {
     name: 'area',
@@ -72,9 +77,9 @@ const fromOptions = reactive([
     default: '423',
     options: [
       { label: '省调公司', value: '1232213213' },
-      { label: '省调公司', value: '423' }
-    ]
-  }
+      { label: '省调公司', value: '423' },
+    ],
+  },
 ]) as IformItem[]
 
 const fromDataOptions = {
@@ -89,20 +94,20 @@ const fromDataOptions = {
       options: [
         {
           value: '计量故障',
-          label: '计量故障'
+          label: '计量故障',
         },
         {
           value: '电线打火',
-          label: '电线打火'
-        }
-      ]
+          label: '电线打火',
+        },
+      ],
     },
     {
       name: 'date',
       label: '日期',
       type: 'date',
       format: 'yyyy-MM-dd',
-      span: 12
+      span: 12,
     },
     {
       name: 'standardDetails',
@@ -113,21 +118,21 @@ const fromDataOptions = {
         {
           name: 'standardDetail',
           label: '标准化作业',
-          type: 'textarea'
+          type: 'textarea',
         },
         {
           name: 'standardComment',
           label: '评分要求',
           type: 'textarea',
-          maxlength: 100
+          maxlength: 100,
         },
         {
           name: 'standardScore',
           label: '评价',
           type: 'text',
-          default: 100
-        }
-      ]
+          default: 100,
+        },
+      ],
       // default: [{ username: 'rzx', username1: '认真细致', content: ['1'] }]
     },
     {
@@ -139,21 +144,21 @@ const fromDataOptions = {
         {
           name: 'qualityDetail',
           label: '抢修质量',
-          type: 'textarea'
+          type: 'textarea',
         },
         {
           name: 'qualityComment',
           label: '评分要求',
           type: 'textarea',
-          maxlength: 100
+          maxlength: 100,
         },
         {
           name: 'qualityScore',
           label: '评价',
           type: 'text',
-          default: 100
-        }
-      ]
+          default: 100,
+        },
+      ],
       // default: [{ username: 'rzx', username1: '认真细致', content: ['1'] }]
     },
     {
@@ -164,22 +169,22 @@ const fromDataOptions = {
       options: [
         {
           value: '满意',
-          label: '满意'
+          label: '满意',
         },
         {
           value: '不满意',
-          label: '不满意'
-        }
+          label: '不满意',
+        },
       ],
-      default: '满意'
+      default: '满意',
     },
     {
       name: 'userScore',
       label: '用户评分',
       type: 'text',
-      span: 8
-    }
-  ])
+      span: 8,
+    },
+  ]),
 }
 const rowAdd = () => {
   close.value = true

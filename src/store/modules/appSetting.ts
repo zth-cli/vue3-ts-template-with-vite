@@ -23,7 +23,7 @@ const appSettings = {
     sidebarLogo: checkStorange('sidebarLogo') === 'true' ? true : false,
     menuMode: checkStorange('menuMode'),
     tagsBar: checkStorange('tagsBar') === 'true' ? true : false,
-    showThemeBar: checkStorange('showThemeBar') === 'true' ? true : false
+    showThemeBar: checkStorange('showThemeBar') === 'true' ? true : false,
   }),
 
   mutations: {
@@ -32,7 +32,7 @@ const appSettings = {
         state[key] = value
         localStorage.setItem(key, value)
       }
-    }
+    },
   },
 
   actions: {
@@ -40,8 +40,8 @@ const appSettings = {
       console.log(1)
 
       commit('CHANGE_SETTING', data)
-    }
-  }
+    },
+  },
 }
 
 export default appSettings

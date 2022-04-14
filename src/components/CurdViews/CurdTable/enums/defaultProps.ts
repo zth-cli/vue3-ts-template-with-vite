@@ -17,5 +17,5 @@ export const defaulltProps = {
   showSettingTool: true,
   showPanelTool: true,
   responseName: () => '',
-  isPrivate: false
+  isPrivate: false,
 }

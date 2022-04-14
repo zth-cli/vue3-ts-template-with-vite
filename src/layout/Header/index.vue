@@ -3,7 +3,11 @@
     <!-- 折叠按钮 -->
     <div v-if="menuMode !== 'horizontal'" class="collapse-btn">
       <el-icon :size="20">
-        <component :is="collapse ? 'fold' : 'expand'" style="font-size: 20px" @click="handleCollapse()" />
+        <component
+          :is="collapse ? 'fold' : 'expand'"
+          style="font-size: 20px"
+          @click="handleCollapse()"
+        />
       </el-icon>
     </div>
     <Breadcrumb v-if="menuMode !== 'horizontal'"></Breadcrumb>
@@ -74,7 +78,7 @@ const fullscreen: Ref<boolean> = ref(false)
 const collapse: Ref<boolean> = ref(false)
 
 const props = withDefaults(defineProps<{ showThemeBar?: boolean }>(), {
-  showThemeBar: true
+  showThemeBar: true,
 })
 
 const menuMode = computed(() => store.getters.menuMode)
@@ -110,7 +114,7 @@ const toggleThemeBar = (bool: boolean) => {
 // 刷新页面
 const reloadPage = () => {
   router.push({
-    path: '/redirect' + unref(route).fullPath
+    path: '/redirect' + unref(route).fullPath,
   })
 }
 </script>

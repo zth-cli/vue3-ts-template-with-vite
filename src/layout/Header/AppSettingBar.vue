@@ -4,10 +4,16 @@
       <li class="theme-item">
         <el-divider><p>菜单布局</p></el-divider>
         <div class="drawer-block-checkbox">
-          <div class="drawer-block-checkbox-item drawer-block-checkbox-item-slide" @click="saveTheme('menuMode', 'vertical')">
+          <div
+            class="drawer-block-checkbox-item drawer-block-checkbox-item-slide"
+            @click="saveTheme('menuMode', 'vertical')"
+          >
             <i v-show="layout.menuMode === 'vertical'" class="selectIcon el-icon-check" />
           </div>
-          <div class="drawer-block-checkbox-item drawer-block-checkbox-item-top" @click="saveTheme('menuMode', 'horizontal')">
+          <div
+            class="drawer-block-checkbox-item drawer-block-checkbox-item-top"
+            @click="saveTheme('menuMode', 'horizontal')"
+          >
             <i v-show="layout.menuMode === 'horizontal'" class="selectIcon el-icon-check" />
           </div>
         </div>
@@ -33,7 +39,11 @@
         <el-divider><p>界面显示</p></el-divider>
         <div class="theme-item-sub">
           <span>多标签:</span>
-          <el-switch v-model="layout.tagsBar" inline-prompt @change="saveTheme('tagsBar')"></el-switch>
+          <el-switch
+            v-model="layout.tagsBar"
+            inline-prompt
+            @change="saveTheme('tagsBar')"
+          ></el-switch>
         </div>
 
         <!-- <el-checkbox v-model="layout.tagsBar" @change="saveTheme('tagsBar')"></el-checkbox> -->
@@ -53,18 +63,18 @@ const colors = ref<any[]>([
   { theme: 'theme3', color: '#397373', name: '经典' },
   { theme: 'theme2', color: '#0e9b92', name: '清爽' },
   { theme: 'theme4', color: '#000', name: '暗夜' },
-  { theme: 'theme1', color: '#030033', name: '炫酷' }
+  { theme: 'theme1', color: '#030033', name: '炫酷' },
 ])
 const themeName = ref<string>(localStorage.getItem('theme') || 'theme2')
 const layout = reactive({
   menuMode: localStorage.getItem('menuMode'),
-  tagsBar: localStorage.getItem('tagsBar') === 'true'
+  tagsBar: localStorage.getItem('tagsBar') === 'true',
 })
 const styles = reactive({
   height: 'calc(100% - 55px)',
   overflow: 'auto',
   paddingBottom: '53px',
-  position: 'static'
+  position: 'static',
 })
 const visible = ref<boolean>(false)
 

@@ -30,6 +30,6 @@ export function useRequest(api: (arg0: any) => Promise<any>) {
     loading,
     error,
     result,
-    fetchResource
+    fetchResource,
   }
 }

@@ -12,5 +12,5 @@ export const allowType = [
   'radio',
   'checkbox',
   'select',
-  'switch'
+  'switch',
 ]

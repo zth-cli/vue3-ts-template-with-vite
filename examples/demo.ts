@@ -13,7 +13,7 @@ interface Indentities<T, U = string> {
 function indentity<T, U>(value: T, msg: U): Indentities<T, U> {
   let indentities: Indentities<T, U> = {
     value,
-    message: msg
+    message: msg,
   }
   return indentities
 }

@@ -1,5 +1,8 @@
 <template>
-  <div class="horizontal-menu-main" :class="{ isCollapse: isCollapse, 'vertical-menu-main': props.menuMode === 'vertical' }">
+  <div
+    class="horizontal-menu-main"
+    :class="{ isCollapse: isCollapse, 'vertical-menu-main': props.menuMode === 'vertical' }"
+  >
     <div v-if="props.menuMode === 'vertical'" class="slide-logo">
       <img src="@/assets/img/logo.png" />
     </div>
@@ -51,7 +54,9 @@ const isCollapse = ref<boolean>(false)
 
 const routeArr = computed(() => store.getters.routes)
 
-const props = withDefaults(defineProps<{ menuMode?: 'horizontal' | 'vertical' }>(), { menuMode: 'vertical' })
+const props = withDefaults(defineProps<{ menuMode?: 'horizontal' | 'vertical' }>(), {
+  menuMode: 'vertical',
+})
 
 bus.on('swithCollapse', (bool: boolean) => {
   props.menuMode === 'vertical' ? (isCollapse.value = bool) : ''

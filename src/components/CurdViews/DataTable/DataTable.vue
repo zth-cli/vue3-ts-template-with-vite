@@ -38,7 +38,7 @@ export default defineComponent({
     expose({
       // 对父级暴露方法和属性
       toggleRowSelection,
-      toggleAllSelection
+      toggleAllSelection,
     })
     return () =>
       h(
@@ -59,7 +59,7 @@ export default defineComponent({
           spanMethod: props.spanMethod,
           stripe: props.stripe,
           style: {
-            width: '100%'
+            width: '100%',
           },
           onRowClick: (row: any) => {
             emit('row-click', row)
@@ -75,15 +75,15 @@ export default defineComponent({
           },
           onHeaderClick: (column: any, event: Event) => {
             emit('header-click', { column, event })
-          }
+          },
         },
         {
           default: () => {
             return tableColumns
-          }
+          },
         }
       )
-  }
+  },
 })
 </script>
 <style lang="scss"></style>

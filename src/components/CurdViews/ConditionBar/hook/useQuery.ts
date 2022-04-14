@@ -1,6 +1,9 @@
 import { toRaw } from 'vue'
 
-export const useQuery = (emit: (event: 'query' | 'resize' | 'params-change', ...args: any[]) => void, fromData: { [x: string]: any }) => {
+export const useQuery = (
+  emit: (event: 'query' | 'resize' | 'params-change', ...args: any[]) => void,
+  fromData: { [x: string]: any }
+) => {
   const query = () => {
     const paramsData = {}
     const params = fromData

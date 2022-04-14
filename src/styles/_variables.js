@@ -4,35 +4,35 @@ const chartColorObj = {
   theme2: ['#588da8', '#ccafaf', '#e58a8a'],
   theme3: ['#2e73ff', '#60e4c2', '#36c57d'],
   theme4: ['#583d72', '#19456b', '#ef4f4f'],
-  theme5: ['#583d72', '#19456b', '#ef4f4f']
+  theme5: ['#583d72', '#19456b', '#ef4f4f'],
 }
 // 地图颜色
 const mapColorObj = {
   theme1: {
     areaColor: '#525078',
     borderColor: '#03002f',
-    areaColors: '#272451'
+    areaColors: '#272451',
   },
   theme2: {
     areaColor: '#2274e2',
     borderColor: '#87ebff',
-    areaColors: '#2B91B7'
+    areaColors: '#2B91B7',
   },
   theme3: {
     areaColor: '#06998e',
     borderColor: '#87ebff',
-    areaColors: '#096d66'
+    areaColors: '#096d66',
   },
   theme4: {
     areaColor: '#323232',
     borderColor: '#000000',
-    areaColors: '#272727'
+    areaColors: '#272727',
   },
   theme5: {
     areaColor: '#525078',
     borderColor: '#03002f',
-    areaColors: '#272451'
-  }
+    areaColors: '#272451',
+  },
 }
 
 // 导航菜单颜色
@@ -40,27 +40,27 @@ const menuColorObj = {
   theme1: {
     textColor: '#d66a57',
     activeTextColor: '#fff',
-    backgroundColor: '#272451'
+    backgroundColor: '#272451',
   },
   theme2: {
     textColor: '#fff',
     activeTextColor: '#fff',
-    backgroundColor: '#0e9b92'
+    backgroundColor: '#0e9b92',
   },
   theme3: {
     textColor: '#fff',
     activeTextColor: '#fff',
-    backgroundColor: '#275050'
+    backgroundColor: '#275050',
   },
   theme4: {
     textColor: '#B0B0B0',
     activeTextColor: '#fff',
-    backgroundColor: '#191919'
+    backgroundColor: '#191919',
   },
   theme5: {
     textColor: '#fff',
     activeTextColor: '#fff',
-    backgroundColor: '#304155'
-  }
+    backgroundColor: '#304155',
+  },
 }
 export { chartColorObj, mapColorObj, menuColorObj }

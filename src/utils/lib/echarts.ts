@@ -1,6 +1,13 @@
 import * as echarts from 'echarts/core'
 
-import { BarChart, LineChart, PieChart, MapChart, PictorialBarChart, RadarChart } from 'echarts/charts'
+import {
+  BarChart,
+  LineChart,
+  PieChart,
+  MapChart,
+  PictorialBarChart,
+  RadarChart,
+} from 'echarts/charts'
 
 import {
   TitleComponent,
@@ -15,7 +22,7 @@ import {
   DataZoomComponent,
   VisualMapComponent,
   TimelineComponent,
-  CalendarComponent
+  CalendarComponent,
 } from 'echarts/components'
 
 import { SVGRenderer } from 'echarts/renderers'
@@ -42,7 +49,7 @@ echarts.use([
   DataZoomComponent,
   VisualMapComponent,
   TimelineComponent,
-  CalendarComponent
+  CalendarComponent,
 ])
 
 export default echarts

@@ -7,12 +7,31 @@
             <el-input v-model="Scope.row[col.name]" :placeholder="col.label" clearable></el-input>
           </template>
           <template v-if="col.type === 'select'">
-            <el-select v-model="Scope.row[col.name]" :placeholder="col.label" clearable filterable :multiple="col.multiple ? col.multiple : false">
-              <el-option v-for="item in col.options" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+            <el-select
+              v-model="Scope.row[col.name]"
+              :placeholder="col.label"
+              clearable
+              filterable
+              :multiple="col.multiple ? col.multiple : false"
+            >
+              <el-option
+                v-for="item in col.options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              >
+              </el-option>
             </el-select>
           </template>
           <template v-if="col.type === 'textarea'">
-            <el-input v-model="Scope.row[col.name]" :maxlength="col.maxlength" show-word-limit :placeholder="col.label" type="textarea" clearable></el-input>
+            <el-input
+              v-model="Scope.row[col.name]"
+              :maxlength="col.maxlength"
+              show-word-limit
+              :placeholder="col.label"
+              type="textarea"
+              clearable
+            ></el-input>
           </template>
         </template>
       </el-table-column>
@@ -53,9 +72,9 @@ const props = withDefaults(
         name: 'content',
         label: '评价',
         type: 'textarea',
-        with: 200
-      }
-    ]
+        with: 200,
+      },
+    ],
   }
 )
 

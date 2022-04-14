@@ -1,4 +1,9 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw, RouteLocationNormalized } from 'vue-router'
+import {
+  createRouter,
+  createWebHashHistory,
+  RouteRecordRaw,
+  RouteLocationNormalized,
+} from 'vue-router'
 import Main from '@/layout/index.vue'
 import { getStorge } from '@/utils/auth'
 import Nprogress from 'nprogress'
@@ -12,34 +17,34 @@ const routes: Array<RouteConfig> = [
     component: Main,
     hidden: false, // 拓展路由属性
     meta: {
-      title: '首页'
+      title: '首页',
     },
-    children: []
+    children: [],
   },
   {
     path: '/redirect',
     component: Main,
     meta: {
-      title: '重载'
+      title: '重载',
     },
     children: [
       {
         path: '/redirect/:path(.*)',
         component: () => import('@/views/Redirect/index.vue'),
         meta: {
-          title: '重载'
-        }
-      }
-    ]
+          title: '重载',
+        },
+      },
+    ],
   },
   {
     path: '/login',
     name: 'login',
     component: () => import('../views/Login.vue'),
     meta: {
-      title: '登录'
-    }
-  }
+      title: '登录',
+    },
+  },
 ]
 
 const router = createRouter({
@@ -56,7 +61,7 @@ const router = createRouter({
         resolve({ left: 0, top })
       }
     })
-  }
+  },
 })
 
 let asyncRouterFlag = 0

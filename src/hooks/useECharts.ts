@@ -8,7 +8,10 @@ import { useDebounceFn } from '@vueuse/core'
 
 import echarts from '@/utils/lib/echarts'
 
-export function useECharts(elRef: Ref<HTMLDivElement>, theme: 'light' | 'dark' | 'default' = 'light') {
+export function useECharts(
+  elRef: Ref<HTMLDivElement>,
+  theme: 'light' | 'dark' | 'default' = 'light'
+) {
   // const { getDarkMode } = useRootSetting();
   // 主题颜色
   const getDarkMode = ref('light')
@@ -23,7 +26,7 @@ export function useECharts(elRef: Ref<HTMLDivElement>, theme: 'light' | 'dark' |
     // @ts-ignore
     return {
       backgroundColor: 'transparent',
-      ...cacheOptions.value
+      ...cacheOptions.value,
     }
   })
 
@@ -37,7 +40,7 @@ export function useECharts(elRef: Ref<HTMLDivElement>, theme: 'light' | 'dark' |
     const { removeEvent } = useEventListener({
       el: window,
       eventName: 'resize',
-      listener: resize
+      listener: resize,
     })
     removeResizeFn = removeEvent
   }
@@ -101,6 +104,6 @@ export function useECharts(elRef: Ref<HTMLDivElement>, theme: 'light' | 'dark' |
     setOptions,
     resize,
     echarts,
-    getInstance
+    getInstance,
   }
 }

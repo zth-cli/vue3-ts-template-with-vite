@@ -4,7 +4,10 @@
       <template v-if="!item.type || item.type === 'flow'">
         <section v-if="!item.disabled" :key="index" class="condition-item">
           <div class="category-title ellipsis">{{ item.label }}：</div>
-          <div ref="categorys" :class="[switchData[item.name] ? 'category-content-auto' : '', 'category-content']">
+          <div
+            ref="categorys"
+            :class="[switchData[item.name] ? 'category-content-auto' : '', 'category-content']"
+          >
             <el-button
               size="small"
               style="margin-top: 10px"
@@ -15,9 +18,12 @@
             >
             <ul class="item-ul">
               <li v-for="(ele, inde) in item.options" :key="ele.value" class="item-li">
-                <el-button size="small" :type="isActive(index, inde) ? 'primary' : 'text'" @click="setFlowSatus(item, index, inde, ele.value)">{{
-                  ele.label
-                }}</el-button>
+                <el-button
+                  size="small"
+                  :type="isActive(index, inde) ? 'primary' : 'text'"
+                  @click="setFlowSatus(item, index, inde, ele.value)"
+                  >{{ ele.label }}</el-button
+                >
               </li>
             </ul>
           </div>
@@ -34,7 +40,12 @@
         </section>
       </template>
     </template>
-    <ConditionBar :from-options="options" @query="query" @params-change="paramsChange" @reset-data="resetData">
+    <ConditionBar
+      :from-options="options"
+      @query="query"
+      @params-change="paramsChange"
+      @reset-data="resetData"
+    >
       <template #tool>
         <slot name="tool"></slot>
       </template>
@@ -72,9 +83,9 @@ const props = withDefaults(defineProps<Props>(), {
     {
       name: 'area',
       label: '接入电网',
-      options: [{ label: '省调公司', value: '1232213213' }]
-    }
-  ]
+      options: [{ label: '省调公司', value: '1232213213' }],
+    },
+  ],
 })
 const initFromData = () => {
   anchor = []
@@ -82,8 +93,12 @@ const initFromData = () => {
     if (item.type === 'flow' || !item.type) {
       if (!item.disabled) {
         const defaultValue = item.default ? toArray(item.default) : []
-        formData[item.name] = props.initParams[item.name] ? toArray(props.initParams[item.name]) : defaultValue
-        orignalFromData[item.name] = props.initParams[item.name] ? toArray(props.initParams[item.name]) : defaultValue
+        formData[item.name] = props.initParams[item.name]
+          ? toArray(props.initParams[item.name])
+          : defaultValue
+        orignalFromData[item.name] = props.initParams[item.name]
+          ? toArray(props.initParams[item.name])
+          : defaultValue
         switchData[item.name] = false
         // 默认选中状态
         if (formData[item.name].length > 0) {

@@ -10,5 +10,5 @@ export const emits: string[] = [
   'params-change',
   'node-click',
   'node-expand',
-  'tab-click'
+  'tab-click',
 ]

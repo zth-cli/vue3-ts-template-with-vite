@@ -1,7 +1,14 @@
 <template>
   <transition name="toast" @after-leave="afterLeave" @after-enter="afterEnter">
     <!-- 弹窗 -->
-    <div v-show="visible" ref="container" class="toast-container" :style="toastStyle" @mouseenter="clearTimer" @mouseleave="createTimer">
+    <div
+      v-show="visible"
+      ref="container"
+      class="toast-container"
+      :style="toastStyle"
+      @mouseenter="clearTimer"
+      @mouseleave="createTimer"
+    >
       <!-- icon -->
       <template v-if="type || type != 'custom'">
         <div v-if="type === 'success'" class="toast-icon success">
@@ -15,7 +22,12 @@
           <i class="fi fi-br-cross-small"></i>
         </div>
       </template>
-      <div v-if="type === 'custom'" :style="{ backgroundColor: customIconBackground }" class="toast-icon" v-html="customIcon"></div>
+      <div
+        v-if="type === 'custom'"
+        :style="{ backgroundColor: customIconBackground }"
+        class="toast-icon"
+        v-html="customIcon"
+      ></div>
       <img v-if="type === 'img'" class="toast-custom-img" :src="customImg" />
       <!-- content -->
       <div class="toast-content">
@@ -32,7 +44,12 @@
         <div class="toast-operate">
           <a
             class="toast-button-confirm"
-            :class="[{ success: type === 'success' }, { warning: type === 'warning' }, { info: type === 'info' }, { error: type === 'error' }]"
+            :class="[
+              { success: type === 'success' },
+              { warning: type === 'warning' },
+              { info: type === 'info' },
+              { error: type === 'error' },
+            ]"
             >{{ confirmText }}</a
           >
         </div>
@@ -73,12 +90,12 @@ const height = ref(0)
 // 位置
 const toastPosition = ref({
   x: 16,
-  y: 16
+  y: 16,
 })
 const toastStyle = computed(() => {
   return {
     top: `${toastPosition.value.y}px`,
-    right: `${toastPosition.value.x}px`
+    right: `${toastPosition.value.x}px`,
   }
 })
 
@@ -139,7 +156,7 @@ defineExpose({
   container,
   height,
   toastPosition,
-  toastStyle
+  toastStyle,
 })
 // return {
 //   visible,

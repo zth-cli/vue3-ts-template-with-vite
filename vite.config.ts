@@ -21,14 +21,14 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       configMockPlugin(command),
       configHtmlPlugin(loadEnv(mode, root), isBuild),
       AutoImport({
-        resolvers: [ElementPlusResolver()]
+        resolvers: [ElementPlusResolver()],
       }),
       //
       Components({
         dirs: ['src/components'],
         deep: true,
-        resolvers: [ElementPlusResolver()]
-      })
+        resolvers: [ElementPlusResolver()],
+      }),
     ],
     base: isBuild ? './' : VITE_PUBLIC_PATH,
     server: {
@@ -39,9 +39,9 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         '/api': {
           target: VITE_PROXY, // 目标地址
           changeOrigin: true, // 设置同源 默认false，是否需要改变原始主机头为目标URL,
-          rewrite: (path) => path.replace(/^\/api/, '')
-        }
-      }
+          rewrite: (path) => path.replace(/^\/api/, ''),
+        },
+      },
     },
     build: {
       // @ts-ignore
@@ -53,9 +53,9 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       terserOptions: {
         compress: {
           drop_console: isBuild,
-          drop_debugger: isBuild
-        }
-      }
+          drop_debugger: isBuild,
+        },
+      },
     },
     resolve: {
       alias: {
@@ -65,16 +65,16 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         views: resolve('src/views'),
         utils: resolve('src/utils'),
         routes: resolve('src/routes'),
-        styles: resolve('src/styles')
-      }
+        styles: resolve('src/styles'),
+      },
     },
     css: {
       preprocessorOptions: {
         // 引入公用的样式
         scss: {
-          additionalData: '@import "./src/styles/mixin.scss";'
-        }
-      }
-    }
+          additionalData: '@import "./src/styles/mixin.scss";',
+        },
+      },
+    },
   }
 }

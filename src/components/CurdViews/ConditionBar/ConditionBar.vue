@@ -5,7 +5,12 @@
       <div ref="tools" class="curd_tools" :class="{ ellipsis_curd_tools: expend }">
         <template v-for="(item, index) in fromOptions" :key="'item' + index">
           <template v-if="item.type && allowType.includes(item.type)">
-            <template v-if="!item.dateSwitch && (item.type === 'date' || item.type === 'month' || item.type === 'year')">
+            <template
+              v-if="
+                !item.dateSwitch &&
+                (item.type === 'date' || item.type === 'month' || item.type === 'year')
+              "
+            >
               <div :ref="setItemRef" class="curd_tool_item">
                 <label v-if="mode !== 'simple'" class="label">{{ item.label }}：</label>
                 <el-date-picker
@@ -76,16 +81,24 @@
                 <template v-if="item.options && item.options.length > 0">
                   <el-checkbox-group v-model="fromData[item.name]">
                     <template v-for="ele in item.options" :key="ele.value">
-                      <el-checkbox :disabled="item.disabled" :label="ele.value">{{ ele.label }}</el-checkbox>
+                      <el-checkbox :disabled="item.disabled" :label="ele.value">{{
+                        ele.label
+                      }}</el-checkbox>
                     </template>
                   </el-checkbox-group>
                 </template>
                 <template v-else>
-                  <el-checkbox v-model="fromData[item.name]" true-label="1" false-label="0">{{ item.label }}</el-checkbox>
+                  <el-checkbox v-model="fromData[item.name]" true-label="1" false-label="0">{{
+                    item.label
+                  }}</el-checkbox>
                 </template>
               </div>
             </template>
-            <template v-else-if="typeArr.includes(item.type) && item.dateSwitch && item.dateSwitch.length > 1">
+            <template
+              v-else-if="
+                typeArr.includes(item.type) && item.dateSwitch && item.dateSwitch.length > 1
+              "
+            >
               <div :ref="setItemRef" class="curd_tool_item">
                 <el-button
                   v-for="(el, i) in item.dateSwitch"
@@ -93,7 +106,17 @@
                   class="mini_btns"
                   :type="switchIndex === i ? 'danger' : 'primary'"
                   @click="switchDate(item.name, el, item.dateTypeParamName, i)"
-                  >{{ el.type === 'date' ? '日' : el.type === 'month' ? '月' : el.type === 'year' ? '年' : el.type === 'dates' ? '多日' : '时间' }}</el-button
+                  >{{
+                    el.type === 'date'
+                      ? '日'
+                      : el.type === 'month'
+                      ? '月'
+                      : el.type === 'year'
+                      ? '年'
+                      : el.type === 'dates'
+                      ? '多日'
+                      : '时间'
+                  }}</el-button
                 >
                 <el-date-picker
                   v-model="fromData[item.name]"
@@ -117,7 +140,11 @@
             <template v-else>
               <div :ref="setItemRef" class="curd_tool_item">
                 <label v-if="mode !== 'simple'" class="label">{{ item.label }}：</label>
-                <el-input v-model="fromData[item.name]" :style="{ width: width }" :placeholder="usePlaceholder(item)"></el-input>
+                <el-input
+                  v-model="fromData[item.name]"
+                  :style="{ width: width }"
+                  :placeholder="usePlaceholder(item)"
+                ></el-input>
               </div>
             </template>
           </template>
@@ -129,7 +156,13 @@
         <i :class="[expend ? 'el-icon-arrow-up' : 'el-icon-arrow-down']"></i>
       </div>
       <div class="btns">
-        <el-button v-if="fromOptions.length > 0 && mode !== 'simple'" type="primary" icon="search" @click="query()">查询</el-button>
+        <el-button
+          v-if="fromOptions.length > 0 && mode !== 'simple'"
+          type="primary"
+          icon="search"
+          @click="query()"
+          >查询</el-button
+        >
         <el-button @click="flowBarResetData">重置</el-button>
         <slot name="tool"></slot>
       </div>
@@ -141,7 +174,14 @@
 import { ref, onMounted, watch } from 'vue'
 import { IformItem } from '../type'
 import { allowType } from './enum/allowType'
-import { usePlaceholder, useTimeSwitch, useDefaultData, useQuery, useItemRefs, useMediaQuery } from './hook'
+import {
+  usePlaceholder,
+  useTimeSwitch,
+  useDefaultData,
+  useQuery,
+  useItemRefs,
+  useMediaQuery,
+} from './hook'
 
 const expend = ref<boolean>(false)
 const tools = ref(null)
@@ -154,7 +194,11 @@ interface IconProps {
   toolAlign?: string
   width?: string
 }
-const props = withDefaults(defineProps<IconProps>(), { mode: 'normal', toolAlign: 'left', width: '200px' })
+const props = withDefaults(defineProps<IconProps>(), {
+  mode: 'normal',
+  toolAlign: 'left',
+  width: '200px',
+})
 
 const { fromData, typeArr, resetData } = useDefaultData(props) // 初始化默认值
 const { switchDate, switchIndex } = useTimeSwitch(fromData) // 时间切换

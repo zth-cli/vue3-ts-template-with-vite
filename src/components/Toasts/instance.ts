@@ -19,7 +19,7 @@ const toasts = (options) => {
         document.body.removeChild(root)
         ToastsApp.unmount()
       }
-    }
+    },
   })
   const instance: publicInstance = ToastsApp.mount(root) // 返回根组件实例
   console.log(instance)

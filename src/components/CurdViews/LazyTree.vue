@@ -8,13 +8,26 @@
       <!-- <slot name="treetab"></slot> -->
       <div v-if="dataUrlArr.length > 1" class="tree_tab">
         <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane v-for="tab in dataUrlArr" :key="tab.value" :label="tab.name" :name="tab.value"></el-tab-pane>
+          <el-tab-pane
+            v-for="tab in dataUrlArr"
+            :key="tab.value"
+            :label="tab.name"
+            :name="tab.value"
+          ></el-tab-pane>
         </el-tabs>
       </div>
-      <el-input v-if="search && !isLazyLoad" v-model="filterText" placeholder="输入关键字进行过滤" size="small"></el-input>
+      <el-input
+        v-if="search && !isLazyLoad"
+        v-model="filterText"
+        placeholder="输入关键字进行过滤"
+        size="small"
+      ></el-input>
       <slot v-else name="searchselect"></slot>
       <div v-loading="loading" class="lazy_tree_list">
-        <el-scrollbar class="treescrollbar" style="height: 100%; background: #fff; overflow-y: hidden; overflow-x: hidden">
+        <el-scrollbar
+          class="treescrollbar"
+          style="height: 100%; background: #fff; overflow-y: hidden; overflow-x: hidden"
+        >
           <el-tree
             v-if="isShow"
             ref="tree"
@@ -44,12 +57,12 @@ export default {
       type: Array,
       default: function () {
         return []
-      }
+      },
     },
     param: {},
     search: {
       type: Boolean,
-      default: true
+      default: true,
     },
     defaultProps: {
       type: Object,
@@ -57,23 +70,23 @@ export default {
         return {
           children: 'children',
           label: 'name',
-          isLeaf: 'leaf'
+          isLeaf: 'leaf',
         }
-      }
+      },
     },
     renderFunction: {
       type: Function,
-      default: renderContent
+      default: renderContent,
     },
     defaultExpandedNodes: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     isLazyLoad: {
       // true: 表示树为异步加载，用slot自定义搜索框，否则用input过滤搜索
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
@@ -82,13 +95,13 @@ export default {
       filterText: '',
       isShow: true,
       activeName: this.dataUrlArr[0].value,
-      activeIndex: 0
+      activeIndex: 0,
     }
   },
   watch: {
     filterText(val) {
       this.$refs.tree.filter(val)
-    }
+    },
     // dataUrlArr: {
     //   handler(val) {
     //     this.$nextTick(() => {
@@ -108,7 +121,10 @@ export default {
       //   let params = Object.assign({}, this.dataUrlArr[index].params);
       //   console.log(params);
 
-      return apiGet(this.dataUrlArr[this.activeIndex].urlArr[index].url, this.dataUrlArr[this.activeIndex].urlArr[index].params)
+      return apiGet(
+        this.dataUrlArr[this.activeIndex].urlArr[index].url,
+        this.dataUrlArr[this.activeIndex].urlArr[index].params
+      )
         .then((res) => {
           this.loading = false
           if (res.code === 0) {
@@ -172,8 +188,8 @@ export default {
           })
         }
       })
-    }
-  }
+    },
+  },
 }
 
 function renderContent(h, { node }) {
@@ -198,7 +214,7 @@ function renderContent(h, { node }) {
       break
   }
   return (
-    <span class="custom-tree-node">
+    <span class='custom-tree-node'>
       <span>
         <i class={icon}> </i> {node.label}{' '}
       </span>{' '}

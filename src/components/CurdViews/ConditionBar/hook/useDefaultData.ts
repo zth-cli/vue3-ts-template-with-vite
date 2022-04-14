@@ -3,7 +3,16 @@ import day from 'dayjs'
 export const useDefaultData = (props) => {
   const orignalFormData: { [x: string]: any } = {}
   const fromData = reactive<{ [x: string]: any }>({})
-  const typeArr: Array<string> = ['date', 'daterange', 'datetime', 'datetimerange', 'year', 'month', 'time', 'timerange']
+  const typeArr: Array<string> = [
+    'date',
+    'daterange',
+    'datetime',
+    'datetimerange',
+    'year',
+    'month',
+    'time',
+    'timerange',
+  ]
 
   if (props.fromOptions.length) {
     props.fromOptions.forEach((item: formItem) => {
@@ -22,7 +31,9 @@ export const useDefaultData = (props) => {
       orignalFormData[item.name] = item.default ? item.default : ''
       if (typeArr.includes(item.type)) {
         fromData[item.name] = item.default ? item.default : day().format(item.format.toUpperCase())
-        orignalFormData[item.name] = item.default ? item.default : day().format(item.format.toUpperCase())
+        orignalFormData[item.name] = item.default
+          ? item.default
+          : day().format(item.format.toUpperCase())
       }
     })
   }
@@ -34,6 +45,6 @@ export const useDefaultData = (props) => {
   return {
     fromData,
     typeArr,
-    resetData
+    resetData,
   }
 }

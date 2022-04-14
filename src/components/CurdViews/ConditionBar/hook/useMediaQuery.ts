@@ -21,6 +21,6 @@ export const useMediaQuery = (tools: Ref<any>, itemRefs: Array<any>) => {
   }
   return {
     toolsMediaQuery,
-    ellipsis
+    ellipsis,
   }
 }

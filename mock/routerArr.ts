@@ -31,8 +31,8 @@ const routeArr: Array<IrouteItem> = [
         type: 3,
         path: '/home',
         mate: {
-          isCahe: true
-        }
+          isCahe: true,
+        },
       },
       {
         title: '分析页',
@@ -42,9 +42,9 @@ const routeArr: Array<IrouteItem> = [
         parentId: 5,
         id: 502,
         type: 3,
-        path: '/analysis'
-      }
-    ]
+        path: '/analysis',
+      },
+    ],
   },
   {
     title: '列表页面',
@@ -61,7 +61,7 @@ const routeArr: Array<IrouteItem> = [
         parentId: 6,
         id: 601,
         type: 3,
-        path: '/basci-table'
+        path: '/basci-table',
       },
       {
         title: '列表布局',
@@ -71,9 +71,9 @@ const routeArr: Array<IrouteItem> = [
         parentId: 6,
         id: 602,
         type: 3,
-        path: '/view-table'
-      }
-    ]
+        path: '/view-table',
+      },
+    ],
   },
   {
     title: '异常界面',
@@ -89,7 +89,7 @@ const routeArr: Array<IrouteItem> = [
         parentId: 7,
         id: 701,
         type: 3,
-        path: '/404'
+        path: '/404',
       },
       {
         title: '500页面',
@@ -98,9 +98,9 @@ const routeArr: Array<IrouteItem> = [
         parentId: 7,
         id: 702,
         type: 3,
-        path: '/500'
-      }
-    ]
+        path: '/500',
+      },
+    ],
   },
   {
     title: '外部界面',
@@ -117,7 +117,7 @@ const routeArr: Array<IrouteItem> = [
         parentId: 8,
         id: 801,
         type: 3,
-        path: '/Vue3'
+        path: '/Vue3',
       },
       {
         title: 'Vuex',
@@ -127,7 +127,7 @@ const routeArr: Array<IrouteItem> = [
         parentId: 8,
         id: 802,
         type: 3,
-        path: '/Vuex'
+        path: '/Vuex',
       },
       {
         title: '掘金',
@@ -137,7 +137,7 @@ const routeArr: Array<IrouteItem> = [
         parentId: 8,
         id: 803,
         type: 3,
-        path: '/juejin'
+        path: '/juejin',
       },
       {
         title: 'VueUse',
@@ -147,7 +147,7 @@ const routeArr: Array<IrouteItem> = [
         parentId: 8,
         id: 804,
         type: 3,
-        path: '/vueuse'
+        path: '/vueuse',
       },
       {
         title: '百度',
@@ -157,9 +157,9 @@ const routeArr: Array<IrouteItem> = [
         parentId: 8,
         id: 805,
         type: 3,
-        path: '/baidu'
-      }
-    ]
-  }
+        path: '/baidu',
+      },
+    ],
+  },
 ]
 export default routeArr

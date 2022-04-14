@@ -17,19 +17,19 @@ export function configHtmlPlugin(env: { [x: string]: string }, isBuild: boolean)
     minify: isBuild,
     inject: {
       injectData: {
-        title: VITE_TITLE
+        title: VITE_TITLE,
       },
       tags: isBuild
         ? [
             {
               tag: 'script',
               attrs: {
-                src: getAppConfigSrc()
-              }
-            }
+                src: getAppConfigSrc(),
+              },
+            },
           ]
-        : []
-    }
+        : [],
+    },
   })
   return htmlPlugin
 }

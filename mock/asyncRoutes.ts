@@ -15,8 +15,8 @@ export default [
     response: ({ query }) => {
       return {
         code: 0,
-        list: routeArr
+        list: routeArr,
       }
-    }
-  }
+    },
+  },
 ] as MockMethod[]

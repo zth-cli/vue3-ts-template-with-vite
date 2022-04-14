@@ -21,24 +21,26 @@ export default function renderFunc(props: any, slots: any) {
           default: (scope: { $index: number; row: any; column: any }) => {
             let index = null
             let indexEle = ''
-            index = showPage.value ? (pageIndex.value - 1) * pageSize.value + scope.$index + 1 : scope.$index + 1
+            index = showPage.value
+              ? (pageIndex.value - 1) * pageSize.value + scope.$index + 1
+              : scope.$index + 1
             if (item.slot) {
               // type为index 且有slot，提供插槽功能
               indexEle = slots[item.slot]({
                 row: scope.row,
                 colum: scope.column,
-                index: scope.$index
+                index: scope.$index,
               })
             }
             return [h('p', [indexEle, h('span', index)])]
-          }
+          },
         })
       }
       if (item.type === 'selection') {
         // @ts-ignore
         return h(ElTableColumn, {
           ...columnProps,
-          type: item.type
+          type: item.type,
         })
       }
       if (item.type === 'expand') {
@@ -47,7 +49,7 @@ export default function renderFunc(props: any, slots: any) {
           ElTableColumn,
           {
             ...columnProps,
-            type: item.type
+            type: item.type,
           },
           {
             // scope 就相当于 slot-scope="{title}" 里面的值
@@ -57,11 +59,11 @@ export default function renderFunc(props: any, slots: any) {
                   slots[item.slot]({
                     row: scope.row,
                     colum: scope.column,
-                    index: scope.$index
-                  })
-                ])
+                    index: scope.$index,
+                  }),
+                ]),
               ]
-            }
+            },
           }
         )
       }
@@ -74,11 +76,11 @@ export default function renderFunc(props: any, slots: any) {
                 slots[item.headerSlot]({
                   row: scope.row,
                   colum: scope.column,
-                  index: scope.$index
-                })
-              ])
+                  index: scope.$index,
+                }),
+              ]),
             ]
-          }
+          },
         })
       }
       if (item.headerSlot && item.slot) {
@@ -90,9 +92,9 @@ export default function renderFunc(props: any, slots: any) {
                 slots[item.slot]({
                   row: scope.row,
                   colum: scope.column,
-                  index: scope.$index
-                })
-              ])
+                  index: scope.$index,
+                }),
+              ]),
             ]
           },
           header: (scope: Iscope) => {
@@ -101,11 +103,11 @@ export default function renderFunc(props: any, slots: any) {
                 slots[item.headerSlot]({
                   row: scope.row,
                   colum: scope.column,
-                  index: scope.$index
-                })
-              ])
+                  index: scope.$index,
+                }),
+              ]),
             ]
-          }
+          },
         })
       }
       if (!item.headerSlot && item.slot) {
@@ -118,11 +120,11 @@ export default function renderFunc(props: any, slots: any) {
                 slots[item.slot]({
                   row: scope.row,
                   colum: scope.column,
-                  index: scope.$index
-                })
-              ])
+                  index: scope.$index,
+                }),
+              ]),
             ]
-          }
+          },
         })
       }
       if (item.prop && item.enum) {
@@ -139,19 +141,19 @@ export default function renderFunc(props: any, slots: any) {
                   ElTag,
                   {
                     size: 'small',
-                    type: element.type ? element.type : ''
+                    type: element.type ? element.type : '',
                   },
                   {
                     default: () => {
                       return element.value
-                    }
+                    },
                   }
                 )
                 break
               }
             }
             return node
-          }
+          },
         })
       }
       if (item.childrens?.length > 0) {
@@ -162,7 +164,7 @@ export default function renderFunc(props: any, slots: any) {
           {
             default: () => {
               return renders(item.childrens)
-            }
+            },
           }
         )
       }

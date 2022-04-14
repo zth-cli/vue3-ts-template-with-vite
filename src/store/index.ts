@@ -12,21 +12,21 @@ export const key: InjectionKey<Store<State>> = Symbol()
 
 export const store = createStore({
   state: {
-    count: 0
+    count: 0,
   },
   mutations: {
     increment(state) {
       state.count++
-    }
+    },
   },
   actions: {
     increment(context) {
       context.commit('increment')
-    }
+    },
   },
   modules: {
     menuPermission,
-    appSettings
+    appSettings,
   },
-  getters
+  getters,
 })

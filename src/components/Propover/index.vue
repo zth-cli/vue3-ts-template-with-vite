@@ -6,7 +6,9 @@
       <el-button size="small" type="primary" @click="confirmBtn()">确认</el-button>
     </div>
     <template #reference>
-      <el-button size="small" type="danger" @click="visible = true">{{ props.subContent }}</el-button>
+      <el-button size="small" type="danger" @click="visible = true">{{
+        props.subContent
+      }}</el-button>
     </template>
   </el-popover>
 </template>
@@ -23,7 +25,7 @@ const props = withDefaults(
   {
     content: '确定删除吗？',
     subContent: '删除',
-    size: 'samll'
+    size: 'samll',
   }
 )
 const visible = ref(false)

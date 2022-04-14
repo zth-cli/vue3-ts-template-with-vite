@@ -14,6 +14,15 @@ export const typeArr = [
   'number',
   'input',
   'textarea',
-  'editTable'
+  'editTable',
 ]
-export const dateType = ['date', 'daterange', 'datetime', 'datetimerange', 'year', 'month', 'time', 'timerange']
+export const dateType = [
+  'date',
+  'daterange',
+  'datetime',
+  'datetimerange',
+  'year',
+  'month',
+  'time',
+  'timerange',
+]

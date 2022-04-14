@@ -15,7 +15,15 @@ export interface UseEventParams {
   wait?: number // 防抖或者节流时间(ms)
 }
 
-export function useEventListener({ el = window, eventName, listener, options, autoRemove = true, isDebounce = true, wait = 80 }: UseEventParams): {
+export function useEventListener({
+  el = window,
+  eventName,
+  listener,
+  options,
+  autoRemove = true,
+  isDebounce = true,
+  wait = 80,
+}: UseEventParams): {
   removeEvent: RemoveEventFn
 } {
   let removeEvent: RemoveEventFn

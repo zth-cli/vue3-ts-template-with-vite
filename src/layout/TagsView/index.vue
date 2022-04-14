@@ -1,7 +1,20 @@
 <template>
   <div v-if="showTags" class="tags">
-    <el-tabs v-model="activeValue" :closable="!(tagsList.length == 1)" type="card" size="small" @tab-click="changeTab" @tab-remove="closeTags">
-      <el-tab-pane v-for="item in tagsList" :key="item.path" :label="item.title" :name="item.title" :tab="item"></el-tab-pane>
+    <el-tabs
+      v-model="activeValue"
+      :closable="!(tagsList.length == 1)"
+      type="card"
+      size="small"
+      @tab-click="changeTab"
+      @tab-remove="closeTags"
+    >
+      <el-tab-pane
+        v-for="item in tagsList"
+        :key="item.path"
+        :label="item.title"
+        :name="item.title"
+        :tab="item"
+      ></el-tab-pane>
     </el-tabs>
     <div class="tags-close-box">
       <el-dropdown placement="bottom" @command="handleTags">
@@ -32,7 +45,7 @@ const setTags = (route: RouteLocationNormalizedLoaded) => {
     fullPath: route.fullPath,
     name: route.name,
     path: route.path,
-    meta: route.meta
+    meta: route.meta,
   }
   const existIndex = tagsList.value.findIndex((item) => {
     return item.path === route.path

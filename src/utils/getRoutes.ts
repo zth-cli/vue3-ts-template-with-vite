@@ -26,8 +26,8 @@ function addRouter(routeArr: Array<IrouteItem>): RouteConfig[] {
           rId: item.id,
           title: item.title,
           isCache: false,
-          requiresAuth: true
-        }
+          requiresAuth: true,
+        },
       })
     }
   })
@@ -48,7 +48,7 @@ function lazyLoad(componentPath: string) {
     errorComponent: NotError,
     // 如果提供了一个 timeout 时间限制，并超时了
     // 也会显示这里配置的报错组件，默认值是：Infinity
-    timeout: 3000
+    timeout: 3000,
   })
 }
 export default addRouter

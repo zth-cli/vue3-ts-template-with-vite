@@ -35,8 +35,14 @@ class Request {
     )
 
     // 使用实例拦截器
-    this.instance.interceptors.request.use(this.interceptorsObj?.requestInterceptors, this.interceptorsObj?.requestInterceptorsCatch)
-    this.instance.interceptors.response.use(this.interceptorsObj?.responseInterceptors, this.interceptorsObj?.responseInterceptorsCatch)
+    this.instance.interceptors.request.use(
+      this.interceptorsObj?.requestInterceptors,
+      this.interceptorsObj?.requestInterceptorsCatch
+    )
+    this.instance.interceptors.response.use(
+      this.interceptorsObj?.responseInterceptors,
+      this.interceptorsObj?.responseInterceptorsCatch
+    )
     // 全局响应拦截器保证最后执行
     this.instance.interceptors.response.use(
       // 因为我们接口的数据都在res.data下，所以我们直接返回res.data
@@ -80,7 +86,7 @@ class Request {
         this.requestUrlList?.push(url)
         config.cancelToken = new axios.CancelToken((c) => {
           this.cancelRequestSourceList?.push({
-            [url]: c
+            [url]: c,
           })
         })
       }

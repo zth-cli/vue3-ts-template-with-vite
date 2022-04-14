@@ -16,8 +16,8 @@ export default [
     response: () => {
       return {
         code: 0,
-        info: echartsList()
+        info: echartsList(),
       }
-    }
-  }
+    },
+  },
 ] as MockMethod[]

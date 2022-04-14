@@ -8,9 +8,16 @@
     <el-button type="primary" size="small" @click="clickHandle">点击</el-button>
     <el-button type="primary" size="small" @click="clickHandles">提示</el-button>
     <el-button type="primary" size="small" @click="debHandler">防抖</el-button>
-    <el-button v-permission="{ action: ['admin'], effect: 'disabled' }" type="primary" size="small">鉴权</el-button>
+    <el-button v-permission="{ action: ['admin'], effect: 'disabled' }" type="primary" size="small"
+      >鉴权</el-button
+    >
     <el-button type="warning" size="small" @click="warn('控制台抛异常')">控制台抛异常</el-button>
-    <el-button type="primary" size="small" @click="downloadByUrl({ url: 'http://192.168.3.165:8888/index.html', fileName: 'a.html' })">下载</el-button>
+    <el-button
+      type="primary"
+      size="small"
+      @click="downloadByUrl({ url: 'http://192.168.3.165:8888/index.html', fileName: 'a.html' })"
+      >下载</el-button
+    >
     <slot name="default"></slot>
     {{ loading }}
     <p></p>
@@ -43,7 +50,7 @@ const title: Ref<string> = ref('home page')
 
 // 定义常量(非响应式),可直接在模板使用
 const theme = {
-  color: 'red'
+  color: 'red',
 }
 
 // 定义props
@@ -53,7 +60,7 @@ interface Props {
 }
 // defineProps编译器宏(处理过程一同被编译掉)
 const props = withDefaults(defineProps<Props>(), {
-  name: 'Vue3'
+  name: 'Vue3',
 })
 
 // 自定义事件
@@ -76,14 +83,14 @@ const clickHandles = () => {
   instance.appContext.config.globalProperties.$Toast({
     type: 'info',
     title: '这是一句标题',
-    message: 'mount函数的主要逻辑。'
+    message: 'mount函数的主要逻辑。',
   })
 }
 
 // 对外暴露属性(defineExpose)
 defineExpose({
   title,
-  theme
+  theme,
 })
 </script>
 <style>

@@ -1,8 +1,21 @@
 <template>
   <div class="curd_table">
     <div v-if="props.showPanelTool && props.mode !== 'simple'" class="panel_tool_left">
-      <el-button v-if="props.defaultPanel.includes('add')" icon="plus" type="primary" @click="addRow()">新增</el-button>
-      <el-button v-if="props.defaultPanel.includes('edit')" icon="edit" type="primary" :disabled="isSingle" @click="editRow()">修改</el-button>
+      <el-button
+        v-if="props.defaultPanel.includes('add')"
+        icon="plus"
+        type="primary"
+        @click="addRow()"
+        >新增</el-button
+      >
+      <el-button
+        v-if="props.defaultPanel.includes('edit')"
+        icon="edit"
+        type="primary"
+        :disabled="isSingle"
+        @click="editRow()"
+        >修改</el-button
+      >
       <el-popover v-model:visible="visible" placement="top" :width="160">
         <p>确定删除吗？</p>
         <div style="text-align: right; margin: 0">
@@ -10,12 +23,23 @@
           <el-button type="primary" @click="deleteRows()">确定</el-button>
         </div>
         <template #reference>
-          <el-button v-if="props.defaultPanel.includes('delete')" icon="circle-close" type="danger" :disabled="isMultiple" @click="visible = true"
+          <el-button
+            v-if="props.defaultPanel.includes('delete')"
+            icon="circle-close"
+            type="danger"
+            :disabled="isMultiple"
+            @click="visible = true"
             >删除</el-button
           >
         </template>
       </el-popover>
-      <el-button v-if="props.defaultPanel.includes('export')" icon="download" type="primary" @click="exportData()">导出</el-button>
+      <el-button
+        v-if="props.defaultPanel.includes('export')"
+        icon="download"
+        type="primary"
+        @click="exportData()"
+        >导出</el-button
+      >
       <slot name="panel"></slot>
     </div>
     <div v-if="props.showSettingTool && props.mode !== 'simple'" class="panel_tool_right">
@@ -23,7 +47,13 @@
       <el-popover placement="bottom-end" :width="200" trigger="click">
         <div style="margin: 5px 0">
           <div v-for="(col, index) in props.columns" :key="index">
-            <el-checkbox v-if="col.label" v-model="col.show" :label="col.label" @change="columnsChange">{{ col.label }}</el-checkbox>
+            <el-checkbox
+              v-if="col.label"
+              v-model="col.show"
+              :label="col.label"
+              @change="columnsChange"
+              >{{ col.label }}</el-checkbox
+            >
           </div>
         </div>
         <template #reference>
@@ -64,7 +94,9 @@
           <slot :name="item.headerSlot" v-bind="Props"></slot>
         </template>
         <template #index="Props">
-          <slot v-if="props.showPage" name="index">{{ Props.index + (pageParam.pageIndex - 1) * pageParam.pageSize + 1 }}</slot>
+          <slot v-if="props.showPage" name="index">{{
+            Props.index + (pageParam.pageIndex - 1) * pageParam.pageSize + 1
+          }}</slot>
           <slot v-else name="index">{{ Props.index + 1 }}</slot>
         </template>
       </DataTable>
@@ -108,7 +140,11 @@ mColumns.value = props.columns.filter((item) => !item.disabled)
 const isSingle = computed(() => !(selection.value !== null && selection.value.length === 1))
 const isMultiple = computed(() => !(selection.value !== null && selection.value.length > 0))
 
-const { queryData, loading, tableData, pageParam, total, lazyLoad } = useTableFetchData(props, emit, selection)
+const { queryData, loading, tableData, pageParam, total, lazyLoad } = useTableFetchData(
+  props,
+  emit,
+  selection
+)
 
 const { exportData } = useExportTable(props)
 
@@ -209,7 +245,7 @@ const toggleAllSelection = () => {
 defineExpose({
   queryData,
   toggleRowSelection,
-  toggleAllSelection
+  toggleAllSelection,
 })
 interface ItableProp {
   columns: Icolumns[]

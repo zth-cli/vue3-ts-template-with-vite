@@ -40,26 +40,26 @@ export default defineComponent({
   props: {
     modelValue: {
       type: Boolean,
-      default: false
+      default: false,
     },
     oheight: {
       type: String,
-      default: ''
+      default: '',
     },
     owidth: {
       type: String,
-      default: ''
+      default: '',
     },
     title: String,
     isDialogDrag: {
       // 控制弹框拖拽
       type: Boolean,
-      default: true
+      default: true,
     },
     size: {
       type: String,
-      default: 'small'
-    }
+      default: 'small',
+    },
   },
   emits: ['update:modelValue'],
   setup(props: any, context: { emit: any }) {
@@ -84,9 +84,9 @@ export default defineComponent({
       isFullScreen,
       width,
       fullScreen,
-      switchs
+      switchs,
     }
-  }
+  },
 })
 </script>
 

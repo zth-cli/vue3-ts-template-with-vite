@@ -1,7 +1,7 @@
 function indentity(value, msg) {
   var indentities = {
     value: value,
-    message: msg
+    message: msg,
   }
   return indentities
 }

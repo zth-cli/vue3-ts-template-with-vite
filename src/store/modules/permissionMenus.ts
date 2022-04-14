@@ -9,13 +9,13 @@ interface State {
 }
 const Menus = {
   state: (): State => ({
-    routes: JSON.parse(localStorage.getItem('menu')) || []
+    routes: JSON.parse(localStorage.getItem('menu')) || [],
   }),
   mutations: {
     [SET_USERMENU]: (state: { routes: any }, menu: any) => {
       state.routes = menu
       // localStorage.setItem('menu', JSON.stringify(menu))
-    }
+    },
   },
   actions: {
     GetUserMenu({ commit }) {
@@ -34,18 +34,18 @@ const Menus = {
               name: 'Main',
               component: Main,
               redirect: routes[0].path,
-              children: routes
+              children: routes,
             })
             router.options.routes.push(
               {
                 component: () => import('../../views/Error/404.vue'),
                 meta: { title: '404', isCache: false, requiresAuth: true },
                 name: '404error',
-                path: '/404error'
+                path: '/404error',
               },
               {
                 path: '/:path(.*)*',
-                redirect: '/404error'
+                redirect: '/404error',
               }
             )
             router.options.routes.forEach((item) => {
@@ -58,8 +58,8 @@ const Menus = {
             reject(error)
           })
       })
-    }
+    },
   },
-  getters: {}
+  getters: {},
 }
 export default Menus

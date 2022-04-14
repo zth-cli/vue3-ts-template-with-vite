@@ -31,6 +31,6 @@ const loading = {
     }
     el.instance.$destroy()
     el.instance = undefined
-  }
+  },
 }
 export default loading

@@ -28,14 +28,20 @@ export const useDefaultData = (props) => {
       }
       if (typeArr.includes(item.type) && !dateType.includes(item.type)) {
         const keys = Object.keys(props.postParams)
-        const defaultValue = keys.includes(item.name) ? props.postParams[item.name] : item.default !== 'undefined' ? item.default : null
+        const defaultValue = keys.includes(item.name)
+          ? props.postParams[item.name]
+          : item.default !== 'undefined'
+          ? item.default
+          : null
         formData[item.name] = defaultValue
         if (item.multiple) {
           const mulValue = typeof defaultValue === 'string' ? defaultValue.split(',') : defaultValue
           formData[item.name] = mulValue || []
         }
         if (dateType.includes(item.type)) {
-          formData[item.name] = item.default ? item.default : dayjs().format(item.format.toUpperCase())
+          formData[item.name] = item.default
+            ? item.default
+            : dayjs().format(item.format.toUpperCase())
         }
       }
       if (props.rowData) {
@@ -46,6 +52,6 @@ export const useDefaultData = (props) => {
   return {
     formData,
     rules,
-    invaildArr
+    invaildArr,
   }
 }

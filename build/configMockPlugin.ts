@@ -6,6 +6,6 @@ export function configMockPlugin(command: string) {
     mockPath: 'mock',
     localEnabled: command === 'serve',
     prodEnabled: command !== 'serve',
-    watchFiles: true
+    watchFiles: true,
   })
 }

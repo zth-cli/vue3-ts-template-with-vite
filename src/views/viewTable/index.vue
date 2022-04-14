@@ -39,11 +39,11 @@ const tableOptions: ItableProps = {
         { prop: 'creator', label: '角色名', align: 'center', width: 180 },
         { prop: 'creator', label: '用户年龄', align: 'center' },
         { label: '用户', slot: 'proflies', align: 'center' },
-        { label: '操作', slot: 'operation', width: 150, align: 'center' }
-      ]
+        { label: '操作', slot: 'operation', width: 150, align: 'center' },
+      ],
     },
-    { label: 'Action', slot: 'action', width: 150, align: 'center' }
-  ]
+    { label: 'Action', slot: 'action', width: 150, align: 'center' },
+  ],
 }
 const fromOptions: formItem[] = [
   { name: 'description', label: '角色描述', span: 6, type: 'text' },
@@ -52,20 +52,20 @@ const fromOptions: formItem[] = [
     label: '日期',
     span: 6,
     type: 'date',
-    format: 'yyyy-MM-dd'
+    format: 'yyyy-MM-dd',
   },
   {
     name: 'bvId',
     label: '电压等级',
     type: 'select',
     prop: { label: 'bvName', value: 'bvId' },
-    options: [{ bvId: 1, bvName: '220kV' }]
-  }
+    options: [{ bvId: 1, bvName: '220kV' }],
+  },
 ]
 const treeOptions: ItreeProps = {
   dataUrl: '/esdaw0',
   search: true,
-  treeProps: { children: 'children', label: 'label', disable: 'false' }
+  treeProps: { children: 'children', label: 'label', disable: 'false' },
 }
 export default defineComponent({
   name: 'ViewTable',
@@ -75,7 +75,7 @@ export default defineComponent({
       tableOptions,
       fromOptions,
       treeOptions,
-      close: false
+      close: false,
     }
   },
   methods: {
@@ -92,10 +92,10 @@ export default defineComponent({
       console.log(data, node)
       //  合并操作，强制触发响应反应
       this.tableOptions.params = Object.assign({}, this.tableOptions.params, {
-        stId: 1
+        stId: 1,
       })
-    }
-  }
+    },
+  },
 })
 </script>
 <style lang="scss"></style>

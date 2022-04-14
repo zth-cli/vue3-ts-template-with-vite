@@ -20,6 +20,6 @@ const permission: ObjectDirective = {
         el.remove()
       }
     }
-  }
+  },
 }
 export default permission
