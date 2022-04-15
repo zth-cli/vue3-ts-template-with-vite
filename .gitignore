@@ -5,3 +5,4 @@ axiosConfig
 dist-ssr
 *.local
 examples
+axiosConfig
