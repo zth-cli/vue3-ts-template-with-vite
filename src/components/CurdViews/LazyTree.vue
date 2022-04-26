@@ -49,7 +49,7 @@
   </div>
 </template>
 
-<script>
+<script type="jsx">
 import { apiGet } from '@/api'
 export default {
   props: {

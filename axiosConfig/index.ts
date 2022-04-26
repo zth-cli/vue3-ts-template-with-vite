@@ -5,9 +5,9 @@ interface ZTHRequestConfig<T> extends RequestConfig {
   data?: T
 }
 interface ZTHResponse<T> {
-  statusCode: number
-  desc: string
-  result: T
+  code: number
+  msg: string
+  data: T
 }
 
 const request = new Request({

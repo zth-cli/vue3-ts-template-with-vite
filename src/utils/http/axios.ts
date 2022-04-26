@@ -137,8 +137,8 @@ class FetchHttp {
     // 单独处理自定义请求/响应回掉
     return new Promise((resolve, reject) => {
       FetchHttp.axiosInstance
-        .request(config)
-        .then((response: undefined) => {
+        .request<any, T>(config)
+        .then((response) => {
           resolve(response)
         })
         .catch((error: any) => {

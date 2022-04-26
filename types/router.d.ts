@@ -1,11 +1,3 @@
-/*
- * @Author: 阮志雄
- * @Date: 2021-10-25 14:24:26
- * @LastEditTime: 2021-11-26 16:36:03
- * @LastEditors: 阮志雄
- * @Description: In User Settings Edit
- * @FilePath: \vue3-template-with-ts\types\router.d.ts
- */
 import { RouteRecordRaw } from 'vue-router'
 
 declare module 'vue-router' {
