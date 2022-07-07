@@ -6,3 +6,4 @@ dist-ssr
 *.local
 examples
 axiosConfig
+.history

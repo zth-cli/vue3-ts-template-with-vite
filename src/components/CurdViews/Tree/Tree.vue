@@ -27,7 +27,7 @@
           <template #default="{ node, data }">
             <slot v-bind="{ node, data }">
               <i class="el-icon-folder"> </i>
-              <span>{{ node[treeProps['label']] }}</span>
+              <span>{{ data[treeProps['label']] }}</span>
             </slot>
           </template>
         </el-tree>
@@ -38,7 +38,6 @@
 
 <script lang="ts" setup>
 import { http } from '@/utils/http'
-import { TreeOptionProps } from 'element-plus/lib/components/tree/src/tree.type'
 import type Node from 'element-plus/es/components/tree/src/model/node'
 import { ref, watch, h, VNode } from 'vue'
 import { defaultTreeData, defaultProps } from './enums'
@@ -53,7 +52,7 @@ interface ItreeProp {
   dataUrl?: string
   param?: { [x: string]: any }
   search?: boolean
-  treeProps?: TreeOptionProps
+  treeProps?: any
   defaultExpandAll?: boolean
   expandOnclickNode?: boolean
   resDataName?: string
@@ -89,7 +88,7 @@ const filterNode = (value: any, data: { label: string | any[] }) => {
   if (!value) {
     return true
   }
-  return data.label.indexOf(value) !== -1
+  return data[props.treeProps.label].indexOf(value) !== -1
 }
 const nodeClick = (data: any, node: any) => {
   emit('nodeClick', { data, node })

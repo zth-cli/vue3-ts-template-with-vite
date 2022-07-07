@@ -16,6 +16,6 @@ export const defaulltProps = {
   stripe: true,
   showSettingTool: true,
   showPanelTool: true,
-  responseName: '',
+  responseName: () => '',
   isPrivate: false,
 }
