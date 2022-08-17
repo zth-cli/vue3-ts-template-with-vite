@@ -11,7 +11,7 @@
                 (item.type === 'date' || item.type === 'month' || item.type === 'year')
               "
             >
-              <div :ref="setItemRef" class="curd_tool_item">
+              <div ref="itemRefs" class="curd_tool_item">
                 <label v-if="mode !== 'simple'" class="label">{{ item.label }}：</label>
                 <el-date-picker
                   v-model="fromData[item.name]"
@@ -25,7 +25,7 @@
               </div>
             </template>
             <template v-else-if="item.type === 'datetime'">
-              <div ref="setItemRef" class="curd_tool_item">
+              <div ref="itemRefs" class="curd_tool_item">
                 <label v-if="mode !== 'simple'" class="label">{{ item.label }}：</label>
                 <el-date-picker
                   v-model="fromData[item.name]"
@@ -40,7 +40,7 @@
               </div>
             </template>
             <template v-else-if="!item.dateSwitch && item.type === 'daterange'">
-              <div :ref="setItemRef" class="curd_tool_item">
+              <div ref="itemRefs" class="curd_tool_item">
                 <label v-if="mode !== 'simple'" class="label">{{ item.label }}：</label>
                 <el-date-picker
                   v-model="fromData[item.name]"
@@ -56,7 +56,7 @@
               </div>
             </template>
             <template v-else-if="item.type === 'select'">
-              <div :ref="setItemRef" class="curd_tool_item">
+              <div ref="itemRefs" class="curd_tool_item">
                 <label v-if="mode !== 'simple'" class="label">{{ item.label }}：</label>
                 <el-select
                   v-model="fromData[item.name]"
@@ -77,7 +77,7 @@
               </div>
             </template>
             <template v-else-if="item.type === 'checkbox'">
-              <div :ref="setItemRef" class="curd_tool_item">
+              <div ref="itemRefs" class="curd_tool_item">
                 <template v-if="item.options && item.options.length > 0">
                   <el-checkbox-group v-model="fromData[item.name]">
                     <template v-for="ele in item.options" :key="ele.value">
@@ -99,7 +99,7 @@
                 typeArr.includes(item.type) && item.dateSwitch && item.dateSwitch.length > 1
               "
             >
-              <div :ref="setItemRef" class="curd_tool_item">
+              <div ref="itemRefs" class="curd_tool_item">
                 <el-button
                   v-for="(el, i) in item.dateSwitch"
                   :key="i"
@@ -138,7 +138,7 @@
               </div>
             </template>
             <template v-else>
-              <div :ref="setItemRef" class="curd_tool_item">
+              <div ref="itemRefs" class="curd_tool_item">
                 <label v-if="mode !== 'simple'" class="label">{{ item.label }}：</label>
                 <el-input
                   v-model="fromData[item.name]"
@@ -174,18 +174,11 @@
 import { ref, onMounted, watch } from 'vue'
 import { IformItem } from '../type'
 import { allowType } from './enum/allowType'
-import {
-  usePlaceholder,
-  useTimeSwitch,
-  useDefaultData,
-  useQuery,
-  useItemRefs,
-  useMediaQuery,
-} from './hook'
+import { usePlaceholder, useTimeSwitch, useDefaultData, useQuery, useMediaQuery } from './hook'
 
 const expend = ref<boolean>(false)
 const tools = ref(null)
-
+const itemRefs = ref<Array<HTMLElement | null>>([])
 const emit = defineEmits(['query', 'resize', 'params-change', 'reset-data'])
 
 interface IconProps {
@@ -202,7 +195,6 @@ const props = withDefaults(defineProps<IconProps>(), {
 
 const { fromData, typeArr, resetData } = useDefaultData(props) // 初始化默认值
 const { switchDate, switchIndex } = useTimeSwitch(fromData) // 时间切换
-const { itemRefs, setItemRef } = useItemRefs() // 获取for循环ref
 const { query } = useQuery(emit, fromData) // 点击查询
 const { toolsMediaQuery, ellipsis } = useMediaQuery(tools, itemRefs) // 布局自适应
 
