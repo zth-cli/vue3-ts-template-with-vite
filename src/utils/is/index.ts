@@ -116,3 +116,28 @@ export function isNullAndUnDef(val: unknown): val is null | undefined {
 export function isNullOrUnDef(val: unknown): val is null | undefined {
   return isUnDef(val) || isNull(val)
 }
+// 比较两个数组
+export const isEqual = (a: any[], b: any[]): boolean => JSON.stringify(a) === JSON.stringify(b)
+
+// 判断是否是http链接
+export function isHttpLink(link: string): boolean {
+  return link.search(/^http[s]?:\/\//) !== -1
+}
+
+/** 判断字符串是否是json结构 */
+export const isJSON = (str: string): boolean => {
+  if (!str) {
+    return false
+  }
+  if (typeof str === 'string') {
+    try {
+      const obj = JSON.parse(str)
+      if (typeof obj === 'object' && obj) {
+        return true
+      }
+      return false
+    } catch (e) {
+      return false
+    }
+  }
+}

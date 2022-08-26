@@ -62,7 +62,7 @@
 <script lang="ts" setup>
 import { reactive, ref, watch, nextTick, toRaw } from 'vue'
 import { ConditionBar } from '@/components/CurdViews/ConditionBar'
-import { toArray } from '@/utils/toArray'
+import { toArray } from '@/utils'
 import { IformItem } from '../type'
 
 const categorys = ref(null)

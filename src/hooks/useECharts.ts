@@ -6,7 +6,7 @@ import { tryOnUnmounted } from '@vueuse/core'
 import { unref, nextTick, watch, computed, ref } from 'vue'
 import { useDebounceFn } from '@vueuse/core'
 
-import echarts from '@/utils/lib/echarts'
+import { echarts } from '@/utils'
 
 export function useECharts(
   elRef: Ref<HTMLDivElement>,

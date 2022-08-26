@@ -52,4 +52,4 @@ echarts.use([
   CalendarComponent,
 ])
 
-export default echarts
+export { echarts }

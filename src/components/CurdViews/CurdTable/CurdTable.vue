@@ -1,66 +1,71 @@
 <template>
   <div class="curd_table">
-    <div v-if="props.showPanelTool && props.mode !== 'simple'" class="panel_tool_left">
-      <el-button
-        v-if="props.defaultPanel.includes('add')"
-        icon="plus"
-        type="primary"
-        @click="addRow()"
-        >新增</el-button
-      >
-      <el-button
-        v-if="props.defaultPanel.includes('edit')"
-        icon="edit"
-        type="primary"
-        :disabled="isSingle"
-        @click="editRow()"
-        >修改</el-button
-      >
-      <el-popover v-model:visible="visible" placement="top" :width="160">
-        <p>确定删除吗？</p>
-        <div style="text-align: right; margin: 0">
-          <el-button type="text" @click="visible = false">取消</el-button>
-          <el-button type="primary" @click="deleteRows()">确定</el-button>
-        </div>
-        <template #reference>
+    <div class="panel_tool">
+      <div v-if="props.mode !== 'simple'" class="panel_tool_left">
+        <template v-if="props.showPanelTool">
           <el-button
-            v-if="props.defaultPanel.includes('delete')"
-            icon="circle-close"
-            type="danger"
-            :disabled="isMultiple"
-            @click="visible = true"
-            >删除</el-button
+            v-if="props.defaultPanel.includes('add')"
+            icon="plus"
+            type="primary"
+            @click="addRow()"
+            >新增</el-button
           >
+          <el-button
+            v-if="props.defaultPanel.includes('edit')"
+            icon="edit"
+            type="primary"
+            :disabled="isSingle"
+            @click="editRow()"
+            >修改</el-button
+          >
+          <el-popover v-model:visible="visible" placement="top" :width="160">
+            <p>确定删除吗？</p>
+            <div style="text-align: right; margin: 0">
+              <el-button type="text" @click="visible = false">取消</el-button>
+              <el-button type="primary" @click="deleteRows()">确定</el-button>
+            </div>
+            <template #reference>
+              <el-button
+                v-if="props.defaultPanel.includes('delete')"
+                icon="circle-close"
+                type="danger"
+                :disabled="isMultiple"
+                @click="visible = true"
+                >删除</el-button
+              >
+            </template>
+          </el-popover>
+          <el-button
+            v-if="props.defaultPanel.includes('export')"
+            icon="download"
+            type="primary"
+            @click="exportData()"
+            >导出</el-button
+          >
+          <slot name="panel"></slot>
         </template>
-      </el-popover>
-      <el-button
-        v-if="props.defaultPanel.includes('export')"
-        icon="download"
-        type="primary"
-        @click="exportData()"
-        >导出</el-button
-      >
-      <slot name="panel"></slot>
-    </div>
-    <div v-if="props.showSettingTool && props.mode !== 'simple'" class="panel_tool_right">
-      <el-button type="primary" icon="refresh" @click="queryData"></el-button>
-      <el-popover placement="bottom-end" :width="200" trigger="click">
-        <div style="margin: 5px 0">
-          <div v-for="(col, index) in props.columns" :key="index">
-            <el-checkbox
-              v-if="col.label"
-              v-model="col.show"
-              :label="col.label"
-              @change="columnsChange"
-              >{{ col.label }}</el-checkbox
-            >
+      </div>
+      <div v-if="props.showSettingTool && props.mode !== 'simple'" class="panel_tool_right">
+        <el-button type="primary" icon="refresh" @click="queryData"></el-button>
+        <el-popover placement="bottom-end" :width="200" trigger="click">
+          <div style="margin: 5px 0">
+            <div v-for="(col, index) in props.columns" :key="index">
+              <el-checkbox
+                v-if="col.label"
+                v-model="col.show"
+                :label="col.label"
+                @change="columnsChange"
+                >{{ col.label }}</el-checkbox
+              >
+            </div>
           </div>
-        </div>
-        <template #reference>
-          <el-button icon="caret-bottom"></el-button>
-        </template>
-      </el-popover>
+          <template #reference>
+            <el-button icon="caret-bottom"></el-button>
+          </template>
+        </el-popover>
+      </div>
     </div>
+    <slot name="panel-gap"></slot>
     <div class="curd_table_main">
       <DataTable
         ref="tableView"
@@ -291,6 +296,12 @@ interface ItableProp {
   @include content-background();
   padding: 10px;
   border-radius: 4px;
+  .panel_tool {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // margin-bottom: 10px;
+  }
   .panel_tool_left {
     float: left;
     color: #666;
