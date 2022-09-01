@@ -1,4 +1,5 @@
 import { Ref, ref } from 'vue'
+import { Icolumns } from '../../type'
 export function useTableHeaderSlot(mColumns: Ref<Icolumns[]>) {
   const headerSlotArr = ref<Array<any>>([])
   const Columns = mColumns.value

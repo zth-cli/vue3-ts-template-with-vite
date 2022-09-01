@@ -1,0 +1,19 @@
+html {
+  --color-primary: #0fa59b;
+  --color-warning: #f0af18;
+  --background: #f0f2f5;
+  --content-background: #fff;
+  --font-color: #1a1919;
+}
+[class='blue'] {
+  --color-primary: #550fa5;
+  --color-warning: #f0af18;
+  --background: #f0f2f5;
+  --content-background: #fff;
+  --font-color: #1a1919;
+}
+[class='dark'] {
+  --color-primary: #4299f0;
+  --background: #2a2c2c;
+  --content-background: #242525;
+}

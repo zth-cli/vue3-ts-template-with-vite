@@ -236,8 +236,8 @@ watch(fromData, (params) => {
   color: #409eff;
 }
 .curd_tool_bar {
-  // background-color: #fff;
-  @include content-background();
+  background-color: var(--content-background);
+  // @include content-background();
   padding: 14px;
   border-radius: 4px 4px 0 0;
 }
@@ -273,7 +273,6 @@ watch(fromData, (params) => {
   margin-bottom: 8px;
 }
 .ellipsis_icon {
-  // @include font-color(null);
   margin-left: 10px;
   cursor: pointer;
   span {
@@ -290,7 +289,6 @@ watch(fromData, (params) => {
   display: inline-block;
   width: 80px;
   font-size: 12px;
-  @include font-color(null);
   text-align: end;
   overflow: hidden;
   text-overflow: ellipsis;

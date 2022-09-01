@@ -65,13 +65,11 @@ bus.on('swithCollapse', (bool: boolean) => {
 
 <style lang="scss">
 .horizontal-menu-main {
-  @include header-background();
-  // background-color: #001428;
+  background-color: #001428;
   height: 100%;
   width: auto;
   overflow-y: auto;
   .el-menu {
-    @include header-background();
     border-right: none;
   }
   .icons {
@@ -86,13 +84,13 @@ bus.on('swithCollapse', (bool: boolean) => {
   //   @include font_color(#fff);
   // }
   .el-menu .el-sub-menu__title:hover {
-    @include header-active-background();
+    // @include header-active-background();
   }
   .el-menu .el-menu-item:hover {
-    @include header-active-background();
+    // @include header-active-background();
   }
   .el-menu .el-menu-item.is-active {
-    @include header-active-background();
+    // @include header-active-background();
   }
   .el-menu--horizontal > .el-sub-menu .el-sub-menu__title,
   .el-menu--horizontal > .el-menu-item {

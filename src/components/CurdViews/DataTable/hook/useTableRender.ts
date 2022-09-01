@@ -2,6 +2,7 @@ import { h, toRefs } from 'vue'
 import { ElTag, ElTableColumn } from 'element-plus/es'
 import 'element-plus/es/components/tag/style/css'
 import 'element-plus/es/components/table-column/style/css'
+import { Icolumns } from '../../type'
 type Iscope = { row?: { [x: string]: any }; column?: any; $index?: number }
 
 export default function renderFunc(props: any, slots: any) {

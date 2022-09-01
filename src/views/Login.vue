@@ -79,7 +79,7 @@ const isValidPhone = computed(() => {
   height: 100vh;
   min-width: 1200px;
   min-height: 700px;
-  @include base-background();
+  background-color: hsl(210, 25%, 97%);
   background: url(../assets/bg.jpg) no-repeat;
   background-size: cover;
   display: flex;
@@ -118,14 +118,14 @@ const isValidPhone = computed(() => {
       border-radius: 50%;
       top: -47%;
       left: -137%;
-      @include content-background();
+      background-color: #fff;
       z-index: -1;
     }
     .loginbox {
       box-sizing: border-box;
       padding: 10px;
       width: 47%;
-      @include content-background();
+      background-color: #fff;
       z-index: 10;
       position: relative;
       padding: 50px 20px;
@@ -135,12 +135,12 @@ const isValidPhone = computed(() => {
         margin-bottom: 12px;
         // line-height: 50px;
         font-size: 27px;
-        @include font_color(null);
+        color: #606266;
         font-weight: bolder;
         letter-spacing: 2px;
       }
       .sub-title {
-        @include font_color(null);
+        color: #606266;
         text-align: center;
         font-size: 20px;
       }

@@ -110,7 +110,7 @@ export default defineComponent({
   }
   .overlayMain {
     position: relative;
-    @include base-background();
+    background-color: var(--content-background);
     box-shadow: 0 2px 5px 5px rgba(0, 0, 0, 0.1);
     border-radius: 6px;
     overflow-x: hidden;
@@ -119,15 +119,13 @@ export default defineComponent({
     margin: 0 auto;
     // transition: all .21s ease-in-out;
     .overlay_head {
-      @include tool-bar-color();
-      @include border-color();
-      @include font_color(null);
+      // background-color: var(--color-primary);
       border-bottom: 1px solid transparent;
       text-align: start;
-      height: 30px;
+      height: 46px;
       padding: 2px 8px;
-      line-height: 30px;
-      font-size: 16px;
+      line-height: 46px;
+      font-size: 17px;
       cursor: pointer;
       .close_btn {
         cursor: pointer;
@@ -144,7 +142,7 @@ export default defineComponent({
       box-sizing: border-box;
       width: 100%;
       min-height: 100px;
-      height: calc(100% - 35px);
+      height: calc(100% - 50px);
       overflow: auto;
       // padding: 10px;
       display: flex;

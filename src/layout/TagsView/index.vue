@@ -111,7 +111,7 @@ const showTags = computed(() => tagsList.value.length > 0)
   height: 30px;
   overflow: hidden;
   padding: 0 10px;
-  @include base-background();
+  background-color: var(--background);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -144,7 +144,7 @@ const showTags = computed(() => tagsList.value.length > 0)
       cursor: pointer;
       height: 32px;
       padding: 6px 12px 4px !important;
-      @include content-background();
+      background-color: var(--content-background);
       vertical-align: middle;
 
       transition: all 0.3s ease-in;
@@ -181,7 +181,6 @@ const showTags = computed(() => tagsList.value.length > 0)
       font-weight: bolder;
       transition: all 0.2s ease-in-out;
       &:hover {
-        @include sec-font-color();
         // transform: rotate(90deg);
       }
     }

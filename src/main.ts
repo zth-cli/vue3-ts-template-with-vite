@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import { store } from './store/index'
 import { getServerConfig } from './config/index'
+import 'element-plus/theme-chalk/dark/css-vars.css'
 import './styles/index.scss'
 import directives from './directive'
 // 安装toasts

@@ -156,12 +156,15 @@
                   :placeholder="getPlaceholder(item)"
                 >
                   <template v-if="item.append" #append>
-                    <slot :name="item.append" :formData="{ data: formData, key: item.name }"></slot>
+                    <slot
+                      :name="item.append"
+                      :form-data="{ data: formData, key: item.name }"
+                    ></slot>
                   </template>
                   <template v-if="item.prepend" #prepend>
                     <slot
                       :name="item.prepend"
-                      :formData="{ data: formData, key: item.name }"
+                      :form-data="{ data: formData, key: item.name }"
                     ></slot>
                   </template>
                 </el-input>
@@ -183,12 +186,15 @@
                   :placeholder="getPlaceholder(item)"
                 >
                   <template v-if="item.append" #append>
-                    <slot :name="item.append" :formData="{ data: formData, key: item.name }"></slot>
+                    <slot
+                      :name="item.append"
+                      :form-data="{ data: formData, key: item.name }"
+                    ></slot>
                   </template>
                   <template v-if="item.prepend" #prepend>
                     <slot
                       :name="item.prepend"
-                      :formData="{ data: formData, key: item.name }"
+                      :form-data="{ data: formData, key: item.name }"
                     ></slot>
                   </template>
                 </el-input>

@@ -107,7 +107,6 @@ watch(
 .theme-list {
   box-sizing: border-box;
   padding: 0 18px;
-  @include font-color(null);
   .theme-item {
     margin-bottom: 40px;
     .theme-item-sub {
@@ -133,7 +132,6 @@ watch(
           position: absolute;
           bottom: 4px;
           right: 6px;
-          @include font-color(null);
           font-weight: 700;
           font-size: 14px;
           pointer-events: none;
@@ -146,7 +144,6 @@ watch(
           left: 0;
           width: 33%;
           height: 100%;
-          @include header-background();
           content: '';
           z-index: 1;
         }
@@ -156,7 +153,6 @@ watch(
           left: 0;
           width: 100%;
           height: 25%;
-          @include header-background();
           content: '';
         }
       }
@@ -177,7 +173,6 @@ watch(
           left: 0;
           width: 100%;
           height: 25%;
-          @include header-background();
           content: '';
         }
       }

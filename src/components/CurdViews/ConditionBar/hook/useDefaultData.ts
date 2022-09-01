@@ -1,5 +1,6 @@
 import { reactive } from 'vue'
 import day from 'dayjs'
+import { IformItem } from '../../type'
 export const useDefaultData = (props) => {
   const orignalFormData: { [x: string]: any } = {}
   const fromData = reactive<{ [x: string]: any }>({})
@@ -15,7 +16,7 @@ export const useDefaultData = (props) => {
   ]
 
   if (props.fromOptions.length) {
-    props.fromOptions.forEach((item: formItem) => {
+    props.fromOptions.forEach((item: IformItem) => {
       for (const key in item) {
         if (key === 'name') {
           const str = item[key]

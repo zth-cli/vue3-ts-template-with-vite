@@ -292,8 +292,7 @@ interface ItableProp {
 </script>
 <style lang="scss">
 .curd_table {
-  background-color: #fff;
-  @include content-background();
+  background-color: var(--content-background);
   padding: 10px;
   border-radius: 4px;
   .panel_tool {
@@ -309,7 +308,7 @@ interface ItableProp {
     padding-bottom: 8px;
   }
   .el-table--striped .el-table__body tr.el-table__row--striped td {
-    @include striped-background();
+    // @include striped-background();
   }
   .panel_tool_right {
     float: right;

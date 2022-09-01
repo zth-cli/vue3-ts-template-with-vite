@@ -127,7 +127,7 @@ watch(filterText, (neeVal) => {
 </script>
 <style lang="scss">
 .curd_tree_wrap {
-  @include content-background();
+  background-color: var(--content-background);
   height: 100%;
   position: relative;
   border-radius: 0 4px 4px 0;

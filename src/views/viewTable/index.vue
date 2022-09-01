@@ -45,7 +45,7 @@ const tableOptions: ItableProps = {
     { label: 'Action', slot: 'action', width: 150, align: 'center' },
   ],
 }
-const fromOptions: formItem[] = [
+const fromOptions: IformItem[] = [
   { name: 'description', label: '角色描述', span: 6, type: 'text' },
   {
     name: 'occurTime',

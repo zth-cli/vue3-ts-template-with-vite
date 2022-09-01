@@ -1,0 +1,12 @@
+@charset "utf-8";
+@import './var.scss';
+:root {
+  --el-bg-color: var(--background);
+  --el-color-primary: var(--color-primary);
+  --el-color-warning: var(--color-warning);
+}
+html.dark {
+  --el-bg-color: var(--background);
+  --el-color-primary: var(--color-primary);
+  --el-color-warning: var(--color-warning);
+}

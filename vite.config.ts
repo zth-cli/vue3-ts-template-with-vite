@@ -72,7 +72,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       preprocessorOptions: {
         // 引入公用的样式
         scss: {
-          additionalData: '@import "./src/styles/mixin.scss";',
+          // additionalData: '@import "./src/styles/mixin.scss";',
         },
       },
     },

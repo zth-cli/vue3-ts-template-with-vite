@@ -109,17 +109,16 @@ watch(
 <style lang="scss">
 ._Edit_table {
   width: 100%;
+  background-color: var(--content-background);
   .add-area {
     width: 100%;
-    border: 1px dashed transparent;
-    @include border-color();
+    border: 1px dashed #e4e7ed;
     padding: 10px 0;
     margin-top: 16px;
     border-radius: 10px;
     text-align: center;
     cursor: pointer;
     i {
-      @include font_color(null);
       font-size: 28px;
     }
   }

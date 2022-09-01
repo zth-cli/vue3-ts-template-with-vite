@@ -205,7 +205,7 @@ watch(switchData, async () => {
 <style lang="scss">
 $linehieht: 40px;
 .curd-condition-bar {
-  @include content-background();
+  background-color: var(--content-background);
   margin-bottom: 12px;
   border-radius: 4px;
   padding: 0 12px;
@@ -215,16 +215,13 @@ $linehieht: 40px;
     }
     padding: 8px 0;
     border-bottom: 1px dashed #21a5bd;
-    // @include border-color();
     // line-height: 50px;
     display: flex;
     .category-title {
-      @include font_color(null);
       width: 130px;
       line-height: 46px;
     }
     .category-more {
-      @include font_color(null);
       width: 80px;
       text-align: center;
     }

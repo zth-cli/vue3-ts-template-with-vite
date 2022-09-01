@@ -120,7 +120,7 @@ const reloadPage = () => {
 </script>
 <style lang="scss">
 .header {
-  @include header-background();
+  background-color: var(--content-background);
   padding: 0 20px;
   position: relative;
   box-sizing: border-box;
@@ -129,7 +129,6 @@ const reloadPage = () => {
   width: 100%;
   height: 60px;
   font-size: 20px;
-  @include font_color(#fff);
   i {
     // @include font_color(#fff);
     font-size: 16px;
@@ -170,7 +169,6 @@ const reloadPage = () => {
       margin-left: 10px;
     }
     .el-dropdown-link {
-      @include font_color(#fff);
       cursor: pointer;
     }
     .el-dropdown-menu__item {
@@ -179,10 +177,7 @@ const reloadPage = () => {
   }
 }
 .light-header {
-  @include content-background();
-  @include font_color(null);
   .el-dropdown-link {
-    @include font_color(null);
     cursor: pointer;
   }
 }

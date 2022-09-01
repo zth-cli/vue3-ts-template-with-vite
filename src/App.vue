@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import zhCn from 'element-plus/lib/locale/lang/zh-cn'
+import { useTheme } from '@/hooks'
 const locale = zhCn
+const { setTheme } = useTheme()
+setTheme()
 console.log('hello script setup')
 // window.addEventListener(
 //   'click',

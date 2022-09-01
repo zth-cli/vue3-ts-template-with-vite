@@ -1,5 +1,6 @@
 import { reactive, Ref, ref } from 'vue'
 import { http } from '@/utils/http'
+import { ItableProps } from '../../type'
 
 export function useExportTable(props: ItableProps) {
   const pageParam = reactive<{ pageSize: number; pageIndex: number }>({
