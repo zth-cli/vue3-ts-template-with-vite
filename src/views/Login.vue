@@ -44,7 +44,7 @@
 <script lang="ts" setup>
 import { getConfig } from '@/config'
 import { ref, Ref, computed, getCurrentInstance } from 'vue'
-import { useStore } from 'vuex'
+import { useMenuStore } from '@/store/menu'
 import { useRouter } from 'vue-router'
 import { setStorge } from '@/utils/auth'
 const internalInstance = getCurrentInstance()
@@ -53,13 +53,13 @@ const mobile: Ref<string> = ref('')
 const passwords: Ref<string> = ref('')
 const isLoging: Ref<boolean> = ref(false)
 const loginByPwd: Ref<boolean> = ref(true)
-const store = useStore()
+const menuStore = useMenuStore()
 const router = useRouter()
 const loginajax = () => {
   getUserMenu()
 }
 const getUserMenu = () => {
-  store.dispatch('GetUserMenu').then((routes) => {
+  menuStore.getUserMenu().then((routes) => {
     setStorge('token', '2321314dqdqf21')
     console.log(routes)
     router.replace('/')

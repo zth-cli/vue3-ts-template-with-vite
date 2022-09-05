@@ -19,6 +19,7 @@ specifiers:
   mitt: ^3.0.0
   mockjs: ^1.1.0
   nprogress: ^0.2.0
+  pinia: ^2.0.21
   prettier: ^2.6.0
   qs: ^6.10.3
   sass: ^1.43.3
@@ -44,6 +45,7 @@ dependencies:
   mitt: 3.0.0
   mockjs: 1.1.0
   nprogress: 0.2.0
+  pinia: 2.0.21_pj7ch6rmow6odq73xb5hfvge3q
   qs: 6.11.0
   vue: 3.2.38
   vue-router: 4.1.5_vue@3.2.38
@@ -2176,6 +2178,24 @@ packages:
     engines: {node: '>=8.6'}
     dev: true
 
+  /pinia/2.0.21_pj7ch6rmow6odq73xb5hfvge3q:
+    resolution: {integrity: sha512-6ol04PtL29O0Z6JHI47O3JUSoyOJ7Og0rstXrHVMZSP4zAldsQBXJCNF0i/H7m8vp/Hjd/CSmuPl7C5QAwpeWQ==}
+    peerDependencies:
+      '@vue/composition-api': ^1.4.0
+      typescript: '>=4.4.4'
+      vue: ^2.6.14 || ^3.2.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+      typescript:
+        optional: true
+    dependencies:
+      '@vue/devtools-api': 6.2.1
+      typescript: 4.8.2
+      vue: 3.2.38
+      vue-demi: 0.13.11_vue@3.2.38
+    dev: false
+
   /postcss-selector-parser/6.0.10:
     resolution: {integrity: sha512-IQ7TZdoaqbT+LCpShg46jnZVlhWD2w6iQYAcYXfHARZ7X1t/UGhhceQDs5X0cGqKvYlHNOuv7Oa1xmb0oQuA3w==}
     engines: {node: '>=4'}
@@ -2557,7 +2577,6 @@ packages:
     resolution: {integrity: sha512-C0I1UsrrDHo2fYI5oaCGbSejwX4ch+9Y5jTQELvovfmFkK3HHSZJB8MSJcWLmCUBzQBchCrZ9rMRV6GuNrvGtw==}
     engines: {node: '>=4.2.0'}
     hasBin: true
-    dev: true
 
   /universalify/2.0.0:
     resolution: {integrity: sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ==}

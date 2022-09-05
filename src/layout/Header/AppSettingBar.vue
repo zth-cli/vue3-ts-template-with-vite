@@ -18,23 +18,20 @@
           </div>
         </div>
       </li>
-      <!-- <li class="theme-item">
+      <li class="theme-item">
         <el-divider><p>主题颜色</p></el-divider>
         <div class="drawer-block-checkbox">
           <template v-for="(item, index) in colors" :key="index">
             <div
               class="theme-color-block"
               :style="{ background: item.color }"
-              @click="
-                changeTheme(item.theme);
-                themeName = item.theme
-              "
+              @click="changeTheme(item)"
             >
-              <i class="selectIcon el-icon-check" v-show="themeName === item.theme" />
+              <i v-show="themeName === item.theme" class="selectIcon el-icon-check" />
             </div>
           </template>
         </div>
-      </li> -->
+      </li>
       <li class="theme-item">
         <el-divider><p>界面显示</p></el-divider>
         <div class="theme-item-sub">
@@ -55,20 +52,20 @@
 <script lang="ts" setup>
 import bus from '@/utils/bus'
 import { reactive, ref, watch } from 'vue'
-import { useStore } from 'vuex'
+import { useConfigStroe } from '@/store/appSetting'
+import { useThemeStore } from '@/store/theme'
 
-const store = useStore()
-
+const configStroe = useConfigStroe()
+const themeStroe = useThemeStore()
 const colors = ref<any[]>([
-  { theme: 'theme3', color: '#397373', name: '经典' },
-  { theme: 'theme2', color: '#0e9b92', name: '清爽' },
-  { theme: 'theme4', color: '#000', name: '暗夜' },
-  { theme: 'theme1', color: '#030033', name: '炫酷' },
+  { theme: '', color: '#0fa59b', name: '经典' },
+  { theme: 'blue', color: '#550fa5', name: '清爽' },
+  { theme: 'dark', color: '#000', name: '暗夜' },
 ])
-const themeName = ref<string>(localStorage.getItem('theme') || 'theme2')
+
 const layout = reactive({
   menuMode: localStorage.getItem('menuMode'),
-  tagsBar: localStorage.getItem('tagsBar') === 'true',
+  tagsBar: localStorage.getItem('tagsBar'),
 })
 const styles = reactive({
   height: 'calc(100% - 55px)',
@@ -86,14 +83,14 @@ const change = () => {
 }
 const saveTheme = (key: string, menuMode?: string) => {
   menuMode ? (layout.menuMode = menuMode) : ''
-  store.dispatch('changeSetting', { key, value: layout[key] })
+  configStroe.changeConfig({ key, value: layout[key] })
+  // store.dispatch('changeSetting', { key, value: layout[key] })
 }
-const changeTheme = (theme: string) => {
-  const { VITE_PUBLIC_PATH: publicPath } = import.meta.env
-  document.documentElement.setAttribute('data-theme', theme)
-  document.getElementById('theme').setAttribute('href', `${publicPath}theme/${theme}/index.css`)
-  localStorage.setItem('theme', theme)
-  bus.emit('changMenuColor', theme)
+const themeName = ref<string>(localStorage.getItem('_theme_') || '')
+const changeTheme = (data: any) => {
+  themeStroe.setTheme(data.theme)
+  themeName.value = data.theme
+  bus.emit('changMenuColor', data.theme)
 }
 
 watch(

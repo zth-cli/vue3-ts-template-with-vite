@@ -8,8 +8,9 @@ import Main from '@/layout/index.vue'
 import { getStorge } from '@/utils/auth'
 import Nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
-import { store } from '@/store/index'
-
+// import { store } from '@/store/index'
+import pinia from '@/store'
+import { useMenuStore } from '@/store/menu'
 const routes: Array<RouteConfig> = [
   {
     path: '/',
@@ -67,6 +68,7 @@ const router = createRouter({
 let asyncRouterFlag = 0
 router.beforeEach(async (to: RouteLocationNormalized, from, next) => {
   Nprogress.start()
+  const store = useMenuStore(pinia)
   //to即将进入的目标路由对象，from当前导航正要离开的路由， next  :  下一步执行的函数钩子
   if (to.path === '/login') {
     next()
@@ -80,9 +82,9 @@ router.beforeEach(async (to: RouteLocationNormalized, from, next) => {
       document.title = to.meta.title
     }
     // 添加flag防止多次获取动态路由和栈溢出
-    if (!asyncRouterFlag && store.getters.routes.length === 0) {
+    if (!asyncRouterFlag && store.routes.length === 0) {
       asyncRouterFlag++
-      await store.dispatch('GetUserMenu')
+      await store.getUserMenu()
       next({ ...to, replace: true })
     } else {
       next()

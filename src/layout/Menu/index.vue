@@ -46,13 +46,13 @@
 </template>
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { useStore } from 'vuex'
+import { useMenuStore } from '@/store/menu'
 import bus from '@/utils/bus'
 
-const store = useStore()
+const menuStore = useMenuStore()
 const isCollapse = ref<boolean>(false)
 
-const routeArr = computed(() => store.getters.routes)
+const routeArr = computed(() => menuStore.routes)
 
 const props = withDefaults(defineProps<{ menuMode?: 'horizontal' | 'vertical' }>(), {
   menuMode: 'vertical',

@@ -22,12 +22,12 @@ import { Menu } from './Menu'
 import { Header } from './Header'
 import { MainView } from './Main'
 import { Tags } from './TagsView'
-import { useStore } from 'vuex'
+import { useConfigStroe } from '@/store/appSetting'
 import { computed } from 'vue'
 
-const store = useStore()
-const menuMode = computed(() => store.getters.menuMode)
-const showTags = computed(() => store.getters.tagsBar)
+const configStroe = useConfigStroe()
+const menuMode = computed(() => configStroe.menuMode)
+const showTags = computed(() => configStroe.tagsBar)
 const mrt = computed(() => (!showTags.value ? '12px' : '0px'))
 const viewHeight = computed(() => (!showTags.value ? '100%' : 'calc(100% - 44px)'))
 </script>

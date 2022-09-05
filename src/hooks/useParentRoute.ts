@@ -1,13 +1,14 @@
 import { ref, computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { useStore } from 'vuex'
+import pinia from '@/store'
+import { useMenuStore } from '@/store/menu'
 
 // 通过子路ID 寻找父级路由集合
 export function useParentRoute() {
-  const store = useStore()
+  const store = useMenuStore(pinia)
   const route = useRoute()
 
-  const routeArr = computed(() => store.getters.routes)
+  const routeArr = computed(() => store.routes)
 
   const parentRoute = ref<Array<IrouteItem>>([])
   const findRouteById = (routeArrs: Array<IrouteItem>, id: number) => {
@@ -30,6 +31,5 @@ export function useParentRoute() {
       findRouteById(routeArr.value, route.meta.rId)
     }
   )
-
   return { parentRoute }
 }

@@ -67,9 +67,9 @@ import { removeAllStorge } from '@/utils/auth'
 import { useRouter, useRoute } from 'vue-router'
 import { Ref, ref, unref, computed } from 'vue'
 import bus from '@/utils/bus'
-import { useStore } from 'vuex'
+import { useConfigStroe } from '@/store/appSetting'
 
-const store = useStore()
+const configStroe = useConfigStroe()
 const router = useRouter()
 const route = useRoute()
 
@@ -81,7 +81,7 @@ const props = withDefaults(defineProps<{ showThemeBar?: boolean }>(), {
   showThemeBar: true,
 })
 
-const menuMode = computed(() => store.getters.menuMode)
+const menuMode = computed(() => configStroe.menuMode)
 
 // 收起展开侧边菜单
 const handleCollapse = () => {

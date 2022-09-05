@@ -1,5 +1,5 @@
 export const defaultTreeData =
-  process.env.MODE === 'production'
+  import.meta.env.MODE === 'production'
     ? []
     : [
         {

@@ -21,6 +21,12 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       configMockPlugin(command),
       configHtmlPlugin(loadEnv(mode, root), isBuild),
       AutoImport({
+        imports: ['vue', 'vue-router', 'vuex'], // 自动导入vue和vue-router等相关函数
+        eslintrc: {
+          enabled: false, // 若没此json文件，先开启，生成后在关闭
+          filepath: './.eslintrc-auto-import.json', // 默认
+          globalsPropValue: true,
+        },
         resolvers: [ElementPlusResolver()],
       }),
       //

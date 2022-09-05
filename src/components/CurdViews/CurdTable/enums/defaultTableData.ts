@@ -1,5 +1,5 @@
 export const defaultTableData =
-  process.env.MODE === 'production'
+  import.meta.env.MODE === 'production'
     ? []
     : [
         {

@@ -1,3 +1,11 @@
+<!--
+ * @Author: 阮志雄
+ * @Date: 2022-03-18 15:52:32
+ * @LastEditTime: 2022-09-05 14:52:06
+ * @LastEditors: 阮志雄
+ * @Description: In User Settings Edit
+ * @FilePath: \vue3-template-with-ts\src\views\Error\500.vue
+-->
 <template>
   <section class="error-page">
     <el-empty description="500">
@@ -17,6 +25,5 @@ const router = useRouter()
   display: flex;
   justify-content: center;
   align-items: center;
-  @include content-background();
 }
 </style>
