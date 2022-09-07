@@ -32,9 +32,7 @@ export const useDefaultData = (props) => {
       orignalFormData[item.name] = item.default ? item.default : ''
       if (typeArr.includes(item.type)) {
         fromData[item.name] = item.default ? item.default : day().format(item.format.toUpperCase())
-        orignalFormData[item.name] = item.default
-          ? item.default
-          : day().format(item.format.toUpperCase())
+        orignalFormData[item.name] = item.default ? item.default : day().format(item.format.toUpperCase())
       }
     })
   }

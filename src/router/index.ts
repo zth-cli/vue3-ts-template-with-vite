@@ -1,9 +1,4 @@
-import {
-  createRouter,
-  createWebHashHistory,
-  RouteRecordRaw,
-  RouteLocationNormalized,
-} from 'vue-router'
+import { createRouter, createWebHashHistory, RouteRecordRaw, RouteLocationNormalized } from 'vue-router'
 import Main from '@/layout/index.vue'
 import { getStorge } from '@/utils/auth'
 import Nprogress from 'nprogress'

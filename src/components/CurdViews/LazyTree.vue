@@ -8,12 +8,7 @@
       <!-- <slot name="treetab"></slot> -->
       <div v-if="dataUrlArr.length > 1" class="tree_tab">
         <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane
-            v-for="tab in dataUrlArr"
-            :key="tab.value"
-            :label="tab.name"
-            :name="tab.value"
-          ></el-tab-pane>
+          <el-tab-pane v-for="tab in dataUrlArr" :key="tab.value" :label="tab.name" :name="tab.value"></el-tab-pane>
         </el-tabs>
       </div>
       <el-input

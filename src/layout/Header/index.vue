@@ -3,11 +3,7 @@
     <!-- 折叠按钮 -->
     <div v-if="menuMode !== 'horizontal'" class="collapse-btn">
       <el-icon :size="20">
-        <component
-          :is="collapse ? 'fold' : 'expand'"
-          style="font-size: 20px"
-          @click="handleCollapse()"
-        />
+        <component :is="collapse ? 'fold' : 'expand'" style="font-size: 20px" @click="handleCollapse()" />
       </el-icon>
     </div>
     <Breadcrumb v-if="menuMode !== 'horizontal'"></Breadcrumb>

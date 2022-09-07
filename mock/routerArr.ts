@@ -16,7 +16,7 @@ interface IrouteItem {
 const routeArr: Array<IrouteItem> = [
   {
     title: 'Dashboard',
-    icon: 'house',
+    icon: 'PieChart',
     parentId: 0,
     id: 5,
     type: 1,

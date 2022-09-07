@@ -3,11 +3,7 @@
     <div class="panel_tool">
       <div v-if="props.mode !== 'simple'" class="panel_tool_left">
         <template v-if="props.showPanelTool">
-          <el-button
-            v-if="props.defaultPanel.includes('add')"
-            icon="plus"
-            type="primary"
-            @click="addRow()"
+          <el-button v-if="props.defaultPanel.includes('add')" icon="plus" type="primary" @click="addRow()"
             >新增</el-button
           >
           <el-button
@@ -35,11 +31,7 @@
               >
             </template>
           </el-popover>
-          <el-button
-            v-if="props.defaultPanel.includes('export')"
-            icon="download"
-            type="primary"
-            @click="exportData()"
+          <el-button v-if="props.defaultPanel.includes('export')" icon="download" type="primary" @click="exportData()"
             >导出</el-button
           >
           <slot name="panel"></slot>
@@ -50,13 +42,9 @@
         <el-popover placement="bottom-end" :width="200" trigger="click">
           <div style="margin: 5px 0">
             <div v-for="(col, index) in props.columns" :key="index">
-              <el-checkbox
-                v-if="col.label"
-                v-model="col.show"
-                :label="col.label"
-                @change="columnsChange"
-                >{{ col.label }}</el-checkbox
-              >
+              <el-checkbox v-if="col.label" v-model="col.show" :label="col.label" @change="columnsChange">{{
+                col.label
+              }}</el-checkbox>
             </div>
           </div>
           <template #reference>
@@ -145,11 +133,7 @@ mColumns.value = props.columns.filter((item) => !item.disabled)
 const isSingle = computed(() => !(selection.value !== null && selection.value.length === 1))
 const isMultiple = computed(() => !(selection.value !== null && selection.value.length > 0))
 
-const { queryData, loading, tableData, pageParam, total, lazyLoad } = useTableFetchData(
-  props,
-  emit,
-  selection
-)
+const { queryData, loading, tableData, pageParam, total, lazyLoad } = useTableFetchData(props, emit, selection)
 
 const { exportData } = useExportTable(props)
 

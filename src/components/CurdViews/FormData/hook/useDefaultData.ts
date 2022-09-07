@@ -39,9 +39,7 @@ export const useDefaultData = (props) => {
           formData[item.name] = mulValue || []
         }
         if (dateType.includes(item.type)) {
-          formData[item.name] = item.default
-            ? item.default
-            : dayjs().format(item.format.toUpperCase())
+          formData[item.name] = item.default ? item.default : dayjs().format(item.format.toUpperCase())
         }
       }
       if (props.rowData) {

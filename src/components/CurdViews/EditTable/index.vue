@@ -14,12 +14,7 @@
               filterable
               :multiple="col.multiple ? col.multiple : false"
             >
-              <el-option
-                v-for="item in col.options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              >
+              <el-option v-for="item in col.options" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
           </template>

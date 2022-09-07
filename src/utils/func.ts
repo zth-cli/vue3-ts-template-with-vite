@@ -20,10 +20,7 @@ export const buildTree = (list: { [x: string]: any }) => {
 
 // 将多维数组转化为一维
 export const newArr = function (arr: any[]) {
-  return arr.reduce(
-    (pre: string | any[], cur: any) => pre.concat(Array.isArray(cur) ? newArr(cur) : cur),
-    []
-  )
+  return arr.reduce((pre: string | any[], cur: any) => pre.concat(Array.isArray(cur) ? newArr(cur) : cur), [])
 }
 
 // 计算数组中每个元素出现的次数
@@ -56,10 +53,7 @@ export function numberFormatter(num: number, digits: number) {
   ]
   for (let i = 0; i < si.length; i++) {
     if (num >= si[i].value) {
-      return (
-        (num / si[i].value + 0.1).toFixed(digits).replace(/\.0+$|(\.[0-9]*[1-9])0+$/, '$1') +
-        si[i].symbol
-      )
+      return (num / si[i].value + 0.1).toFixed(digits).replace(/\.0+$|(\.[0-9]*[1-9])0+$/, '$1') + si[i].symbol
     }
   }
   return num.toString()
@@ -95,8 +89,7 @@ export const randomIp = () =>
 
 // 下划线转驼峰
 // eslint-disable-next-line no-useless-escape
-export const toHump = (str: string) =>
-  str.replace(/_(\w)/g, (all: any, letter: string) => letter.toUpperCase())
+export const toHump = (str: string) => str.replace(/_(\w)/g, (all: any, letter: string) => letter.toUpperCase())
 
 // 驼峰转下划线横线
 export const toLine = (str: string) => str.replace(/([A-Z])/g, '_$1').toLowerCase()

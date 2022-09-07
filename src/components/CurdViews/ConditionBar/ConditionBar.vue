@@ -6,10 +6,7 @@
         <template v-for="(item, index) in fromOptions" :key="'item' + index">
           <template v-if="item.type && allowType.includes(item.type)">
             <template
-              v-if="
-                !item.dateSwitch &&
-                (item.type === 'date' || item.type === 'month' || item.type === 'year')
-              "
+              v-if="!item.dateSwitch && (item.type === 'date' || item.type === 'month' || item.type === 'year')"
             >
               <div ref="itemRefs" class="curd_tool_item">
                 <label v-if="mode !== 'simple'" class="label">{{ item.label }}：</label>
@@ -81,9 +78,7 @@
                 <template v-if="item.options && item.options.length > 0">
                   <el-checkbox-group v-model="fromData[item.name]">
                     <template v-for="ele in item.options" :key="ele.value">
-                      <el-checkbox :disabled="item.disabled" :label="ele.value">{{
-                        ele.label
-                      }}</el-checkbox>
+                      <el-checkbox :disabled="item.disabled" :label="ele.value">{{ ele.label }}</el-checkbox>
                     </template>
                   </el-checkbox-group>
                 </template>
@@ -94,11 +89,7 @@
                 </template>
               </div>
             </template>
-            <template
-              v-else-if="
-                typeArr.includes(item.type) && item.dateSwitch && item.dateSwitch.length > 1
-              "
-            >
+            <template v-else-if="typeArr.includes(item.type) && item.dateSwitch && item.dateSwitch.length > 1">
               <div ref="itemRefs" class="curd_tool_item">
                 <el-button
                   v-for="(el, i) in item.dateSwitch"
@@ -156,11 +147,7 @@
         <i :class="[expend ? 'el-icon-arrow-up' : 'el-icon-arrow-down']"></i>
       </div>
       <div class="btns">
-        <el-button
-          v-if="fromOptions.length > 0 && mode !== 'simple'"
-          type="primary"
-          icon="search"
-          @click="query()"
+        <el-button v-if="fromOptions.length > 0 && mode !== 'simple'" type="primary" icon="search" @click="query()"
           >查询</el-button
         >
         <el-button @click="flowBarResetData">重置</el-button>

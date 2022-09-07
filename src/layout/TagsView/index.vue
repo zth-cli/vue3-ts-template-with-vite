@@ -8,18 +8,11 @@
       @tab-click="changeTab"
       @tab-remove="closeTags"
     >
-      <el-tab-pane
-        v-for="item in tagsList"
-        :key="item.path"
-        :label="item.title"
-        :name="item.title"
-        :tab="item"
-      ></el-tab-pane>
+      <el-tab-pane v-for="item in tagsList" :key="item.path" :label="item.title" :name="item.title"></el-tab-pane>
     </el-tabs>
     <div class="tags-close-box">
       <el-dropdown placement="bottom" @command="handleTags">
-        <!-- <i class="el-icon-arrow-down drop-icon"></i> -->
-        <el-button icon="el-icon-arrow-down" style="border: none"></el-button>
+        <el-button icon="ArrowDown" style="border: none"></el-button>
         <template #dropdown>
           <el-dropdown-menu size="small">
             <el-dropdown-item command="other">关闭其他</el-dropdown-item>
@@ -34,6 +27,7 @@
 import bus from '@/utils/bus'
 import { RouteLocationNormalizedLoaded, useRoute, useRouter } from 'vue-router'
 import { ref, Ref, watch, computed } from 'vue'
+import { TabsPaneContext } from 'element-plus'
 const route = useRoute()
 const router = useRouter()
 const tagsList: Ref<Array<any>> = ref([])
@@ -71,10 +65,10 @@ const closeTags = (tabName: string) => {
     router.push('/')
   }
 }
-const changeTab = (component: { instance: { attrs: { tab: any } } }) => {
-  // console.log(component.instance.attrs.tab )
-  const tab = component.instance.attrs.tab
-  router.push(tab.path)
+const changeTab = (pane: TabsPaneContext) => {
+  const curPathName = pane.props.label
+  const routeItem = tagsList.value.filter((item) => item.title === curPathName)[0]
+  router.push(routeItem.path)
 }
 // 关闭全部标签
 const closeAll = () => {
@@ -108,14 +102,14 @@ const showTags = computed(() => tagsList.value.length > 0)
 <style lang="scss">
 .tags {
   position: relative;
-  height: 30px;
+  height: 44px;
   overflow: hidden;
   padding: 0 10px;
   background-color: var(--background);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 6px 19px 8px 10px;
+  padding: 6px 19px 6px 10px;
   // @include box-shadow();
   .el-tabs--top.el-tabs--card > .el-tabs__header {
     border: none;

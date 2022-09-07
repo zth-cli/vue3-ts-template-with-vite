@@ -12,25 +12,15 @@
               prefix-icon="el-icon-user"
               autocomplete="off"
             ></el-input>
-            <span v-show="!isValidPhone" class="color_warning" style="font-size: 12px"
-              >*请输入有效号码</span
-            >
+            <span v-show="!isValidPhone" class="color_warning" style="font-size: 12px">*请输入有效号码</span>
           </div>
           <div class="bdbox">
-            <el-input
-              v-model="passwords"
-              placeholder="请输入密码"
-              prefix-icon="el-icon-c-scale-to-original"
-            >
+            <el-input v-model="passwords" placeholder="请输入密码" prefix-icon="el-icon-c-scale-to-original">
             </el-input>
           </div>
-          <el-button v-debounce="loginajax" type="primary" :loading="isLoging" class="login_btn"
-            >登录</el-button
-          >
+          <el-button v-debounce="loginajax" type="primary" :loading="isLoging" class="login_btn">登录</el-button>
           <p class="login-tips">
-            <span @click="loginByPwd = !loginByPwd">{{
-              loginByPwd ? '短信登录' : '密码登录'
-            }}</span>
+            <span @click="loginByPwd = !loginByPwd">{{ loginByPwd ? '短信登录' : '密码登录' }}</span>
             <span>没有账号? 立即注册</span>
           </p>
         </div>

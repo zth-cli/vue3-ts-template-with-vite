@@ -4,10 +4,7 @@
       <template v-if="!item.type || item.type === 'flow'">
         <section v-if="!item.disabled" :key="index" class="condition-item">
           <div class="category-title ellipsis">{{ item.label }}：</div>
-          <div
-            ref="categorys"
-            :class="[switchData[item.name] ? 'category-content-auto' : '', 'category-content']"
-          >
+          <div ref="categorys" :class="[switchData[item.name] ? 'category-content-auto' : '', 'category-content']">
             <el-button
               size="small"
               style="margin-top: 10px"
@@ -40,12 +37,7 @@
         </section>
       </template>
     </template>
-    <ConditionBar
-      :from-options="options"
-      @query="query"
-      @params-change="paramsChange"
-      @reset-data="resetData"
-    >
+    <ConditionBar :from-options="options" @query="query" @params-change="paramsChange" @reset-data="resetData">
       <template #tool>
         <slot name="tool"></slot>
       </template>
@@ -93,12 +85,8 @@ const initFromData = () => {
     if (item.type === 'flow' || !item.type) {
       if (!item.disabled) {
         const defaultValue = item.default ? toArray(item.default) : []
-        formData[item.name] = props.initParams[item.name]
-          ? toArray(props.initParams[item.name])
-          : defaultValue
-        orignalFromData[item.name] = props.initParams[item.name]
-          ? toArray(props.initParams[item.name])
-          : defaultValue
+        formData[item.name] = props.initParams[item.name] ? toArray(props.initParams[item.name]) : defaultValue
+        orignalFromData[item.name] = props.initParams[item.name] ? toArray(props.initParams[item.name]) : defaultValue
         switchData[item.name] = false
         // 默认选中状态
         if (formData[item.name].length > 0) {

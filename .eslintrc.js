@@ -46,7 +46,7 @@ module.exports = {
     'vue/no-v-html': 'off',
     'no-var': 'error',
     'no-undef': 0,
-    'prettier/prettier': 'error',
+    'prettier/prettier': ['error', { semi: false, printWidth: 120, singleQuote: true }],
     // 禁止出现console
     'no-console': 'off',
     // 禁用debugger

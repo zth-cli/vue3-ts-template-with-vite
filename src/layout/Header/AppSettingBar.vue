@@ -22,11 +22,7 @@
         <el-divider><p>主题颜色</p></el-divider>
         <div class="drawer-block-checkbox">
           <template v-for="(item, index) in colors" :key="index">
-            <div
-              class="theme-color-block"
-              :style="{ background: item.color }"
-              @click="changeTheme(item)"
-            >
+            <div class="theme-color-block" :style="{ background: item.color }" @click="changeTheme(item)">
               <i v-show="themeName === item.theme" class="selectIcon el-icon-check" />
             </div>
           </template>
@@ -36,11 +32,7 @@
         <el-divider><p>界面显示</p></el-divider>
         <div class="theme-item-sub">
           <span>多标签:</span>
-          <el-switch
-            v-model="layout.tagsBar"
-            inline-prompt
-            @change="saveTheme('tagsBar')"
-          ></el-switch>
+          <el-switch v-model="layout.tagsBar" inline-prompt @change="saveTheme('tagsBar')"></el-switch>
         </div>
 
         <!-- <el-checkbox v-model="layout.tagsBar" @change="saveTheme('tagsBar')"></el-checkbox> -->

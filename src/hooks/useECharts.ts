@@ -8,10 +8,7 @@ import { useDebounceFn } from '@vueuse/core'
 
 import { echarts } from '@/utils'
 
-export function useECharts(
-  elRef: Ref<HTMLDivElement>,
-  theme: 'light' | 'dark' | 'default' = 'light'
-) {
+export function useECharts(elRef: Ref<HTMLDivElement>, theme: 'light' | 'dark' | 'default' = 'light') {
   // const { getDarkMode } = useRootSetting();
   // 主题颜色
   const getDarkMode = ref('light')

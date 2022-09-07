@@ -8,9 +8,7 @@
     <el-button type="primary" size="small" @click="clickHandle">点击</el-button>
     <el-button type="primary" size="small" @click="clickHandles">提示</el-button>
     <el-button type="primary" size="small" @click="debHandler">防抖</el-button>
-    <el-button v-permission="{ action: ['admin'], effect: 'disabled' }" type="primary" size="small"
-      >鉴权</el-button
-    >
+    <el-button v-permission="{ action: ['admin'], effect: 'disabled' }" type="primary" size="small">鉴权</el-button>
     <el-button type="warning" size="small" @click="warn('控制台抛异常')">控制台抛异常</el-button>
     <el-button
       type="primary"

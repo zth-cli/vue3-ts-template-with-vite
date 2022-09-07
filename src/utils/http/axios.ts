@@ -123,12 +123,7 @@ class FetchHttp {
   }
 
   // 封装请求
-  public request<T>(
-    method: Method,
-    url: string,
-    param?: any,
-    axiosConfig?: AxiosRequestConfig
-  ): Promise<T> {
+  public request<T>(method: Method, url: string, param?: any, axiosConfig?: AxiosRequestConfig): Promise<T> {
     const config = transformConfigByMethod(param, {
       method,
       url,

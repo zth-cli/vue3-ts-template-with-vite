@@ -4,12 +4,7 @@
       <i :class="[toggle ? 'el-icon-arrow-left' : 'el-icon-arrow-right']" @click="changeSatus"></i>
     </span>
     <div v-show="toggle" class="tree_main">
-      <el-input
-        v-if="search"
-        v-model="filterText"
-        placeholder="输入关键字进行过滤"
-        size="small"
-      ></el-input>
+      <el-input v-if="search" v-model="filterText" placeholder="输入关键字进行过滤" size="small"></el-input>
       <div v-loading="loading" class="tree_list">
         <el-tree
           ref="tree"

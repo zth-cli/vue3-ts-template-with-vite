@@ -29,12 +29,7 @@
     </div>
 
     <div class="curd_table_view">
-      <div
-        :class="[
-          { boxShadow: tableOptions.mode !== 'simple' },
-          { mb: tableOptions.mode !== 'simple' },
-        ]"
-      >
+      <div :class="[{ boxShadow: tableOptions.mode !== 'simple' }, { mb: tableOptions.mode !== 'simple' }]">
         <ConditionBar
           v-if="showSearchDynamic"
           :width="fromWidth"

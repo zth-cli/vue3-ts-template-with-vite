@@ -22,9 +22,7 @@ export default function renderFunc(props: any, slots: any) {
           default: (scope: { $index: number; row: any; column: any }) => {
             let index = null
             let indexEle = ''
-            index = showPage.value
-              ? (pageIndex.value - 1) * pageSize.value + scope.$index + 1
-              : scope.$index + 1
+            index = showPage.value ? (pageIndex.value - 1) * pageSize.value + scope.$index + 1 : scope.$index + 1
             if (item.slot) {
               // type为index 且有slot，提供插槽功能
               indexEle = slots[item.slot]({
