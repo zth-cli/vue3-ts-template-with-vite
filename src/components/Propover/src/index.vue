@@ -2,7 +2,7 @@
   <el-popover v-model:visible="visible" placement="top" :width="160">
     <p>{{ props.content }}</p>
     <div style="text-align: right; margin: 0">
-      <el-button size="small" type="text" @click="cancelBtn()">取消</el-button>
+      <el-button size="small" link @click="cancelBtn()">取消</el-button>
       <el-button size="small" type="primary" @click="confirmBtn()">确认</el-button>
     </div>
     <template #reference>

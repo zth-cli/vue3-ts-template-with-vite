@@ -9,7 +9,7 @@
               size="small"
               style="margin-top: 10px"
               :disabled="item.disabledAll"
-              :type="formData[item.name].length ? 'text' : 'primary'"
+              :type="formData[item.name].length ? '' : 'primary'"
               @click="resetItemActive(item, index)"
               >全部</el-button
             >
@@ -17,7 +17,7 @@
               <li v-for="(ele, inde) in item.options" :key="ele.value" class="item-li">
                 <el-button
                   size="small"
-                  :type="isActive(index, inde) ? 'primary' : 'text'"
+                  :type="isActive(index, inde) ? 'primary' : ''"
                   @click="setFlowSatus(item, index, inde, ele.value)"
                   >{{ ele.label }}</el-button
                 >
@@ -28,7 +28,7 @@
             <el-button
               size="small"
               style="margin-top: 6px"
-              type="text"
+              type="info"
               :icon="!switchData[item.name] ? 'arrow-down' : 'arrow-up'"
               @click="switchData[item.name] = !switchData[item.name]"
               >{{ !switchData[item.name] ? '展开' : '收起' }}</el-button

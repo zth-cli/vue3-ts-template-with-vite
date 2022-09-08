@@ -1,7 +1,7 @@
 <template>
   <div class="curd_tree_wrap">
-    <span class="toggle">
-      <i :class="[toggle ? 'el-icon-arrow-left' : 'el-icon-arrow-right']" @click="changeSatus"></i>
+    <span class="toggle" :title="toggle ? '收起' : '展开'">
+      <el-icon @click="changeSatus"><ArrowLeft v-show="toggle" /> <ArrowRight v-show="!toggle" /></el-icon>
     </span>
     <div v-show="toggle" class="tree_main">
       <el-input v-if="search" v-model="filterText" placeholder="输入关键字进行过滤" size="small"></el-input>
@@ -88,33 +88,6 @@ const filterNode = (value: any, data: { label: string | any[] }) => {
 const nodeClick = (data: any, node: any) => {
   emit('nodeClick', { data, node })
 }
-// const renderContent = (h, { node, data, store }): VNode => {
-//   return h(
-//     'span',
-//     {
-//       class: 'custom-tree-node'
-//     },
-//     [
-//       h('span', null, node.label),
-//       h('span', null, [
-//         h(
-//           'a',
-//           {
-//             onClick: () => {}
-//           },
-//           'Append '
-//         ),
-//         h(
-//           'a',
-//           {
-//             onClick: () => {}
-//           },
-//           'Delete'
-//         )
-//       ])
-//     ]
-//   )
-// }
 queryData()
 watch(filterText, (neeVal) => {
   tree.value.filter(neeVal)
@@ -126,6 +99,7 @@ watch(filterText, (neeVal) => {
   height: 100%;
   position: relative;
   border-radius: 0 4px 4px 0;
+  margin-right: 12px;
   .el-tree {
     background-color: transparent;
   }
@@ -141,7 +115,7 @@ watch(filterText, (neeVal) => {
   color: #282a29;
   text-align: center;
   cursor: pointer;
-  line-height: 28px;
+  line-height: 34px;
 }
 
 .tree_main {

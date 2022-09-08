@@ -1,5 +1,6 @@
 import { defineConfig, loadEnv, UserConfigExport, ConfigEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 import { configMockPlugin } from './build/configMockPlugin'
 import { configHtmlPlugin } from './build/configHtmlPlugin'
 import path from 'path'
@@ -18,6 +19,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
   return {
     plugins: [
       vue(),
+      vueJsx(),
       configMockPlugin(command),
       configHtmlPlugin(loadEnv(mode, root), isBuild),
       AutoImport({

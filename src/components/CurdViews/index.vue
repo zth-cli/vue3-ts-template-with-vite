@@ -217,13 +217,7 @@ getHeaderSlot()
 }
 .curd_table_view {
   overflow: auto;
-  padding: 12px;
   box-sizing: border-box;
   flex: 1;
-  padding-top: 0;
-  /* padding-right: 0; */
-  // .boxShadow {
-  //   @include box-shadow();
-  // }
 }
 </style>

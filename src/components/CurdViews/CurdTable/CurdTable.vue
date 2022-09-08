@@ -17,7 +17,7 @@
           <el-popover v-model:visible="visible" placement="top" :width="160">
             <p>确定删除吗？</p>
             <div style="text-align: right; margin: 0">
-              <el-button type="text" @click="visible = false">取消</el-button>
+              <el-button type="info" link @click="visible = false">取消</el-button>
               <el-button type="primary" @click="deleteRows()">确定</el-button>
             </div>
             <template #reference>

@@ -37,6 +37,8 @@ console.log(route.fullPath)
     left: 0;
     right: 0;
     transition: all 0.8s cubic-bezier(0.55, 0, 0.1, 1);
+    box-sizing: border-box;
+    padding: 0 12px;
   }
 }
 </style>
