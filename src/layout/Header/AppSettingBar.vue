@@ -2,7 +2,7 @@
   <el-drawer v-model="visible" title="系统配置" :append-to-body="true" size="300px" @close="change">
     <ul class="theme-list">
       <li class="theme-item">
-        <el-divider><p>菜单布局</p></el-divider>
+        <el-divider><p>导航栏模式</p></el-divider>
         <div class="drawer-block-checkbox">
           <div
             class="drawer-block-checkbox-item drawer-block-checkbox-item-slide"
@@ -19,7 +19,7 @@
         </div>
       </li>
       <li class="theme-item">
-        <el-divider><p>主题颜色</p></el-divider>
+        <el-divider><p>系统主题</p></el-divider>
         <div class="drawer-block-checkbox">
           <template v-for="(item, index) in colors" :key="index">
             <div class="theme-color-block" :style="{ background: item.color }" @click="changeTheme(item)">
@@ -95,7 +95,6 @@ watch(
 <style lang="scss">
 .theme-list {
   box-sizing: border-box;
-  padding: 0 18px;
   .theme-item {
     margin-bottom: 40px;
     .theme-item-sub {
@@ -107,6 +106,7 @@ watch(
     }
     .drawer-block-checkbox {
       display: flex;
+      overflow: hidden;
       .drawer-block-checkbox-item {
         position: relative;
         margin-right: 16px;
@@ -133,6 +133,7 @@ watch(
           left: 0;
           width: 33%;
           height: 100%;
+          background-color: #001428;
           content: '';
           z-index: 1;
         }
@@ -142,6 +143,7 @@ watch(
           left: 0;
           width: 100%;
           height: 25%;
+          background-color: #fff;
           content: '';
         }
       }
@@ -162,6 +164,7 @@ watch(
           left: 0;
           width: 100%;
           height: 25%;
+          background-color: #001428;
           content: '';
         }
       }

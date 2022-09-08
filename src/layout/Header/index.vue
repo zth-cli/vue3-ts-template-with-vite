@@ -3,7 +3,7 @@
     <!-- 折叠按钮 -->
     <div v-if="menuMode !== 'horizontal'" class="collapse-btn">
       <el-icon :size="20">
-        <component :is="collapse ? 'fold' : 'expand'" style="font-size: 20px" @click="handleCollapse()" />
+        <component :is="collapse ? 'expand' : 'fold'" style="font-size: 20px" @click="handleCollapse()" />
       </el-icon>
     </div>
     <Breadcrumb v-if="menuMode !== 'horizontal'"></Breadcrumb>
@@ -136,7 +136,7 @@ const reloadPage = () => {
     display: flex;
     align-items: center;
     &:hover {
-      color: #d66a57;
+      color: var(--color-primary);
     }
   }
   .solgan {

@@ -2,6 +2,7 @@
   <div v-if="showTags" class="tags">
     <el-tabs
       v-model="activeValue"
+      class="tage-main"
       :closable="!(tagsList.length == 1)"
       type="card"
       size="small"
@@ -110,6 +111,10 @@ const showTags = computed(() => tagsList.value.length > 0)
   justify-content: space-between;
   align-items: center;
   padding: 6px 19px 6px 10px;
+  .tage-main {
+    overflow: hidden;
+    overflow-x: auto;
+  }
   // @include box-shadow();
   .el-tabs--top.el-tabs--card > .el-tabs__header {
     border: none;
@@ -153,10 +158,6 @@ const showTags = computed(() => tagsList.value.length > 0)
     .el-tabs__nav-prev {
       line-height: 32px;
     }
-    // .el-tabs__item.is-active {
-    //   @include font-color(#fff);
-    //   @include tool-bar-color();
-    // }
     .el-tabs__nav {
       border: none;
     }

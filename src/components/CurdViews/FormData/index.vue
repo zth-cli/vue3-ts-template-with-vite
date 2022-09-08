@@ -104,6 +104,13 @@
               </el-form-item>
             </el-col>
           </template>
+          <template v-else-if="item.type === 'upload'">
+            <el-col :key="item.name" :span="item.span || 12">
+              <el-form-item :key="item.name" class="from_item" :label="item.label" :prop="item.name">
+                <zth-upload v-model="formData[item.name]" :data="item.params" :url="item.url"></zth-upload>
+              </el-form-item>
+            </el-col>
+          </template>
           <template v-else-if="item.type === 'input'">
             <el-col :key="item.name" :span="item.span || 12">
               <el-form-item :key="item.name" class="from_item" :label="item.label" :prop="item.name">
@@ -155,6 +162,7 @@
 <script lang="ts" setup>
 import { http } from '@/utils/http'
 import { EditTable } from '../EditTable'
+import { ZthUpload } from '../Upload'
 import { ref, toRaw, watch } from 'vue'
 import { usePlaceholder } from './hook/usePlaceholder'
 import { useDefaultData } from './hook/useDefaultData'

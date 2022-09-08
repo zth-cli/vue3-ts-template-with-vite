@@ -62,7 +62,7 @@ const router = createRouter({
 
 let asyncRouterFlag = 0
 router.beforeEach(async (to: RouteLocationNormalized, from, next) => {
-  Nprogress.start()
+  // Nprogress.start()
   const store = useMenuStore(pinia)
   //to即将进入的目标路由对象，from当前导航正要离开的路由， next  :  下一步执行的函数钩子
   if (to.path === '/login') {
@@ -88,7 +88,7 @@ router.beforeEach(async (to: RouteLocationNormalized, from, next) => {
 })
 router.afterEach(() => {
   //...
-  Nprogress.done()
+  // Nprogress.done()
 })
 
 export default router

@@ -51,6 +51,7 @@ declare module 'vue' {
     ElTabs: typeof import('element-plus/es')['ElTabs']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     ElTree: typeof import('element-plus/es')['ElTree']
+    ElUpload: typeof import('element-plus/es')['ElUpload']
     FlowBar: typeof import('./src/components/CurdViews/FlowBar/FlowBar.vue')['default']
     FormData: typeof import('./src/components/CurdViews/FormData/index.vue')['default']
     FormGenerate: typeof import('./src/components/CurdViews/FormGenerate/FormGenerate.vue')['default']
@@ -61,6 +62,7 @@ declare module 'vue' {
     Propover: typeof import('./src/components/Propover/index.vue')['default']
     Toasts: typeof import('./src/components/Toasts/toasts.vue')['default']
     Tree: typeof import('./src/components/CurdViews/Tree/Tree.vue')['default']
+    Upload: typeof import('./src/components/CurdViews/Upload/index.vue')['default']
   }
 }
 

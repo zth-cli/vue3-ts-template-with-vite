@@ -3,7 +3,7 @@
     <div class="panel_tool">
       <div v-if="props.mode !== 'simple'" class="panel_tool_left">
         <template v-if="props.showPanelTool">
-          <el-button v-if="props.defaultPanel.includes('add')" icon="plus" type="primary" @click="addRow()"
+          <el-button v-if="props.defaultPanel.includes('add')" icon="plus" type="success" @click="addRow()"
             >新增</el-button
           >
           <el-button

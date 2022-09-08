@@ -101,6 +101,7 @@ const fromDataOptions = {
           label: '电线打火',
         },
       ],
+      span: 8,
     },
     {
       name: 'date',
@@ -108,6 +109,13 @@ const fromDataOptions = {
       type: 'date',
       format: 'yyyy-MM-dd',
       span: 12,
+    },
+    {
+      name: 'uploads',
+      label: '上传附件',
+      type: 'upload',
+      span: 24,
+      url: '/api/sys/attach/uploadImg',
     },
     {
       name: 'standardDetails',
