@@ -16,7 +16,7 @@ import { UploadRequestOptions } from 'element-plus'
 export default defineComponent({
   name: 'ZthUpload',
   props: {
-    modelValue: { type: Object },
+    modelValue: [Object, String],
     url: { type: String },
   },
   emits: ['update:modelValue'],

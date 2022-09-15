@@ -18,14 +18,14 @@
     <slot name="default"></slot>
     {{ loading }}
     <p></p>
+    <countTo prefix="$" :start-val="1" :end-val="100" />
+    <renderJsx>
+      <strong>这是默认插槽内容</strong>
+      <template #footer="{ text }"
+        ><strong>具名插槽内容：{{ text }}</strong></template
+      >
+    </renderJsx>
   </div>
-  <countTo prefix="$" :start-val="1" :end-val="100" />
-  <renderJsx>
-    <strong>这是默认插槽内容</strong>
-    <template #footer="{ text }"
-      ><strong>具名插槽内容：{{ text }}</strong></template
-    >
-  </renderJsx>
 </template>
 
 <script lang="ts" setup>

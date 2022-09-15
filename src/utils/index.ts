@@ -1,5 +1,5 @@
 export * from './auth'
-export * from './is'
+export * from './types'
 export * from './func'
 export * from './log'
 export * from './urlUtils'
