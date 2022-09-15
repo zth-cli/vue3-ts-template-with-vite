@@ -65,16 +65,20 @@ declare module 'vue' {
     FormData: typeof import('./src/components/CurdViews/FormData/index.vue')['default']
     LazyTree: typeof import('./src/components/CurdViews/LazyTree.vue')['default']
     Loading: typeof import('element-plus/es')['ElLoadingDirective']
+    MenuItem: typeof import('./src/components/ZthMenu/menu-item.vue')['default']
     MouseTracker: typeof import('./src/components/MouseTracker.vue')['default']
     Overlay: typeof import('./src/components/Overlay/index.vue')['default']
     Propover: typeof import('./src/components/Propover/index.vue')['default']
     PropoverSrc: typeof import('./src/components/Propover/src/index.vue')['default']
     RenderJSX: typeof import('./src/components/renderJSX.vue')['default']
     Src: typeof import('./src/components/CountTo/src/index.vue')['default']
+    SubMenu: typeof import('./src/components/ZthMenu/sub-menu.vue')['default']
     Toasts: typeof import('./src/components/Toasts/src/toasts.vue')['default']
     ToastsSrcToasts: typeof import('./src/components/Toasts/src/toasts.vue')['default']
     Tree: typeof import('./src/components/CurdViews/Tree/Tree.vue')['default']
     Upload: typeof import('./src/components/CurdViews/Upload/index.vue')['default']
+    ZthMenu: typeof import('./src/components/ZthMenu/index.vue')['default']
+    ZthSubMenu: typeof import('./src/components/ZthMenu/zth-sub-menu.vue')['default']
   }
 }
 

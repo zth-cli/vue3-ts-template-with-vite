@@ -2,13 +2,16 @@
   <el-row :gutter="10">
     <el-col :span="12"> <div ref="chartRef" :style="{ height: '280px', width: '100%' }"></div></el-col>
     <el-col :span="12"><div ref="chartRef1" :style="{ height: '280px', width: '100%' }"></div></el-col>
+    <el-col :span="24">
+      <zth-menu :model="routeArr"></zth-menu>
+    </el-col>
   </el-row>
 </template>
 <script lang="ts">
 import { defineComponent, onMounted, ref, Ref } from 'vue'
 
 import { useECharts } from '@/hooks/useECharts'
-
+import { useMenuStore } from '@/store/menu'
 export default defineComponent({
   setup() {
     const chartRef = ref<HTMLDivElement | null>(null)
@@ -194,7 +197,10 @@ export default defineComponent({
         ],
       })
     })
-    return { chartRef, chartRef1 }
+    const menuStore = useMenuStore()
+
+    const routeArr = computed(() => menuStore.routes)
+    return { chartRef, chartRef1, routeArr }
   },
 })
 </script>
