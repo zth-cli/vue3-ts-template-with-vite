@@ -15,6 +15,7 @@ declare module 'vue' {
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
     ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElCol: typeof import('element-plus/es')['ElCol']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
     ElContainer: typeof import('element-plus/es')['ElContainer']
     ElDivider: typeof import('element-plus/es')['ElDivider']
@@ -29,6 +30,7 @@ declare module 'vue' {
     ElMain: typeof import('element-plus/es')['ElMain']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
+    ElRow: typeof import('element-plus/es')['ElRow']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
@@ -37,6 +39,7 @@ declare module 'vue' {
     FlowBar: typeof import('./src/components/CurdViews/FlowBar/FlowBar.vue')['default']
     FormData: typeof import('./src/components/CurdViews/FormData/index.vue')['default']
     LazyTree: typeof import('./src/components/CurdViews/LazyTree.vue')['default']
+    MenuCollapseTransition: typeof import('./src/components/ZthMenu/menu-collapse-transition.vue')['default']
     MenuItem: typeof import('./src/components/ZthMenu/menu-item.vue')['default']
     MouseTracker: typeof import('./src/components/MouseTracker.vue')['default']
     Overlay: typeof import('./src/components/Overlay/index.vue')['default']
@@ -48,6 +51,7 @@ declare module 'vue' {
     Tree: typeof import('./src/components/CurdViews/Tree/Tree.vue')['default']
     Upload: typeof import('./src/components/CurdViews/Upload/index.vue')['default']
     ZthMenu: typeof import('./src/components/ZthMenu/index.vue')['default']
+    ZthMenuCollapseTransition: typeof import('./src/components/ZthMenu/zth-menu-collapse-transition.vue')['default']
   }
 }
 

@@ -6,7 +6,9 @@
         <component is="ArrowDown" />
       </el-icon>
     </div>
-    <slot></slot>
+    <zth-menu-collapse-transition>
+      <slot></slot>
+    </zth-menu-collapse-transition>
   </li>
 </template>
 <script setup lang="ts">

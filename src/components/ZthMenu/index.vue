@@ -33,6 +33,7 @@ export default {
   background-color: #001529;
   box-sizing: border-box;
   color: #fff;
+  transition: all 0.3s;
   i {
     margin-right: 5px;
     width: 24px;
