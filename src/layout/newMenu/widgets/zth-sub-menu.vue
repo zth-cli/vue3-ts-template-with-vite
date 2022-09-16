@@ -48,7 +48,7 @@ const handleClick = () => {
 </script>
 <script lang="ts">
 export default {
-  name: 'SubMenu',
+  name: 'ZthSubMenu',
 }
 </script>
 <style lang="scss">

@@ -2,18 +2,21 @@
   <el-row :gutter="10">
     <el-col :span="12"> <div ref="chartRef" :style="{ height: '280px', width: '100%' }"></div></el-col>
     <el-col :span="12"><div ref="chartRef1" :style="{ height: '280px', width: '100%' }"></div></el-col>
-    <el-col :span="24">
-      <zth-menu :model="routeArr"></zth-menu>
+    <el-col :span="3">
+      <el-button type="primary" size="default" @click="close = !close">按钮</el-button>
+      <new-menu :model="routeArr" :collapse="close"></new-menu>
     </el-col>
   </el-row>
 </template>
 <script lang="ts">
+import NewMenu from '@/layout/newMenu/index.vue'
 import { defineComponent, onMounted, ref, Ref } from 'vue'
-
 import { useECharts } from '@/hooks/useECharts'
 import { useMenuStore } from '@/store/menu'
 export default defineComponent({
+  components: { NewMenu },
   setup() {
+    const close = ref(false)
     const chartRef = ref<HTMLDivElement | null>(null)
     const chartRef1 = ref<HTMLDivElement | null>(null)
     const { setOptions } = useECharts(chartRef as Ref<HTMLDivElement>)
@@ -200,7 +203,7 @@ export default defineComponent({
     const menuStore = useMenuStore()
 
     const routeArr = computed(() => menuStore.routes)
-    return { chartRef, chartRef1, routeArr }
+    return { chartRef, chartRef1, routeArr, close }
   },
 })
 </script>

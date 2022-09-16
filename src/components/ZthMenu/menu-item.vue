@@ -5,7 +5,7 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
-const msg = ref('Hello World!')
+const props = defineProps<{ index: any }>()
 </script>
 <script lang="ts">
 export default {
@@ -18,11 +18,12 @@ export default {
   line-height: 50px;
   display: flex;
   align-items: center;
-  font-size: var(--el-menu-item-font-size);
+  font-size: 14px;
   padding: 0 20px 0 40px;
   list-style: none;
   cursor: pointer;
   position: relative;
+  min-width: 200px;
   transition: border-color 0.3s, background-color 0.3s, color 0.3s;
   box-sizing: border-box;
   white-space: nowrap;
