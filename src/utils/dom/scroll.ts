@@ -1,11 +1,6 @@
-import { isClient } from '@vueuse/core'
 import { getStyle } from './style'
 
 export const isScroll = (el: HTMLElement, isVertical?: boolean): boolean => {
-  if (!isClient) {
-    return false
-  }
-
   const key = (
     {
       undefined: 'overflow',
@@ -18,10 +13,6 @@ export const isScroll = (el: HTMLElement, isVertical?: boolean): boolean => {
 }
 
 export const getScrollContainer = (el: HTMLElement, isVertical?: boolean): Window | HTMLElement | undefined => {
-  if (!isClient) {
-    return
-  }
-
   let parent: HTMLElement = el
   while (parent) {
     if ([window, document, document.documentElement].includes(parent)) {
@@ -40,9 +31,6 @@ export const getScrollContainer = (el: HTMLElement, isVertical?: boolean): Windo
 
 let scrollBarWidth: number
 export const getScrollBarWidth = (namespace: string): number => {
-  if (!isClient) {
-    return 0
-  }
   if (scrollBarWidth !== undefined) {
     return scrollBarWidth
   }
@@ -74,10 +62,6 @@ export const getScrollBarWidth = (namespace: string): number => {
  * of the container
  */
 export function scrollIntoView(container: HTMLElement, selected: HTMLElement): void {
-  if (!isClient) {
-    return
-  }
-
   if (!selected) {
     container.scrollTop = 0
     return

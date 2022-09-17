@@ -29,6 +29,18 @@
         </div>
       </li>
       <li class="theme-item">
+        <el-divider><p>菜单主题</p></el-divider>
+        <div class="drawer-block-checkbox">
+          <template v-for="(item, index) in menuCssVars" :key="index">
+            <div
+              class="theme-color-block"
+              :style="{ background: item.backgroundColor }"
+              @click="setMenuTheme(index)"
+            ></div>
+          </template>
+        </div>
+      </li>
+      <li class="theme-item">
         <el-divider><p>界面显示</p></el-divider>
         <div class="theme-item-sub">
           <span>多标签:</span>
@@ -44,6 +56,7 @@
 <script lang="ts" setup>
 import bus from '@/utils/bus'
 import { reactive, ref, watch } from 'vue'
+import { menuCssVars } from '@/styles/CsstoJs/menuCssVar'
 import { useConfigStroe } from '@/store/appSetting'
 import { useThemeStore } from '@/store/theme'
 
@@ -80,11 +93,13 @@ const saveTheme = (key: string, menuMode?: string) => {
 }
 const themeName = ref<string>(localStorage.getItem('_theme_') || '')
 const changeTheme = (data: any) => {
-  themeStroe.setTheme(data.theme)
+  themeStroe.setSysTheme(data.theme)
   themeName.value = data.theme
   bus.emit('changMenuColor', data.theme)
 }
-
+const setMenuTheme = (index: number) => {
+  themeStroe.setMenuTheme(index)
+}
 watch(
   () => props.status,
   (val) => {

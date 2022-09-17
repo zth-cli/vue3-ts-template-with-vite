@@ -1,5 +1,5 @@
 <template>
-  <li class="zth-sub-menu">
+  <li class="zth-sub-menu" :style="{ 'padding-left': paddingLeft }" :data-level="subMenu.level">
     <div class="zth-sub-menu__title" @click="handleClick">
       <slot name="title"></slot>
       <el-icon :size="14" class="zth-sub-menu__icon-arrow" :style="{ transform: opened ? 'rotateZ(180deg)' : 'none' }">
@@ -8,32 +8,27 @@
     </div>
     <collapse-transition>
       <ul v-show="opened" class="zth-menu">
-        <template v-if="data?.length">
-          <template v-for="(item, i) in data" :key="i">
-            <sub-menu v-if="item.children?.length" :index="item.id">
-              <template #title>
-                <el-icon :size="20">
-                  <component is="setting" />
-                </el-icon>
-                <span>{{ item.title }}</span>
-              </template></sub-menu
-            >
-            <menu-item v-else :index="item.id">{{ item.title }}</menu-item>
-          </template>
-        </template>
+        <slot />
       </ul>
     </collapse-transition>
   </li>
 </template>
 <script setup lang="ts">
 import { ref, getCurrentInstance } from 'vue'
-import { MenuProvider } from './types'
-const instahce = getCurrentInstance()!
-console.log(instahce.parent.type.name)
-
-const props = defineProps<{ index: any; data: Array<any> }>()
+import { MenuProvider, SubMenuProvider } from './types'
+import useMenu from './use-menu'
+const instance = getCurrentInstance()!
+const { indexPath, parentMenu } = useMenu(
+  instance,
+  computed(() => props.index)
+)
+const subMenu = inject<SubMenuProvider>(`subMenu:${parentMenu.value!.uid}`)
+const props = defineProps<{ index: any }>()
 // inject
 const rootMenu = inject<MenuProvider>('rootMenu')
+const baseLevelPadding = 20
+const paddingLeft = computed(() => (subMenu.level - 1) * baseLevelPadding + 20 + 'px')
+
 const opened = computed(() => rootMenu.openedMenus.includes(props.index))
 const handleClick = () => {
   if (rootMenu.props.collapse) {
@@ -45,6 +40,10 @@ const handleClick = () => {
     active: true,
   })
 }
+// provide
+provide<SubMenuProvider>(`subMenu:${instance.uid}`, {
+  level: subMenu.level + 1,
+})
 </script>
 <script lang="ts">
 export default {

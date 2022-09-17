@@ -7,8 +7,12 @@
 </template>
 <script setup lang="ts">
 import { h, ref } from 'vue'
-import { MenuProvider } from './types'
+import { MenuProvider, SubMenuProvider } from './types'
+
 type menuProps = { mode?: boolean; uniqueOpened?: boolean; collapse?: boolean }
+const instance = getCurrentInstance()!
+console.log(instance)
+
 const emit = defineEmits(['close', 'open'])
 const props = defineProps<menuProps>()
 // 展开菜单id唯一标识集合
@@ -53,6 +57,10 @@ watch(
   }
 )
 provide('rootMenu', reactive({ props, openedMenus, isMenuPopup, handleSubMenuClick }))
+provide<SubMenuProvider>(`subMenu:${instance.uid}`, {
+  mouseInChild: ref(false),
+  level: 0,
+})
 </script>
 <script lang="ts">
 export default {
@@ -61,6 +69,7 @@ export default {
 </script>
 <style lang="scss">
 .zth-menu {
+  width: 100%;
   list-style: none;
   position: relative;
   margin: 0;
@@ -68,7 +77,7 @@ export default {
   background-color: #001529;
   box-sizing: border-box;
   color: #fff;
-  transition: all 0.3s;
+  transition: all 0.3s ease-in-out;
   i {
     margin-right: 5px;
     width: 24px;

@@ -11,9 +11,9 @@
       :mode="props.menuMode"
       unique-opened
       :collapse="isCollapse"
-      background-color="#001529"
-      active-text-color="#409EFF"
-      text-color="#fff"
+      :background-color="menuColor.backgroundColor"
+      :active-text-color="menuColor.activeTextColor"
+      :text-color="menuColor.textColor"
       router
     >
       <template v-for="item in routeArr">
@@ -48,11 +48,14 @@
 import { ref, computed } from 'vue'
 import { useMenuStore } from '@/store/menu'
 import bus from '@/utils/bus'
+import { useThemeStore } from '@/store/theme'
 
 const menuStore = useMenuStore()
+const themeStroe = useThemeStore()
 const isCollapse = ref<boolean>(false)
 
 const routeArr = computed(() => menuStore.routes)
+const menuColor = computed(() => themeStroe.menuCss)
 
 const props = withDefaults(defineProps<{ menuMode?: 'horizontal' | 'vertical' }>(), {
   menuMode: 'vertical',
@@ -65,11 +68,10 @@ bus.on('swithCollapse', (bool: boolean) => {
 
 <style lang="scss">
 .horizontal-menu-main {
-  background-color: #001529;
+  background-color: v-bind('menuColor.backgroundColor');
   height: 100%;
   width: auto;
   overflow-y: auto;
-  border-right: 1px solid #eee;
   .el-menu {
     border-right: none;
   }
@@ -92,6 +94,7 @@ bus.on('swithCollapse', (bool: boolean) => {
 .vertical-menu-main {
   width: 208px;
   transition: width 0.2s ease-in;
+  // border-right: 1px solid #eee;
 }
 .slide-logo {
   margin-left: 10px;

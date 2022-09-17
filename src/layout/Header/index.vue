@@ -126,7 +126,6 @@ const reloadPage = () => {
   height: 60px;
   font-size: 20px;
   i {
-    // @include font_color(#fff);
     font-size: 16px;
     cursor: pointer;
   }
@@ -144,7 +143,6 @@ const reloadPage = () => {
     max-width: 250px;
     line-height: 50px;
     margin-right: 24px;
-    // @include font_color(#fff);
     font-weight: bolder;
   }
   .header-menu {

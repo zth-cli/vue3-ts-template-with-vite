@@ -2,14 +2,14 @@
   <el-row :gutter="10">
     <el-col :span="12"> <div ref="chartRef" :style="{ height: '280px', width: '100%' }"></div></el-col>
     <el-col :span="12"><div ref="chartRef1" :style="{ height: '280px', width: '100%' }"></div></el-col>
-    <el-col :span="3">
+    <el-col :span="4">
       <el-button type="primary" size="default" @click="close = !close">按钮</el-button>
-      <new-menu :model="routeArr" :collapse="close"></new-menu>
+      <new-menu :menu-data="routeArr" :collapse="close"></new-menu>
     </el-col>
   </el-row>
 </template>
 <script lang="ts">
-import NewMenu from '@/layout/newMenu/index.vue'
+import NewMenu from '@/layout/newMenu'
 import { defineComponent, onMounted, ref, Ref } from 'vue'
 import { useECharts } from '@/hooks/useECharts'
 import { useMenuStore } from '@/store/menu'
