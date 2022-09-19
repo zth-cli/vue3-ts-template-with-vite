@@ -52,7 +52,6 @@ declare module 'vue' {
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     ElTree: typeof import('element-plus/es')['ElTree']
     ElUpload: typeof import('element-plus/es')['ElUpload']
-    ExpandTransition: typeof import('./src/components/Transition/ExpandTransition.vue')['default']
     FlowBar: typeof import('./src/components/CurdViews/FlowBar/FlowBar.vue')['default']
     FormData: typeof import('./src/components/CurdViews/FormData/index.vue')['default']
     LazyTree: typeof import('./src/components/CurdViews/LazyTree.vue')['default']

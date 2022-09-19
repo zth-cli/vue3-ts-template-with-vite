@@ -14,7 +14,10 @@ export default defineComponent({
           return (
             <sub-menu index={item.id}>
               {{
-                title: () => [<el-icon size={20}>{h(resolveComponent(item.icon))}</el-icon>, <span>{item.title}</span>],
+                title: () => [
+                  item.icon && <el-icon size={20}>{h(resolveComponent(item.icon))}</el-icon>,
+                  <span>{item.title}</span>,
+                ],
                 default: () => this.menuLoopHandle(item.children),
               }}
             </sub-menu>
