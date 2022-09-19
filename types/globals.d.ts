@@ -1,10 +1,10 @@
 /*
  * @Author: 阮志雄
  * @Date: 2021-10-31 02:16:09
- * @LastEditTime: 2022-03-23 14:02:10
+ * @LastEditTime: 2022-09-17 16:45:37
  * @LastEditors: 阮志雄
  * @Description: In User Settings Edit
- * @FilePath: \vue3-template-with-ts\types\globals.d.ts
+ * @FilePath: \vue3.0-template-with-elementui\types\globals.d.ts
  */
 interface ServerConfigs {
   Version?: string
@@ -19,7 +19,7 @@ interface IrouteItem {
   title: string
   componentName?: string
   componentPath?: string
-  icon?: String
+  icon?: string
   parentId: number
   id: number
   type: number

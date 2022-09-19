@@ -2,7 +2,9 @@ import { hexToRgba, getDarkColor } from '@/utils'
 /**
  * 主题切换
  * @param theme
+ * @description 基于element-plus
  */
+export const DARK_MODE = 'dark'
 export function useTheme() {
   const getTheme = () => {
     const el = document.documentElement
@@ -18,11 +20,12 @@ export function useTheme() {
     const localTheme = localStorage.getItem('_theme_') || ''
     const el = document.documentElement
     el.setAttribute('class', theme ? theme : localTheme)
-    localStorage.setItem('_theme_', theme || '')
+    el.setAttribute('data-mode', theme ? theme : localTheme)
+    localStorage.setItem('_theme_', theme ? theme : localTheme)
     // 获取 css 变量
     const light = [3, 5, 7, 8, 9]
     const colorValues = getTheme()
-    const isDark = theme === 'dark'
+    const isDark = theme === DARK_MODE
     colorValues.forEach((item) => {
       const darkerColor = getDarkColor(item.value, 0.1)
       el.style.setProperty(`--el-color-${item.label}-dark-2`, `${darkerColor}`)
@@ -33,9 +36,14 @@ export function useTheme() {
         el.style.setProperty(`--el-color-${item.label}-light-${ele}`, colorLight as string)
       })
     })
+    return colorValues
+  }
+  const getMode = () => {
+    return localStorage.getItem('_theme_') === DARK_MODE
   }
   return {
     getTheme,
     setTheme,
+    getMode,
   }
 }

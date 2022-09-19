@@ -1,11 +1,3 @@
-/*
- * @Author: 阮志雄
- * @Date: 2022-09-16 11:22:07
- * @LastEditTime: 2022-09-16 17:29:39
- * @LastEditors: 阮志雄
- * @Description: In User Settings Edit
- * @FilePath: \vue3-template-with-ts\src\components\ZthMenu\types.d.ts
- */
 import type { Ref } from 'vue'
 import type { RouteLocationRaw } from 'vue-router'
 
@@ -41,9 +33,9 @@ export interface MenuProvider {
 }
 
 export interface SubMenuProvider {
-  addSubMenu: (item: MenuItemRegistered) => void
-  removeSubMenu: (item: MenuItemRegistered) => void
+  addSubMenu?: (item: MenuItemRegistered) => void
+  removeSubMenu?: (item: MenuItemRegistered) => void
   handleMouseleave?: (deepDispatch: boolean) => void
-  mouseInChild: Ref<boolean>
+  mouseInChild?: Ref<boolean>
   level: number
 }
