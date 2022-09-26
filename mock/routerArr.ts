@@ -24,7 +24,7 @@ const routeArr: Array<IrouteItem> = [
       {
         title: '首页',
         componentName: 'Home',
-        componentPath: 'Home',
+        componentPath: 'Home/index',
         icon: 'house',
         parentId: 5,
         id: 501,
