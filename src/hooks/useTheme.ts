@@ -19,9 +19,10 @@ export function useTheme() {
   const setTheme = (theme?: string) => {
     const localTheme = localStorage.getItem('_theme_') || ''
     const el = document.documentElement
-    el.setAttribute('class', theme ? theme : localTheme)
-    el.setAttribute('data-mode', theme ? theme : localTheme)
-    localStorage.setItem('_theme_', theme ? theme : localTheme)
+    const themeStr = theme === 'default' ? '' : theme
+    el.setAttribute('class', theme ? themeStr : localTheme)
+    el.setAttribute('data-mode', theme ? themeStr : localTheme)
+    localStorage.setItem('_theme_', theme ? themeStr : localTheme)
     // 获取 css 变量
     const light = [3, 5, 7, 8, 9]
     const colorValues = getTheme()
