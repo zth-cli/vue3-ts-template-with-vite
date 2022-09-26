@@ -1,7 +1,7 @@
 <template>
   <el-breadcrumb separator="/">
     <el-breadcrumb-item>
-      <el-dropdown v-if="parentRoute[0].children" class="user-name" trigger="hover" @command="handleCommand">
+      <el-dropdown v-if="parentRoute[0]?.children" class="user-name" trigger="hover" @command="handleCommand">
         <span> {{ parentRoute[0].title }} </span>
         <template #dropdown>
           <el-dropdown-menu>
