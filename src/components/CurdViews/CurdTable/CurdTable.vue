@@ -1,15 +1,22 @@
 <template>
   <div class="curd_table">
+    <h5 v-if="tableTitle" class="curd_title">{{ tableTitle }}</h5>
     <div class="panel_tool">
       <div v-if="props.mode !== 'simple'" class="panel_tool_left">
         <template v-if="props.showPanelTool">
-          <el-button v-if="props.defaultPanel.includes('add')" icon="plus" type="success" @click="addRow()"
+          <el-button
+            v-if="props.defaultPanel.includes('add')"
+            :size="tableSize"
+            icon="plus"
+            type="success"
+            @click="addRow()"
             >新增</el-button
           >
           <el-button
             v-if="props.defaultPanel.includes('edit')"
             icon="edit"
             type="primary"
+            :size="tableSize"
             :disabled="isSingle"
             @click="editRow()"
             >修改</el-button
@@ -17,29 +24,45 @@
           <el-popover v-model:visible="visible" placement="top" :width="160">
             <p>确定删除吗？</p>
             <div style="text-align: right; margin: 0">
-              <el-button type="info" link @click="visible = false">取消</el-button>
-              <el-button type="primary" @click="deleteRows()">确定</el-button>
+              <el-button type="text" :size="tableSize" @click="visible = false">取消</el-button>
+              <el-button type="primary" :size="tableSize" @click="deleteRows()">确定</el-button>
             </div>
             <template #reference>
               <el-button
                 v-if="props.defaultPanel.includes('delete')"
                 icon="circle-close"
                 type="danger"
+                :size="tableSize"
                 :disabled="isMultiple"
                 @click="visible = true"
                 >删除</el-button
               >
             </template>
           </el-popover>
-          <el-button v-if="props.defaultPanel.includes('export')" icon="download" type="primary" @click="exportData()"
+          <el-button
+            v-if="props.defaultPanel.includes('export')"
+            :size="tableSize"
+            icon="download"
+            type="primary"
+            @click="exportData()"
             >导出</el-button
           >
           <slot name="panel"></slot>
         </template>
       </div>
       <div v-if="props.showSettingTool && props.mode !== 'simple'" class="panel_tool_right">
-        <el-button type="primary" icon="refresh" @click="queryData"></el-button>
-        <el-popover placement="bottom-end" :width="200" trigger="click">
+        <el-icon class="icon" title="刷新" @click="queryData"><RefreshRight /></el-icon>
+        <el-popover placement="bottom-end" :width="80" trigger="click">
+          <div style="margin: 5px 0">
+            <div v-for="(col, index) in sizeArr" :key="index">
+              <el-radio v-model="size" :label="col.value" @change="sizeChange">{{ col.label }}</el-radio>
+            </div>
+          </div>
+          <template #reference>
+            <el-icon class="icon" title="密度"><Operation /></el-icon>
+          </template>
+        </el-popover>
+        <el-popover placement="bottom-end" :width="160" trigger="click">
           <div style="margin: 5px 0">
             <div v-for="(col, index) in props.columns" :key="index">
               <el-checkbox v-if="col.label" v-model="col.show" :label="col.label" @change="columnsChange">{{
@@ -48,7 +71,7 @@
             </div>
           </div>
           <template #reference>
-            <el-button icon="caret-bottom"></el-button>
+            <el-icon class="icon" title="表格列"><Setting /></el-icon>
           </template>
         </el-popover>
       </div>
@@ -62,7 +85,7 @@
         :columns="mColumns"
         :table-data="tableData"
         :border="props.border"
-        :size="props.tableSize"
+        :size="size"
         :height="props.height"
         :row-key="props.rowKey"
         :stripe="props.stripe"
@@ -121,7 +144,7 @@ import { ref, computed, watch, toRaw } from 'vue'
 import { Icolumns } from '../type'
 const tableView = ref<InstanceType<typeof DataTable>>(null)
 
-const props = withDefaults(defineProps<ItableProp>(), { ...defaulltProps })
+const props = withDefaults(defineProps<ItableProp>(), { ...defaulltProps, tableSize: 'default' })
 const visible = ref<boolean>(false)
 const mColumns = ref<Icolumns[]>([])
 const selection = ref<any[]>([])
@@ -133,7 +156,15 @@ mColumns.value = props.columns.filter((item) => !item.disabled)
 const isSingle = computed(() => !(selection.value !== null && selection.value.length === 1))
 const isMultiple = computed(() => !(selection.value !== null && selection.value.length > 0))
 
-const { queryData, loading, tableData, pageParam, total, lazyLoad } = useTableFetchData(props, emit, selection)
+const sizeArr = [
+  { label: '默认', value: 'default' },
+  { label: '宽松', value: 'large' },
+  { label: '紧凑', value: 'small' },
+]
+const sizeChange = (val) => {
+  console.log(val)
+}
+const { queryData, loading, tableData, pageParam, total, lazyLoad, size } = useTableFetchData(props, emit, selection)
 
 const { exportData } = useExportTable(props)
 
@@ -246,7 +277,8 @@ defineExpose({
 interface ItableProp {
   columns: Icolumns[]
   initData?: Array<any>
-  tableSize?: string
+  tableTitle?: string
+  tableSize?: 'large' | 'default' | 'small'
   mode?: string
   defaultPanel?: Array<string>
   pageAlign?: string
@@ -274,11 +306,33 @@ interface ItableProp {
   treeProps?: { children: string; hasChildren: string }
 }
 </script>
+<script lang="ts">
+export default {
+  name: 'CurdTable',
+}
+</script>
 <style lang="scss">
 .curd_table {
   background-color: var(--content-background);
   padding: 10px;
-  border-radius: 4px;
+  border-radius: 2px;
+  .curd_title {
+    letter-spacing: 3px;
+    text-indent: 4px;
+    position: relative;
+    margin-bottom: 10px;
+    font-size: 14px;
+    text-indent: 12px;
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0px;
+      top: 0;
+      height: 100%;
+      width: 4px;
+      background-color: var(--color-primary);
+    }
+  }
   .panel_tool {
     display: flex;
     justify-content: space-between;
@@ -297,6 +351,14 @@ interface ItableProp {
   .panel_tool_right {
     float: right;
     padding-bottom: 8px;
+    .icon {
+      font-size: 20px;
+      cursor: pointer;
+      margin: 0 6px;
+      &:hover {
+        color: var(--color-primary);
+      }
+    }
   }
   button {
     margin-left: 8px;

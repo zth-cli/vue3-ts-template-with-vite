@@ -1,6 +1,6 @@
 <template>
   <div ref="data_ref" class="from_data_main">
-    <el-form ref="ruleForm" :model="formData" :rules="rules" size="default" label-width="100px">
+    <el-form ref="ruleForm" :model="formData" :rules="rules" size="default" :label-width="labelWidth">
       <el-row>
         <template v-for="item in fromItems">
           <template v-if="item.type === 'date' || item.type === 'datetime'">
@@ -13,7 +13,8 @@
                   :disabled="item.disabled"
                   :placeholder="getPlaceholder(item)"
                   clearable
-                  :value-format="item.format || 'yyyy-MM-dd'"
+                  :format="item.format || 'YYYY-MM-DD'"
+                  :value-format="item.format || 'YYYY-MM-DD'"
                 ></el-date-picker>
               </el-form-item>
             </el-col>
@@ -173,6 +174,7 @@ const fromItems = ref<Array<any>>([])
 
 //  定义props
 interface IformProps {
+  labelWidth?: string
   formItem: Array<any>
   postUrl?: string
   // 额外的提交数据,例如在提交表单时，会把选中id一同提交进来,但是Id并不需要显示
@@ -184,6 +186,10 @@ interface IformProps {
   contentType?: 'json' | 'form-data'
 }
 const props = withDefaults(defineProps<IformProps>(), {
+  labelWidth: '100px',
+  postParams: () => {
+    return {}
+  },
   formItem: () => [],
   placeholderLabel: false,
   contentType: 'json',
@@ -267,8 +273,12 @@ watch(
   },
   { deep: true }
 )
+const getData = () => {
+  return formData
+}
+defineExpose({ getData })
 </script>
-<style>
+<style lang="scss">
 .from_data_main {
   width: 100%;
   height: 100%;
@@ -276,6 +286,9 @@ watch(
   /* background-color: #ffffff; */
   box-sizing: border-box;
   padding: 18px;
+  .el-input__wrapper {
+    width: 100%;
+  }
 }
 
 .from_data_content_mini .from_item {

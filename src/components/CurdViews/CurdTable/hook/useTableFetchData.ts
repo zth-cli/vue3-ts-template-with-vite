@@ -14,7 +14,7 @@ export function useTableFetchData(
   })
   const total = ref<number>(0)
   const lazyLoad = ref<boolean>(props.lazy)
-
+  const size = ref<string>(props.tableSize)
   const queryData = () => {
     let timeout: any = {}
     if (!props.dataUrl || loading.value) {
@@ -72,5 +72,6 @@ export function useTableFetchData(
     pageParam,
     total,
     lazyLoad,
+    size,
   }
 }
