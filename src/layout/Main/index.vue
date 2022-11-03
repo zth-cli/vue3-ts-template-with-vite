@@ -2,7 +2,7 @@
   <div class="zth-route-view">
     <router-view>
       <template #default="{ Component }">
-        <transition :name="menuMode === 'horizontal' ? 'slide-fade-Y' : 'slide-fade-X'">
+        <transition :name="menuMode === 'horizontal' ? 'slide-fade-Y' : 'slide-fade-X'" appear>
           <keep-alive v-if="route.meta.isCache">
             <component :is="Component" :key="route.fullPath" class="child-view" />
           </keep-alive>
