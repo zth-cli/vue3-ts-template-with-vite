@@ -6,6 +6,7 @@ $font_default_size: 14px;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html,
@@ -25,17 +26,6 @@ a,
 ul {
   list-style: none;
 }
-
-// .el-table--enable-row-hover .el-table__body tr:hover>td {
-//     background-color: background-color-theme1();
-// }
-
-.el-button--success,
-.el-button--warning,
-.el-button--primary {
-  color: #fff !important;
-}
-
 .icon {
   width: 1em;
   height: 1em;
@@ -48,30 +38,6 @@ ul {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-/* 隐藏横向滚动条 */
-.el-scrollbar__wrap {
-  overflow-x: hidden !important;
-}
-
-/* element滚动条样式 */
-// .el-scrollbar__bar {
-//     position: absolute;
-//     right: 2px;
-//     bottom: 2px;
-//     z-index: 1;
-//     border-radius: 4px;
-//     opacity: 1;
-//     -webkit-transition: opacity 120ms ease-out;
-//     transition: opacity 120ms ease-out;
-// }
-
-#content {
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  overflow-x: auto;
 }
 
 .width {
@@ -87,41 +53,6 @@ ul {
 
 .middle {
   vertical-align: middle;
-}
-
-/*弹性盒*/
-.flex {
-  display: inline-flex;
-  display: -webkit-flex;
-  display: flex;
-}
-
-/*弹性盒-子元素可竖向居中*/
-.flex-middle {
-  display: flex;
-  display: -webkit-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.tl {
-  text-align: left;
-}
-
-.tc {
-  text-align: center;
-}
-
-.tr {
-  text-align: right;
-}
-
-.fl {
-  float: left;
-}
-
-.fr {
-  float: right;
 }
 
 .clear::after {
@@ -190,15 +121,25 @@ ul {
 /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
+
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 4px;
+  height: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(144, 147, 153, 0.5);
-  border-radius: 4px;
+  background: rgba(144, 147, 153, 0.3);
+  border-radius: 2px;
   transition: all 0.5s;
+}
+@media screen and (min-width: 700px) {
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb  {
+    background: rgba(144, 147, 153, 0.5);
+  }
 }
 .color_warning {
   cursor: pointer;
