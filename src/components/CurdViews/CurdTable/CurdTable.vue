@@ -51,7 +51,7 @@
         </template>
       </div>
       <div v-if="props.showSettingTool && props.mode !== 'simple'" class="panel_tool_right">
-        <el-icon class="icon" title="刷新" @click="queryData"><RefreshRight /></el-icon>
+        <el-icon :class="['icon', { refresh: loading }]" title="刷新" @click="queryData"><RefreshRight /></el-icon>
         <el-popover placement="bottom-end" :width="80" trigger="click">
           <div style="margin: 5px 0">
             <div v-for="(col, index) in sizeArr" :key="index">
@@ -357,6 +357,18 @@ export default {
       margin: 0 6px;
       &:hover {
         color: var(--color-primary);
+      }
+    }
+    .refresh {
+      animation: refresh 0.5s linear infinite;
+    }
+    @keyframes refresh {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
       }
     }
   }
