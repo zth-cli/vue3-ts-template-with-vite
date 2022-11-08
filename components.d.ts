@@ -7,6 +7,7 @@ declare module 'vue' {
     Child: typeof import('./src/components/child.vue')['default']
     CollapseTransition: typeof import('./src/components/Transition/CollapseTransition.vue')['default']
     ConditionBar: typeof import('./src/components/CurdViews/ConditionBar/ConditionBar.vue')['default']
+    ContextmenuItem: typeof import('./src/components/Contextmenu/src/contextmenu-item.vue')['default']
     CurdTable: typeof import('./src/components/CurdViews/CurdTable/CurdTable.vue')['default']
     CurdViews: typeof import('./src/components/CurdViews/index.vue')['default']
     DataTable: typeof import('./src/components/CurdViews/DataTable/DataTable.vue')['default']
@@ -70,8 +71,10 @@ declare module 'vue' {
     Toasts: typeof import('./src/components/Toasts/src/toasts.vue')['default']
     Tree: typeof import('./src/components/CurdViews/Tree/Tree.vue')['default']
     Upload: typeof import('./src/components/CurdViews/Upload/index.vue')['default']
+    ZthIcon: typeof import('./src/components/ZthIcon/index.vue')['default']
     ZthMenu: typeof import('./src/components/ZthMenu/src/zth-menu.vue')['default']
+    ZthSplit: typeof import('./src/components/ZthSplit/index.vue')['default']
   }
 }
 
-export { }
+export {}
