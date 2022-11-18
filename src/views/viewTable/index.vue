@@ -21,6 +21,7 @@
 
 <script lang="ts">
 import CurdView from '@/components/CurdViews/index.vue'
+import { IformItem, ItableProps, ItreeProps } from '@/components/CurdViews/type'
 import { defineComponent } from 'vue'
 const tableOptions: ItableProps = {
   pageSize: 20,

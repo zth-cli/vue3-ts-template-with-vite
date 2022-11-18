@@ -23,13 +23,21 @@ import { Header } from './Header'
 import { MainView } from './Main'
 import { Tags } from './TagsView'
 import { useConfigStroe } from '@/store/appSetting'
+import { useThemeStore } from '@/store/theme'
 import { computed } from 'vue'
 
+const themeStroe = useThemeStore()
 const configStroe = useConfigStroe()
+
 const menuMode = computed(() => configStroe.menuMode)
 const showTags = computed(() => configStroe.tagsBar)
+const menuColor = computed(() => (menuMode.value === 'horizontal' ? themeStroe.headerCss : themeStroe.menuCss))
+const headerColor = computed(() => themeStroe.headerCss)
+
 const mrt = computed(() => (!showTags.value ? '12px' : '0px'))
 const viewHeight = computed(() => (!showTags.value ? '100%' : 'calc(100% - 44px)'))
+
+provide('layout-provide', { menuMode, menuColor, headerColor, showTags })
 </script>
 <style lang="scss">
 .layout {

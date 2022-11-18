@@ -8,6 +8,7 @@ declare module 'vue' {
     CollapseTransition: typeof import('./src/components/Transition/CollapseTransition.vue')['default']
     ConditionBar: typeof import('./src/components/CurdViews/ConditionBar/ConditionBar.vue')['default']
     ContextmenuItem: typeof import('./src/components/Contextmenu/src/contextmenu-item.vue')['default']
+    CountBar: typeof import('./src/components/CountBar/CountBar.vue')['default']
     CurdTable: typeof import('./src/components/CurdViews/CurdTable/CurdTable.vue')['default']
     CurdViews: typeof import('./src/components/CurdViews/index.vue')['default']
     DataTable: typeof import('./src/components/CurdViews/DataTable/DataTable.vue')['default']

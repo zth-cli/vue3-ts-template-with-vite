@@ -29,14 +29,22 @@
         </div>
       </li>
       <li class="theme-item">
+        <el-divider><p>头部主题</p></el-divider>
+        <div class="drawer-block-checkbox">
+          <template v-for="(item, index) in headerCssVars" :key="index">
+            <div class="theme-color-block" :style="{ background: item.backgroundColor }" @click="setHeaderTheme(index)">
+              <el-icon v-show="activeHeaderIndex === index" class="selectIcon"><Select /></el-icon>
+            </div>
+          </template>
+        </div>
+      </li>
+      <li class="theme-item">
         <el-divider><p>菜单主题</p></el-divider>
         <div class="drawer-block-checkbox">
           <template v-for="(item, index) in menuCssVars" :key="index">
-            <div
-              class="theme-color-block"
-              :style="{ background: item.backgroundColor }"
-              @click="setMenuTheme(index)"
-            ></div>
+            <div class="theme-color-block" :style="{ background: item.backgroundColor }" @click="setMenuTheme(index)">
+              <el-icon v-show="activeMenuIndex === index" class="selectIcon"><Select /></el-icon>
+            </div>
           </template>
         </div>
       </li>
@@ -46,8 +54,6 @@
           <span>多标签:</span>
           <el-switch v-model="layout.tagsBar" inline-prompt @change="saveTheme('tagsBar')"></el-switch>
         </div>
-
-        <!-- <el-checkbox v-model="layout.tagsBar" @change="saveTheme('tagsBar')"></el-checkbox> -->
       </li>
     </ul>
   </el-drawer>
@@ -56,10 +62,10 @@
 <script lang="ts" setup>
 import bus from '@/utils/bus'
 import { reactive, ref, watch } from 'vue'
-import { menuCssVars } from '@/styles/CsstoJs/menuCssVar'
+import { menuCssVars, LOCAL_NAME as MENU_NAME } from '@/styles/CsstoJs/menuCssVar'
+import { headerCssVars, LOCAL_NAME } from '@/styles/CsstoJs/headerCssVar'
 import { useConfigStroe } from '@/store/appSetting'
 import { useThemeStore } from '@/store/theme'
-
 const configStroe = useConfigStroe()
 const themeStroe = useThemeStore()
 const colors = ref<any[]>([
@@ -91,14 +97,23 @@ const saveTheme = (key: string, menuMode?: string) => {
   configStroe.changeConfig({ key, value: layout[key] })
   // store.dispatch('changeSetting', { key, value: layout[key] })
 }
-const themeName = ref<string>(localStorage.getItem('_theme_') || '')
+const themeName = ref<string>(localStorage.getItem('_theme_') || 'default')
+
 const changeTheme = (data: any) => {
   themeStroe.setSysTheme(data.theme)
   themeName.value = data.theme
   bus.emit('changMenuColor', data.theme)
 }
+const activeMenuIndex = ref<number>(Number(localStorage.getItem(MENU_NAME)))
 const setMenuTheme = (index: number) => {
+  activeMenuIndex.value = index
   themeStroe.setMenuTheme(index)
+}
+
+const activeHeaderIndex = ref<number>(Number(localStorage.getItem(LOCAL_NAME)))
+const setHeaderTheme = (index: number) => {
+  activeHeaderIndex.value = index
+  themeStroe.setHeaderTheme(index)
 }
 watch(
   () => props.status,
@@ -133,6 +148,7 @@ watch(
         height: 36px;
         background-color: #f0f2f5;
         .selectIcon {
+          color: rgb(142, 142, 142);
           position: absolute;
           bottom: 4px;
           right: 6px;
@@ -194,7 +210,7 @@ watch(
         cursor: pointer;
         position: relative;
         .selectIcon {
-          color: #fff;
+          color: rgb(142, 142, 142);
           font-weight: 700;
           font-size: 14px;
           pointer-events: none;

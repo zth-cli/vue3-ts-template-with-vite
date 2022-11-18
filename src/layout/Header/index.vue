@@ -1,47 +1,45 @@
 <template>
-  <div class="header" :class="{ 'light-header': menuMode !== 'horizontal' }">
+  <div class="header" :class="{ 'light-header': !isHor }">
     <!-- 折叠按钮 -->
-    <div v-if="menuMode !== 'horizontal'" class="collapse-btn">
+    <div v-if="!isHor" class="collapse-btn">
       <el-icon :size="20">
         <component :is="collapse ? 'expand' : 'fold'" style="font-size: 20px" @click="handleCollapse()" />
       </el-icon>
     </div>
-    <Breadcrumb v-if="menuMode !== 'horizontal'"></Breadcrumb>
+    <Breadcrumb v-if="!isHor"></Breadcrumb>
     <!-- <div class="solgan ellipsis" title="首页">ZeroToHero</div> -->
-    <div v-if="menuMode === 'horizontal'" class="logo">
+    <div v-if="isHor" class="logo">
       <img src="@/assets/img/logo.png" />
     </div>
     <div class="header-menu">
       <slot>
-        <Menu v-if="menuMode === 'horizontal'" menu-mode="horizontal"></Menu>
+        <Menu v-if="isHor" menu-mode="horizontal"></Menu>
       </slot>
     </div>
     <div class="header-right">
       <div class="header-user-con">
         <!-- 全屏显示 -->
         <el-tooltip :content="fullscreen ? `取消全屏` : `全屏`" placement="bottom">
-          <el-icon :size="20" class="icon-cammand">
+          <el-icon :size="16" class="icon-cammand">
             <component is="rank" @click="handleFullScreen()" />
           </el-icon>
         </el-tooltip>
         <el-tooltip content="系统设置" placement="bottom">
-          <el-icon v-if="props.showThemeBar" :size="20" class="icon-cammand">
+          <el-icon v-if="props.showThemeBar" :size="16" class="icon-cammand">
             <component is="setting" @click="settingBarStatus = true" />
           </el-icon>
         </el-tooltip>
         <el-tooltip content="重载" placement="bottom">
-          <el-icon v-if="props.showThemeBar" :size="20" class="icon-cammand">
+          <el-icon v-if="props.showThemeBar" :size="16" class="icon-cammand">
             <component is="refresh-right" @click="reloadPage" />
           </el-icon>
         </el-tooltip>
-        <el-avatar icon="el-icon-user-solid" :size="36" style="margin-left: 10px"></el-avatar>
+        <el-avatar icon="el-icon-user-solid" :size="30" style="margin-left: 10px"></el-avatar>
         <!-- 用户名下拉菜单 -->
         <el-dropdown class="user-name" trigger="click" @command="handleCommand">
-          <span class="el-dropdown-link">
+          <span>
             管理员
-            <el-icon>
-              <arrow-down />
-            </el-icon>
+            <el-icon><arrow-down /></el-icon>
           </span>
           <template #dropdown>
             <el-dropdown-menu>
@@ -63,9 +61,7 @@ import { removeAllStorge } from '@/utils/auth'
 import { useRouter, useRoute } from 'vue-router'
 import { Ref, ref, unref, computed } from 'vue'
 import bus from '@/utils/bus'
-import { useConfigStroe } from '@/store/appSetting'
 
-const configStroe = useConfigStroe()
 const router = useRouter()
 const route = useRoute()
 
@@ -77,7 +73,10 @@ const props = withDefaults(defineProps<{ showThemeBar?: boolean }>(), {
   showThemeBar: true,
 })
 
-const menuMode = computed(() => configStroe.menuMode)
+// 获取layout状态peovide
+const layoutProvide = inject<any>('layout-provide')
+const { menuMode, headerColor } = toRefs(layoutProvide)
+const isHor = computed(() => menuMode.value === 'horizontal')
 
 // 收起展开侧边菜单
 const handleCollapse = () => {
@@ -116,7 +115,7 @@ const reloadPage = () => {
 </script>
 <style lang="scss">
 .header {
-  background-color: var(--content-background);
+  background-color: v-bind('headerColor.backgroundColor');
   padding: 0 20px;
   position: relative;
   box-sizing: border-box;
@@ -125,11 +124,13 @@ const reloadPage = () => {
   width: 100%;
   height: 60px;
   font-size: 20px;
+  color: v-bind('headerColor.textColor');
   i {
     font-size: 16px;
     cursor: pointer;
   }
   .collapse-btn {
+    color: v-bind('headerColor.textColor');
     margin-right: 12px;
     cursor: pointer;
     display: flex;
@@ -155,15 +156,17 @@ const reloadPage = () => {
       align-items: center;
     }
     .icon-cammand {
+      color: v-bind('headerColor.textColor');
       transform: rotate(45deg);
       margin-left: 12px;
       font-weight: lighter;
     }
     .user-name {
       margin-left: 10px;
-    }
-    .el-dropdown-link {
-      cursor: pointer;
+      color: v-bind('headerColor.textColor');
+      .el-dropdown-link {
+        cursor: pointer;
+      }
     }
     .el-dropdown-menu__item {
       text-align: center;

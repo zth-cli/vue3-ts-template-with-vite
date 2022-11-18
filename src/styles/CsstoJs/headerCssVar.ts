@@ -3,8 +3,8 @@ export type TcssVar = {
   activeTextColor: string
   textColor: string
 }
-export const LOCAL_NAME = '_menuThemeNum_'
-export const menuCssVars: TcssVar[] = [
+export const LOCAL_NAME = '_headerThemeNum_'
+export const headerCssVars: TcssVar[] = [
   {
     backgroundColor: '#001529',
     activeTextColor: '#fff',
@@ -22,10 +22,10 @@ export const menuCssVars: TcssVar[] = [
   },
 ]
 
-export const initMenuTheme = () => {
+export const initHeaderTheme = () => {
   const init = Number(localStorage.getItem(LOCAL_NAME))
-  return init ? menuCssVars[init] : menuCssVars[0]
+  return init ? headerCssVars[init] : headerCssVars[0]
 }
-export const updataMenuTheme = (index: number) => {
+export const updataHeaderTheme = (index: number) => {
   localStorage.setItem(LOCAL_NAME, index.toString())
 }

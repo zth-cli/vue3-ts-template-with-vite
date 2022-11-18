@@ -48,14 +48,13 @@
 import { ref, computed } from 'vue'
 import { useMenuStore } from '@/store/menu'
 import bus from '@/utils/bus'
-import { useThemeStore } from '@/store/theme'
 
 const menuStore = useMenuStore()
-const themeStroe = useThemeStore()
 const isCollapse = ref<boolean>(false)
 
 const routeArr = computed(() => menuStore.routes)
-const menuColor = computed(() => themeStroe.menuCss)
+const layoutProvide = inject<any>('layout-provide')
+const { menuColor } = toRefs(layoutProvide)
 
 const props = withDefaults(defineProps<{ menuMode?: 'horizontal' | 'vertical' }>(), {
   menuMode: 'vertical',
@@ -65,7 +64,6 @@ bus.on('swithCollapse', (bool: boolean) => {
   props.menuMode === 'vertical' ? (isCollapse.value = bool) : ''
 })
 </script>
-
 <style lang="scss">
 .horizontal-menu-main {
   background-color: v-bind('menuColor.backgroundColor');
