@@ -67,12 +67,11 @@ declare module 'vue' {
     Overlay: typeof import('./src/components/Overlay/index.vue')['default']
     Propover: typeof import('./src/components/Propover/index.vue')['default']
     RenderJSX: typeof import('./src/components/renderJSX.vue')['default']
-    Src: typeof import('./src/components/CountTo/src/index.vue')['default']
+    Src: typeof import('./src/components/Contextmenu/src/index.vue')['default']
     SubMenu: typeof import('./src/components/ZthMenu/src/sub-menu.vue')['default']
     Toasts: typeof import('./src/components/Toasts/src/toasts.vue')['default']
     Tree: typeof import('./src/components/CurdViews/Tree/Tree.vue')['default']
     Upload: typeof import('./src/components/CurdViews/Upload/index.vue')['default']
-    ZthIcon: typeof import('./src/components/ZthIcon/index.vue')['default']
     ZthMenu: typeof import('./src/components/ZthMenu/src/zth-menu.vue')['default']
     ZthSplit: typeof import('./src/components/ZthSplit/index.vue')['default']
   }

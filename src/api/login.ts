@@ -1,5 +1,14 @@
+/*
+ * @Author: 阮志雄
+ * @Date: 2022-03-18 15:52:32
+ * @LastEditTime: 2023-02-01 15:43:07
+ * @LastEditors: 阮志雄
+ * @Description: In User Settings Edit
+ * @FilePath: \vue3-ts-template-with-vite\src\api\login.ts
+ */
 import qs from 'qs'
 import { http } from '@/utils/http'
+import { AxiosRequestConfig } from 'axios'
 
 // 获取验证码
 export const getVerify = (): Promise<IRes<IGiftInfo>> => {
