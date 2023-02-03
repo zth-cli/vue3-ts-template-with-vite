@@ -6,6 +6,8 @@
       :from-options="fromOptions"
       @selection-change="selectionChange"
       @row-add="rowAdd"
+      @row-delete="rowDeleteHandle"
+      @row-edit="rowEditHandle"
     >
       <template #action="{ row }">
         <el-button size="small" @click="getRow(row)">action</el-button>
@@ -18,7 +20,7 @@
       </template>
     </CurdView>
     <Overlay v-model="close">
-      <FormData v-bind="fromDataOptions" :before-submit="beforeSubmit"></FormData>
+      <FormData v-bind="fromDataOptions" :before-submit="beforeSubmit" @submit="close = false"></FormData>
     </Overlay>
   </div>
 </template>
@@ -83,7 +85,7 @@ const fromOptions = reactive([
 ]) as IformItem[]
 
 const fromDataOptions = {
-  postParams: {},
+  postParams: ref({}),
   postUrl: '/api/modifyComment/create',
   contentType: 'form-data',
   formItem: reactive([
@@ -203,7 +205,14 @@ const selectionChange = (selection) => {
 const getRow = (row) => {
   console.log(row)
 }
-
+const rowDeleteHandle = (rows) => {
+  // rows 选择删除的行
+  //todo
+}
+const rowEditHandle = (row) => {
+  // row 选择编辑的行
+  fromDataOptions.postParams = row
+}
 const beforeSubmit = (params) => {
   console.log(params)
 
