@@ -53,6 +53,9 @@ npm run build
 ```
 
 ## 约束代码风格
+>   eslint-config-prettier 会关闭ESLint中有关代码格式化的配置
+
+>  eslint-plugin-prettier 把Prettier配置成ESLint的一个插件，让其当做一个linter规则来运行
 
 ![eslint](./images/eslint.png)
 ![eslint1](./images/eslint1.png)
