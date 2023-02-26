@@ -74,7 +74,7 @@ interface IformItem {
   default?: any // 默认值
   disabled?: boolean // 是否禁用
   disabledAll?: boolean // 是否禁用'全部'按钮
-  options?: Array<{ [x: string]: any; [x: string]: any }>
+  options?: Array<{ [x: string]: any }>
   prop?: { label: string; value: string }
   format?: string
   remoteMethod?: Promise<any>
