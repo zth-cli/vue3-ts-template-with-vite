@@ -29,13 +29,12 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { getConfig } from '@/config'
-import { ref, Ref, computed, getCurrentInstance } from 'vue'
+import { ref, Ref, computed } from 'vue'
 import { useMenuStore } from '@/store/menu'
 import { useRouter } from 'vue-router'
 import { setStorge } from '@/utils/auth'
-const internalInstance = getCurrentInstance()
-const slogan = internalInstance.appContext.config.globalProperties.$config.Title
+
+const slogan = '欢迎登录'
 const mobile: Ref<string> = ref('')
 const username: Ref<string> = ref('')
 const passwords: Ref<string> = ref('')

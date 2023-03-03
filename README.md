@@ -8,7 +8,7 @@ This template should help get you started developing with Vue 3 and Typescript i
 
 ## 简介
 
-基于 Vue3 + Typescript + Elementui 开发得项目模板
+基于 Vue3 + Typescript + ElementPlus 开发得项目模板
 
 ## 特性
 
@@ -18,18 +18,10 @@ This template should help get you started developing with Vue 3 and Typescript i
 
 ## 安装使用
 
-- 获取项目代码
-
-```bash
-# gitlab
-git clone http://10.172.246.235/rzx100/ZeroToHeroAdmin.git
-```
 
 - 安装依赖
-
+  
 ```bash
-cd ZeroToHeroAdmin
-
 yarn install
 # or
 npm install

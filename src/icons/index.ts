@@ -1,7 +1,7 @@
 import * as icons from '@element-plus/icons-vue'
 import { App } from 'vue'
 
-// 全局注册element-plus svg-icons
+// 全局注册element-plus zth-icons
 export default function RegisterIcons(app: App) {
   Object.keys(icons).forEach((key) => {
     app.component(key, icons[key])

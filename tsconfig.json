@@ -10,14 +10,38 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "lib": ["esnext", "dom", "ES6"],
-    "types": ["element-plus/global"],
-    "typeRoots": ["./node_modules/@types/", "./types"],
+    "lib": [
+      "esnext",
+      "dom",
+      "ES6"
+    ],
+    "types": [
+      "element-plus/global",
+      "vite-plugin-pages/client",
+      "vite-plugin-vue-layouts/client",
+      "unplugin-vue-macros/macros-global",
+      "unplugin-vue-define-options/macros-global"
+    ],
+    "typeRoots": [
+      "./node_modules/@types/",
+      "./types"
+    ],
     "paths": {
-      "@/*": ["./src/*"],
-      "components/*": ["./src/components/*"],
-      "api/*": ["./src/api/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "components/*": [
+        "./src/components/*"
+      ],
+      "api/*": [
+        "./src/api/*"
+      ]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/**/*.d.ts", "src/**/*.tsx", "types/*.d.ts", "src/**/*.vue", "axiosConfig/", "auto-imports.d.ts", "src/layout/newMenu/index.txs"]
+  "include": [
+    "src",
+    "axiosConfig/",
+    "auto-imports.d.ts",
+    "src/layout/newMenu/index.txs"
+  ]
 }

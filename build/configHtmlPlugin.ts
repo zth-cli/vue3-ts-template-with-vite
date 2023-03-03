@@ -1,6 +1,6 @@
-import type { Plugin } from 'vite'
+import type { PluginOption } from 'vite'
 
-import html from 'vite-plugin-html'
+import { createHtmlPlugin } from 'vite-plugin-html'
 
 import pkg from '../package.json'
 
@@ -13,10 +13,10 @@ export function configHtmlPlugin(env: { [x: string]: string }, isBuild: boolean)
     return `${path || '/'}_app.config.js?v=${pkg.version}-${new Date().getTime()}`
   }
 
-  const htmlPlugin: Plugin[] = html({
+  const htmlPlugin: PluginOption[] = createHtmlPlugin({
     minify: isBuild,
     inject: {
-      injectData: {
+      data: {
         title: VITE_TITLE,
       },
       tags: isBuild
