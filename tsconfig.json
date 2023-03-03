@@ -42,6 +42,7 @@
     "src",
     "axiosConfig/",
     "auto-imports.d.ts",
-    "src/layout/newMenu/index.txs"
+    "src/layout/newMenu/index.txs",
+    "./types/*.d.ts"
   ]
 }

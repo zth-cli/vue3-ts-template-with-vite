@@ -10,6 +10,4 @@ declare module 'vue-router' {
   }
 }
 // 通过扩展 RouteMeta 接口来输入 meta 字段
-declare global {
-  type RouteConfig = RouteRecordRaw & { hidden?: boolean } //hidden 是可选属性,拓展路由属性
-}
+type RouteConfig = RouteRecordRaw & { hidden?: boolean } //hidden 是可选属性,拓展路由属性

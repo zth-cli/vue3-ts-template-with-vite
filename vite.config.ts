@@ -64,7 +64,9 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       }),
       // 仓库: https://github.com/hannoeru/vite-plugin-pages
       Pages({
+        dirs: ['src/views'],
         extensions: ['vue', 'md'],
+        importMode: "async",
       }),
 
       // 仓库: https://github.com/JohnCampionJr/vite-plugin-vue-layouts
