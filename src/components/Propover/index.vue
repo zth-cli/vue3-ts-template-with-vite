@@ -13,6 +13,9 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+defineOptions({
+  name: 'Popover',
+})
 const emit = defineEmits(['on-confirm', 'on-cancel']) // 事件
 const props = withDefaults(
   defineProps<{

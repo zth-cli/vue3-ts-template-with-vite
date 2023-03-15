@@ -13,7 +13,7 @@
       </div>
       <div class="dashboard-item-left">
         <span>
-          <svg-icon :icon="icon" style="font-size: 120px"></svg-icon>
+          <zth-icon :icon="icon" style="font-size: 120px"></zth-icon>
         </span>
       </div>
     </div>
@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="t-card_mask">
-      <svg-icon :icon="icon" style="font-size: 120px"></svg-icon>
+      <zth-icon :icon="icon" style="font-size: 120px"></zth-icon>
     </div>
   </div>
 </template>

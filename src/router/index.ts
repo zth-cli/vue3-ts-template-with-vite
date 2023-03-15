@@ -6,6 +6,9 @@ import 'nprogress/nprogress.css'
 // import { store } from '@/store/index'
 import pinia from '@/store'
 import { useMenuStore } from '@/store/menu'
+// import generatedRoutes from '~pages'
+import { RouteConfig } from '../../types/router'
+
 const routes: Array<RouteConfig> = [
   {
     path: '/',
@@ -74,7 +77,7 @@ router.beforeEach(async (to: RouteLocationNormalized, from, next) => {
   } else {
     //下一跳路由需要登录验证，并且还未登录，则路由定向到  登录路由
     if (to.meta.title) {
-      document.title = to.meta.title
+      document.title = to.meta.title as string
     }
     // 添加flag防止多次获取动态路由和栈溢出
     if (!asyncRouterFlag && store.routes.length === 0) {
