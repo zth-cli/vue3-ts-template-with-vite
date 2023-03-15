@@ -65,7 +65,7 @@ class FetchHttp {
   // 请求拦截器
   private interceptorsRequest(): void {
     FetchHttp.axiosInstance.interceptors.request.use(
-      (config: AxiosRequestConfig) => {
+      (config: AxiosRequestConfig<any>) => {
         const _config = config
         // 1.设置一个请求标识
         const cancelKey = FetchHttp.setCancelTokenString(_config)
