@@ -6,8 +6,9 @@ import axios, {
   Canceler,
   AxiosError,
   Method,
+  InternalAxiosRequestConfig,
 } from 'axios'
-import { genConfig } from './config'
+import { genConfig, FILES_TYPES } from './config'
 import { transformConfigByMethod } from './utils'
 import { httpStatus } from './httpStatus'
 import { ElMessage } from 'element-plus'
@@ -16,11 +17,18 @@ type cancelTokenItem = {
   cancelKey: string
   cancelHandler: Canceler
 }
+export type AxiosRequestConfigs = AxiosRequestConfig & { parallel?: boolean }
+export type Interceptors = {
+  request?: (arg0: AxiosRequestConfigs) => void
+  response?: (arg0: AxiosResponse) => void
+}
 interface FetchHttppError extends AxiosError {
   isCancelRequest?: boolean
 }
 class FetchHttp {
-  constructor() {
+  interceptors: Interceptors
+  constructor(interceptors?: Interceptors) {
+    this.interceptors = interceptors
     this.interceptorsRequest()
     this.interceptorsResponse()
   }
@@ -34,7 +42,7 @@ class FetchHttp {
   private currentCabcelToken = ''
 
   // 每次请求设置唯一标识
-  private static setCancelTokenString(config: AxiosRequestConfig): string {
+  private static setCancelTokenString(config: AxiosRequestConfigs): string {
     return `${config.url}&&${JSON.stringify(config.params)}&&${config.data}`
   }
   // 清除唯一标识
@@ -65,17 +73,20 @@ class FetchHttp {
   // 请求拦截器
   private interceptorsRequest(): void {
     FetchHttp.axiosInstance.interceptors.request.use(
-      (config: AxiosRequestConfig<any>) => {
+      (config: InternalAxiosRequestConfig<any> & { parallel?: boolean }) => {
         const _config = config
-        // 1.设置一个请求标识
-        const cancelKey = FetchHttp.setCancelTokenString(_config)
-        this.currentCabcelToken = cancelKey
+        if (!_config.parallel) {
+          // 1.设置一个请求标识
+          const cancelKey = FetchHttp.setCancelTokenString(_config)
+          this.currentCabcelToken = cancelKey
 
-        // 2.通过axios.CancelToken构造函数生成取消函数
-        _config.cancelToken = new this.CancelToken((cancelHandler: Canceler) => {
-          this.sourceTokenList.push({ cancelKey, cancelHandler })
-        })
-        this.cancelRepeatRequest()
+          // 2.通过axios.CancelToken构造函数生成取消函数
+          _config.cancelToken = new this.CancelToken((cancelHandler: Canceler) => {
+            this.sourceTokenList.push({ cancelKey, cancelHandler })
+          })
+          this.cancelRepeatRequest()
+          this.interceptors?.request && this.interceptors?.request(_config)
+        }
         return _config
       },
       (error: AxiosError) => {
@@ -93,6 +104,7 @@ class FetchHttp {
         const cancelKey = FetchHttp.setCancelTokenString(_config)
         this.deleteCancelTokenString(cancelKey)
         this.currentCabcelToken = ''
+        this.interceptors?.response && this.interceptors?.response(response)
         return response.data
       },
       (error: FetchHttppError) => {
@@ -123,12 +135,17 @@ class FetchHttp {
   }
 
   // 封装请求
-  public request<T>(method: Method, url: string, param?: any, axiosConfig?: AxiosRequestConfig): Promise<T> {
+  public request<T>(
+    method: Method,
+    url: string,
+    param?: Record<string | number | symbol, any>,
+    axiosConfig?: AxiosRequestConfigs
+  ): Promise<T> {
     const config = transformConfigByMethod(param, {
       method,
       url,
       ...axiosConfig,
-    } as AxiosRequestConfig)
+    } as AxiosRequestConfigs)
     // 单独处理自定义请求/响应回掉
     return new Promise((resolve, reject) => {
       FetchHttp.axiosInstance
@@ -141,12 +158,23 @@ class FetchHttp {
         })
     })
   }
-  public post<T>(url: string, params?: any, config?: AxiosRequestConfig): Promise<T> {
+  public post<T>(url: string, params?: any, config?: AxiosRequestConfigs): Promise<T> {
     return this.request<T>('post', url, params, config)
   }
 
-  public get<T>(url: string, params?: any, config?: AxiosRequestConfig): Promise<T> {
+  public get<T>(url: string, params?: any, config?: AxiosRequestConfigs): Promise<T> {
     return this.request<T>('get', url, params, config)
   }
+  public async dowmload(url: string, params: any, fileName: string, fileType = 'xls') {
+    const res = await this.request<BlobPart>('get', url, params, { responseType: 'blob' })
+    const blob: Blob = new Blob([res], { type: FILES_TYPES[fileType] || 'application/vnd.ms-excel' })
+    const link: HTMLAnchorElement = document.createElement('a')
+    link.href = URL.createObjectURL(blob)
+    link.download = fileName + '.' + fileType
+    document.body.appendChild(link)
+    link.click()
+    URL.revokeObjectURL(link.href)
+    link.remove()
+  }
 }
-export default FetchHttp
+export { FetchHttp }
