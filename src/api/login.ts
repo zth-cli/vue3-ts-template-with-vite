@@ -1,11 +1,3 @@
-/*
- * @Author: 阮志雄
- * @Date: 2022-03-18 15:52:32
- * @LastEditTime: 2023-02-01 15:43:07
- * @LastEditors: 阮志雄
- * @Description: In User Settings Edit
- * @FilePath: \vue3-ts-template-with-vite\src\api\login.ts
- */
 import qs from 'qs'
 import { http } from '@/utils/http'
 import { AxiosRequestConfig } from 'axios'
@@ -33,7 +25,7 @@ export async function apiGet(url: string, params: any): Promise<any> {
   return res
 }
 // post
-export async function apiPost(url: string, params: any, config: AxiosRequestConfig<any>): Promise<any> {
+export async function apiPost(url: string, params: any, config?: AxiosRequestConfig<any>): Promise<any> {
   const res = await http.post(url, params, config)
   return res
 }

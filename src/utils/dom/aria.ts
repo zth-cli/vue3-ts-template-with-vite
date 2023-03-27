@@ -4,7 +4,7 @@ const FOCUSABLE_ELEMENT_SELECTORS = `a[href],button:not([disabled]),button:not([
  * Determine if the testing element is visible on screen no matter if its on the viewport or not
  */
 export const isVisible = (element: HTMLElement) => {
-  if (process.env.NODE_ENV === 'test') {
+  if (import.meta.env.NODE_ENV === 'test') {
     return true
   }
   const computed = getComputedStyle(element)

@@ -41,7 +41,6 @@ export interface Ioption {
 }
 export default defineComponent({
   name: 'CountBar',
-  emits: ['update:modelValue', 'on-click'],
   props: {
     modelValue: Number,
     options: {
@@ -65,6 +64,7 @@ export default defineComponent({
       type: Object,
     },
   },
+  emits: ['update:modelValue', 'on-click'],
   data() {
     return {
       visible: false,
@@ -86,7 +86,7 @@ export default defineComponent({
       }
       apiPost(this.dataUrl, this.dataParams).then((res) => {
         if (res.success) {
-          res.data.rows.forEach((item) => {
+          res.data.rows.forEach((item: { type: any; count: any }) => {
             this.$set(this.countObj, item.type, item.count)
           })
         }
