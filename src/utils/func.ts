@@ -19,7 +19,7 @@ export const buildTree = (list: { [x: string]: any }) => {
 }
 
 // 将多维数组转化为一维
-export const newArr = function (arr: any[]) {
+export const newArr = function (arr: any[]): string | any[] {
   return arr.reduce((pre: string | any[], cur: any) => pre.concat(Array.isArray(cur) ? newArr(cur) : cur), [])
 }
 
@@ -150,7 +150,7 @@ export function getDarkColor(color: string, level: number): string | void {
   if (!r.test(color.trim())) {
     return console.warn('输入错误的hex颜色值')
   }
-  const rgbc = HexToRgb(color)
+  const rgbc = HexToRgb(color) || []
   for (let i = 0; i < 3; i++) {
     rgbc[i] = Math.floor(rgbc[i] * (1 - level))
   }
@@ -162,7 +162,7 @@ export function getLightColor(color: string, level: number): string | void {
   if (!r.test(color.trim())) {
     return console.warn('输入错误的hex颜色值')
   }
-  const rgbc = this.HexToRgb(color)
+  const rgbc = HexToRgb(color) || []
   for (let i = 0; i < 3; i++) {
     rgbc[i] = Math.floor((255 - rgbc[i]) * level + rgbc[i])
   }

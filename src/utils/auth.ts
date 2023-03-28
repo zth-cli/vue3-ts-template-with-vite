@@ -1,4 +1,4 @@
-export function getStorge(name: string): string {
+export function getStorge(name: string): string | null {
   return sessionStorage.getItem(name)
 }
 

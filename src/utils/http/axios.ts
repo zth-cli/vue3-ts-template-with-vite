@@ -26,7 +26,7 @@ interface FetchHttppError extends AxiosError {
   isCancelRequest?: boolean
 }
 class FetchHttp {
-  interceptors: Interceptors
+  interceptors: Interceptors | undefined
   constructor(interceptors?: Interceptors) {
     this.interceptors = interceptors
     this.interceptorsRequest()
