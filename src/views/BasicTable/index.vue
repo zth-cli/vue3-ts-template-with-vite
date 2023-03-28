@@ -19,7 +19,7 @@
         <el-button size="small" @click="getRow(row)">operation</el-button>
       </template>
     </CurdView>
-    <Overlay v-model="close">
+    <Overlay v-model="close" title="表单录入">
       <FormData v-bind="fromDataOptions" :before-submit="beforeSubmit" @submit="close = false"></FormData>
     </Overlay>
   </div>

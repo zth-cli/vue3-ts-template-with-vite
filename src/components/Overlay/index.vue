@@ -116,7 +116,9 @@ export default defineComponent({
     .overlay_head {
       padding: 20px;
       padding-bottom: 10px;
-
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       word-break: break-all;
       cursor: pointer;
       font-size: 18px;

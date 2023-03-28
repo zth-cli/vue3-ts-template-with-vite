@@ -6,6 +6,11 @@ export type TcssVar = {
 export const LOCAL_NAME = '_headerThemeNum_'
 export const headerCssVars: TcssVar[] = [
   {
+    backgroundColor: '#fff',
+    activeTextColor: '',
+    textColor: '',
+  },
+  {
     backgroundColor: '#001529',
     activeTextColor: '#fff',
     textColor: '#fff',
@@ -14,11 +19,6 @@ export const headerCssVars: TcssVar[] = [
     backgroundColor: '#0fa59b',
     activeTextColor: '#fff',
     textColor: '#fff',
-  },
-  {
-    backgroundColor: '#fff',
-    activeTextColor: '',
-    textColor: '',
   },
 ]
 
