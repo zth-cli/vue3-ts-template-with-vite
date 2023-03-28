@@ -8,6 +8,11 @@
 import { ref, computed, watchEffect, unref, onMounted, watch } from 'vue'
 import { useTransition, TransitionPresets } from '@vueuse/core'
 import { isNumber } from '@/utils'
+
+defineOptions({
+  name: 'CountNum',
+})
+
 interface Props {
   startVal: number
   endVal: number

@@ -9,7 +9,7 @@
     </div>
     <div class="t-card__body">
       <div class="dashboard-item-top">
-        <countTo prefix="" :start-val="1" :end-val="count" />
+        <CountNum prefix="" :start-val="1" :end-val="count" />
       </div>
       <div class="dashboard-item-left">
         <span>
@@ -39,9 +39,9 @@
 </template>
 
 <script lang="ts">
-import { countTo } from '@/components/CountTo'
+import { CountNum } from '@/components/CountNum'
 export default defineComponent({
-  components: { countTo },
+  components: { CountNum },
   props: {
     count: {
       type: Number,

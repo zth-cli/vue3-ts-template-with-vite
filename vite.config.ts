@@ -6,8 +6,6 @@ import Inspector from 'vite-plugin-vue-inspector'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-import Pages from 'vite-plugin-pages'
-import Layouts from 'vite-plugin-vue-layouts'
 import VueMacros from 'unplugin-vue-macros/vite'
 import DefineOptions from 'unplugin-vue-define-options/vite'
 
@@ -62,15 +60,6 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       Inspector({
         toggleButtonVisibility: 'never',
       }),
-      // 仓库: https://github.com/hannoeru/vite-plugin-pages
-      Pages({
-        dirs: ['src/views'],
-        extensions: ['vue', 'md'],
-        importMode: "async",
-      }),
-
-      // 仓库: https://github.com/JohnCampionJr/vite-plugin-vue-layouts
-      Layouts(),
     ],
     base: isBuild ? './' : VITE_PUBLIC_PATH,
     server: {

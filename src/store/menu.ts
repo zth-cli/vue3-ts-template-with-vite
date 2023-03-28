@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
 import router from '@/router'
 import addRouter from '@/utils/getRoutes'
-import { getAsyncRoutes } from '@/api'
 import routeArr from '@/router/routerArr'
 import Main from '@/layout/index.vue'
 

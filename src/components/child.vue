@@ -18,7 +18,7 @@
     <slot name="default"></slot>
     {{ loading }}
     <p></p>
-    <countTo prefix="$" :start-val="1" :end-val="100" />
+    <CountNum prefix="$" :start-val="1" :end-val="100" />
     <renderJsx>
       <strong>这是默认插槽内容</strong>
       <template #footer="{ text }"
@@ -30,7 +30,7 @@
 
 <script lang="ts" setup>
 import renderJsx from './renderJSX.vue'
-import { countTo } from './CountTo'
+import { CountNum } from './CountNum'
 import { warn } from '@/utils/log'
 import { downloadByUrl } from '@/utils/downloadFile'
 import { Ref, ref, useAttrs, getCurrentInstance, onMounted } from 'vue'
