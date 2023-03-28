@@ -65,23 +65,6 @@ ul {
 }
 
 /*  字体颜色*/
-
-.color_warning {
-  cursor: pointer;
-  color: #f6726c !important;
-}
-
-.color_warning :hover {
-  color: #f6726c;
-}
-
-.color_green {
-  color: #3bca3b !important;
-}
-
-.color_green:hover {
-  color: #1ee81e;
-}
 .pointer {
   cursor: pointer;
 }
@@ -137,7 +120,7 @@ ul {
     width: 10px;
     height: 10px;
   }
-  ::-webkit-scrollbar-thumb  {
+  ::-webkit-scrollbar-thumb {
     background: rgba(144, 147, 153, 0.5);
   }
 }
@@ -173,4 +156,26 @@ ul {
   opacity: 0;
   transform: scale(1);
   transform: translateY(-50px);
+}
+
+// 启动加载
+.app-loading {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .loading {
+    border: 3px solid var(--el-color-primary-light-7);
+    border-top-color: var(--el-color-primary);
+    border-radius: 50%;
+    width: 3em;
+    height: 3em;
+    animation: spin 1s linear infinite;
+  }
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
 }
