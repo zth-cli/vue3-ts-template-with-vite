@@ -20,7 +20,7 @@ export const getAsyncRoutes = (data?: object) => {
 
 // 不定参数请求
 // get
-export async function apiGet(url: string, params: any): Promise<any> {
+export async function apiGet(url: string, params?: any): Promise<any> {
   const res = await http.get(url, params)
   return res
 }

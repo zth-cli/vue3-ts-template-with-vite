@@ -168,3 +168,37 @@ export function getLightColor(color: string, level: number): string | void {
   }
   return RgbToHex(rgbc[0], rgbc[1], rgbc[2])
 }
+
+/**
+ *
+ * @description 并发执行任务，控制同时执行任务的数量
+ * @param {Promise<any>[]} tasks
+ * @param {number} paralleCount
+ * @returns
+ */
+export const paralleTask = (tasks: Promise<any>[], paralleCount: number) => {
+  return new Promise<void>((resolve) => {
+    if (tasks.length === 0) {
+      resolve()
+    }
+    let nextIndex = 0
+    let finishCount = 0
+    const _run = () => {
+      const task = tasks[nextIndex]
+      nextIndex++
+      task &&
+        task.then(() => {
+          finishCount++
+          if (tasks.length > nextIndex) {
+            _run()
+          } else if (finishCount === tasks.length) {
+            // 任务完成
+            resolve()
+          }
+        })
+    }
+    for (let index = 0; index < paralleCount && index < tasks.length; index++) {
+      _run()
+    }
+  })
+}
