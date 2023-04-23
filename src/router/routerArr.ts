@@ -64,6 +64,16 @@ const routeArr: Array<IrouteItem> = [
         path: '/basci-table',
       },
       {
+        title: 'proTable',
+        componentName: 'useProTable',
+        componentPath: 'useProTable',
+        icon: 'el-icon-house',
+        parentId: 6,
+        id: 603,
+        type: 3,
+        path: '/pro-table',
+      },
+      {
         title: '列表布局',
         componentName: 'viewTable',
         componentPath: 'viewTable/index',
