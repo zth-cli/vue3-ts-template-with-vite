@@ -16,7 +16,7 @@ export const useTable = (
 ) => {
   const state = reactive<Table.TableStateProps>({
     // 表格数据
-    tableData: [],
+    tableData: [{ id: 1 }],
     // 分页数据
     pageable: {
       // 当前页数

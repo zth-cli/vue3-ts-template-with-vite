@@ -2,13 +2,16 @@
   <component :is="renderLoop(column)"></component>
 </template>
 
-<script lang="tsx" setup name="TableColumn">
+<script lang="tsx" setup>
 import { inject, ref, useSlots } from 'vue'
 import { ColumnProps } from '@/components/ProTable/interface'
 import { filterEnum, formatValue, handleRowAccordingToProp } from '@/utils/util'
-
+defineOptions({
+  name: 'TableColumn',
+})
 defineProps<{ column: ColumnProps }>()
 
+// 获取父级传入的插槽
 const slots = useSlots()
 
 const enumMap = inject('enumMap', ref(new Map()))
@@ -31,13 +34,29 @@ const getTagType = (item: ColumnProps, scope: { [key: string]: any }) => {
 }
 
 const renderLoop = (item: ColumnProps) => {
+  // tsx语法，传递插槽，作用如下
+  /*
+    <el-table-column align="right">
+      <template #header>
+        <el-input v-model="search" size="small" placeholder="Type to search" />
+      </template>
+      <template #default="scope">
+        <el-button size="small" @click="handleEdit(scope.$index, scope.row)"
+          >Edit</el-button
+        >
+        <el-button
+          size="small"
+          type="danger"
+          @click="handleDelete(scope.$index, scope.row)"
+          >Delete</el-button
+        >
+      </template>
+    </el-table-column>
+  */
   return (
     <>
-      {item.isShow && (
-        <el-table-column
-          {...item}
-          align={item.align ?? 'center'}
-          showOverflowTooltip={item.showOverflowTooltip ?? item.prop !== 'operation'}>
+      {!item.hidden && (
+        <el-table-column {...item} align={item.align || 'center'} showOverflowTooltip={item.showOverflowTooltip}>
           {{
             default: (scope: any) => {
               if (item._children) {

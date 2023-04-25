@@ -29,11 +29,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, ref } from 'vue'
+import { computed, inject, shallowRef, ref } from 'vue'
 import { handleProp } from '@/utils/util'
 import { ColumnProps } from '@/components/ProTable/interface'
 import { ElInput, ElSelect, ElOption } from 'element-plus/es'
-const map = ref({
+const map = shallowRef({
   input: ElInput,
   select: ElSelect,
 })
