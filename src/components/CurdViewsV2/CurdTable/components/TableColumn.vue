@@ -4,8 +4,8 @@
 
 <script lang="tsx" setup>
 import { inject, ref, useSlots } from 'vue'
-import { ColumnProps } from '@/components/ProTable/interface'
 import { filterEnum, formatValue, handleRowAccordingToProp } from '@/utils/util'
+import { ColumnProps } from '..'
 defineOptions({
   name: 'TableColumn',
 })

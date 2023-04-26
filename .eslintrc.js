@@ -44,6 +44,7 @@ module.exports = {
     'vue/require-default-prop': 'off',
     'vue/require-component-is': 'off',
     'vue/no-v-html': 'off',
+    'vue/no-mutating-props': 'off',
     'no-var': 'error',
     'no-undef': 0,
     'prettier/prettier': ['error', { semi: false, printWidth: 120, singleQuote: true, endOfLine: 'auto' }],

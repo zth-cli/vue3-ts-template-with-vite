@@ -14,7 +14,6 @@ export type TypeProp = 'index' | 'selection' | 'expand'
 
 export type SearchType =
   | 'input'
-  | 'input-number'
   | 'select'
   | 'select-v2'
   | 'tree-select'
@@ -22,28 +21,48 @@ export type SearchType =
   | 'date-picker'
   | 'time-picker'
   | 'time-select'
-  | 'switch'
-  | 'slider'
 
 export type SearchProps = {
-  el: SearchType // 当前项搜索框的类型
-  props?: any // 搜索项参数，根据 element plus 官方文档来传递，该属性所有值会透传到组件
-  key?: string // 当搜索项 key 不为 prop 属性时，可通过 key 指定
-  order?: number // 搜索项排序（从大到小）
+  type: SearchType // 当前项搜索框的类型
+  props?: any // element plus组件属性 参照官方文档来传递
+  key?: string // 搜索参数 key 没定义时取当前列的 prop
+  order?: number // 搜索项排序, 数字越小越靠前
   span?: number // 搜索项所占用的列数，默认为1列
   offset?: number // 搜索字段左侧偏移列数
-  defaultValue?: string | number | boolean | any[] // 搜索项默认值
+  defaultValue?: string | number | any[] // 搜索项默认值
 } & Partial<Record<BreakPoint, Responsive>>
 
 export interface ColumnProps<T = any> // 此处泛型为表格row数据类型
   extends Partial<Omit<TableColumnCtx<T>, 'children' | 'renderHeader' | 'renderCell'>> {
   tag?: boolean // 是否是标签展示
-  hidden?: boolean // 是否显示在表格当中
+  hidden?: boolean // 是否隐藏列
   search?: SearchProps | undefined // 搜索项配置
-  enum?: EnumProps[] | ((params?: any) => Promise<any>) // 枚举类型（渲染值的字典）
+  enum?: EnumProps[] | ((params?: any) => Promise<any>) // 枚举类型（渲染值的字典）,如果此列是查询项，会自动识别当作查询项
   isFilterEnum?: boolean // 当前单元格值是否根据 enum 格式化（示例：enum 只作为搜索项数据）
   fieldNames?: { label: string; value: string } // 指定 label && value 的 key 值
   headerRender?: (row: ColumnProps) => any // tsx自定义表头内容渲染
   render?: (scope: { row: T }) => any // tsx自定义单元格内容渲染
   _children?: ColumnProps<T>[] // 多级表头
+}
+
+export interface Pageable {
+  pageIndex: number
+  pageSize: number
+  total: number
+}
+export interface TableStateProps {
+  tableData: any[]
+  pageParams: Pageable
+  searchParam: {
+    [key: string]: any
+  }
+  totalParam: {
+    [key: string]: any
+  }
+  icon?: {
+    [key: string]: any
+  }
+}
+export namespace HandleData {
+  export type MessageType = '' | 'success' | 'warning' | 'info' | 'error'
 }

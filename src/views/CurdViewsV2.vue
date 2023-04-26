@@ -1,9 +1,10 @@
 <template>
   <div class="table-box">
-    <ProTable
+    <CurdTable
       ref="proTable"
       title="用户列表"
       highlight-current-row
+      size="small"
       :columns="columns"
       :request-api="getGiftlist"
       :row-class-name="tableRowClassName"
@@ -13,7 +14,7 @@
       @row-click="rowClick"
     >
       <!-- 表格 header 按钮 -->
-      <template #tableHeader="scope">
+      <template #table-header="scope">
         <el-button type="primary" :icon="CirclePlus" @click="proTable.element.toggleAllSelection()"
           >全选 / 全不选</el-button
         >
@@ -22,8 +23,8 @@
           type="danger"
           :icon="Delete"
           plain
-          :disabled="!scope.isSelected"
-          @click="batchDelete(scope.selectedListIds)"
+          :disabled="!scope['is-selected']"
+          @click="batchDelete(scope['selected-list-ids'])"
         >
           批量删除用户
         </el-button>
@@ -42,21 +43,20 @@
           >我是插入在表格最后的内容。若表格有合计行，该内容会位于合计行之上。</span
         >
       </template>
-    </ProTable>
+    </CurdTable>
   </div>
 </template>
 
 <script setup lang="tsx">
 import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
-import { ColumnProps } from '@/components/ProTable/interface'
+import { ColumnProps } from '@/components/CurdViewsV2/CurdTable'
 import { useHandleData } from '@/hooks/useHandleData'
-import ProTable from '@/components/ProTable/index.vue'
-import type { TableColumnCtx } from 'element-plus/es/components/table/src/table-column/defaults'
+import CurdTable from '@/components/CurdViewsV2/CurdTable/index.vue'
 import { CirclePlus, Pointer, Delete, Refresh } from '@element-plus/icons-vue'
 import { getGiftlist } from '@/api'
 
-// 获取 ProTable DOM
+// 获取 CurdTable DOM
 const proTable = ref()
 
 // 表格配置项
@@ -69,12 +69,16 @@ const columns: ColumnProps<any>[] = [
     label: '基本信息',
     // headerRender,
     _children: [
-      { prop: 'username', label: '用户姓名', width: 110 },
-      { prop: 'user.detail.age', label: '年龄', width: 100 },
+      { prop: 'username', label: '用户姓名', width: 110, search: { type: 'input', order: 2, defaultValue: '男' } },
+      { prop: 'user.detail.age', label: '年龄', width: 100, search: { type: 'input', order: 2, defaultValue: '男' } },
       {
         prop: 'gender',
         label: '性别',
-        search: { el: 'input' },
+        search: { type: 'date-picker', order: 2 },
+        enum: [
+          { label: '男', value: 1, color: 'success' },
+          { label: '女', value: 2, color: 'danger' },
+        ],
         width: 100,
         fieldNames: { label: 'genderLabel', value: 'genderValue' },
       },
@@ -93,10 +97,14 @@ const columns: ColumnProps<any>[] = [
     prop: 'status',
     label: '用户状态',
     tag: true,
-    search: { el: 'input' },
+    search: { type: 'input', order: 1 },
+    enum: [
+      { label: '正常', value: 1, color: 'success' },
+      { label: '禁用', value: 2, color: 'danger' },
+    ],
     fieldNames: { label: 'userLabel', value: 'userStatus' },
   },
-  { prop: 'createTime', label: '创建时间', width: 200 },
+  { prop: 'createTime', label: '创建时间', width: 200, search: { type: 'select', order: 2, defaultValue: '男' } },
   { prop: 'operation', label: '操作', fixed: 'right', width: 230 },
 ]
 

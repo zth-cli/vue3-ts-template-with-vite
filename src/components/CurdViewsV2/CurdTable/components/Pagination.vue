@@ -1,7 +1,7 @@
 <template>
   <!-- 分页组件 -->
   <el-pagination
-    :current-page="pageable.pageNum"
+    :current-page="pageable.pageIndex"
     :page-size="pageable.pageSize"
     :page-sizes="[10, 25, 50, 100]"
     :background="true"
@@ -12,12 +12,11 @@
   ></el-pagination>
 </template>
 
-<script setup lang="ts" name="Pagination">
-interface Pageable {
-  pageNum: number
-  pageSize: number
-  total: number
-}
+<script setup lang="ts">
+import { Pageable } from '..'
+defineOptions({
+  name: 'Pagination',
+})
 
 interface PaginationProps {
   pageable: Pageable

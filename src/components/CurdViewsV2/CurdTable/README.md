@@ -1,12 +1,12 @@
-## ProTable 文档 📚
+## CurdTable 文档 📚
 
-### 1、ProTable 属性（ProTableProps）：
+### 1、CurdTable 属性（ProTableProps）：
 
-> 使用 `v-bind="$attrs"` 通过属性透传将 **ProTable** 组件属性全部透传到 **el-table** 上，所以我们支持 **el-table** 的所有 **Props** 属性。在此基础上，还扩展了以下 **Props：**
+> 使用 `v-bind="$attrs"` 通过属性透传将 **CurdTable** 组件属性全部透传到 **el-table** 上，所以我们支持 **el-table** 的所有 **Props** 属性。在此基础上，还扩展了以下 **Props：**
 
 |    属性名    |    类型     | 是否必传 |                默认值                 |                                               属性描述                                               |
 | :----------: | :---------: | :------: | :-----------------------------------: | :--------------------------------------------------------------------------------------------------: |
-|   columns    | ColumnProps |    ✅    |                   —                   |                  ProTable 组件会根据此字段渲染搜索表单与表格列，详情见 ColumnProps                   |
+|   columns    | ColumnProps |    ✅    |                   —                   |                  CurdTable 组件会根据此字段渲染搜索表单与表格列，详情见 ColumnProps                   |
 |  requestApi  |  Function   |    ✅    |                   —                   |                                        获取表格数据的请求 API                                        |
 | requestAuto  |   Boolean   |    ❌    |                 true                  |                                    表格初始化是否自动执行请求 API                                    |
 | dataCallback |  Function   |    ❌    |                   —                   |                           后台返回数据的回调函数，可对后台返回数据进行处理                           |
@@ -47,15 +47,15 @@
 |     span     | Number |    ❌    |   1    |                                                        搜索项所占用的列数，默认为 1 列                                                         |
 |    offset    | Number |    ❌    |   —    |                                                              搜索字段左侧偏移列数                                                              |
 
-### 4、ProTable 事件：
+### 4、CurdTable 事件：
 
-> 根据 **ElementPlus Table** 文档在 **ProTable** 组件上绑定事件即可，组件会通过 **$attrs** 透传给 **el-table**。
+> 根据 **ElementPlus Table** 文档在 **CurdTable** 组件上绑定事件即可，组件会通过 **$attrs** 透传给 **el-table**。
 >
 > [el-table 事件文档链接](https://element-plus.org/zh-CN/component/table.html#table-%E4%BA%8B%E4%BB%B6)
 
-### 5、ProTable 方法：
+### 5、CurdTable 方法：
 
-> **ProTable** 组件暴露了 **el-table** 实例和一些组件内部的参数和方法：
+> **CurdTable** 组件暴露了 **el-table** 实例和一些组件内部的参数和方法：
 >
 > [el-table 方法文档链接](https://element-plus.org/zh-CN/component/table.html#table-%E6%96%B9%E6%B3%95)
 
@@ -73,11 +73,11 @@
 |  selectedList   |                          表格选中的数据列表                           |
 | selectedListIds |                        表格选中的数据列表的 id                        |
 
-### 6、ProTable 插槽：
+### 6、CurdTable 插槽：
 
 |          插槽名          |                                                                  描述                                                                   |
 | :----------------------: | :-------------------------------------------------------------------------------------------------------------------------------------: |
-|            —             |                                         默认插槽，支持直接在 ProTable 中写 el-table-column 标签                                         |
+|            —             |                                         默认插槽，支持直接在 CurdTable 中写 el-table-column 标签                                         |
 |       tableHeader        |                                         自定义表格头部左侧区域的插槽，一般情况该区域放操作按钮                                          |
 |        toolButton        |                                                  自定义表格头部左右侧侧功能区域的插槽                                                   |
 |          append          | 插入至表格最后一行之后的内容， 如果需要对表格的内容进行无限滚动操作，可能需要用到这个 slot。 若表格有合计行，该 slot 会位于合计行之上。 |
