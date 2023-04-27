@@ -27,8 +27,6 @@ export type SearchProps = {
   props?: any // element plus组件属性 参照官方文档来传递
   key?: string // 搜索参数 key 没定义时取当前列的 prop
   order?: number // 搜索项排序, 数字越小越靠前
-  span?: number // 搜索项所占用的列数，默认为1列
-  offset?: number // 搜索字段左侧偏移列数
   defaultValue?: string | number | any[] // 搜索项默认值
 } & Partial<Record<BreakPoint, Responsive>>
 

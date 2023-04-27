@@ -1,7 +1,7 @@
 <template>
   <div class="curd-table">
     <!-- 查询条件 -->
-    <SearchForm
+    <CurdSearchForm
       v-show="isShowSearch"
       v-model="searchParam"
       :search="searchHandle"
@@ -98,12 +98,12 @@ import { Refresh, Operation, Search } from '@element-plus/icons-vue'
 import { useTable } from './hooks/useTable'
 import { useSelection } from './hooks/useSelection'
 import { useColEnum } from './hooks/useColEnum'
-import SearchForm from '../SearchForm/index.vue'
+import CurdSearchForm from '../CurdSearchForm/index.vue'
 import Pagination from './components/Pagination.vue'
 import ColSetting from './components/ColSetting.vue'
 import TableColumn from './components/TableColumn.vue'
 
-interface ProTableProps extends Partial<Omit<TableProps<any>, 'data'>> {
+interface CurdTableProps extends Partial<Omit<TableProps<any>, 'data'>> {
   columns: ColumnProps[] // 列配置项
   requestApi?: (params: any) => Promise<any> // 请求表格数据的api
   apiUrl?: string // 请求表格数据的api地址, 二选一，优先级低于 requestApi
@@ -120,7 +120,7 @@ defineOptions({
   name: 'CurdTable',
 })
 // 接受父组件参数，配置默认值
-const props = withDefaults(defineProps<ProTableProps>(), {
+const props = withDefaults(defineProps<CurdTableProps>(), {
   requestAuto: true,
   columns: () => [],
   pagination: true,
@@ -210,7 +210,7 @@ const openColSetting = () => colRef.value.openColSetting()
 
 // 暴露参数和方法
 defineExpose({
-  element: tableRef,
+  eltable: tableRef,
   tableData,
   searchParam,
   pageParams,

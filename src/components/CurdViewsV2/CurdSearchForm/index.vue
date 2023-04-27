@@ -36,7 +36,7 @@ export interface ProTableProps {
   modelValue: { [key: string]: any } // 搜索参数
 }
 defineOptions({
-  name: 'SearchForm',
+  name: 'CurdSearchForm',
 })
 // 默认值
 const props = withDefaults(defineProps<ProTableProps>(), {
@@ -61,8 +61,6 @@ watch(
 // 获取响应式设置
 const getResponsive = (item: ColumnProps) => {
   return {
-    span: item.search?.span,
-    offset: item.search?.offset ?? 0,
     xs: item.search?.xs || 24,
     sm: item.search?.sm || 8,
     md: item.search?.md || 8,
