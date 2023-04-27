@@ -31,7 +31,7 @@
 
 <script setup lang="ts">
 import { computed, inject, shallowRef, ref } from 'vue'
-import { ColumnProps } from '@/components/CurdViewsV2/CurdTable'
+import { ColumnProps } from '@/components/CurdViewsV2'
 import {
   ElInput,
   ElSelect,

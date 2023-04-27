@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { Pageable } from '..'
+import { Pageable } from '@/components/CurdViewsV2'
 defineOptions({
   name: 'Pagination',
 })

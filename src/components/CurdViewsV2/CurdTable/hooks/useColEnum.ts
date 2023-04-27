@@ -1,4 +1,4 @@
-import { ColumnProps } from '..'
+import { ColumnProps } from '../..'
 import { ref, provide } from 'vue'
 export const useColEnum = () => {
   // 获取columns中的enum

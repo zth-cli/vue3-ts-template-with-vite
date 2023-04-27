@@ -5,7 +5,8 @@
 <script lang="tsx" setup>
 import { inject, ref, useSlots } from 'vue'
 import { filterEnum, formatValue, handleRowAccordingToProp } from '@/utils/util'
-import { ColumnProps } from '..'
+import { ColumnProps } from '@/components/CurdViewsV2'
+
 defineOptions({
   name: 'TableColumn',
 })

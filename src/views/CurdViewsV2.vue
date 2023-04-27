@@ -50,7 +50,7 @@
 <script setup lang="tsx">
 import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
-import { ColumnProps } from '@/components/CurdViewsV2/CurdTable'
+import { ColumnProps } from '@/components/CurdViewsV2'
 import { useHandleData } from '@/hooks/useHandleData'
 import CurdTable from '@/components/CurdViewsV2/CurdTable/index.vue'
 import { CirclePlus, Pointer, Delete, Refresh } from '@element-plus/icons-vue'

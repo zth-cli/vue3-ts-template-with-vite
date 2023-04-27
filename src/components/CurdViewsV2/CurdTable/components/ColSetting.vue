@@ -27,10 +27,13 @@
   </el-drawer>
 </template>
 
-<script setup lang="ts" name="ColSetting">
+<script setup lang="ts">
 import { ref } from 'vue'
-import { ColumnProps } from '..'
+import { ColumnProps } from '@/components/CurdViewsV2'
 
+defineOptions({
+  name: 'ColSetting',
+})
 defineProps<{ colSetting: ColumnProps[] }>()
 
 const drawerVisible = ref<boolean>(false)

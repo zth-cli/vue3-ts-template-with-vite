@@ -25,7 +25,7 @@
 import { computed, ref } from 'vue'
 import { Delete, Search, ArrowDown, ArrowUp } from '@element-plus/icons-vue'
 import SearchFormItem from './components/SearchFormItem.vue'
-import { ColumnProps } from '@/components/CurdViewsV2/CurdTable'
+import { ColumnProps } from '@/components/CurdViewsV2'
 import { BreakPoint } from '@/components/Grid/interface'
 
 export interface ProTableProps {

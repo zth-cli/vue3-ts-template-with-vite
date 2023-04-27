@@ -1,4 +1,4 @@
-import { TableStateProps, Pageable } from '..'
+import { TableStateProps, Pageable } from '../..'
 import { reactive, computed, toRefs } from 'vue'
 
 /**

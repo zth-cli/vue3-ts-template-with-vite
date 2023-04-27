@@ -92,7 +92,7 @@
 <script setup lang="ts">
 import { ref, watch, onMounted } from 'vue'
 import { BreakPoint } from '@/components/Grid/interface'
-import { ColumnProps } from '.'
+import { ColumnProps } from '..'
 import { ElTable, TableProps } from 'element-plus'
 import { Refresh, Operation, Search } from '@element-plus/icons-vue'
 import { useTable } from './hooks/useTable'
