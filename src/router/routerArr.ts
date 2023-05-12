@@ -64,6 +64,16 @@ const routeArr: Array<IrouteItem> = [
         path: '/basci-table',
       },
       {
+        title: 'CurdViewsV2',
+        componentName: 'CurdViewsV2',
+        componentPath: 'CurdViewsV2',
+        icon: 'el-icon-house',
+        parentId: 6,
+        id: 603,
+        type: 3,
+        path: '/el-table',
+      },
+      {
         title: '列表布局',
         componentName: 'viewTable',
         componentPath: 'viewTable/index',

@@ -12,6 +12,7 @@ import { genConfig, FILES_TYPES } from './config'
 import { transformConfigByMethod } from './utils'
 import { httpStatus } from './httpStatus'
 import { ElMessage } from 'element-plus'
+import 'element-plus/es/components/message/style/css'
 
 type cancelTokenItem = {
   cancelKey: string
