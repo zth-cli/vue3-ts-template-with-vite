@@ -18,7 +18,7 @@
         </el-table-column>
         <template #empty>
           <div class="table-empty">
-            <img src="@/assets/images/notData.png" alt="notData" />
+            <!-- <img src="@/assets/images/notData.png" alt="notData" /> -->
             <div>暂无可配置列</div>
           </div>
         </template>

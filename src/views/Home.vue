@@ -8,7 +8,6 @@
 </template>
 
 <script lang="ts" setup>
-import { getConfig } from '@/config'
 import child from '@/components/child.vue'
 import { overlay } from '@/components/Overlay'
 import { ref, onMounted } from 'vue'
@@ -17,7 +16,6 @@ const close = ref<boolean>(false)
 onMounted(() => {
   console.log(import.meta.env.MODE)
   console.log(import.meta.env)
-  console.log(getConfig())
 
   console.log(childRef.value)
 })
