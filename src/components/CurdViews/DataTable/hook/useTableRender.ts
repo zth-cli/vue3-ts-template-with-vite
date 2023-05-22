@@ -66,95 +66,6 @@ export default function renderFunc(props: any, slots: any) {
           }
         )
       }
-      if (item.headerSlot && !item.slot) {
-        // @ts-ignore
-        return h(ElTableColumn, columnProps, {
-          header: (scope: Iscope) => {
-            return [
-              h('p', [
-                slots[item.headerSlot]({
-                  row: scope.row,
-                  colum: scope.column,
-                  index: scope.$index,
-                }),
-              ]),
-            ]
-          },
-        })
-      }
-      if (item.headerSlot && item.slot) {
-        // @ts-ignore
-        return h(ElTableColumn, columnProps, {
-          default: (scope: Iscope) => {
-            return [
-              h('p', [
-                slots[item.slot]({
-                  row: scope.row,
-                  colum: scope.column,
-                  index: scope.$index,
-                }),
-              ]),
-            ]
-          },
-          header: (scope: Iscope) => {
-            return [
-              h('p', [
-                slots[item.headerSlot]({
-                  row: scope.row,
-                  colum: scope.column,
-                  index: scope.$index,
-                }),
-              ]),
-            ]
-          },
-        })
-      }
-      if (!item.headerSlot && item.slot) {
-        // @ts-ignore
-        return h(ElTableColumn, columnProps, {
-          // `<div><child v-slot="props"><span>{{ props.text }}</span></child></div>`
-          default: (scope: Iscope) => {
-            return [
-              h('p', [
-                slots[item.slot]({
-                  row: scope.row,
-                  colum: scope.column,
-                  index: scope.$index,
-                }),
-              ]),
-            ]
-          },
-        })
-      }
-      if (item.prop && item.enum) {
-        const enums = item.enum
-        // @ts-ignore
-        return h(ElTableColumn, columnProps, {
-          default: (scope: Iscope) => {
-            let node = null
-            for (let index = 0; index < enums.length; index++) {
-              const element = enums[index]
-              if (element.id === scope.row[item.prop]) {
-                node = h(
-                  // @ts-ignore
-                  ElTag,
-                  {
-                    size: 'small',
-                    type: element.type ? element.type : '',
-                  },
-                  {
-                    default: () => {
-                      return element.value
-                    },
-                  }
-                )
-                break
-              }
-            }
-            return node
-          },
-        })
-      }
       if (item.childrens?.length > 0) {
         return h(
           // @ts-ignore
@@ -168,7 +79,34 @@ export default function renderFunc(props: any, slots: any) {
         )
       }
       // @ts-ignore
-      return h(ElTableColumn, { prop: item.prop, ...columnProps })
+      return h(ElTableColumn, columnProps, {
+        header: (scope: Iscope) => {
+          if (item.headerSlot) {
+            return slots[item.headerSlot]({
+              row: scope.row,
+              colum: scope.column,
+              index: scope.$index,
+            })
+          } else if (item.headerRender) {
+            return item.headerRender(scope)
+          }
+          return item.label
+        },
+        default: (scope: Iscope) => {
+          if (item.slot) {
+            return slots[item.slot]({
+              row: scope.row,
+              colum: scope.column,
+              index: scope.$index,
+            })
+          } else if (item.render) {
+            return item.render(scope)
+          } else if (item.enum) {
+            return renderEnum(item.enum, scope, item.prop)
+          }
+          return scope.row[item.prop]
+        },
+      })
     })
     return elememtArr
   }
@@ -178,6 +116,30 @@ export default function renderFunc(props: any, slots: any) {
 export function filterHandler(value: any, row: { [x: string]: any }, column: { property: any }) {
   const property = column.property
   return row[property] === value
+}
+
+export function renderEnum(enums: { id: any; type?: any; value: any }[], scope: Iscope, prop: string) {
+  let node = null
+  for (let index = 0; index < enums.length; index++) {
+    const element = enums[index]
+    if (element.id === scope.row[prop]) {
+      node = h(
+        // @ts-ignore
+        ElTag,
+        {
+          size: 'small',
+          type: element.type ? element.type : '',
+        },
+        {
+          default: () => {
+            return element.value
+          },
+        }
+      )
+      break
+    }
+  }
+  return node
 }
 // https://forum.vuejs.org/t/how-to-solve-the-non-function-value-encountered-for-default-slot-prefer-function-slots-for-better-performance-warning/109097
 // which has only a getter 命名冲突

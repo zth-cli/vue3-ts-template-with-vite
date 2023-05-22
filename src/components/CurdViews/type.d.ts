@@ -1,12 +1,9 @@
 import { IDatePickerType } from 'element-plus/es/components/date-picker/src/date-picker.type'
-
-interface ItreeProps {
+import { TreeComponentProps } from 'element-plus/es/components/tree/src/tree.type'
+interface ItreeProps extends Partial<TreeComponentProps> {
   dataUrl?: string
   param?: { [x: string]: any }
   search?: boolean
-  treeProps?: any
-  defaultExpandAll?: boolean
-  expandOnclickNode?: boolean
   resDataName?: string
 }
 
@@ -29,12 +26,15 @@ interface Icolumns {
   resizable?: boolean
   headerAlign?: string
   sortable?: boolean
+  render?: (scope: any) => any // tsx自定义单元格内容渲染
+  headerRender?: (row: Icolumns) => any // tsx自定义表头内容渲染
   sortMethod?: () => void
   filters?: Array<{ text: string; value: any }>
   renderHeader?: () => void
   filterMethod?: (value: any, row: { [x: string]: any }, column: { property: any }) => void
   sortBy?: string | Array<any> | (() => void)
   filteredValue?: Array<any>
+  [x: string]: any
 }
 interface ItableProps {
   columns: Icolumns[]
