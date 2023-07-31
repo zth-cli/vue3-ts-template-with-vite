@@ -186,14 +186,12 @@ export function handleProp(prop: string) {
  * @param {String} callValue 当前单元格值
  * @param {Array} enumData 字典列表
  * @param {Array} fieldNames 指定 label && value 的 key 值
- * @param {String} type 过滤类型（目前只有 tag）
  * @return string
  * */
 export function filterEnum(
   callValue: any,
   enumData: any[] | undefined,
-  fieldNames?: { label: string; value: string },
-  type?: 'tag'
+  fieldNames?: { label: string; value: string }
 ): string {
   const value = fieldNames?.value ?? 'value'
   const label = fieldNames?.label ?? 'label'
@@ -201,8 +199,25 @@ export function filterEnum(
   if (Array.isArray(enumData)) {
     filterData = enumData.find((item: any) => item[value] === callValue)
   }
-  if (type === 'tag') {
-    return filterData?.tagType ? filterData.tagType : ''
-  }
   return filterData ? filterData[label] : '--'
+}
+
+/**
+ * @description 返货当前枚举的color
+ * @param {String} callValue 当前单元格值
+ * @param {Array} enumData 字典列表
+ * @param {Array} fieldNames 指定 label && value 的 key 值
+ * @return string
+ * */
+export function filterEnumColor(
+  callValue: any,
+  enumData: any[] | undefined,
+  fieldNames?: { label: string; value: string }
+): string {
+  const value = fieldNames?.value ?? 'value'
+  let filterData: { [key: string]: any } = {}
+  if (Array.isArray(enumData)) {
+    filterData = enumData.find((item: any) => item[value] === callValue)
+  }
+  return filterData && filterData['color'] ? filterData['color'] : ''
 }

@@ -52,6 +52,7 @@
           <!-- expand 支持 tsx 语法 && 作用域插槽 -->
           <el-table-column v-if="item.type == 'expand'" v-bind="item" :align="item.align || 'center'">
             <template #default="scope">
+              <!-- 支持render函数 -->
               <component :is="item.render" v-bind="scope" v-if="item.render"> </component>
               <slot v-else :name="item.type" v-bind="scope"></slot>
             </template>
@@ -116,9 +117,6 @@ interface CurdTableProps extends Partial<Omit<TableProps<any>, 'data'>> {
   searchCol?: number | Record<BreakPoint, number> // 表格搜索项 每列占比配置
 }
 
-defineOptions({
-  name: 'CurdTable',
-})
 // 接受父组件参数，配置默认值
 const props = withDefaults(defineProps<CurdTableProps>(), {
   requestAuto: true,
@@ -167,8 +165,8 @@ const tableColumns = ref<ColumnProps[]>(props.columns)
 const { setEnumMap, enumMap } = useColEnum()
 const flatColumnsFunc = (columns: ColumnProps[], flatArr: ColumnProps[] = []) => {
   columns.forEach(async (col) => {
-    if (col._children?.length) {
-      flatArr.push(...flatColumnsFunc(col._children))
+    if (col.children?.length) {
+      flatArr.push(...flatColumnsFunc(col.children))
     }
     flatArr.push(col)
 
@@ -179,7 +177,7 @@ const flatColumnsFunc = (columns: ColumnProps[], flatArr: ColumnProps[] = []) =>
     // 设置 enumMap
     setEnumMap(col)
   })
-  return flatArr.filter((item) => !item._children?.length)
+  return flatArr.filter((item) => !item.children?.length)
 }
 
 const flatColumns = ref<ColumnProps[]>()
@@ -222,6 +220,11 @@ defineExpose({
   selectedList,
   selectedListIds,
 })
+</script>
+<script lang="ts">
+export default {
+  name: 'CurdTable',
+}
 </script>
 <style lang="scss">
 @import './style.scss';

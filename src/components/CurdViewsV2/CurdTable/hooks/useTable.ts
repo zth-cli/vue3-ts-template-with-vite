@@ -1,21 +1,24 @@
-import { TableStateProps, Pageable } from '../..'
+import { TableStateProps, Pageable } from '../../.'
 import { reactive, computed, toRefs } from 'vue'
 
 /**
- * @description table 页面操作方法封装
- * @param {Function} api 获取表格数据 api 方法
+ * @description table 页面操作hook方法封装
+ * @param {Function} httpRequest 获取表格数据 httpRequest 方法
  * @param {Object} initParam 获取数据初始化参数
  * @param {Boolean} isPageable 是否有分页
  * @param {Function} dataCallBack 对后台返回的数据进行处理的方法
  * */
 export const useTable = (
-  api: (params: any) => Promise<any>,
+  httpRequest: (params: any) => Promise<any>,
   initParam: object = {},
   isPageable = true,
   dataCallBack?: (data: any) => any
 ) => {
   const state = reactive<TableStateProps>({
-    tableData: [{ id: 1 }, { id: 2 }],
+    tableData: [
+      { id: 1, status: 1, children: [{ id: 22, status: 1 }] },
+      { id: 2, status: 2 },
+    ],
     pageParams: {
       pageIndex: 1,
       pageSize: 10,
@@ -39,7 +42,7 @@ export const useTable = (
     try {
       // 先把初始化参数和分页参数放到总参数里面
       Object.assign(state.totalParam, initParam, unref(pageParam))
-      let { data } = await api(state.totalParam)
+      let { data } = await httpRequest(state.totalParam)
       dataCallBack && (data = dataCallBack(data))
       state.tableData = data.list
 
