@@ -17,8 +17,8 @@
         <div class="header-button-lf">
           <slot
             name="table-header"
-            :selected-list-ids="selectedListIds"
-            :selected-list="selectedList"
+            :selected-rows-ids="selectedRowsIds"
+            :selected-rows="selectedRows"
             :is-selected="isSelected"
           />
         </div>
@@ -135,7 +135,7 @@ const isShowSearch = ref(true)
 const tableRef = ref<InstanceType<typeof ElTable>>()
 
 // 表格多选 Hooks
-const { selectionChange, selectedList, selectedListIds, isSelected } = useSelection(props.rowKey)
+const { selectionChange, selectedRows, selectedRowsIds, isSelected } = useSelection(props.rowKey)
 
 // 表格操作 Hooks
 const {
@@ -194,7 +194,6 @@ if (searchColumns.length > 0) {
       searchParam.value[column.search.key || column.prop!] = column.search?.defaultValue
     }
   })
-
   // 排序搜索表单项
   searchColumns.sort((a, b) => a.search?.order - b.search?.order)
 }
@@ -206,9 +205,8 @@ const colSetting = tableColumns.value?.filter(
 )
 const openColSetting = () => colRef.value.openColSetting()
 
-// 暴露参数和方法
-defineExpose({
-  eltable: tableRef,
+// 提取eltable所有的方法
+const exposeFn = {
   tableData,
   searchParam,
   pageParams,
@@ -217,9 +215,18 @@ defineExpose({
   clearSelection,
   enumMap,
   isSelected,
-  selectedList,
-  selectedListIds,
+  selectedRows,
+  selectedRowsIds,
+}
+onMounted(() => {
+  const entries = Object.entries(tableRef.value)
+  for (const [method, fn] of entries) {
+    exposeFn[method] = fn
+  }
 })
+
+// 暴露参数和方法
+defineExpose(exposeFn)
 </script>
 <script lang="ts">
 export default {

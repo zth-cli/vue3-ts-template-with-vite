@@ -1,4 +1,5 @@
 import { ElMessageBox, ElMessage } from 'element-plus'
+import 'element-plus/es/components/message-box/style/css'
 import { HandleData } from './interface'
 
 /**
@@ -10,9 +11,9 @@ import { HandleData } from './interface'
  * @return Promise
  */
 export const useHandleData = <P = any, R = any>(
-  api: (params?: P) => Promise<R>,
-  params: Parameters<typeof api>[0],
-  message: string,
+  api?: (params?: P) => Promise<R>,
+  params?: Parameters<typeof api>[0],
+  message = '删除',
   confirmType: HandleData.MessageType = 'warning'
 ) => {
   return new Promise((resolve, reject) => {

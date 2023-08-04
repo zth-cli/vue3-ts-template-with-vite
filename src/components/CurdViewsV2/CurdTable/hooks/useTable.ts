@@ -15,17 +15,19 @@ export const useTable = (
   dataCallBack?: (data: any) => any
 ) => {
   const state = reactive<TableStateProps>({
+    // 表格数据
     tableData: [
-      { id: 1, status: 1, children: [{ id: 22, status: 1 }] },
+      { id: 1, status: 1 },
       { id: 2, status: 2 },
     ],
+    // 分页参数
     pageParams: {
       pageIndex: 1,
       pageSize: 10,
       total: 0,
     },
-    searchParam: {},
-    totalParam: {},
+    searchParam: {}, // 搜索参数
+    totalParam: {}, // 查询参数
   })
 
   const pageParam = computed(() => {

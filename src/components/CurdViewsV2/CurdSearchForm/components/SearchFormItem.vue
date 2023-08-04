@@ -32,6 +32,8 @@
 <script setup lang="ts">
 import { computed, inject, shallowRef, ref } from 'vue'
 import { ColumnProps } from '@/components/CurdViewsV2'
+// 引入时间控件样式,避免样式丢失
+import 'element-plus/es/components/date-picker/style/css'
 import {
   ElInput,
   ElSelect,

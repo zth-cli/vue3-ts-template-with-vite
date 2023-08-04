@@ -35,9 +35,6 @@ export interface ProTableProps {
   reset: (params: any) => void // 重置方法
   modelValue: { [key: string]: any } // 搜索参数
 }
-defineOptions({
-  name: 'CurdSearchForm',
-})
 // 默认值
 const props = withDefaults(defineProps<ProTableProps>(), {
   columns: () => [],
@@ -65,7 +62,7 @@ const getResponsive = (item: ColumnProps) => {
     sm: item.search?.sm || 8,
     md: item.search?.md || 8,
     lg: item.search?.lg || 6,
-    xl: item.search?.xl || 4,
+    xl: item.search?.xl || 6,
   }
 }
 
@@ -94,4 +91,9 @@ const showCollapse = computed(() => {
   }, 0)
   return show
 })
+</script>
+<script lang="ts">
+export default {
+  name: 'CurdSearchForm',
+}
 </script>

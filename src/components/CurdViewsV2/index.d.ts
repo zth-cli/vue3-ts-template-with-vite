@@ -29,7 +29,7 @@ export type SearchProps = {
 } & Partial<Record<BreakPoint, Responsive>>
 
 export interface ColumnProps<T = any> // 此处泛型为表格row数据类型
-  extends Partial<Omit<TableColumnCtx<T>, 'renderCell'>> {
+  extends Partial<Omit<TableColumnCtx<T>, 'renderCell' | 'children'>> {
   hidden?: boolean // 是否隐藏列
   search?: SearchProps | undefined // 搜索项配置
   enum?: EnumProps[] | ((params?: any) => Promise<any>) // 枚举类型（渲染值的字典）,如果此列是查询项，会自动识别当作查询项
@@ -37,6 +37,7 @@ export interface ColumnProps<T = any> // 此处泛型为表格row数据类型
   fieldNames?: { label: string; value: string } // 指定enum的 label && value 的 key 值
   headerRender?: (row: ColumnProps) => any // tsx自定义表头内容渲染
   render?: (scope: { row: T }) => any // tsx自定义单元格内容渲染
+  children?: ColumnProps[] // 子列
 }
 
 export interface Pageable {

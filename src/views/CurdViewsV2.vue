@@ -15,16 +15,14 @@
     >
       <!-- 表格 header 按钮 -->
       <template #table-header="scope">
-        <el-button type="primary" :icon="CirclePlus" @click="proTable.eltable.toggleAllSelection()"
-          >全选 / 全不选</el-button
-        >
+        <el-button type="primary" :icon="CirclePlus" @click="proTable.toggleAllSelection()">全选 / 全不选</el-button>
         <el-button type="primary" :icon="Pointer" plain @click="setCurrent">选中第二行</el-button>
         <el-button
           type="danger"
           :icon="Delete"
           plain
-          :disabled="!scope['is-selected']"
-          @click="batchDelete(scope['selected-list-ids'])"
+          :disabled="!scope['isSelected']"
+          @click="batchDelete(scope['selectedRowsIds'])"
         >
           批量删除用户
         </el-button>
@@ -32,6 +30,10 @@
       <!-- Expand -->
       <template #expand="scope">
         {{ scope.row }}
+      </template>
+      <!-- 自定义标题 -->
+      <template #createTimeHeader>
+        <el-button type="primary">自定义表头</el-button>
       </template>
       <!-- 表格操作 -->
       <template #operation="scope">
@@ -77,7 +79,6 @@ const columns: ColumnProps<any>[] = [
     children: [
       {
         prop: 'username',
-        renderHeader,
         label: '用户姓名',
         width: 110,
         search: { type: 'input', order: 2, defaultValue: '男' },
@@ -97,7 +98,7 @@ const columns: ColumnProps<any>[] = [
       {
         prop: 'details',
         label: '详细资料',
-        _children: [
+        children: [
           { prop: 'idCard', label: '身份证号' },
           { prop: 'email', label: '邮箱' },
           { prop: 'address', label: '居住地址' },
@@ -116,7 +117,7 @@ const columns: ColumnProps<any>[] = [
   },
   {
     prop: 'createTime',
-    renderHeader,
+    // renderHeader,
     label: '创建时间',
     width: 200,
     search: { type: 'select', order: 2, defaultValue: '男' },
@@ -126,7 +127,7 @@ const columns: ColumnProps<any>[] = [
 
 // 选择行
 const setCurrent = () => {
-  proTable.value?.eltable?.setCurrentRow(proTable.value?.tableData[1])
+  proTable.value?.setCurrentRow(proTable.value?.tableData[1])
 }
 
 const getSummaries = (param: any) => {
@@ -172,22 +173,21 @@ const rowClick = (row, column) => {
 
 // 删除用户信息
 const deleteAccount = async (params) => {
-  useHandleData
-  alert('删除用户信息')
-  proTable.value.getTableList()
+  useHandleData()
+  proTable.value.queryTableData()
 }
 
 // 批量删除用户信息
 const batchDelete = async (id: string[]) => {
   alert('删除所选用户信息')
   proTable.value.clearSelection()
-  proTable.value.getTableList()
+  proTable.value.queryTableData()
 }
 
 // 重置用户密码
 const resetPass = async (params) => {
   alert('重置用户密码')
-  proTable.value.getTableList()
+  proTable.value.queryTableData()
 }
 </script>
 
