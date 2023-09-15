@@ -25,7 +25,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       VueMacros({
         plugins: {
           vue: vue({
-            include: [/\.vue$/, /\.md$/],
+            include: [ /\.[tj]sx?$/, /\.vue$/, /\.md$/],
           }),
           vueJsx: vueJsx(),
         },
@@ -34,6 +34,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       configMockPlugin(command),
       configHtmlPlugin(loadEnv(mode, root), isBuild),
       AutoImport({
+        include: [ /\.[tj]sx?$/, /\.vue$/, /\.md$/],
         imports: ['vue', 'vue-router', 'vuex', 'vue/macros'], // 自动导入vue和vue-router等相关函数
         eslintrc: {
           enabled: false, // 若没此json文件，先开启，生成后在关闭
@@ -48,6 +49,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       }),
       //
       Components({
+        include: [ /\.[tj]sx?$/, /\.vue$/, /\.md$/],
         dirs: ['src/components'],
         deep: true,
         resolvers: [ElementPlusResolver()],

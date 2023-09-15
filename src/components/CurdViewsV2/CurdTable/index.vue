@@ -33,10 +33,10 @@
       <!-- el-table -->
       <el-table
         ref="tableRef"
-        v-bind="$attrs"
         :data="tableData"
         :border="border"
         :row-key="rowKey"
+        v-bind="$attrs"
         @selection-change="selectionChange"
       >
         <!-- 默认插槽, el-table-column -->
