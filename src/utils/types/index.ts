@@ -125,19 +125,14 @@ export function isHttpLink(link: string): boolean {
 }
 
 /** 判断字符串是否是json结构 */
-export const isJSON = (str: string): boolean => {
+export const isJSON = (str: string): boolean | undefined => {
   if (!str) {
     return false
   }
-  if (typeof str === 'string') {
-    try {
-      const obj = JSON.parse(str)
-      if (typeof obj === 'object' && obj) {
-        return true
-      }
-      return false
-    } catch (e) {
-      return false
-    }
+  try {
+    const obj = JSON.parse(str)
+    return !!(typeof obj === 'object' && obj)
+  } catch (e) {
+    return false
   }
 }

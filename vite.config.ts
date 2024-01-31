@@ -6,8 +6,6 @@ import Inspector from 'vite-plugin-vue-inspector'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-import VueMacros from 'unplugin-vue-macros/vite'
-import DefineOptions from 'unplugin-vue-define-options/vite'
 
 import { configMockPlugin } from './build/configMockPlugin'
 import { configHtmlPlugin } from './build/configHtmlPlugin'
@@ -22,15 +20,8 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
   const { VITE_PORT, VITE_PUBLIC_PATH, VITE_PROXY } = loadEnv(mode, root)
   return {
     plugins: [
-      VueMacros({
-        plugins: {
-          vue: vue({
-            include: [ /\.[tj]sx?$/, /\.vue$/, /\.md$/],
-          }),
-          vueJsx: vueJsx(),
-        },
-      }),
-      DefineOptions(),
+      vue(),
+      vueJsx(),
       configMockPlugin(command),
       configHtmlPlugin(loadEnv(mode, root), isBuild),
       AutoImport({
