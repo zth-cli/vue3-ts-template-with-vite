@@ -21,12 +21,13 @@
             @click="editRow()"
             >修改</el-button
           >
-          <el-popover v-model:visible="visible" placement="top" :width="160">
-            <p>确定删除吗？</p>
-            <div style="text-align: right; margin: 0">
-              <el-button type="text" :size="tableSize" @click="visible = false">取消</el-button>
-              <el-button type="primary" :size="tableSize" @click="deleteRows()">确定</el-button>
-            </div>
+          <el-popconfirm
+            confirm-button-text="确定"
+            cancel-button-text="取消"
+            icon-color="#626AEF"
+            title="确定删除吗?"
+            @confirm="deleteRows"
+          >
             <template #reference>
               <el-button
                 v-if="props.defaultPanel.includes('delete')"
@@ -34,11 +35,10 @@
                 type="danger"
                 :size="tableSize"
                 :disabled="isMultiple"
-                @click="visible = true"
                 >删除</el-button
               >
             </template>
-          </el-popover>
+          </el-popconfirm>
           <el-button
             v-if="props.defaultPanel.includes('export')"
             :size="tableSize"
@@ -145,7 +145,6 @@ import { Icolumns } from '../type'
 const tableView = ref<InstanceType<typeof DataTable>>(null)
 
 const props = withDefaults(defineProps<ItableProp>(), { ...defaulltProps, tableSize: 'default' })
-const visible = ref<boolean>(false)
 const mColumns = ref<Icolumns[]>([])
 const selection = ref<any[]>([])
 const key = ref<number>(0)
@@ -198,7 +197,6 @@ const editRow = () => {
   emit('row-edit', Object.assign({}, selection.value[0]))
 }
 const deleteRows = () => {
-  visible.value = false
   emit('row-delete', selection.value)
 }
 const columnsChange = () => {

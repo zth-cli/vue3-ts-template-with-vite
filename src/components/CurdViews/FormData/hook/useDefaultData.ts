@@ -26,20 +26,20 @@ export const useDefaultData = (props) => {
           item.options = res
         })
       }
-      if (typeArr.includes(item.type) && !dateType.includes(item.type)) {
-        const keys = Object.keys(props.postParams)
+      if (typeArr.includes(item.type)) {
+        const keys = Object.keys(unref(props.postParams))
         const defaultValue = keys.includes(item.name)
-          ? props.postParams[item.name]
+          ? unref(props.postParams)[item.name]
           : item.default !== 'undefined'
           ? item.default
           : null
         formData[item.name] = defaultValue
+        if (dateType.includes(item.type) && !defaultValue) {
+          formData[item.name] = dayjs().format(item.format)
+        }
         if (item.multiple) {
           const mulValue = typeof defaultValue === 'string' ? defaultValue.split(',') : defaultValue
           formData[item.name] = mulValue || []
-        }
-        if (dateType.includes(item.type)) {
-          formData[item.name] = item.default ? item.default : dayjs().format(item.format.toUpperCase())
         }
       }
       if (props.rowData) {
