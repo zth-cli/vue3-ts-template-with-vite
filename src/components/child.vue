@@ -7,14 +7,14 @@
     <h2>{{ props.name }}</h2>
     <el-button type="primary" @click="clickHandle">点击</el-button>
     <el-button type="primary" @click="clickHandles">提示</el-button>
-    <el-button type="primary" @click="debHandler">防抖</el-button>
-    <el-button v-permission="{ action: ['admin'], effect: 'disabled' }" type="primary">鉴权</el-button>
+    <el-button v-auth="{ action: ['admin'], effect: 'disabled' }" type="primary">鉴权</el-button>
     <el-button type="warning" @click="warn('控制台抛异常')">控制台抛异常</el-button>
     <el-button
       type="primary"
-      @click="downloadByUrl({ url: 'http://192.168.3.165:8888/index.html', fileName: 'a.html' })"
-      >下载</el-button
+      @click="downloadByUrl({ url: 'http://localhost:8889/src/assets/img/logo.png', fileName: 'a.png' })"
     >
+      下载
+    </el-button>
     <slot name="default"></slot>
     {{ loading }}
     <p></p>
@@ -35,7 +35,6 @@ import { warn } from '@/utils/log'
 import { downloadByUrl } from '@/utils/downloadFile'
 import { Ref, ref, useAttrs, getCurrentInstance, onMounted } from 'vue'
 import { useRequest } from '@/hooks/useRequest'
-import { useDebounce } from '@/hooks/useDebounce'
 import { getAsyncRoutes } from '@/api'
 
 const { loading, error, result, fetchResource } = useRequest(getAsyncRoutes)
@@ -44,7 +43,6 @@ const handler = () => {
   console.log(1)
 }
 
-const { debHandler } = useDebounce(handler)
 onMounted(() => {
   fetchResource().then((result) => {
     console.log(result)

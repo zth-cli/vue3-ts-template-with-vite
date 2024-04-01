@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FlowBar :options="fromOptions" :multiple="false"></FlowBar>
+    <!-- <FlowBar :options="fromOptions" :multiple="false"></FlowBar> -->
     <CurdView
       :table-options="tableOptions"
       :from-options="fromOptions"

@@ -1,12 +1,15 @@
 import debounce from './debounce'
-// import throttle from './throttle'
-// import copy from './copy'
-import { activeStyle } from './activestyle'
+import throttle from './throttle'
+import copy from './copy'
+import activeStyle from './activestyle'
+import dragable from './dragable'
+import resize from './resize'
 import dialogDrag from './dialogdrag'
-import permission from './permission'
-const directives = { debounce, dialogDrag, permission, activeStyle }
+import auth from './permission'
+import { App } from 'vue'
+const directives = { debounce, throttle, dialogDrag, copy, dragable, resize, auth, activeStyle }
 export default {
-  install: (app) => {
+  install: (app: App) => {
     Object.keys(directives).forEach((key) => {
       app.directive(key, directives[key])
     })

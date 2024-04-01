@@ -1,11 +1,13 @@
-import { ref, watchEffect } from 'vue'
+import { Directive, watchEffect } from 'vue'
 
 /**
- * Implement the custom directive
- * Make sure the list item text color changes to red when the `toggleTab` is toggled
- *
+ * @description: 激活样式
+ * @param {*} el
+ * @param {*} binding
+ * @example
+ * <span v-active-style="[{'color':'red','font-size': '22px'},() => activeTab === index]"></span>
  */
-export const activeStyle = {
+const activeStyle: Directive = {
   mounted: (el: HTMLElement, { value }) => {
     const [style, fn] = value
     watchEffect(() => {
@@ -15,4 +17,4 @@ export const activeStyle = {
     })
   },
 }
-//  v-active-style="[{'color':'red','font-size': '22px'},() => activeTab === index]"
+export default activeStyle

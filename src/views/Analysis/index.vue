@@ -2,9 +2,19 @@
   <el-row :gutter="10">
     <el-col :span="12"> <div ref="chartRef" :style="{ height: '280px', width: '100%' }"></div></el-col>
     <el-col :span="12"><div ref="chartRef1" :style="{ height: '280px', width: '100%' }"></div></el-col>
+    <el-col :span="12">
+      <Child />
+    </el-col>
     <el-col :span="4">
       <el-button type="primary" size="default" @click="close = !close">按钮</el-button>
       <new-menu :menu-data="routeArr" :collapse="close"></new-menu>
+      <div v-resize="true" style="height: 300px; width: 300px; background-color: aquamarine">拖拽resize元素</div>
+      <div
+        v-dragable="true"
+        style="height: 300px; width: 300px; background-color: #ddd; position: absolute; left: 400px; top: 400px"
+      >
+        拖拽元素
+      </div>
     </el-col>
   </el-row>
 </template>
@@ -13,6 +23,7 @@ import NewMenu from '@/layout/newMenu'
 import { defineComponent, onMounted, ref, Ref } from 'vue'
 import { useECharts } from '@/hooks/useECharts'
 import { useMenuStore } from '@/store/menu'
+import Child from '@/components/child.vue'
 export default defineComponent({
   components: { NewMenu },
   setup() {
