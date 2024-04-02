@@ -83,11 +83,11 @@ const columns: ColumnProps<any>[] = [
         width: 110,
         search: { type: 'input', order: 2, defaultValue: '男' },
       },
-      { prop: 'user.detail.age', label: '年龄', width: 100, search: { type: 'input', order: 2, defaultValue: '男' } },
+      { prop: 'age', label: '年龄', width: 100, search: { type: 'input', order: 2, defaultValue: '男' } },
       {
         prop: 'gender',
         label: '性别',
-        search: { type: 'date-picker', order: 2 },
+        search: { type: 'select', order: 2 },
         isFilterEnum: true,
         enum: [
           { label: '男', value: 1 },
@@ -120,7 +120,7 @@ const columns: ColumnProps<any>[] = [
     // renderHeader,
     label: '创建时间',
     width: 200,
-    search: { type: 'select', order: 2, defaultValue: '男' },
+    search: { type: 'date-picker', order: 2, defaultValue: '男' },
   },
   { prop: 'operation', label: '操作', fixed: 'right', width: 230 },
 ]

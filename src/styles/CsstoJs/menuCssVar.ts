@@ -6,7 +6,7 @@ export type TcssVar = {
 export const LOCAL_NAME = '_menuThemeNum_'
 export const menuCssVars: TcssVar[] = [
   {
-    backgroundColor: '#001529',
+    backgroundColor: '#141414',
     activeTextColor: '#fff',
     textColor: '#fff',
   },

@@ -10,9 +10,7 @@
       :search-col="searchCol"
     />
 
-    <!-- 表格区域 -->
     <div class="table-main">
-      <!-- 表格头部 操作按钮 -->
       <div class="table-header">
         <div class="header-button-lf">
           <slot
@@ -53,7 +51,7 @@
           <el-table-column v-if="item.type == 'expand'" v-bind="item" :align="item.align || 'center'">
             <template #default="scope">
               <!-- 支持render函数 -->
-              <component :is="item.render" v-bind="scope" v-if="item.render"> </component>
+              <component :is="item.renderCell" v-bind="scope" v-if="item.renderCell"> </component>
               <slot v-else :name="item.type" v-bind="scope"></slot>
             </template>
           </el-table-column>
@@ -102,7 +100,7 @@ import { useColEnum } from './hooks/useColEnum'
 import CurdSearchForm from '../CurdSearchForm/index.vue'
 import Pagination from './components/Pagination.vue'
 import ColSetting from './components/ColSetting.vue'
-import TableColumn from './components/TableColumn.vue'
+import { TableColumn } from './components/TableColumn'
 
 interface CurdTableProps extends Partial<Omit<TableProps<any>, 'data'>> {
   columns: ColumnProps[] // 列配置项
@@ -201,7 +199,7 @@ if (searchColumns.length > 0) {
 // 过滤掉不需要设置显隐的列
 const colRef = ref()
 const colSetting = tableColumns.value?.filter(
-  (item) => !['selection', 'index', 'expand'].includes(item.type!) && item.prop !== 'operation'
+  (item) => !['selection', 'index', 'expand'].includes(item.type!) && item.prop !== 'operation',
 )
 const openColSetting = () => colRef.value.openColSetting()
 

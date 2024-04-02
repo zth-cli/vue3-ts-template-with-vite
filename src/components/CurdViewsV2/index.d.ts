@@ -20,23 +20,26 @@ export type SearchType =
   | 'time-picker'
   | 'time-select'
 
-export type SearchProps = {
+// 查询条件
+export interface SearchProps extends Partial<Record<BreakPoint, Responsive>> {
   type: SearchType // 当前项搜索框的类型
   props?: any // element plus组件属性 参照官方文档来传递
-  key?: string // 搜索参数 key 没定义时取当前列的 prop
-  order?: number // 搜索项排序, 数字越小越靠前
+  key?: string // 搜索参数字段名 没定义时取当前列的 prop
+  order?: number //排序, 数字越小越靠前
+  span?: number // 查询项所占用的列数，默认为 1 列
+  offset?: number // 查询项偏移列数, 默认0
   defaultValue?: string | number | any[] // 搜索项默认值
-} & Partial<Record<BreakPoint, Responsive>>
+}
 
-export interface ColumnProps<T = any> // 此处泛型为表格row数据类型
-  extends Partial<Omit<TableColumnCtx<T>, 'renderCell' | 'children'>> {
+//  继承element plus的table-column 属性,排除一些属性，并扩展一些属性
+export interface ColumnProps<T = any> extends Partial<Omit<TableColumnCtx<T>, 'renderCell' | 'children'>> {
   hidden?: boolean // 是否隐藏列
   search?: SearchProps | undefined // 搜索项配置
   enum?: EnumProps[] | ((params?: any) => Promise<any>) // 枚举类型（渲染值的字典）,如果此列是查询项，会自动识别当作查询项
   isFilterEnum?: boolean // 当前单元格值是否根据 enum 格式化（示例：enum 只作为搜索项数据）
   fieldNames?: { label: string; value: string } // 指定enum的 label && value 的 key 值
-  headerRender?: (row: ColumnProps) => any // tsx自定义表头内容渲染
-  render?: (scope: { row: T }) => any // tsx自定义单元格内容渲染
+  headerRender?: (row: ColumnProps) => any // tsx或渲染函数自定义表头内容渲染
+  renderCell?: (scope: { row: T }) => any // tsx或渲染函数自定义单元格内容渲染
   children?: ColumnProps[] // 子列
 }
 

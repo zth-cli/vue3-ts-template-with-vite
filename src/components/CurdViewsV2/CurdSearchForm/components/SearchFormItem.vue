@@ -69,8 +69,9 @@ const fieldNames = computed(() => {
   }
 })
 
-// 接收 enumMap
+// 接收 enumMap,从cloumns中获取搜索项的枚举(enum)数据, 用于下拉框等选项渲染
 const enumMap = inject('enumMap', ref(new Map()))
+
 const searchOptions = computed(() => {
   let enumData = enumMap.value.get(props.column.prop)
   if (!enumData) {

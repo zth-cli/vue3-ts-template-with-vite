@@ -11,6 +11,7 @@ export const useColEnum = () => {
     if (typeof column.enum !== 'function') {
       return enumMap.value.set(column.prop!, column.enum!)
     }
+    // 如果是(异步)函数，调用函数获取数据
     const { data } = await column.enum()
     enumMap.value.set(column.prop!, data)
   }

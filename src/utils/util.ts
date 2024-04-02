@@ -191,7 +191,7 @@ export function handleProp(prop: string) {
 export function filterEnum(
   callValue: any,
   enumData: any[] | undefined,
-  fieldNames?: { label: string; value: string }
+  fieldNames?: { label: string; value: string },
 ): string {
   const value = fieldNames?.value ?? 'value'
   const label = fieldNames?.label ?? 'label'
@@ -212,12 +212,12 @@ export function filterEnum(
 export function filterEnumColor(
   callValue: any,
   enumData: any[] | undefined,
-  fieldNames?: { label: string; value: string }
+  fieldNames?: { label: string; value: string },
 ): string {
   const value = fieldNames?.value ?? 'value'
   let filterData: { [key: string]: any } = {}
   if (Array.isArray(enumData)) {
     filterData = enumData.find((item: any) => item[value] === callValue)
   }
-  return filterData && filterData['color'] ? filterData['color'] : ''
+  return filterData && filterData['color'] ? filterData['color'] : 'primary'
 }

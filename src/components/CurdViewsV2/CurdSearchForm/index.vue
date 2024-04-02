@@ -1,32 +1,35 @@
 <template>
   <div v-if="columns.length" class="table-search">
     <el-form ref="formRef" :model="searchParam">
-      <el-row ref="gridRef" :gutter="10">
-        <el-col v-for="(item, index) in columns" :key="item.prop" v-bind="getResponsive(item)" :index="index">
+      <Grid ref="gridRef" :collapsed="collapsed" :gap="[20, 0]" :cols="searchCol">
+        <GridItem v-for="(item, index) in columns" :key="item.prop" v-bind="getResponsive(item)" :index="index">
           <el-form-item :label="`${item.label} :`">
             <SearchFormItem :column="item" :search-param="searchParam" />
           </el-form-item>
-        </el-col>
-      </el-row>
+        </GridItem>
+        <GridItem suffix>
+          <div class="operation">
+            <el-button type="primary" :icon="Search" @click="search">搜索</el-button>
+            <el-button :icon="Delete" @click="reset">重置</el-button>
+            <el-button v-if="showCollapse" type="primary" link class="search-isOpen" @click="collapsed = !collapsed">
+              {{ collapsed ? '展开' : '收起' }}
+              <el-icon class="el-icon--right">
+                <component :is="collapsed ? ArrowDown : ArrowUp"></component>
+              </el-icon>
+            </el-button></div
+        ></GridItem>
+      </Grid>
     </el-form>
-    <div class="operation">
-      <el-button type="primary" :icon="Search" @click="search">搜索</el-button>
-      <el-button :icon="Delete" @click="reset">重置</el-button>
-      <el-button v-if="showCollapse" type="primary" link class="search-isOpen" @click="collapsed = !collapsed">
-        {{ collapsed ? '展开' : '收起' }}
-        <el-icon class="el-icon--right">
-          <component :is="collapsed ? ArrowDown : ArrowUp"></component>
-        </el-icon>
-      </el-button>
-    </div>
   </div>
 </template>
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { Delete, Search, ArrowDown, ArrowUp } from '@element-plus/icons-vue'
 import SearchFormItem from './components/SearchFormItem.vue'
-import { ColumnProps } from '@/components/CurdViewsV2'
-import { BreakPoint } from '@/components/Grid/interface'
+import type { ColumnProps } from '@/components/CurdViewsV2'
+import type { BreakPoint } from '@/components/Grid/interface'
+import Grid from '@/components/Grid/index.vue'
+import GridItem from '@/components/Grid/components/GridItem.vue'
 
 export interface ProTableProps {
   columns?: ColumnProps[] // 搜索配置列
@@ -52,17 +55,19 @@ watch(
   (val) => {
     emit('update:modelValue', val)
   },
-  { deep: true }
+  { deep: true },
 )
 
 // 获取响应式设置
 const getResponsive = (item: ColumnProps) => {
   return {
-    xs: item.search?.xs || 24,
-    sm: item.search?.sm || 8,
-    md: item.search?.md || 8,
-    lg: item.search?.lg || 6,
-    xl: item.search?.xl || 6,
+    span: item.search?.span,
+    offset: item.search?.offset ?? 0,
+    xs: item.search?.xs,
+    sm: item.search?.sm,
+    md: item.search?.md,
+    lg: item.search?.lg,
+    xl: item.search?.xl,
   }
 }
 
