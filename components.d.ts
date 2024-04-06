@@ -12,7 +12,6 @@ declare module 'vue' {
     ColSetting: typeof import('./src/components/CurdViewsV2/CurdTable/components/ColSetting.vue')['default']
     ConditionBar: typeof import('./src/components/CurdViews/ConditionBar/ConditionBar.vue')['default']
     ContextmenuItem: typeof import('./src/components/Contextmenu/src/contextmenu-item.vue')['default']
-    copy: typeof import('./src/components/CurdViewsV2/CurdTable/components/TableColumn copy.vue')['default']
     CountBar: typeof import('./src/components/CountBar/CountBar.vue')['default']
     CurdSearchForm: typeof import('./src/components/CurdViewsV2/CurdSearchForm/index.vue')['default']
     CurdTable: typeof import('./src/components/CurdViews/CurdTable/CurdTable.vue')['default']

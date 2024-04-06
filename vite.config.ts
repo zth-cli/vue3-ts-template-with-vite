@@ -6,6 +6,7 @@ import Inspector from 'vite-plugin-vue-inspector'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import { envParse, EnvParseOptions  } from 'vite-plugin-env-parse'
 
 import { configMockPlugin } from './build/configMockPlugin'
 import { configHtmlPlugin } from './build/configHtmlPlugin'
@@ -24,6 +25,9 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       vueJsx(),
       configMockPlugin(command),
       configHtmlPlugin(loadEnv(mode, root), isBuild),
+      envParse({
+        dtsPath: './types/env.d.ts'
+      }),
       AutoImport({
         include: [ /\.[tj]sx?$/, /\.vue$/, /\.md$/],
         imports: ['vue', 'vue-router', 'vuex', 'vue/macros'], // 自动导入vue和vue-router等相关函数
