@@ -1,6 +1,6 @@
 import { TableColumnCtx } from 'element-plus/es/components/table/src/table-column/defaults'
-import { BreakPoint, Responsive } from '@/components/Grid/interface'
 
+export type BreakPoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 export interface EnumProps {
   label: string // 选项框显示的文字
   value: any // 选项框值
@@ -21,13 +21,11 @@ export type SearchType =
   | 'time-select'
 
 // 查询条件
-export interface SearchProps extends Partial<Record<BreakPoint, Responsive>> {
+export interface SearchProps {
   type: SearchType // 当前项搜索框的类型
   props?: any // element plus组件属性 参照官方文档来传递
   key?: string // 搜索参数字段名 没定义时取当前列的 prop
   order?: number //排序, 数字越小越靠前
-  span?: number // 查询项所占用的列数，默认为 1 列
-  offset?: number // 查询项偏移列数, 默认0
   defaultValue?: string | number | any[] // 搜索项默认值
 }
 
@@ -49,6 +47,7 @@ export interface Pageable {
   total: number
 }
 export interface TableStateProps {
+  loading: boolean
   tableData: any[]
   pageParams: Pageable
   searchParam: {

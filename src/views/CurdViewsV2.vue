@@ -1,7 +1,7 @@
 <template>
   <div class="table-box">
     <CurdTable
-      ref="proTable"
+      ref="tableRef"
       title="用户列表"
       highlight-current-row
       size="small"
@@ -15,8 +15,8 @@
     >
       <!-- 表格 header 按钮 -->
       <template #table-header="scope">
-        <el-button type="primary" :icon="CirclePlus" @click="proTable.toggleAllSelection()">全选 / 全不选</el-button>
-        <el-button type="primary" :icon="Pointer" plain @click="setCurrent">选中第二行</el-button>
+        <el-button type="primary" :icon="CirclePlus" @click="tableRef.toggleAllSelection()">全选 / 全不选</el-button>
+        <el-button type="primary" :icon="Finished" plain @click="setCurrent">选中第二行</el-button>
         <el-button
           type="danger"
           :icon="Delete"
@@ -24,7 +24,7 @@
           :disabled="!scope['isSelected']"
           @click="batchDelete(scope['selectedRowsIds'])"
         >
-          批量删除用户
+          批量删除
         </el-button>
       </template>
       <!-- Expand -->
@@ -55,11 +55,11 @@ import { ElMessage } from 'element-plus'
 import { ColumnProps } from '@/components/CurdViewsV2'
 import { useHandleData } from '@/hooks/useHandleData'
 import CurdTable from '@/components/CurdViewsV2/CurdTable/index.vue'
-import { CirclePlus, Pointer, Delete, Refresh } from '@element-plus/icons-vue'
+import { CirclePlus, Finished, Delete, Refresh } from '@element-plus/icons-vue'
 import { getGiftlist } from '@/api'
 
 // 获取 CurdTable DOM
-const proTable = ref(null)
+const tableRef = ref(null)
 // 自定义渲染表头（使用tsx语法）
 const renderHeader = (scope) => {
   return (
@@ -71,8 +71,9 @@ const renderHeader = (scope) => {
 // 表格配置项
 const columns: ColumnProps<any>[] = [
   { type: 'selection', fixed: 'left', width: 80 },
+  // { type: 'radio', label: '单选', width: 80 },
   { type: 'index', label: '#', width: 80 },
-  // { type: 'expand', label: 'Expand', width: 100 },
+  { type: 'expand', label: 'Expand', width: 100 },
   {
     prop: 'base',
     label: '基本信息',
@@ -125,9 +126,14 @@ const columns: ColumnProps<any>[] = [
   { prop: 'operation', label: '操作', fixed: 'right', width: 230 },
 ]
 
+watch(
+  () => tableRef.value?.radio,
+  () => tableRef.value?.radio && ElMessage.success(`选中 id 为【${JSON.stringify(tableRef.value?.radio)}】的数据`),
+)
+
 // 选择行
 const setCurrent = () => {
-  proTable.value?.setCurrentRow(proTable.value?.tableData[1])
+  tableRef.value?.setCurrentRow(tableRef.value?.tableData[1])
 }
 
 const getSummaries = (param: any) => {
@@ -174,33 +180,19 @@ const rowClick = (row, column) => {
 // 删除用户信息
 const deleteAccount = async (params) => {
   useHandleData()
-  proTable.value.queryTableData()
+  tableRef.value.queryTableData()
 }
 
 // 批量删除用户信息
 const batchDelete = async (id: string[]) => {
   alert('删除所选用户信息')
-  proTable.value.clearSelection()
-  proTable.value.queryTableData()
+  tableRef.value.clearSelection()
+  tableRef.value.queryTableData()
 }
 
 // 重置用户密码
 const resetPass = async (params) => {
   alert('重置用户密码')
-  proTable.value.queryTableData()
+  tableRef.value.queryTableData()
 }
 </script>
-
-<style lang="scss">
-.el-table .warning-row,
-.el-table .warning-row .el-table-fixed-column--right,
-.el-table .warning-row .el-table-fixed-column--left {
-  background-color: var(--el-color-warning-light-9);
-}
-
-.el-table .success-row,
-.el-table .success-row .el-table-fixed-column--right,
-.el-table .success-row .el-table-fixed-column--left {
-  background-color: var(--el-color-success-light-9);
-}
-</style>

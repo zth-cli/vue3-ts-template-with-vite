@@ -6,8 +6,19 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;;
-;
+  height: 100%;
+  .refresh {
+    animation: refresh 0.5s linear infinite;
+  }
+  @keyframes refresh {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 }
 .table-box,
 .table-main {
@@ -47,14 +58,23 @@
   }
   // 表格 header 样式
   .table-header {
-    .header-button-lf {
-      float: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    .header-lf,
+    .header-ri {
+      flex: 1;
     }
-    .header-button-ri {
-      float: right;
-    }
-    .el-button {
-      margin-bottom: 15px;
+    .header-ri {
+      text-align: right;
+      .ri-icon {
+        font-size: 20px;
+        cursor: pointer;
+        &:hover {
+          color: var(--color-primary);
+        }
+      }
     }
   }
 
@@ -62,7 +82,6 @@
   .el-table {
     flex: 1;
 
-    // 修复 safari 浏览器表格错位 https://github.com/HalseySpicy/Geeker-Admin/issues/83
     table {
       width: 100%;
     }
@@ -81,12 +100,10 @@
       }
     }
 
-    // 设置 el-table 中 header 文字不换行，并省略
     .el-table__header .el-table__cell > .cell {
       white-space: nowrap;
     }
 
-    // 解决表格数据为空时样式不居中问题(仅在element-plus中)
     .el-table__empty-block {
       position: absolute;
       top: 50%;
@@ -97,7 +114,6 @@
       }
     }
 
-    // table 中 image 图片样式
     .table-image {
       width: 50px;
       height: 50px;
@@ -105,7 +121,6 @@
     }
   }
 
-  // 表格 pagination 样式
   .el-pagination {
     display: flex;
     justify-content: flex-end;

@@ -4,7 +4,7 @@
 
 <script lang="tsx" setup>
 import { inject, ref, useSlots } from 'vue'
-import { filterEnum, filterEnumColor, formatValue, handleRowAccordingToProp } from '@/utils/util'
+import { filterEnum, filterEnumColor, formatValue, handleRowAccordingToProp } from '@/components/CurdViewsV2/utils'
 import { ColumnProps } from '@/components/CurdViewsV2'
 
 defineProps<{ column: ColumnProps }>()
@@ -26,7 +26,7 @@ const getTagType = (item: ColumnProps, scope: { [key: string]: any }) => {
   return filterEnumColor(
     handleRowAccordingToProp(scope.row, item.prop!),
     enumMap.value.get(item.prop),
-    item.fieldNames
+    item.fieldNames,
   ) as any
 }
 
@@ -53,8 +53,8 @@ const renderLoop = (item: ColumnProps) => {
               if (item.children) {
                 return item.children.map((child) => renderLoop(child))
               }
-              if (item.render) {
-                return item.render(scope)
+              if (item.renderCell) {
+                return item.renderCell(scope)
               }
               if (slots[item.prop!]) {
                 return slots[item.prop!]!(scope)

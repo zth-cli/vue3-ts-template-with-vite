@@ -4,27 +4,38 @@
     <CurdSearchForm
       v-show="isShowSearch"
       v-model="searchParam"
-      :search="searchHandle"
-      :reset="resetHandle"
+      :search="_searchHandle"
+      :reset="_resetHandle"
       :columns="searchColumns"
-      :search-col="searchCol"
     />
 
     <div class="table-main">
       <div class="table-header">
-        <div class="header-button-lf">
+        <div class="header-lf">
           <slot
             name="table-header"
-            :selected-rows-ids="selectedRowsIds"
+            :selected-rows-keys="selectedRowsKeys"
             :selected-rows="selectedRows"
             :is-selected="isSelected"
           />
         </div>
-        <div class="header-button-ri">
+        <div class="header-ri">
           <slot name="table-tool">
-            <el-button :icon="Refresh" circle @click="queryTableData" />
-            <!-- <el-button v-if="columns.length" :icon="Operation" circle @click="openColSetting" /> -->
-            <el-button v-if="searchColumns.length" :icon="Search" circle @click="isShowSearch = !isShowSearch" />
+            <el-space wrap>
+              <el-icon :class="['ri-icon', { refresh: loading }]" title="刷新" @click="queryTableData">
+                <RefreshRight />
+              </el-icon>
+              <SizeSetting v-model="tableSize">
+                <el-icon class="ri-icon" title="密度"><Operation /></el-icon>
+              </SizeSetting>
+              <!-- <el-button v-if="columns.length" :icon="Operation" circle @click="openColSetting" /> -->
+              <ColSetting v-model="colSetting">
+                <el-icon class="ri-icon" title="表格列"><Setting /></el-icon>
+              </ColSetting>
+              <el-icon v-if="searchColumns.length" class="ri-icon" @click="isShowSearch = !isShowSearch">
+                <Search />
+              </el-icon>
+            </el-space>
           </slot>
         </div>
       </div>
@@ -32,27 +43,29 @@
       <el-table
         ref="tableRef"
         :data="tableData"
-        :border="border"
         :row-key="rowKey"
+        :size="tableSize"
         v-bind="$attrs"
         @selection-change="selectionChange"
       >
         <!-- 默认插槽, el-table-column -->
         <slot></slot>
         <template v-for="item in tableColumns" :key="item">
-          <!-- selection || index特殊处理 -->
+          <!-- 处理特殊 column -->
           <el-table-column
-            v-if="item.type == 'selection' || item.type == 'index'"
+            v-if="item.type && columnTypes.includes(item.type)"
             v-bind="item"
             :align="item.align || 'center'"
           >
-          </el-table-column>
-          <!-- expand 支持 tsx 语法 && 作用域插槽 -->
-          <el-table-column v-if="item.type == 'expand'" v-bind="item" :align="item.align || 'center'">
             <template #default="scope">
-              <!-- 支持render函数 -->
-              <component :is="item.renderCell" v-bind="scope" v-if="item.renderCell"> </component>
-              <slot v-else :name="item.type" v-bind="scope"></slot>
+              <!-- expand 支持 tsx 语法 && 作用域插槽 -->
+              <template v-if="item.type == 'expand'">
+                <!-- 支持render函数 -->
+                <component :is="item.renderCell" v-bind="scope" v-if="item.renderCell"> </component>
+                <slot v-else :name="item.type" v-bind="scope"></slot>
+              </template>
+              <!-- 单选时 -->
+              <el-radio v-if="item.type == 'radio'" v-model="radio" :label="scope.row[rowKey]"><span></span></el-radio>
             </template>
           </el-table-column>
           <!-- 其他常规 el-table-column -->
@@ -84,35 +97,36 @@
       </slot>
     </div>
     <!-- 列设置 -->
-    <ColSetting ref="colRef" v-model:colSetting="colSetting" />
+    <!-- <ColSetting ref="colRef" v-model:col-setting="colSetting" /> -->
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, watch, onMounted } from 'vue'
-import { BreakPoint } from '@/components/Grid/interface'
 import { ColumnProps } from '..'
-import { ElTable, TableProps } from 'element-plus'
-import { Refresh, Operation, Search } from '@element-plus/icons-vue'
+import { ElTable } from 'element-plus'
+import { Refresh, RefreshRight, Operation, Search } from '@element-plus/icons-vue'
 import { useTable } from './hooks/useTable'
 import { useSelection } from './hooks/useSelection'
 import { useColEnum } from './hooks/useColEnum'
 import CurdSearchForm from '../CurdSearchForm/index.vue'
 import Pagination from './components/Pagination.vue'
-import ColSetting from './components/ColSetting.vue'
+import { ColSetting } from './components/ColSetting'
+import { SizeSetting } from './components/SizeSetting'
 import { TableColumn } from './components/TableColumn'
 
-interface CurdTableProps extends Partial<Omit<TableProps<any>, 'data'>> {
-  columns: ColumnProps[] // 列配置项
+defineOptions({ name: 'CurdTable' })
+
+interface CurdTableProps {
+  columns: ColumnProps[] // 表格列配置项
   requestApi?: (params: any) => Promise<any> // 请求表格数据的api
   apiUrl?: string // 请求表格数据的api地址, 二选一，优先级低于 requestApi
   requestAuto?: boolean // 是否初次加载时自动请求表格数据
   dataCallback?: (data: any) => any // 返回数据的回调函数，可以对数据进行处理
   pagination?: boolean // 是否需要分页组件
   initParam?: any // 初始化请求参数
-  border?: boolean // 是否带有纵向边框
+  size?: '' | 'default' | 'small' | 'large' // 表格大小
   rowKey?: string // 行数据的 Key，用来优化 Table 的渲染，当表格数据多选时，所指定的 id
-  searchCol?: number | Record<BreakPoint, number> // 表格搜索项 每列占比配置
 }
 
 // 接受父组件参数，配置默认值
@@ -121,31 +135,55 @@ const props = withDefaults(defineProps<CurdTableProps>(), {
   columns: () => [],
   pagination: true,
   initParam: {},
-  border: true,
   rowKey: 'id',
-  searchCol: () => ({ xs: 1, sm: 2, md: 2, lg: 3, xl: 4 }),
+  size: 'small',
 })
+
+// 暴露事件
+const emit = defineEmits(['search', 'reset'])
+
+// 表格大小
+const tableSize = ref(props.size)
 
 // 是否显示搜索模块
 const isShowSearch = ref(true)
 
-// 表格 DOM 元素
+// 单选值
+const radio = ref('')
+
+// 表格实例引用
 const tableRef = ref<InstanceType<typeof ElTable>>()
 
+// 特殊的 column 列类型
+const columnTypes = ['selection', 'radio', 'index', 'expand']
+
 // 表格多选 Hooks
-const { selectionChange, selectedRows, selectedRowsIds, isSelected } = useSelection(props.rowKey)
+const { selectionChange, selectedRows, selectedRowsKeys, isSelected } = useSelection(props.rowKey)
 
 // 表格操作 Hooks
 const {
   tableData,
   pageParams,
   searchParam,
+  loading,
   queryTableData,
   searchHandle,
   resetHandle,
   handleSizeChange,
   handleCurrentChange,
 } = useTable(props.requestApi, props.initParam, props.pagination, props.dataCallback)
+
+// 点击查询事件
+const _searchHandle = (params: any) => {
+  emit('search', params)
+  searchHandle()
+}
+
+// 重置事件
+const _resetHandle = () => {
+  emit('reset')
+  resetHandle()
+}
 
 // 清空选中数据列表
 const clearSelection = () => tableRef.value?.clearSelection()
@@ -198,9 +236,7 @@ if (searchColumns.length > 0) {
 
 // 过滤掉不需要设置显隐的列
 const colRef = ref()
-const colSetting = tableColumns.value?.filter(
-  (item) => !['selection', 'index', 'expand'].includes(item.type!) && item.prop !== 'operation',
-)
+const colSetting = tableColumns.value?.filter((item) => !columnTypes.includes(item.type!) && item.prop !== 'operation')
 const openColSetting = () => colRef.value.openColSetting()
 
 // 提取eltable所有的方法
@@ -214,7 +250,8 @@ const exposeFn = {
   enumMap,
   isSelected,
   selectedRows,
-  selectedRowsIds,
+  selectedRowsKeys,
+  radio,
 }
 onMounted(() => {
   const entries = Object.entries(tableRef.value)
@@ -225,11 +262,6 @@ onMounted(() => {
 
 // 暴露参数和方法
 defineExpose(exposeFn)
-</script>
-<script lang="ts">
-export default {
-  name: 'CurdTable',
-}
 </script>
 <style lang="scss">
 @import './style.scss';

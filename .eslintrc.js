@@ -159,5 +159,7 @@ module.exports = {
     defineEmits: 'readonly',
     defineExpose: 'readonly',
     withDefaults: 'readonly',
+    defineOptions: 'readonly',
+    defineModel: 'readonly',
   },
 }

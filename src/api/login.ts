@@ -10,7 +10,7 @@ export const getVerify = (): Promise<IRes<IGiftInfo>> => {
 
 // 接口返回类型定义 例子
 export const getGiftlist = (params: any): Promise<IRes<IGiftInfo>> => {
-  return http.get('/apis/gift/list', params)
+  return http.get('/v2/douyinhot', params)
 }
 
 export const getAsyncRoutes = (data?: object) => {

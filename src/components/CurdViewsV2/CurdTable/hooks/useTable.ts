@@ -12,13 +12,14 @@ export const useTable = (
   httpRequest: (params: any) => Promise<any>,
   initParam: object = {},
   isPageable = true,
-  dataCallBack?: (data: any) => any
+  dataCallBack?: (data: any) => any,
 ) => {
   const state = reactive<TableStateProps>({
+    loading: false,
     // 表格数据
     tableData: [
-      { id: 1, status: 1 },
-      { id: 2, status: 2 },
+      { id: 1, status: 1, gender: 1 },
+      { id: 2, status: 2, gender: 2 },
     ],
     // 分页参数
     pageParams: {
@@ -41,17 +42,19 @@ export const useTable = (
 
   // 获取表格数据
   const queryTableData = async () => {
+    state.loading = true
     try {
       // 先把初始化参数和分页参数放到总参数里面
       Object.assign(state.totalParam, initParam, unref(pageParam))
       let { data } = await httpRequest(state.totalParam)
       dataCallBack && (data = dataCallBack(data))
       state.tableData = data.list
-
+      state.loading = false
       // 更新总条数
       const { total } = data
       isPageable && state.pageParams.total !== total && (state.pageParams.total = total)
     } catch (error) {
+      state.loading = false
       console.warn(error)
     }
   }

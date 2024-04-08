@@ -7,7 +7,7 @@ export const useSelection = (rowKey = 'id') => {
   const selectedRows = ref([])
 
   // 当前选中的所有ids(数组)，可根据项目自行配置id字段
-  const selectedRowsIds = computed((): string[] => {
+  const selectedRowsKeys = computed((): string[] => {
     const ids: string[] = []
     selectedRows.value.forEach((item) => ids.push(item[rowKey]))
     return ids
@@ -21,7 +21,7 @@ export const useSelection = (rowKey = 'id') => {
   return {
     isSelected,
     selectedRows,
-    selectedRowsIds,
+    selectedRowsKeys,
     selectionChange,
   }
 }

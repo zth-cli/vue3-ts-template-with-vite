@@ -6,7 +6,7 @@ import Inspector from 'vite-plugin-vue-inspector'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-import { envParse, EnvParseOptions  } from 'vite-plugin-env-parse'
+import { envParse } from 'vite-plugin-env-parse'
 
 import { configMockPlugin } from './build/configMockPlugin'
 import { configHtmlPlugin } from './build/configHtmlPlugin'
@@ -30,7 +30,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       }),
       AutoImport({
         include: [ /\.[tj]sx?$/, /\.vue$/, /\.md$/],
-        imports: ['vue', 'vue-router', 'vuex', 'vue/macros'], // 自动导入vue和vue-router等相关函数
+        imports: ['vue', 'vue-router', 'vuex'], // 自动导入vue和vue-router等相关函数
         eslintrc: {
           enabled: false, // 若没此json文件，先开启，生成后在关闭
           filepath: './.eslintrc-auto-import.json', // 默认
