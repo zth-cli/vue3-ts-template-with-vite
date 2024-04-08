@@ -29,9 +29,9 @@
                 <el-icon class="ri-icon" title="密度"><Operation /></el-icon>
               </SizeSetting>
               <!-- <el-button v-if="columns.length" :icon="Operation" circle @click="openColSetting" /> -->
-              <ColSetting v-model="colSetting">
+              <!-- <ColSetting v-model="colSetting">
                 <el-icon class="ri-icon" title="表格列"><Setting /></el-icon>
-              </ColSetting>
+              </ColSetting> -->
               <el-icon v-if="searchColumns.length" class="ri-icon" @click="isShowSearch = !isShowSearch">
                 <Search />
               </el-icon>
@@ -97,7 +97,7 @@
       </slot>
     </div>
     <!-- 列设置 -->
-    <!-- <ColSetting ref="colRef" v-model:col-setting="colSetting" /> -->
+    <ColSetting1 v-if="loading" ref="colRef" v-model:col-setting="colSetting" />
   </div>
 </template>
 
@@ -111,7 +111,7 @@ import { useSelection } from './hooks/useSelection'
 import { useColEnum } from './hooks/useColEnum'
 import CurdSearchForm from '../CurdSearchForm/index.vue'
 import Pagination from './components/Pagination.vue'
-import { ColSetting } from './components/ColSetting'
+import ColSetting1 from './components/ColSetting.vue'
 import { SizeSetting } from './components/SizeSetting'
 import { TableColumn } from './components/TableColumn'
 

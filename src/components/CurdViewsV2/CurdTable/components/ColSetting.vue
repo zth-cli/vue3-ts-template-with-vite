@@ -1,6 +1,6 @@
 <template>
   <!-- 列设置 -->
-  <el-drawer v-model="drawerVisible" title="列设置" size="450px">
+  <el-drawer v-model="drawerVisible" title="列设置1" size="450px">
     <div class="table-main">
       <el-table
         :data="colSetting"
@@ -32,7 +32,7 @@ import { ref } from 'vue'
 import { ColumnProps } from '@/components/CurdViewsV2'
 
 defineOptions({
-  name: 'ColSetting',
+  name: 'ColSetting1',
 })
 defineProps<{ colSetting: ColumnProps[] }>()
 
