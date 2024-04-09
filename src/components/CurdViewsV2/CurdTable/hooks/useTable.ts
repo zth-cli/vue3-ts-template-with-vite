@@ -41,7 +41,7 @@ export const useTable = (
   })
 
   // 获取表格数据
-  const queryTableData = async () => {
+  const fetchTableData = async () => {
     state.loading = true
     try {
       // 先把初始化参数和分页参数放到总参数里面
@@ -77,7 +77,7 @@ export const useTable = (
   const searchHandle = () => {
     state.pageParams.pageIndex = 1
     updatedTotalParam()
-    queryTableData()
+    fetchTableData()
   }
 
   // 表格数据重置
@@ -89,25 +89,25 @@ export const useTable = (
       state.searchParam[key] = initParam[key]
     })
     updatedTotalParam()
-    queryTableData()
+    fetchTableData()
   }
 
   // 分页, 每页条数改变
   const handleSizeChange = (pageSize: number) => {
     state.pageParams.pageIndex = 1
     state.pageParams.pageSize = pageSize
-    queryTableData()
+    fetchTableData()
   }
 
   // 分页, 当前页改变
   const handleCurrentChange = (pageIndex: number) => {
     state.pageParams.pageIndex = pageIndex
-    queryTableData()
+    fetchTableData()
   }
 
   return {
     ...toRefs(state),
-    queryTableData,
+    fetchTableData,
     searchHandle,
     resetHandle,
     handleSizeChange,

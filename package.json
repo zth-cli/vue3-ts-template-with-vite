@@ -17,6 +17,7 @@
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
     "@vueuse/core": "^10.9.0",
+    "@vueuse/motion": "^2.1.0",
     "axios": "^1.6.8",
     "dayjs": "^1.11.10",
     "echarts": "^5.5.0",
@@ -27,6 +28,7 @@
     "pinia": "^2.1.7",
     "qs": "^6.12.0",
     "vue": "^3.4.21",
+    "vue-draggable-plus": "^0.4.0",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {

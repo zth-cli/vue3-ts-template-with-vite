@@ -22,16 +22,16 @@
         <div class="header-ri">
           <slot name="table-tool">
             <el-space wrap>
-              <el-icon :class="['ri-icon', { refresh: loading }]" title="刷新" @click="queryTableData">
+              <el-icon :class="['ri-icon', { refresh: loading }]" title="刷新" @click="fetchTableData">
                 <RefreshRight />
               </el-icon>
               <SizeSetting v-model="tableSize">
                 <el-icon class="ri-icon" title="密度"><Operation /></el-icon>
               </SizeSetting>
               <!-- <el-button v-if="columns.length" :icon="Operation" circle @click="openColSetting" /> -->
-              <!-- <ColSetting v-model="colSetting">
+              <ColSetting v-model="colSetting">
                 <el-icon class="ri-icon" title="表格列"><Setting /></el-icon>
-              </ColSetting> -->
+              </ColSetting>
               <el-icon v-if="searchColumns.length" class="ri-icon" @click="isShowSearch = !isShowSearch">
                 <Search />
               </el-icon>
@@ -107,12 +107,13 @@ import { useSelection } from './hooks/useSelection'
 import { useColEnum } from './hooks/useColEnum'
 import CurdSearchForm from '../CurdSearchForm/index.vue'
 import Pagination from './components/Pagination.vue'
-import { SizeSetting } from './components/SizeSetting'
 import { TableColumn } from './components/TableColumn'
+import { SizeSetting } from './components/SizeSetting'
+import { ColSetting } from './components/ColSetting'
 
 defineOptions({ name: 'CurdTable2' })
 
-interface CurdTableProps {
+export interface CurdTableProps {
   columns: ColumnProps[] // 表格列配置项
   requestApi?: (params: any) => Promise<any> // 请求表格数据的api
   apiUrl?: string // 请求表格数据的api地址, 二选一，优先级低于 requestApi
@@ -161,7 +162,7 @@ const {
   pageParams,
   searchParam,
   loading,
-  queryTableData,
+  fetchTableData,
   searchHandle,
   resetHandle,
   handleSizeChange,
@@ -184,10 +185,10 @@ const _resetHandle = () => {
 const clearSelection = () => tableRef.value?.clearSelection()
 
 // 初始化请求
-onMounted(() => props.requestAuto && queryTableData())
+onMounted(() => props.requestAuto && fetchTableData())
 
 // 监听页面 initParam 改化，重新获取表格数据
-watch(() => props.initParam, queryTableData, { deep: true })
+watch(() => props.initParam, fetchTableData, { deep: true })
 
 // 接收 columns 并设置为响应式
 const tableColumns = ref<ColumnProps[]>(props.columns)
@@ -239,7 +240,7 @@ const exposeFn = {
   tableData,
   searchParam,
   pageParams,
-  queryTableData,
+  fetchTableData,
   resetHandle,
   clearSelection,
   enumMap,

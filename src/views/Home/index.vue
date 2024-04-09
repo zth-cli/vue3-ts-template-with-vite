@@ -1,7 +1,27 @@
 <template>
   <div class="home-main">
     <el-row :gutter="18">
-      <el-col v-for="(item, i) in dashBoardList" :key="i" :xs="24" :sm="12" :md="12" :lg="6" :xl="6">
+      <el-col
+        v-for="(item, i) in dashBoardList"
+        :key="i"
+        v-motion
+        :initial="{
+          opacity: 0,
+          y: 1000,
+        }"
+        :enter="{
+          opacity: 1,
+          y: 0,
+          transition: {
+            delay: 80 * (i + 1),
+          },
+        }"
+        :xs="24"
+        :sm="12"
+        :md="12"
+        :lg="6"
+        :xl="6"
+      >
         <dashboardItem v-bind="item" style="margin-bottom: 16px"></dashboardItem>
       </el-col>
     </el-row>
