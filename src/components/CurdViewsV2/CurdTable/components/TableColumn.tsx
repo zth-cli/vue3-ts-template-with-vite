@@ -27,7 +27,7 @@ export const TableColumn = defineComponent({
       return filterEnumColor(
         handleRowAccordingToProp(scope.row, item.prop!),
         enumMap.value.get(item.prop),
-        item.fieldNames
+        item.fieldNames,
       ) as any
     }
     const renderLoop = (item: ColumnProps) => {

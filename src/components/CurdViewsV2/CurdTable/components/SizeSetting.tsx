@@ -1,5 +1,4 @@
 import { ElDropdown } from 'element-plus'
-import { defineExpose } from 'vue'
 
 export const SizeSetting = defineComponent({
   name: 'SizeSetting',
@@ -10,9 +9,6 @@ export const SizeSetting = defineComponent({
       { label: '紧凑', value: 'small' },
     ]
     const dropRef = ref<InstanceType<typeof ElDropdown>>()
-    defineExpose({
-      ...dropRef.value,
-    })
     return () => (
       <>
         <el-radio-group {...attrs}>

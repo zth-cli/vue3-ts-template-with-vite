@@ -39,7 +39,6 @@
           </slot>
         </div>
       </div>
-      <!-- el-table -->
       <el-table
         ref="tableRef"
         :data="tableData"
@@ -96,26 +95,22 @@
         />
       </slot>
     </div>
-    <!-- 列设置 -->
-    <ColSetting1 v-if="loading" ref="colRef" v-model:col-setting="colSetting" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, watch, onMounted } from 'vue'
 import { ColumnProps } from '..'
-import { ElTable } from 'element-plus'
-import { Refresh, RefreshRight, Operation, Search } from '@element-plus/icons-vue'
+import { RefreshRight, Operation, Search } from '@element-plus/icons-vue'
 import { useTable } from './hooks/useTable'
 import { useSelection } from './hooks/useSelection'
 import { useColEnum } from './hooks/useColEnum'
 import CurdSearchForm from '../CurdSearchForm/index.vue'
 import Pagination from './components/Pagination.vue'
-import ColSetting1 from './components/ColSetting.vue'
 import { SizeSetting } from './components/SizeSetting'
 import { TableColumn } from './components/TableColumn'
 
-defineOptions({ name: 'CurdTable' })
+defineOptions({ name: 'CurdTable2' })
 
 interface CurdTableProps {
   columns: ColumnProps[] // 表格列配置项
@@ -152,7 +147,7 @@ const isShowSearch = ref(true)
 const radio = ref('')
 
 // 表格实例引用
-const tableRef = ref<InstanceType<typeof ElTable>>()
+const tableRef = ref<any>()
 
 // 特殊的 column 列类型
 const columnTypes = ['selection', 'radio', 'index', 'expand']

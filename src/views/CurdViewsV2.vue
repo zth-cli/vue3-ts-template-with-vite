@@ -123,7 +123,7 @@ const columns: ColumnProps<any>[] = [
     width: 200,
     search: { type: 'date-picker', order: 2, defaultValue: '男' },
   },
-  { prop: 'operation', label: '操作', fixed: 'right', width: 230 },
+  // { prop: 'operation', label: '操作', fixed: 'right', width: 230 },
 ]
 
 watch(
