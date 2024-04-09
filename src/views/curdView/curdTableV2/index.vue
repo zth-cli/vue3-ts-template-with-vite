@@ -15,7 +15,9 @@
     >
       <!-- 表格 header 按钮 -->
       <template #table-header="scope">
-        <el-button type="primary" :icon="CirclePlus" @click="tableRef.toggleAllSelection()">全选 / 全不选</el-button>
+        <el-button type="primary" :icon="CirclePlus" @click="tableRef?.el?.toggleAllSelection()">
+          全选 / 全不选
+        </el-button>
         <el-button type="primary" :icon="Finished" plain @click="setCurrent">选中第二行</el-button>
         <el-button
           type="danger"
@@ -133,7 +135,7 @@ watch(
 
 // 选择行
 const setCurrent = () => {
-  tableRef.value?.setCurrentRow(tableRef.value?.tableData[1])
+  tableRef.value?.el?.setCurrentRow(tableRef.value?.tableData[1])
 }
 
 const getSummaries = (param: any) => {
@@ -186,7 +188,7 @@ const deleteAccount = async (params) => {
 // 批量删除用户信息
 const batchDelete = async (id: string[]) => {
   alert('删除所选用户信息')
-  tableRef.value.clearSelection()
+  tableRef.value.el?.clearSelection()
   tableRef.value.queryTableData()
 }
 

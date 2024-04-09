@@ -52,12 +52,14 @@ provide('layout-provide', { menuMode, menuColor, headerColor, showTags })
   }
   .zth-main {
     padding: 0;
+    display: flex;
+    flex-direction: column;
     .zth-view {
+      position: relative;
       box-sizing: border-box;
       padding-top: v-bind('mrt');
       width: 100%;
-      height: v-bind('viewHeight');
-      overflow: hidden;
+      flex: 1;
     }
   }
 }

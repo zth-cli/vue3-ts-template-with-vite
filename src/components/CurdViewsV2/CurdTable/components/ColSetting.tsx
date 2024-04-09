@@ -14,7 +14,6 @@ export const ColSetting = defineComponent({
       () => props.modelValue,
       (val) => {
         model.value = val
-        console.log(model.value)
       },
       {
         immediate: true,

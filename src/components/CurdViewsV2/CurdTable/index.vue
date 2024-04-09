@@ -180,10 +180,6 @@ const _resetHandle = () => {
   emit('reset')
   resetHandle()
 }
-
-// 清空选中数据列表
-const clearSelection = () => tableRef.value?.clearSelection()
-
 // 初始化请求
 onMounted(() => props.requestAuto && fetchTableData())
 
@@ -233,7 +229,6 @@ if (searchColumns.length > 0) {
 // 过滤掉不需要设置显隐的列
 const colRef = ref()
 const colSetting = tableColumns.value?.filter((item) => !columnTypes.includes(item.type!) && item.prop !== 'operation')
-const openColSetting = () => colRef.value.openColSetting()
 
 // 提取eltable所有的方法
 const exposeFn = {
@@ -242,19 +237,13 @@ const exposeFn = {
   pageParams,
   fetchTableData,
   resetHandle,
-  clearSelection,
   enumMap,
   isSelected,
   selectedRows,
   selectedRowsKeys,
   radio,
+  el: tableRef, // 暴露table实例
 }
-onMounted(() => {
-  const entries = Object.entries(tableRef.value)
-  for (const [method, fn] of entries) {
-    exposeFn[method] = fn
-  }
-})
 
 // 暴露参数和方法
 defineExpose(exposeFn)

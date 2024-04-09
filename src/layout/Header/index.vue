@@ -74,8 +74,8 @@ const props = withDefaults(defineProps<{ showThemeBar?: boolean }>(), {
 })
 
 // 获取layout状态peovide
-const layoutProvide = inject<any>('layout-provide')
-const { menuMode, headerColor } = toRefs(layoutProvide)
+const { menuMode, headerColor } = inject<any>('layout-provide')
+
 const isHor = computed(() => menuMode.value === 'horizontal')
 
 // 收起展开侧边菜单

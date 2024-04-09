@@ -53,8 +53,7 @@ const menuStore = useMenuStore()
 const isCollapse = ref<boolean>(false)
 
 const routeArr = computed(() => menuStore.routes)
-const layoutProvide = inject<any>('layout-provide')
-const { menuColor } = toRefs(layoutProvide)
+const { menuColor } = inject<any>('layout-provide')
 
 const props = withDefaults(defineProps<{ menuMode?: 'horizontal' | 'vertical' }>(), {
   menuMode: 'vertical',

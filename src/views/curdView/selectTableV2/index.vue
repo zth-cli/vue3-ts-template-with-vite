@@ -72,8 +72,15 @@ const selectFilterData = reactive<SelectDataProps[]>([
   },
 ])
 
+setTimeout(() => {
+  selectFilterData[1].options = [
+    { label: '全部', value: '' },
+    { label: '管理员', value: '1' },
+    { label: '普通用户', value: '2' },
+  ]
+}, 1000)
 // 默认 selectFilter 参数
-const selectFilterValues = ref({ userStatus: '2', userRole: ['1', '3'] })
+const selectFilterValues = ref({ userStatus: '2', userRole: ['1', '2'] })
 const changeSelectFilter = (value: typeof selectFilterValues.value) => {
   ElMessage.success('请注意查看请求参数变化 🤔')
   proTable.value!.pageParams.pageIndex = 1

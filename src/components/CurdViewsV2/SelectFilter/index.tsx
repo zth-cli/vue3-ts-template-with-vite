@@ -15,8 +15,6 @@ export const SelectFilter = defineComponent({
   },
   emits: ['change'],
   setup(props, { slots, emit }) {
-    defineOptions({ name: 'SelectFilter' })
-
     // 重新接收默认值
     const selected = ref<Record<string, any>>({})
     watch(

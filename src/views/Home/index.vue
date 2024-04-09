@@ -71,7 +71,6 @@ export default defineComponent({
 <style lang="scss">
 .home-main {
   box-sizing: border-box;
-  padding: 18px 0;
   min-height: 100%;
 }
 </style>

@@ -1,16 +1,16 @@
 <template>
-  <div class="zth-route-view">
-    <router-view>
-      <template #default="{ Component }">
-        <transition :name="menuMode === 'horizontal' ? 'slide-fade-Y' : 'slide-fade-X'" appear>
+  <router-view>
+    <template #default="{ Component }">
+      <transition :name="menuMode === 'horizontal' ? 'slide-fade-Y' : 'slide-fade-X'" appear>
+        <div class="child-view">
           <keep-alive v-if="route.meta.isCache">
-            <component :is="Component" :key="route.fullPath" class="child-view" />
+            <component :is="Component" :key="route.fullPath" />
           </keep-alive>
-          <component :is="Component" v-else :key="route.fullPath" class="child-view" />
-        </transition>
-      </template>
-    </router-view>
-  </div>
+          <component :is="Component" :key="route.fullPath" />
+        </div>
+      </transition>
+    </template>
+  </router-view>
 </template>
 
 <script lang="ts" setup>
@@ -25,20 +25,13 @@ const menuMode = computed(() => store.menuMode)
 console.log(route.fullPath)
 </script>
 <style lang="scss">
-.zth-route-view {
+.child-view {
+  position: absolute;
+  left: 0;
+  right: 0;
   height: 100%;
   width: 100%;
-  overflow: hidden;
-  overflow-y: auto;
-  position: relative;
-  // 路由动画
-  .child-view {
-    position: absolute;
-    left: 0;
-    right: 0;
-    transition: all 0.8s cubic-bezier(0.55, 0, 0.1, 1);
-    box-sizing: border-box;
-    padding: 0 12px;
-  }
+  box-sizing: border-box;
+  padding: 0 12px;
 }
 </style>

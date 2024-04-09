@@ -1,6 +1,6 @@
 import { inject, ref } from 'vue'
 import { filterEnum, filterEnumColor, formatValue, handleRowAccordingToProp } from '@/utils/util'
-import { ColumnProps } from '@/components/CurdViewsV2'
+import { ColumnProps, HeaderRenderScope, RenderScope } from '@/components/CurdViewsV2'
 
 export const TableColumn = defineComponent({
   name: 'TableColumn', // 组件名
@@ -30,16 +30,23 @@ export const TableColumn = defineComponent({
         item.fieldNames,
       ) as any
     }
+    const columnAttrs = (item: ColumnProps) => {
+      const attrs = Object.assign({}, item)
+      if (attrs.children) {
+        delete attrs.children
+      }
+      return attrs
+    }
     const renderLoop = (item: ColumnProps) => {
       return (
         <>
           {!item.hidden && (
             <el-table-column
-              {...item}
+              {...columnAttrs(item)}
               align={item.align || 'center'}
               showOverflowTooltip={item.showOverflowTooltip || true}>
               {{
-                default: (scope: any) => {
+                default: (scope: RenderScope<any>) => {
                   if (item.children) {
                     // 多级表头
                     return item.children.map((child) => renderLoop(child))
@@ -59,14 +66,14 @@ export const TableColumn = defineComponent({
                   // 正常处理
                   return renderCellData(item, scope)
                 },
-                header: () => {
+                header: (scope: HeaderRenderScope<any>) => {
                   if (item.headerRender) {
                     // tsx || 渲染函数自定义表头内容渲染
-                    return item.headerRender(item)
+                    return item.headerRender(scope)
                   }
                   if (slots[`${item.prop}Header`]) {
                     // 传递插槽, 插槽名为列的prop + Header
-                    return slots[`${item.prop}Header`]!({ row: item })
+                    return slots[`${item.prop}Header`]!(scope)
                   }
                   return item.label
                 },
