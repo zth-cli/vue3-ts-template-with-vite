@@ -51,39 +51,11 @@ const getSubMenuIconStyle = computed((): CSSProperties => {
 </script>
 <style lang="scss">
 @import './style.scss';
-.horizontal-menu-main {
-  background-color: v-bind('menuColor.backgroundColor');
-  height: 100%;
-  width: auto;
-  overflow-y: auto;
-  .el-menu {
-    border-right: none;
-  }
-  .icons {
-    margin-right: 5px;
-    width: 24px;
-    text-align: center;
-    font-size: 18px;
-    vertical-align: middle;
-  }
-  .el-menu--horizontal > .el-sub-menu .el-sub-menu__title,
-  .el-menu--horizontal > .el-menu-item {
-    padding: 0 12px !important;
-    font-size: 14px;
-  }
-  .el-menu.el-menu--horizontal {
-    border-bottom: none !important;
-  }
-}
-.vertical-menu-main {
-  width: 208px;
-  // transition: width 0.2s ease-in;
-  // border-right: 1px solid #eee;
-}
+
 .slide-logo {
   height: 36px;
   margin-left: 4px;
-  margin-top: 8px;
+  // margin-top: 8px;
 }
 .isCollapse {
   width: 54px;

@@ -3,7 +3,8 @@
   height: 100%;
   overflow: visible;
   font-size: 0;
-  // background-color: #001529;
+  background-color: var(--menu-background);
+  border-right: 1px solid var(--el-border-color-lighter);
   transition: width 0.3s ease-in;
   .el-scrollbar.sidebar-wraper {
     height: calc(100% - 60px);
@@ -26,9 +27,6 @@
       padding: 0;
     }
   }
-  .el-menu-item {
-    z-index: 1;
-  }
   .is-active.menu-item-noDropdown::before {
     position: absolute;
     inset: 0 8px;
@@ -44,11 +42,14 @@
     .el-sub-menu__title {
       height: 50px;
       line-height: 50px;
-      // color: $menuText;
+      color: var(--menu-text) !important;
       // background-color: $subMenuBg;
-
-      &:hover {
-        // color: $menuTitleHover !important;
+      transition: all 0.2s ease-in;
+      .el-text {
+        color: var(--menu-text);
+      }
+      &:hover > * {
+        color: var(--menu-active-text) !important;
       }
     }
   }

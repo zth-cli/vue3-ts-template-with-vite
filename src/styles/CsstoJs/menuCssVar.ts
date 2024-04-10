@@ -11,7 +11,7 @@ export const menuCssVars: TcssVar[] = [
     textColor: '#fff',
   },
   {
-    backgroundColor: '#0fa59b',
+    backgroundColor: '#032121',
     activeTextColor: '#fff',
     textColor: '#fff',
   },

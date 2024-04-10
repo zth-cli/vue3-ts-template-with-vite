@@ -11,8 +11,6 @@ export const TableColumn = defineComponent({
     },
   },
   setup(props, { slots }) {
-    // defineOptions({ name: 'TableColumn' })
-
     const enumMap = inject('enumMap', ref(new Map()))
 
     // 渲染表格数据
