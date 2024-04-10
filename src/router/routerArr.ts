@@ -15,36 +15,27 @@ interface IrouteItem {
 }
 const routeArr: Array<IrouteItem> = [
   {
-    title: 'Dashboard',
-    icon: 'PieChart',
+    title: '首页',
+    componentName: 'Home',
+    componentPath: 'Home/index',
+    icon: 'house',
     parentId: 0,
-    id: 5,
-    type: 1,
-    children: [
-      {
-        title: '首页',
-        componentName: 'Home',
-        componentPath: 'Home/index',
-        icon: 'house',
-        parentId: 5,
-        id: 501,
-        type: 3,
-        path: '/home',
-        mate: {
-          isCahe: true,
-        },
-      },
-      {
-        title: '分析页',
-        componentName: 'Analysis',
-        componentPath: 'Analysis/index',
-        icon: '',
-        parentId: 5,
-        id: 502,
-        type: 3,
-        path: '/analysis',
-      },
-    ],
+    id: 501,
+    type: 3,
+    path: '/home',
+    mate: {
+      isCahe: true,
+    },
+  },
+  {
+    title: '分析页',
+    componentName: 'Analysis',
+    componentPath: 'Analysis/index',
+    icon: '',
+    parentId: 0,
+    id: 502,
+    type: 3,
+    path: '/analysis',
   },
   {
     title: '表格页面',

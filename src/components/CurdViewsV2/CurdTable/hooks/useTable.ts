@@ -84,7 +84,7 @@ export const useTable = (
   const resetHandle = () => {
     state.pageParams.pageIndex = 1
     state.searchParam = {}
-    // 重置搜索表单的时，如果有默认搜索参数，则重置默认的搜索参数
+    // 重置成默认参数
     Object.keys(initParam).forEach((key) => {
       state.searchParam[key] = initParam[key]
     })
