@@ -103,7 +103,7 @@ const showTags = computed(() => tagsList.value.length > 0)
 <style lang="scss">
 .tags {
   position: relative;
-  height: 40px;
+  height: 34px;
   overflow: hidden;
   background-color: var(--content-background);
   display: flex;

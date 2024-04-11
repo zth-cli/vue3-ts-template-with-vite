@@ -1,5 +1,5 @@
 <template>
-  <Playground>
+  <TablePlayground>
     <SelectFilter :data="selectFilterData" :default-values="selectFilterValues" @change="changeSelectFilter" />
     <CurdTable
       ref="proTable"
@@ -23,10 +23,11 @@
         <el-button type="primary" link :icon="Delete">删除</el-button>
       </template>
     </CurdTable>
-  </Playground>
+  </TablePlayground>
 </template>
 <script setup lang="ts" name="useSelectFilter">
 import { ElMessage } from 'element-plus'
+import { TablePlayground } from '@/components/TablePlayground'
 import { SelectFilter } from '@/components/CurdViewsV2/SelectFilter'
 import CurdTable from '@/components/CurdViewsV2/CurdTable/index.vue'
 import { CirclePlus, Delete, EditPen, Pointer, Download, Upload, View, Refresh } from '@element-plus/icons-vue'
