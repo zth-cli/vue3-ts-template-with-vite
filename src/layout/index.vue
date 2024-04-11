@@ -1,7 +1,7 @@
 <template>
   <el-container class="layout">
     <el-aside v-if="menuMode === 'vertical'" width="auto">
-      <Menu></Menu>
+      <Vertical></Vertical>
     </el-aside>
     <el-container style="overflow: hidden; position: relative">
       <el-header class="zth-header">
@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Menu } from './Menu'
+import Vertical from './Menu/vertical.vue'
 import { Header } from './Header'
 import { MainView } from './Main'
 import { Tags } from './TagsView'

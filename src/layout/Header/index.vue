@@ -7,7 +7,6 @@
       </el-icon>
     </div>
     <Breadcrumb v-if="!isHor"></Breadcrumb>
-    <!-- <div class="solgan ellipsis" title="首页">ZeroToHero</div> -->
     <div v-if="isHor" class="logo">
       <img src="@/assets/img/logo.png" />
     </div>
@@ -54,7 +53,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { Menu } from '../Menu'
+import Menu from '../Menu/vertical.vue'
 import { Breadcrumb } from '../Breadcrumb'
 import AppSettingBar from './AppSettingBar.vue'
 import { removeAllStorge } from '@/utils/auth'
