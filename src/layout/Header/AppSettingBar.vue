@@ -28,7 +28,7 @@
           </template>
         </div>
       </li>
-      <li class="theme-item">
+      <!-- <li class="theme-item">
         <el-divider><p>头部主题</p></el-divider>
         <div class="drawer-block-checkbox">
           <template v-for="(item, index) in headerCssVars" :key="index">
@@ -37,8 +37,8 @@
             </div>
           </template>
         </div>
-      </li>
-      <li class="theme-item">
+      </li> -->
+      <!-- <li class="theme-item">
         <el-divider><p>菜单主题</p></el-divider>
         <div class="drawer-block-checkbox">
           <template v-for="(item, index) in menuCssVars" :key="index">
@@ -47,7 +47,7 @@
             </div>
           </template>
         </div>
-      </li>
+      </li> -->
       <li class="theme-item">
         <el-divider><p>界面显示</p></el-divider>
         <div class="theme-item-sub">

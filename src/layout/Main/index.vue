@@ -4,9 +4,9 @@
       <transition :name="menuMode === 'horizontal' ? 'slide-fade-Y' : 'slide-fade-X'" appear>
         <div class="child-view">
           <keep-alive v-if="route.meta.isCache">
-            <component :is="Component" :key="route.fullPath" />
+            <RouterWrapper :is="Component" :key="route.fullPath"></RouterWrapper>
           </keep-alive>
-          <component :is="Component" :key="route.fullPath" />
+          <RouterWrapper :is="Component" v-else :key="route.fullPath"></RouterWrapper>
         </div>
       </transition>
     </template>
@@ -15,6 +15,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
+import { RouterWrapper } from './RouterWrapper'
 import { RouterView } from 'vue-router'
 import { useRoute } from 'vue-router'
 import { useConfigStroe } from '@/store/appSetting'
