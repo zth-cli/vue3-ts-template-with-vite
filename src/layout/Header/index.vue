@@ -114,6 +114,7 @@ const reloadPage = () => {
 }
 </script>
 <style lang="scss">
+$headerHeight: 48px;
 .header {
   background-color: v-bind('headerColor.backgroundColor');
   padding: 0 20px;
@@ -122,8 +123,7 @@ const reloadPage = () => {
   display: flex;
   align-items: center;
   width: 100%;
-  height: 60px;
-  font-size: 20px;
+  height: $headerHeight;
   color: v-bind('headerColor.textColor');
   i {
     font-size: 16px;
@@ -163,7 +163,9 @@ const reloadPage = () => {
     }
     .user-name {
       margin-left: 10px;
+      font-size: 14px;
       color: v-bind('headerColor.textColor');
+      cursor: pointer;
       .el-dropdown-link {
         cursor: pointer;
       }

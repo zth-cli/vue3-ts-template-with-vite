@@ -7,11 +7,13 @@
  * @FilePath: \vue3-template-with-ts\src\views\Error\500.vue
 -->
 <template>
-  <section class="error-page">
-    <el-empty description="500">
-      <el-button type="primary" @click="router.push('/')">返回首页</el-button>
-    </el-empty>
-  </section>
+  <Playground>
+    <section class="error-page">
+      <el-empty description="500">
+        <el-button type="primary" @click="router.push('/')">返回首页</el-button>
+      </el-empty>
+    </section>
+  </Playground>
 </template>
 
 <script lang="ts" setup>

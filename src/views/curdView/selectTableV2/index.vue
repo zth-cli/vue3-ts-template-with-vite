@@ -1,5 +1,5 @@
 <template>
-  <div class="table-box">
+  <Playground>
     <SelectFilter :data="selectFilterData" :default-values="selectFilterValues" @change="changeSelectFilter" />
     <CurdTable
       ref="proTable"
@@ -23,7 +23,7 @@
         <el-button type="primary" link :icon="Delete">删除</el-button>
       </template>
     </CurdTable>
-  </div>
+  </Playground>
 </template>
 <script setup lang="ts" name="useSelectFilter">
 import { ElMessage } from 'element-plus'

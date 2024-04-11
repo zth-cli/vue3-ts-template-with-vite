@@ -1,5 +1,5 @@
 <template>
-  <div class="table-box">
+  <Playground>
     <CurdTable
       ref="tableRef"
       title="用户列表"
@@ -48,7 +48,7 @@
         </span>
       </template>
     </CurdTable>
-  </div>
+  </Playground>
 </template>
 
 <script setup lang="tsx">

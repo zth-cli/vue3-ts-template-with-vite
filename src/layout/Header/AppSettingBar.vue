@@ -69,6 +69,7 @@ import { useThemeStore } from '@/store/theme'
 const configStroe = useConfigStroe()
 const themeStroe = useThemeStore()
 const colors = ref<any[]>([
+  { theme: 'light', color: '#fff', name: '浅色' },
   { theme: 'default', color: '#409EFF', name: '经典' },
   { theme: 'green', color: '#0fa59b', name: '翠绿' },
   { theme: 'blue', color: '#550fa5', name: '清爽' },
@@ -210,6 +211,7 @@ watch(
         border-radius: 2px;
         cursor: pointer;
         position: relative;
+        border: 1px solid rgba(0, 0, 0, 0.1);
         .selectIcon {
           color: rgb(142, 142, 142);
           font-weight: 700;

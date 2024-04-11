@@ -10,10 +10,12 @@ import directives from './directive'
 // 安装toasts
 import toasts from './components/Toasts'
 import RegisterIcons from './icons/index'
+import { Playground } from './components/Playground'
 
 const app = createApp(App)
 
 RegisterIcons(app)
+app.component('Playground', Playground)
 app.use(pinia)
 app.use(toasts)
 app.use(router)

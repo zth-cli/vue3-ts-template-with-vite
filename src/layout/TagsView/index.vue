@@ -103,14 +103,13 @@ const showTags = computed(() => tagsList.value.length > 0)
 <style lang="scss">
 .tags {
   position: relative;
-  height: 44px;
+  height: 40px;
   overflow: hidden;
-  padding: 0 10px;
-  background-color: var(--background);
+  background-color: var(--content-background);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 6px 19px 6px 10px;
+  padding: 0 19px 0px 10px;
   .tage-main {
     overflow: hidden;
     overflow-x: auto;

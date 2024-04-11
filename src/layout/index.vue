@@ -46,7 +46,8 @@ provide('layout-provide', { menuMode, menuColor, headerColor, showTags })
   .zth-header {
     padding: 0;
     height: auto;
-    box-shadow: 0 1px 4px rgb(0 21 41 / 8%);
+    // box-shadow: 0 1px 4px rgb(0 21 41 / 8%);
+    border-bottom: 1px solid var(--el-border-color-lighter);
     transition: all 0.2s ease-in-out;
     z-index: 11;
   }
@@ -57,7 +58,7 @@ provide('layout-provide', { menuMode, menuColor, headerColor, showTags })
     .zth-view {
       position: relative;
       box-sizing: border-box;
-      padding-top: v-bind('mrt');
+      overflow-x: hidden;
       width: 100%;
       flex: 1;
     }
