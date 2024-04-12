@@ -36,7 +36,7 @@ export const useMenuStore = defineStore('menu', {
               path: '/:path(.*)*',
               redirect: '/404error',
             },
-          ]
+          ],
         )
         router.options.routes.forEach((item) => {
           router.addRoute(item)

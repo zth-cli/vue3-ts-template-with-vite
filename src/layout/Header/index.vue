@@ -49,14 +49,12 @@
         </el-dropdown>
       </div>
     </div>
-    <!-- <AppSettingBar :status="settingBarStatus" @visible-change="toggleThemeBar"></AppSettingBar> -->
     <Setting v-model="settingBarStatus"></Setting>
   </div>
 </template>
 <script setup lang="ts">
 import Horizontal from '../Menu/horizontal.vue'
 import { Breadcrumb } from '../Breadcrumb'
-import AppSettingBar from './AppSettingBar.vue'
 import Setting from '../components/setting/index.vue'
 import { removeAllStorge } from '@/utils/auth'
 import { useRouter, useRoute } from 'vue-router'
@@ -70,14 +68,13 @@ const settingBarStatus = ref<boolean>(false)
 const fullscreen: Ref<boolean> = ref(false)
 const collapse: Ref<boolean> = ref(false)
 
-const props = withDefaults(defineProps<{ showThemeBar?: boolean }>(), {
+const props = withDefaults(defineProps<{ showThemeBar?: boolean; menuMode: 'vertical' | 'horizontal' }>(), {
   showThemeBar: true,
+  menuMode: 'vertical',
 })
 
 // 获取layout状态peovide
-const { menuMode, headerColor } = inject<any>('layout-provide')
-
-const isHor = computed(() => menuMode.value === 'horizontal')
+const isHor = computed(() => props.menuMode === 'horizontal')
 
 // 收起展开侧边菜单
 const handleCollapse = () => {
@@ -125,13 +122,13 @@ $headerHeight: 48px;
   align-items: center;
   width: 100%;
   height: $headerHeight;
-  color: v-bind('headerColor.textColor');
+  color: var(--el-text-color-regular);
   i {
     font-size: 16px;
     cursor: pointer;
   }
   .collapse-btn {
-    color: v-bind('headerColor.textColor');
+    color: var(--el-text-color-regular);
     margin-right: 12px;
     cursor: pointer;
     display: flex;

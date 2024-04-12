@@ -8,7 +8,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useThemeStore } from '@/store/theme'
+import { useThemeStore } from '@/store/modules/themeSetting'
 import { ref } from 'vue'
 
 defineOptions({ name: 'SysTheme' })
@@ -29,3 +29,4 @@ const changeTheme = (data: any) => {
 }
 </script>
 <style></style>
+@/store/modules/themeSetting

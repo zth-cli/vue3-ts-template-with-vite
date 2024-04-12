@@ -12,14 +12,16 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
 import { RouterView } from 'vue-router'
 import { useRoute } from 'vue-router'
-import { useConfigStroe } from '@/store/appSetting'
+defineProps({
+  menuMode: {
+    type: String,
+    default: 'vertical',
+  },
+})
 
-const store = useConfigStroe()
 const route = useRoute()
-const menuMode = computed(() => store.menuMode)
 console.log(route.fullPath)
 </script>
 <style lang="scss">

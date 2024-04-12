@@ -26,7 +26,8 @@ export function useTheme() {
     // 获取 css 变量
     const light = [3, 5, 7, 8, 9]
     const colorValues = getTheme()
-    const isDark = theme === DARK_MODE
+    const isDark = localStorage.getItem('_theme_') === DARK_MODE
+
     colorValues.forEach((item) => {
       const darkerColor = getDarkColor(item.value, 0.1)
       el.style.setProperty(`--el-color-${item.label}-dark-2`, `${darkerColor}`)
@@ -37,12 +38,12 @@ export function useTheme() {
     })
     return colorValues
   }
-  const getMode = () => {
+  const getDarkMode = () => {
     return localStorage.getItem('_theme_') === DARK_MODE
   }
   return {
     getTheme,
     setTheme,
-    getMode,
+    getDarkMode,
   }
 }

@@ -13,7 +13,7 @@ declare global {
   const $shallowRef: typeof import('vue/macros')['$shallowRef']
   const $toRef: typeof import('vue/macros')['$toRef']
   const EffectScope: typeof import('vue')['EffectScope']
-  const checkStorange: typeof import('./src/store/appSetting')['checkStorange']
+  const checkStorange: typeof import('./src/store/modules/appSetting')['checkStorange']
   const computed: typeof import('vue')['computed']
   const createApp: typeof import('vue')['createApp']
   const createLogger: typeof import('vuex')['createLogger']
@@ -69,7 +69,7 @@ declare global {
   const unref: typeof import('vue')['unref']
   const useAttrs: typeof import('vue')['useAttrs']
   const useConfigStroe: typeof import('./src/store/appSetting')['useConfigStroe']
-  const useConfigStroe1: typeof import('./src/store/appSetting')['useConfigStroe1']
+  const useConfigStroe1: typeof import('./src/store/modules/appSetting')['useConfigStroe1']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
   const useLink: typeof import('vue-router')['useLink']
@@ -150,7 +150,6 @@ declare module 'vue' {
     readonly triggerRef: UnwrapRef<typeof import('vue')['triggerRef']>
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
-    readonly useConfigStroe: UnwrapRef<typeof import('./src/store/appSetting')['useConfigStroe']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useLink: UnwrapRef<typeof import('vue-router')['useLink']>
@@ -159,7 +158,6 @@ declare module 'vue' {
     readonly useRouter: UnwrapRef<typeof import('vue-router')['useRouter']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly useStore: UnwrapRef<typeof import('vuex')['useStore']>
-    readonly useThemeStore: UnwrapRef<typeof import('./src/store/theme')['useThemeStore']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
     readonly watchPostEffect: UnwrapRef<typeof import('vue')['watchPostEffect']>
@@ -224,7 +222,6 @@ declare module '@vue/runtime-core' {
     readonly triggerRef: UnwrapRef<typeof import('vue')['triggerRef']>
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
-    readonly useConfigStroe: UnwrapRef<typeof import('./src/store/appSetting')['useConfigStroe']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useLink: UnwrapRef<typeof import('vue-router')['useLink']>
@@ -233,7 +230,6 @@ declare module '@vue/runtime-core' {
     readonly useRouter: UnwrapRef<typeof import('vue-router')['useRouter']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly useStore: UnwrapRef<typeof import('vuex')['useStore']>
-    readonly useThemeStore: UnwrapRef<typeof import('./src/store/theme')['useThemeStore']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
     readonly watchPostEffect: UnwrapRef<typeof import('vue')['watchPostEffect']>

@@ -9,10 +9,11 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useConfigStroe } from '@/store/appSetting'
+import { useConfigStroe } from '@/store/modules/appSetting'
 const configStroe = useConfigStroe()
 const setMenuMode = (mode: 'vertical' | 'horizontal') => {
   configStroe.menuMode = mode
 }
 </script>
 <style></style>
+@/store/modules/appSetting

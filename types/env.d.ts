@@ -24,8 +24,8 @@ interface ImportMetaEnv {
    * Cross-domain proxy, you can configure multiple
    */
   VITE_PROXY: string
-  VITE_sidebarLogo: boolean
-  VITE_menuMode: string
-  VITE_tagsBar: boolean
-  VITE_showThemeBar: boolean
+  VITE_SIDEBAR_LOGO: boolean
+  VITE_MENU_MODE: 'vertical' | 'horizontal'
+  VITE_SHOW_TAG: boolean
+  VITE_SHOW_THEME: boolean
 }
