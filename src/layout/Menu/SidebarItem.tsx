@@ -16,6 +16,10 @@ export const SidebarItem = defineComponent({
       type: Boolean,
       default: false,
     },
+    mode: {
+      type: String,
+      default: 'vertical',
+    },
   },
   setup(props, { attrs }) {
     const getDivStyle = computed((): CSSProperties => {
@@ -28,11 +32,13 @@ export const SidebarItem = defineComponent({
       }
     })
     const getNoDropdownStyle = computed((): CSSProperties => {
-      return {
-        width: '100%',
-        display: 'flex',
-        alignItems: 'center',
-      }
+      return props.mode === 'vertical'
+        ? {
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+          }
+        : null
     })
 
     const getSubMenuIconStyle = computed((): CSSProperties => {
@@ -81,6 +87,10 @@ export const SidebarItem = defineComponent({
         </ElSubMenu>
       )
     }
-    return () => <>{props.item?.children?.length > 0 ? <SubMenu {...props.item} /> : <MenuItem {...props.item} />}</>
+    return () => (
+      <>
+        {props.item?.children?.length > 0 ? <SubMenu class='sub-menu' {...props.item} /> : <MenuItem {...props.item} />}
+      </>
+    )
   },
 })

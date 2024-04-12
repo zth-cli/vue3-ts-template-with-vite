@@ -1,5 +1,5 @@
 <template>
-  <div class="header" :class="{ 'light-header': !isHor }">
+  <div class="header" :class="{ 'horizontal-header': isHor }">
     <!-- 折叠按钮 -->
     <div v-if="!isHor" class="collapse-btn">
       <el-icon :size="20">
@@ -12,7 +12,7 @@
     </div>
     <div class="header-menu">
       <slot>
-        <Menu v-if="isHor" menu-mode="horizontal"></Menu>
+        <Horizontal v-if="isHor"></Horizontal>
       </slot>
     </div>
     <div class="header-right">
@@ -53,7 +53,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import Menu from '../Menu/vertical.vue'
+import Horizontal from '../Menu/horizontal.vue'
 import { Breadcrumb } from '../Breadcrumb'
 import AppSettingBar from './AppSettingBar.vue'
 import { removeAllStorge } from '@/utils/auth'
@@ -115,7 +115,7 @@ const reloadPage = () => {
 <style lang="scss">
 $headerHeight: 48px;
 .header {
-  background-color: v-bind('headerColor.backgroundColor');
+  background-color: var(--content-background);
   padding: 0 20px;
   position: relative;
   box-sizing: border-box;
@@ -174,9 +174,7 @@ $headerHeight: 48px;
     }
   }
 }
-.light-header {
-  .el-dropdown-link {
-    cursor: pointer;
-  }
+.horizontal-header {
+  background-color: var(--menu-background) !important;
 }
 </style>

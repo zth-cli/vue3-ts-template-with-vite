@@ -15,7 +15,7 @@ export const isVisible = (element: HTMLElement) => {
 
 export const obtainAllFocusableElements = (element: HTMLElement): HTMLElement[] => {
   return Array.from(element.querySelectorAll<HTMLElement>(FOCUSABLE_ELEMENT_SELECTORS)).filter(
-    (item: HTMLElement) => isFocusable(item) && isVisible(item)
+    (item: HTMLElement) => isFocusable(item) && isVisible(item),
   )
 }
 
@@ -111,3 +111,19 @@ export const focusNode = (el: HTMLElement) => {
   el.focus()
   !isLeaf(el) && el.click()
 }
+
+/**
+ * @description 检测某个元素是否聚焦
+ * @param el
+ * @returns {Boolean}
+ */
+export const hasFocus = (el: Element) => el === document.activeElement
+
+/**
+ * @description 获取某个元素所有的兄弟元素
+ * @param el
+ * @returns {Array}
+ * @example a(document.querySelector('.section')) => [div#id, p, span]
+ */
+export const a = (el: { parentNode: { children: any } }): Array<any> =>
+  [].slice.call(el.parentNode.children).filter((child: any) => child !== el)

@@ -1,10 +1,10 @@
-import { hexToRgba, getDarkColor } from '@/utils'
-/**
- * 主题切换
- * @param theme
- * @description 基于element-plus
- */
+import { getDarkColor, getLightColor } from '@/utils'
+
 export const DARK_MODE = 'dark'
+
+/**
+ * @description 根据主题主色调，生成element-plus同名的css颜色变量
+ */
 export function useTheme() {
   const getTheme = () => {
     const el = document.documentElement
@@ -30,10 +30,8 @@ export function useTheme() {
     colorValues.forEach((item) => {
       const darkerColor = getDarkColor(item.value, 0.1)
       el.style.setProperty(`--el-color-${item.label}-dark-2`, `${darkerColor}`)
-      light.forEach((ele, index) => {
-        const colorLight = isDark
-          ? getDarkColor(item.value.trim(), 0.1 * ele - 0.1)
-          : hexToRgba(item.value, 1 - 0.1 * ele)
+      light.forEach((ele, _i) => {
+        const colorLight = isDark ? getDarkColor(item.value.trim(), ele / 10) : getLightColor(item.value, ele / 10)
         el.style.setProperty(`--el-color-${item.label}-light-${ele}`, colorLight as string)
       })
     })

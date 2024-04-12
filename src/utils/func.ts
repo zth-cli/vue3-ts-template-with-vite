@@ -23,10 +23,14 @@ export const newArr = function (arr: any[]): string | any[] {
   return arr.reduce((pre: string | any[], cur: any) => pre.concat(Array.isArray(cur) ? newArr(cur) : cur), [])
 }
 
-// 计算数组中每个元素出现的次数
-// let names = ['Alice', 'Bob', 'Tiff', 'Bruce', 'Alice'];
-export const nameNum = function (names: any[]) {
-  return names.reduce((pre: { [x: string]: number }, cur: string) => {
+/**
+ * @description 计算数组中每个元素出现的次数
+ * @param array
+ * @returns {Object}
+ * @example nameNum(['Alice', 'Bob', 'Tiff', 'Bruce', 'Alice']) => {"Alice": 2, "Bob": 1, "Tiff": 1, "Bruce": 1}
+ */
+export const nameNum = (array: any[]): Record<any, number> => {
+  return array.reduce((pre: { [x: string]: number }, cur: string) => {
     if (cur in pre) {
       pre[cur]++
     } else {
@@ -36,13 +40,23 @@ export const nameNum = function (names: any[]) {
   }, {})
 }
 
-// 转数组
-export function toArray(likeArray: any) {
+/**
+ * @description 将类数组转换为数组
+ * @param {*} likeArray
+ * @returns {Array}
+ * @example toArray({0: 'a', 'length': 1}) => ["a"]
+ */
+export function toArray(likeArray: any): Array<any> {
   return Array.isArray(likeArray) ? likeArray : [likeArray]
 }
 
-// 数字科学计数 10000 => 10k
-export function numberFormatter(num: number, digits: number) {
+/**
+ * @description 数字科学计数 10000 => 10k 数字格式化
+ * @param num
+ * @returns {String}
+ * @example numberFormatter(10000) => 10k
+ */
+export function numberFormatter(num: number, digits: number): string {
   const si = [
     { value: 1e18, symbol: 'E' },
     { value: 1e15, symbol: 'P' },
@@ -59,124 +73,88 @@ export function numberFormatter(num: number, digits: number) {
   return num.toString()
 }
 
-// 数字科学计数
-// 10000 => "10,000"数字格式化
-export function toThousandFilter(num: string | number) {
+/**
+ * @description 数字科学计数 10000 => "10,000"数字格式化
+ * @param num
+ * @returns {String}
+ * @example toThousandFilter(10000) => "10,000"
+ */
+export function toThousandFilter(num: string | number): string {
   return (+num || 0).toString().replace(/^-?\d+/g, (m) => m.replace(/(?=(?!\b)(\d{3})+$)/g, ','))
 }
 
-// 首字母大写
-export function uppercaseFirst(string: string) {
+/**
+ * @description 首字母大写
+ * @param string
+ * @returns {String}
+ * @example uppercaseFirst('hello') => 'Hello'
+ */
+export function uppercaseFirst(string: string): string {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
-// 首字母小写
-export const lowercaseFirst = (str: string) => `${str.charAt(0).toLowerCase()}${str.slice(1)}`
+/**
+ * @description 首字母小写
+ * @param str
+ * @returns {String}
+ * @example uppercaseFirst('Hello') => 'hello'
+ */
+export const lowercaseFirst = (str: string): string => `${str.charAt(0).toLowerCase()}${str.slice(1)}`
 
-// 检测某个元素是否聚焦
-export const hasFocus = (el: Element) => el === document.activeElement
-
-//获取某个元素所有的兄弟元素
-export const a = (el: { parentNode: { children: any } }) =>
-  [].slice.call(el.parentNode.children).filter((child: any) => child !== el)
-
-// 随机IP地址
-export const randomIp = () =>
+/**
+ * @description 随机IP地址
+ * @returns {String}
+ * @example randomIp() => '192.168.1.1'
+ */
+export const randomIp = (): string =>
   Array(4)
     .fill(0)
     .map((_, i) => Math.floor(Math.random() * 255) + (i === 0 ? 1 : 0))
     .join('.')
 
-// 下划线转驼峰
-// eslint-disable-next-line no-useless-escape
-export const toHump = (str: string) => str.replace(/_(\w)/g, (all: any, letter: string) => letter.toUpperCase())
-
-// 驼峰转下划线横线
-export const toLine = (str: string) => str.replace(/([A-Z])/g, '_$1').toLowerCase()
-
-// 两个日期之间相差的天数
-export const diffDays = (date: number, otherDate: number) =>
-  Math.ceil(Math.abs(date - otherDate) / (1000 * 60 * 60 * 24))
-
-//检查日期是否有效
-export const isDateValid = (val: Date | string) => !Number.isNaN(new Date(val).valueOf())
-
-// 颜色格式 hex 转 rgba
-export const hexToRgba = (bgColor: string, opt = 1) => {
-  const color = bgColor.trim().slice(1) // 去掉'#'号
-  const rgba = [
-    parseInt('0x' + color.slice(0, 2)),
-    parseInt('0x' + color.slice(2, 4)),
-    parseInt('0x' + color.slice(4, 6)),
-    opt,
-  ]
-  return 'rgba(' + rgba.toString() + ')'
-}
-//hex颜色转rgb颜色
-export function HexToRgb(color: string): void | number[] {
-  const r = /^#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/
-  //test方法检查在字符串中是否存在一个模式，如果存在则返回true，否则返回false
-  if (!r.test(color.trim())) {
-    return console.warn('非法hex字符串')
-  }
-  //replace替换查找的到的字符串
-  color = color.trim().slice(1) // 去掉'#'号
-  //match得到查询数组
-  const hxs = [
-    parseInt('0x' + color.slice(0, 2)),
-    parseInt('0x' + color.slice(2, 4)),
-    parseInt('0x' + color.slice(4, 6)),
-  ]
-  return hxs
-}
-//GRB颜色转Hex颜色
-export function RgbToHex(a: any, b: any, c: any): string | void {
-  const r = /^\d{1,3}$/
-  if (!r.test(a) || !r.test(b) || !r.test(c)) {
-    return console.warn('输入错误的rgb颜色值')
-  }
-  const hexs = [a.toString(16), b.toString(16), c.toString(16)]
-  for (let i = 0; i < 3; i++) {
-    if (hexs[i].length === 1) {
-      hexs[i] = '0' + hexs[i]
-    }
-  }
-  return '#' + hexs.join('')
-}
-
-//得到hex颜色值为color的加深颜色值，level为加深的程度，限0-1之间, 值越大颜色越深
-export function getDarkColor(color: string, level: number): string | void {
-  const r = /^#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/
-  if (!r.test(color.trim())) {
-    return console.warn('输入错误的hex颜色值')
-  }
-  const rgbc = HexToRgb(color) || []
-  for (let i = 0; i < 3; i++) {
-    rgbc[i] = Math.floor(rgbc[i] * (1 - level))
-  }
-  return RgbToHex(rgbc[0], rgbc[1], rgbc[2])
-}
-//得到hex颜色值为color的减淡颜色值，level为加深的程度，限0-1之间
-export function getLightColor(color: string, level: number): string | void {
-  const r = /^#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/
-  if (!r.test(color.trim())) {
-    return console.warn('输入错误的hex颜色值')
-  }
-  const rgbc = HexToRgb(color) || []
-  for (let i = 0; i < 3; i++) {
-    rgbc[i] = Math.floor((255 - rgbc[i]) * level + rgbc[i])
-  }
-  return RgbToHex(rgbc[0], rgbc[1], rgbc[2])
-}
+/**
+ * @description 下划线转驼峰
+ * @param {String} str
+ * @returns {String}
+ * @example toHump('user_name') => 'userName'
+ */
+export const toHump = (str: string): string =>
+  str.replace(/_(\w)/g, (_all: any, letter: string) => letter.toUpperCase())
 
 /**
- *
+ * @description 驼峰转下划线
+ * @param {String} str
+ * @returns {String}
+ * @example toLine('userName') => 'user_name'
+ */
+export const toLine = (str: string): string => str.replace(/([A-Z])/g, '_$1').toLowerCase()
+
+/**
+ * @description 计算两个日期之间相差的天数
+ * @param {Date | string} date
+ * @param {Date | string} otherDate
+ * @returns {number}
+ * @example diffDays(new Date(), new Date(2020, 0, 1)) => 365
+ */
+export const diffDays = (date: number, otherDate: number): number =>
+  Math.ceil(Math.abs(date - otherDate) / (1000 * 60 * 60 * 24))
+
+/**
+ * @description 判断日期是否合法
+ * @param {Date | string} val
+ * @returns {Boolean}
+ * @example isDateValid(new Date()) => true
+ */
+export const isDateValid = (val: Date | string): boolean => !Number.isNaN(new Date(val).valueOf())
+
+/**
  * @description 并发执行任务，控制同时执行任务的数量
  * @param {Promise<any>[]} tasks
  * @param {number} paralleCount
- * @returns
+ * @returns {Promise<void>}
+ * @example paralleTask([Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)], 2) => Promise<void>
  */
-export const paralleTask = (tasks: Promise<any>[], paralleCount: number) => {
+export const paralleTask = (tasks: Promise<any>[], paralleCount: number): Promise<void> => {
   return new Promise<void>((resolve) => {
     if (tasks.length === 0) {
       resolve()

@@ -8,9 +8,9 @@ export const SidebarMenu = defineComponent({
     const menuStore = useMenuStore()
     const routeArr = computed<IrouteItem[]>(() => menuStore.routes)
     return () => (
-      <el-menu unique-opened collapse={props.collapse} router {...attrs}>
+      <el-menu unique-opened default collapse={props.collapse} router {...attrs}>
         {routeArr.value.map((item, index) => (
-          <SidebarItem item={item} isCollapse={props.collapse} key={index} />
+          <SidebarItem item={item} isCollapse={props.collapse} mode={attrs?.mode || ''} key={index} />
         ))}
       </el-menu>
     )

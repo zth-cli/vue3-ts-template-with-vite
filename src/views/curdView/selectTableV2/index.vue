@@ -83,7 +83,11 @@ setTimeout(() => {
 // 默认 selectFilter 参数
 const selectFilterValues = ref({ userStatus: '2', userRole: ['1', '2'] })
 const changeSelectFilter = (value: typeof selectFilterValues.value) => {
-  ElMessage.success('请注意查看请求参数变化 🤔')
+  ElMessage({
+    type: 'success',
+    message: `当前筛选参数为【${JSON.stringify(value)}】`,
+    duration: 2000 * 20,
+  })
   proTable.value!.pageParams.pageIndex = 1
   selectFilterValues.value = value
 }

@@ -1,10 +1,10 @@
 <template>
   <div class="sidebar-container" :class="{ 'menu-collapse': isCollapse }">
     <div class="slide-logo">
-      <img src="@/assets/img/logo.png" />
+      <!-- <img src="@/assets/img/logo.png" /> -->
     </div>
     <el-scrollbar wrap-class="scrollbar-wrapper" class="sidebar-wraper">
-      <SidebarMenu :collapse="isCollapse" />
+      <SidebarMenu :collapse="isCollapse" :collapse-transition="false" />
     </el-scrollbar>
   </div>
 </template>
@@ -27,7 +27,8 @@ bus.on('swithCollapse', (bool: boolean) => {
   // margin-top: 8px;
 }
 .menu-collapse {
-  width: 54px;
+  width: 54px !important;
   overflow: hidden;
+  box-sizing: content-box;
 }
 </style>

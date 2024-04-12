@@ -31,7 +31,7 @@ const routeArr: Array<IrouteItem> = [
     title: '分析页',
     componentName: 'Analysis',
     componentPath: 'Analysis/index',
-    icon: '',
+    icon: 'Histogram',
     parentId: 0,
     id: 502,
     type: 3,
