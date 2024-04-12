@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 interface AppSettingState {
-  menuMode: string | boolean //导航模式
+  menuMode: string //导航模式
   navTheme?: string //导航风格
   headerSetting?: string //顶部设置
   sidebarLogo?: string
@@ -13,24 +13,37 @@ interface AppSettingState {
   showThemeBar?: string
 }
 const env = import.meta.env
-export function checkStorange(key: string) {
-  const temp = env['VITE_' + key]
-  return localStorage.getItem(key) !== null ? localStorage.getItem(key) : temp
-}
 
-export const useConfigStroe = defineStore('useConfigStroe', {
-  state(): AppSettingState {
+export const useConfigStroe = defineStore(
+  'useConfigStroe',
+  () => {
+    const sidebarLogo = ref(true)
+    const menuMode = ref('vertical')
+    const tagsBar = ref(true)
+    const showThemeBar = ref(true)
+
+    // watch menuMode, 给body元素的layout添加属性
+    watch(
+      () => menuMode.value,
+      (newValue) => {
+        document.body.setAttribute('layout', newValue)
+      },
+      {
+        immediate: true,
+      },
+    )
+
     return {
-      sidebarLogo: checkStorange('sidebarLogo'),
-      menuMode: checkStorange('menuMode') || 'vertical',
-      tagsBar: checkStorange('tagsBar'),
-      showThemeBar: checkStorange('showThemeBar'),
+      sidebarLogo,
+      menuMode,
+      tagsBar,
+      showThemeBar,
     }
   },
-  actions: {
-    changeConfig({ key, value }) {
-      localStorage.setItem(key, value)
-      this[key] = value ? value : ''
+  {
+    persist: {
+      key: '_appSetting',
+      storage: localStorage,
     },
   },
-})
+)

@@ -46,7 +46,7 @@ export const SidebarItem = defineComponent({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        margin: props.isCollapse ? '0 auto' : '0 5px 0 0',
+        margin: props.isCollapse ? '0 auto' : '0',
       }
     })
     const MenuItem = (item: IrouteItem) => {

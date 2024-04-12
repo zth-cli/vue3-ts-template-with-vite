@@ -49,13 +49,15 @@
         </el-dropdown>
       </div>
     </div>
-    <AppSettingBar :status="settingBarStatus" @visible-change="toggleThemeBar"></AppSettingBar>
+    <!-- <AppSettingBar :status="settingBarStatus" @visible-change="toggleThemeBar"></AppSettingBar> -->
+    <Setting v-model="settingBarStatus"></Setting>
   </div>
 </template>
 <script setup lang="ts">
 import Horizontal from '../Menu/horizontal.vue'
 import { Breadcrumb } from '../Breadcrumb'
 import AppSettingBar from './AppSettingBar.vue'
+import Setting from '../components/setting/index.vue'
 import { removeAllStorge } from '@/utils/auth'
 import { useRouter, useRoute } from 'vue-router'
 import { Ref, ref, unref, computed } from 'vue'
@@ -155,7 +157,7 @@ $headerHeight: 48px;
       align-items: center;
     }
     .icon-cammand {
-      color: v-bind('headerColor.textColor');
+      color: var(--menu-text);
       transform: rotate(45deg);
       margin-left: 12px;
       font-weight: lighter;
@@ -163,7 +165,7 @@ $headerHeight: 48px;
     .user-name {
       margin-left: 10px;
       font-size: 14px;
-      color: v-bind('headerColor.textColor');
+      color: var(--menu-text);
       cursor: pointer;
       .el-dropdown-link {
         cursor: pointer;
@@ -176,5 +178,13 @@ $headerHeight: 48px;
 }
 .horizontal-header {
   background-color: var(--menu-background) !important;
+}
+body[layout='vertical'] {
+  .icon-cammand {
+    color: var(--el-text-color-regular) !important;
+  }
+  .user-name {
+    color: var(--el-text-color-regular) !important;
+  }
 }
 </style>

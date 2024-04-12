@@ -69,6 +69,7 @@ declare global {
   const unref: typeof import('vue')['unref']
   const useAttrs: typeof import('vue')['useAttrs']
   const useConfigStroe: typeof import('./src/store/appSetting')['useConfigStroe']
+  const useConfigStroe1: typeof import('./src/store/appSetting')['useConfigStroe1']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
   const useLink: typeof import('vue-router')['useLink']
@@ -95,7 +96,6 @@ declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
-    readonly checkStorange: UnwrapRef<typeof import('./src/store/appSetting')['checkStorange']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
     readonly createLogger: UnwrapRef<typeof import('vuex')['createLogger']>
@@ -170,7 +170,6 @@ declare module '@vue/runtime-core' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
-    readonly checkStorange: UnwrapRef<typeof import('./src/store/appSetting')['checkStorange']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
     readonly createLogger: UnwrapRef<typeof import('vuex')['createLogger']>

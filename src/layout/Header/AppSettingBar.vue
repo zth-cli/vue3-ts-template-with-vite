@@ -4,16 +4,10 @@
       <li class="theme-item">
         <el-divider><p>导航栏模式</p></el-divider>
         <div class="drawer-block-checkbox">
-          <div
-            class="drawer-block-checkbox-item drawer-block-checkbox-item-slide"
-            @click="saveTheme('menuMode', 'vertical')"
-          >
+          <div class="drawer-block-checkbox-item drawer-block-checkbox-item-slide" @click="setMenuMode('vertical')">
             <el-icon v-show="layout.menuMode === 'vertical'" class="selectIcon"><Select /></el-icon>
           </div>
-          <div
-            class="drawer-block-checkbox-item drawer-block-checkbox-item-top"
-            @click="saveTheme('menuMode', 'horizontal')"
-          >
+          <div class="drawer-block-checkbox-item drawer-block-checkbox-item-top" @click="setMenuMode('horizontal')">
             <el-icon v-show="layout.menuMode === 'horizontal'" class="selectIcon"><Select /></el-icon>
           </div>
         </div>
@@ -66,6 +60,7 @@ import { menuCssVars, LOCAL_NAME as MENU_NAME } from '@/styles/CsstoJs/menuCssVa
 import { headerCssVars, LOCAL_NAME } from '@/styles/CsstoJs/headerCssVar'
 import { useConfigStroe } from '@/store/appSetting'
 import { useThemeStore } from '@/store/theme'
+import { mode } from 'crypto-js'
 const configStroe = useConfigStroe()
 const themeStroe = useThemeStore()
 const colors = ref<any[]>([
@@ -97,7 +92,9 @@ const change = () => {
 const saveTheme = (key: string, menuMode?: string) => {
   menuMode ? (layout.menuMode = menuMode) : ''
   configStroe.changeConfig({ key, value: layout[key] })
-  // store.dispatch('changeSetting', { key, value: layout[key] })
+}
+const setMenuMode = (mode: 'vertical' | 'horizontal') => {
+  configStroe.menuMode = mode
 }
 const themeName = ref<string>(localStorage.getItem('_theme_') || 'default')
 
