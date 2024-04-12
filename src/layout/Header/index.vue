@@ -55,7 +55,7 @@
 <script setup lang="ts">
 import Horizontal from '../Menu/horizontal.vue'
 import { Breadcrumb } from '../Breadcrumb'
-import Setting from '../components/setting/index.vue'
+import Setting from '../Setting/index.vue'
 import { removeAllStorge } from '@/utils/auth'
 import { useRouter, useRoute } from 'vue-router'
 import { Ref, ref, unref, computed } from 'vue'

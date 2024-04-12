@@ -29,6 +29,7 @@ export interface SearchProps {
   key?: string // 搜索参数字段名 没定义时取当前列的 prop
   order?: number //排序, 数字越小越靠前
   tooltip?: string // 提示
+  label?: string
   defaultValue?: string | number | any[] // 搜索项默认值
 }
 // 实现el-table类型提示

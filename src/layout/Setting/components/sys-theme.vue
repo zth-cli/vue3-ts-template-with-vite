@@ -28,5 +28,23 @@ const changeTheme = (data: any) => {
   themeName.value = data.theme
 }
 </script>
-<style></style>
-@/store/modules/themeSetting
+<style lang="scss">
+.theme-color-block {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  color: #fff;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  .selectIcon {
+    color: rgb(142, 142, 142);
+    font-weight: 700;
+    font-size: 14px;
+    pointer-events: none;
+  }
+}
+</style>

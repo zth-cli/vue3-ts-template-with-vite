@@ -25,7 +25,7 @@ interface ImportMetaEnv {
    */
   VITE_PROXY: string
   VITE_SIDEBAR_LOGO: boolean
-  VITE_MENU_MODE: 'vertical' | 'horizontal'
+  VITE_MENU_MODE: string
   VITE_SHOW_TAG: boolean
   VITE_SHOW_THEME: boolean
 }

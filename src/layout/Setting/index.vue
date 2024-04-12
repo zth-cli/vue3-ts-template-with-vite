@@ -17,7 +17,7 @@
   </Panel>
 </template>
 <script setup lang="ts">
-import Panel from '../panel/inde.vue'
+import Panel from './panel/inde.vue'
 import MenuMode from './components/menu-mode.vue'
 import SysTheme from './components/sys-theme.vue'
 import PageSetting from './components/page-setting.vue'
@@ -25,5 +25,10 @@ import { ref } from 'vue'
 const msg = ref('Hello World!')
 </script>
 <style lang="scss">
-@import './style.scss';
+.theme-list {
+  box-sizing: border-box;
+  .theme-item {
+    margin-bottom: 40px;
+  }
+}
 </style>

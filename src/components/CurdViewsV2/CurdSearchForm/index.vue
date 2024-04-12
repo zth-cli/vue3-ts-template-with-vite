@@ -9,7 +9,16 @@
           v-bind="getResponsive"
           :index="index"
         >
-          <el-form-item :label="`${item.label} :`">
+          <el-form-item>
+            <template #label>
+              <el-space :size="4">
+                <span>{{ `${item.search?.label ?? item.label}` }}</span>
+                <el-tooltip v-if="item.search?.tooltip" effect="dark" :content="item.search?.tooltip" placement="top">
+                  <el-icon><QuestionFilled /></el-icon>
+                </el-tooltip>
+              </el-space>
+              <span>&nbsp;:</span>
+            </template>
             <SearchFormItem :column="item" :search-param="searchParam" />
           </el-form-item>
         </el-col>

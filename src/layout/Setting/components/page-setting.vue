@@ -11,5 +11,9 @@ const setTagVisible = (val: boolean) => {
   configStroe.showTag = val
 }
 </script>
-<style></style>
-@/store/modules/appSetting
+<style lang="scss">
+.theme-item-sub {
+  display: flex;
+  justify-content: space-between;
+}
+</style>

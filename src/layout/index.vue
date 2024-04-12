@@ -21,7 +21,7 @@
 import Vertical from './Menu/vertical.vue'
 import { Header } from './Header'
 import { MainView } from './Main'
-import { Tags } from './TagsView'
+import { Tags } from './Tags'
 import { useConfigStroe } from '@/store/modules/appSetting'
 import { computed } from 'vue'
 

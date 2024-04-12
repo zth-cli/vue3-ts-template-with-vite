@@ -84,7 +84,7 @@ const columns: ColumnProps<any>[] = [
         prop: 'username',
         label: '用户姓名',
         width: 110,
-        search: { type: 'input', order: 2, defaultValue: '男' },
+        search: { type: 'input', order: 2, defaultValue: '男', tooltip: '这是提示！😃' },
       },
       { prop: 'age', label: '年龄', width: 100, search: { type: 'input', order: 2, defaultValue: '男' } },
       {
