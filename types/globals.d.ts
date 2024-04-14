@@ -1,11 +1,3 @@
-/*
- * @Author: 阮志雄
- * @Date: 2021-10-31 02:16:09
- * @LastEditTime: 2022-09-17 16:45:37
- * @LastEditors: 阮志雄
- * @Description: In User Settings Edit
- * @FilePath: \vue3.0-template-with-elementui\types\globals.d.ts
- */
 interface ServerConfigs {
   Version?: string
   Title?: string
@@ -53,4 +45,37 @@ declare interface IGiftInfo {
 
 declare interface Fn<T = any, R = T> {
   (...arg: T[]): R
+}
+/**
+ * ref 绑定的元素类型
+ */
+type ElementRefType = HTMLElement | null
+
+/**
+ * setTimeout 类型
+ */
+type Timeout = ReturnType<typeof setTimeout>
+
+/**
+ * setInterval 类型
+ */
+type Interval = ReturnType<typeof setInterval>
+
+/**
+ * 普通的对象的泛型
+ */
+type RecordType = {
+  [index: string]: any
+}
+
+/**
+ * 允许null的泛型
+ */
+type Nullable<T> = T | null
+
+/**
+ * 去除只读状态
+ */
+type Mutable<T extends Record<string, any>> = {
+  -readonly [K in keyof T]: T[K]
 }
