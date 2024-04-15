@@ -84,6 +84,16 @@ const routeArr: Array<IrouteItem> = [
         type: 3,
         path: '/select-tablev2',
       },
+      {
+        title: '表单',
+        componentName: 'zthForm',
+        componentPath: 'curdView/zthForm/index',
+        icon: '',
+        parentId: 6,
+        id: 605,
+        type: 3,
+        path: '/zth-form',
+      },
     ],
   },
   {

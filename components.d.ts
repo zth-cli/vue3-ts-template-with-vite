@@ -64,7 +64,9 @@ declare module 'vue' {
     ElTree: typeof import('element-plus/es')['ElTree']
     ElUpload: typeof import('element-plus/es')['ElUpload']
     FlowBar: typeof import('./src/components/CurdViews/FlowBar/FlowBar.vue')['default']
+    FormContent: typeof import('./src/components/ZthForm/FormContent.vue')['default']
     FormData: typeof import('./src/components/CurdViews/FormData/index.vue')['default']
+    FormItem: typeof import('./src/components/ZthForm/FormItem.vue')['default']
     LazyTree: typeof import('./src/components/CurdViews/LazyTree.vue')['default']
     MenuItem: typeof import('./src/components/ZthMenu/src/menu-item.vue')['default']
     Menus: typeof import('./src/components/ZthMenu/src/menus.vue')['default']
@@ -81,6 +83,7 @@ declare module 'vue' {
     Toasts: typeof import('./src/components/Toasts/src/toasts.vue')['default']
     Tree: typeof import('./src/components/CurdViews/Tree/Tree.vue')['default']
     Upload: typeof import('./src/components/CurdViews/Upload/index.vue')['default']
+    ZthForm: typeof import('./src/components/ZthForm/index.vue')['default']
     ZthMenu: typeof import('./src/components/ZthMenu/src/zth-menu.vue')['default']
     ZthSplit: typeof import('./src/components/ZthSplit/index.vue')['default']
   }

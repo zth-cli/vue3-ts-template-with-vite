@@ -32,27 +32,96 @@ import type {
 import type { TimeSelectProps } from 'element-plus/es/components/time-select/src/time-select'
 
 /**
- * 拓展el-form组件类型
+ * 原生input所有的type类型
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types
  */
-interface PlusFormProps extends /* @vue-ignore */ Partial<Mutable<FormProps>> {
-  modelValue?: FieldValues
-  defaultValues?: FieldValues
-  columns?: ZthFormProp[]
-  labelWidth?: string
-  labelPosition?: 'left' | 'right' | 'top'
-  rowProps?: Partial<Mutable<RowProps>>
-  colProps?: Partial<Mutable<ColProps>>
-  labelSuffix?: string
-  hasErrorTip?: boolean
-  hasFooter?: boolean
-  hasReset?: boolean
-  hasLabel?: boolean
-  submitText?: string
-  resetText?: string
-  submitLoading?: boolean
-  footerAlign?: 'left' | 'right' | 'center'
-  rules?: FormRules
-}
+export type InputType =
+  | 'button'
+  | 'checkbox'
+  | 'color'
+  | 'date'
+  | 'datetime-local'
+  | 'email'
+  | 'file'
+  | 'hidden'
+  | 'image'
+  | 'month'
+  | 'number'
+  | 'password'
+  | 'radio'
+  | 'range'
+  | 'reset'
+  | 'search'
+  | 'submit'
+  | 'tel'
+  | 'text'
+  | 'time'
+  | 'url'
+  | 'week'
+
+/**
+ * 所有表单的类型 默认是  input
+ */
+export type FormItemValueType =
+  | 'autocomplete'
+  | 'cascader'
+  | 'checkbox'
+  | 'color-picker'
+  | 'date-picker'
+  | 'input-number'
+  | 'img'
+  | 'radio'
+  | 'rate'
+  | 'select'
+  | 'slider'
+  | 'switch'
+  | 'time-picker'
+  | 'time-select'
+  | 'textarea'
+  | 'input'
+  | 'text'
+  | 'plus-radio'
+  | 'plus-date-picker'
+  | 'plus-input-tag'
+  | undefined
+
+/**
+ * 表单值的类型
+ */
+export type FieldValueType =
+  | string
+  | number
+  | boolean
+  | null
+  | undefined
+  | Date
+  | string[]
+  | number[]
+  | boolean[]
+  | Date[]
+  | [Date, Date]
+  | [number, number]
+  | [string, string]
+  | string[][]
+  | number[][]
+
+/**
+ * 需要去除或者需要重新定义的类型
+ */
+export type OmitTypes =
+  // 去除的
+  | 'modelValue'
+  | 'src'
+  | 'autocomplete'
+  | 'type'
+  | 'loading'
+  | 'step'
+  | 'format'
+  | 'filterMethod'
+  | 'id'
+  | 'effect'
+  | 'height'
+  | 'autosize'
 
 /**
  *  自定义props类型  支持对象object，computed，函数和Promise
@@ -68,6 +137,28 @@ export type PropsItemType<T extends Record<string, any> = any> =
       },
     ) => Partial<T> | Promise<Partial<T>>)
   | Promise<Partial<T>>
+
+/**
+ * 拓展el-form组件类型
+ */
+export interface PlusFormProps extends /* @vue-ignore */ Partial<Mutable<FormProps>> {
+  defaultValues?: FieldValues
+  columns?: ZthFormItemProp[]
+  labelWidth?: string
+  labelPosition?: 'left' | 'right' | 'top'
+  rowProps?: Partial<Mutable<RowProps>>
+  colProps?: Partial<Mutable<ColProps>>
+  labelSuffix?: string
+  hasErrorTip?: boolean
+  hasFooter?: boolean
+  hasReset?: boolean
+  hasLabel?: boolean
+  submitText?: string
+  resetText?: string
+  submitLoading?: boolean
+  footerAlign?: 'left' | 'right' | 'center'
+  rules?: FormRules
+}
 
 /**
  * 选择框类型
@@ -121,51 +212,6 @@ export declare type ElTooltipProps = ExtractPropTypes<typeof useTooltipProps>
  * 提取el-cascader的props类型
  */
 export type CascaderProps = ExtractPropTypes<typeof cascaderProps>
-/**
- * 原生input所有的type类型
- * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types
- */
-export type InputType =
-  | 'button'
-  | 'checkbox'
-  | 'color'
-  | 'date'
-  | 'datetime-local'
-  | 'email'
-  | 'file'
-  | 'hidden'
-  | 'image'
-  | 'month'
-  | 'number'
-  | 'password'
-  | 'radio'
-  | 'range'
-  | 'reset'
-  | 'search'
-  | 'submit'
-  | 'tel'
-  | 'text'
-  | 'time'
-  | 'url'
-  | 'week'
-
-/**
- * 需要去除或者需要重新定义的类型
- */
-export type OmitTypes =
-  // 去除的
-  | 'modelValue'
-  | 'src'
-  // 重新定义过的
-  | 'autocomplete'
-  | 'type'
-  | 'loading'
-  | 'step'
-  | 'format'
-  | 'filterMethod'
-  | 'id'
-  | 'effect'
-  | 'height'
 
 /**
  * 表单和现实组件所有字段类型
@@ -231,7 +277,7 @@ export type FieldProps = Partial<
       Omit<CheckboxGroupProps, OmitTypes> &
       Omit<ColorPickerProps, OmitTypes> &
       Omit<DatePickerProps, OmitTypes> &
-      Omit<InputProps, OmitTypes> &
+      Omit<InputProps & { autosize: boolean | object }, OmitTypes> &
       Omit<InputNumberProps, OmitTypes> &
       Omit<RadioGroupProps, OmitTypes> &
       Omit<RateProps, OmitTypes> &
@@ -240,7 +286,6 @@ export type FieldProps = Partial<
       Omit<SwitchProps, OmitTypes> &
       Omit<TimePickerDefaultProps, OmitTypes> &
       Omit<TimeSelectProps, OmitTypes> &
-      // 内置组件表单
       Omit<RadioProps, OmitTypes> &
       Omit<DatePickerProps, OmitTypes> &
       // 显示
@@ -253,38 +298,78 @@ export type FieldProps = Partial<
 >
 
 /**
- * 所有表单的类型 默认是  input
+ * 共享类型
  */
-export type FormItemValueType =
-  | 'autocomplete'
-  | 'cascader'
-  | 'checkbox'
-  | 'color-picker'
-  | 'date-picker'
-  | 'input-number'
-  | 'radio'
-  | 'rate'
-  | 'select'
-  | 'slider'
-  | 'switch'
-  | 'time-picker'
-  | 'time-select'
-  | 'textarea'
-  | 'input'
-  | 'text'
-  | 'plus-radio'
-  | 'plus-date-picker'
-  | 'plus-input-tag'
-  | undefined
+export interface CommonType {
+  [index: string]: any
+  /**
+   * el-form-item的label；在descriptions 是 el-descriptions-item的label；
+   */
+  label?: string
+  /**
+   * 表格对应列内容的字段名 ；在form 中是 el-input等所有表单项的双向绑定的值；在descriptions 是 el-descriptions-item的值对应的字段；
+   */
+  prop: string
 
+  /**
+   *  表格宽
+   */
+  width?: string | number
+  /**
+   *  表格最小宽
+   */
+  minWidth?: string | number
+
+  /**
+   * @desc 值的类型
+   */
+  valueType?: FormItemValueType
+
+  /** @desc 在 PlusForm 组件中隐藏 */
+  hideInForm?: boolean | Ref<boolean> | ComputedRef<boolean>
+
+  /**
+   * el-select，el-radio-group，el-checkbox-group 选项 ，支持数组，函数，和Promise
+   */
+  options?: OptionsType
+  /**
+   *  自定义状态显示逻辑 需要返回一个 OptionsRow
+   * @param data
+   * @returns
+   */
+  customGetStatus?: (data: { options: OptionsRow[]; value: string | number; row: RecordType }) => OptionsRow
+
+  /** @desc 展示一个 icon，hover 是展示一些提示信息 */
+  tooltip?: ElTooltipProps | string
+
+  /**
+   *
+   * @desc 自定义渲染表格单行显示内容 需要返回一个 VNode，`render`的优先级最高
+   * @example
+   * ```ts
+   * import { h } from 'vue'
+   * import { ElTag } from 'element-plus'
+   * import type { ZthFormProp } from 'plus-pro-components'
+   *
+   * const tableColumns:ZthFormProp[] = [
+   *  {
+   *     label: 'tag',
+   *     prop: 'tag',
+   *     render: value => {
+   *       const item = statusOptions.find(item => item.value === value)
+   *        return h(ElTag, { type: item.type }, () => item.label)
+   *     }
+   *  }
+   * ]
+   *
+   * ```
+   */
+  render?: (value: FieldValueType, data: { row: RecordType; column: ZthFormProp; index: number }) => VNode | string
+}
 /**
  * 表单项的props
  */
 export interface FormColumnProps {
-  /**
-   * @desc 传递给 PlusForm的配置， 支持所有 el-form的props。值支持对象object。
-   */
-  formProps?: PropsItemType<PlusFormProps>
   /**
    * @desc 传递给 el-form-item 的配置， 支持所有 el-form-item的props。值支持对象 object，computed，函数和 Promise。
    */
@@ -434,168 +519,16 @@ export interface FormColumnProps {
   fieldChildrenSlot?: (option?: OptionsRow) => VNode | string
 }
 /**
- * 共享类型
- */
-export interface CommonType {
-  [index: string]: any
-  /**
-   * 表格表头显示的标题 ；在form 中是 el-form-item的label；在descriptions 是 el-descriptions-item的label；
-   */
-  label?: string
-  /**
-   * 表格对应列内容的字段名 ；在form 中是 el-input等所有表单项的双向绑定的值；在descriptions 是 el-descriptions-item的值对应的字段；
-   */
-  prop: string
-
-  /**
-   *  表格宽
-   */
-  width?: string | number
-  /**
-   *  表格最小宽
-   */
-  minWidth?: string | number
-
-  /**
-   * @desc 当开启时  valueType 为 `FormItemValueType` 其中之一时 表格中显示的是对应的可编辑的表单
-   * @default false
-   */
-  editable?: boolean
-
-  /**
-   * @desc 值的类型
-   */
-  valueType?: FormItemValueType
-
-  /** @desc 在 PlusDescriptions组件中 隐藏 */
-  hideInDescriptions?: boolean | Ref<boolean> | ComputedRef<boolean>
-
-  /** @desc 在 PlusForm 组件中隐藏 */
-  hideInForm?: boolean | Ref<boolean> | ComputedRef<boolean>
-
-  /** @desc 在 PlusTable 组件中隐藏 */
-  hideInTable?: boolean | Ref<boolean> | ComputedRef<boolean>
-
-  /** @desc 在 PlusSearch 中隐藏 */
-  hideInSearch?: boolean | Ref<boolean> | ComputedRef<boolean>
-
-  /**
-   * 描述行，el-descriptions-item 的props
-   */
-  descriptionsItemProps?: RecordType
-
-  /**
-   * el-select，el-radio-group，el-checkbox-group 选项 ，支持数组，函数，和Promise
-   */
-  options?: OptionsType
-  /**
-   *  自定义状态显示逻辑 需要返回一个 OptionsRow
-   * @param data
-   * @returns
-   */
-  customGetStatus?: (data: { options: OptionsRow[]; value: string | number; row: RecordType }) => OptionsRow
-
-  /** @desc 展示一个 icon，hover 是展示一些提示信息 */
-  tooltip?: ElTooltipProps | string
-
-  /**
-   *
-   * @desc 自定义渲染表格单行显示内容 需要返回一个 VNode，`render`的优先级最高
-   * @example
-   * ```ts
-   * import { h } from 'vue'
-   * import { ElTag } from 'element-plus'
-   * import type { ZthFormProp } from 'plus-pro-components'
-   *
-   * const tableColumns:ZthFormProp[] = [
-   *  {
-   *     label: 'tag',
-   *     prop: 'tag',
-   *     render: value => {
-   *       const item = statusOptions.find(item => item.value === value)
-   *        return h(ElTag, { type: item.type }, () => item.label)
-   *     }
-   *  }
-   * ]
-   *
-   * ```
-   */
-  render?: (value: FieldValueType, data: { row: RecordType; column: ZthFormProp; index: number }) => VNode | string
-
-  /**
-   * @desc  自定义渲染单行显示内容 需要返回一个 html字符串，`renderHTML`的优先级低于`render`，高于`valueType`。
-   * @desc **注意：renderHTML 内部使用`v-html`渲染，使用时需要保证 html字符串可信。**
-   * @example
-   * ```ts
-   *  import type { ZthFormProp } from 'plus-pro-components'
-   *
-   *  const tableColumns:ZthFormProp[] = [
-   *    {
-   *       label: '自定义',
-   *       prop: 'custom',
-   *       renderHTML: (value, { row }) => {
-   *         return `
-   *          <div>自定义: ${row.number || 0}</div>
-   *         `
-   *      }
-   *    }
-   *  ]
-   *
-   *```
-   */
-  renderHTML?: (value: FieldValueType, data: { row: RecordType; column: ZthFormProp; index: number }) => string
-
-  /**
-   * @desc 渲染table表单的Header
-   * @example
-   * ```ts
-   * import { h } from 'vue'
-   * import { ElButton } from 'element-plus'
-   * import type { ZthFormProp } from 'plus-pro-components'
-   *
-   * const tableColumns:ZthFormProp[] = [
-   *    {
-   *       label: '自定义',
-   *       prop: 'custom',
-   *       renderHeader:label => h(ElButton, null, () => label)
-   *    }
-   * ]
-   *
-   *```
-   */
-  renderHeader?: (label: string, props: ZthFormProp) => VNode | string
-  /**
-   * 自定义el-descriptions-item 里的内容 优先级高于 render, renderHTML
-   */
-  renderDescriptionsItem?: (data: { value: string; column: ZthFormProp; row: RecordType }) => VNode | string
-  /**
-   * 自定义el-descriptions-item 里的label
-   */
-  renderDescriptionsLabel?: (data: { label: string; column: ZthFormProp; row: RecordType }) => VNode | string
-}
-/**
- * 表单值的类型
- */
-export type FieldValueType =
-  | string
-  | number
-  | boolean
-  | null
-  | undefined
-  | Date
-  | string[]
-  | number[]
-  | boolean[]
-  | Date[]
-  | [Date, Date]
-  | [number, number]
-  | [string, string]
-  | string[][]
-  | number[][]
-
-/**
  * 通用的整体表单值的类型
  */
-export type FieldValues = Record<keyof any, FieldValueType>
+export type FieldValues = Record<string, FieldValueType>
 
-export interface ZthFormProp extends FormColumnProps, CommonType {}
+/**
+ * @desc 传递给 ZthForm的配置， 支持所有 el-form的props。值支持对象object。
+ */
+export type ZthFormProp = PropsItemType<PlusFormProps>
+
+/**
+ * @desc 传递给 ZthFormItem的配置， 支持所有 el-form-item的props。及el-form-item子组件的props
+ */
+export interface ZthFormItemProp extends FormColumnProps, CommonType {}
