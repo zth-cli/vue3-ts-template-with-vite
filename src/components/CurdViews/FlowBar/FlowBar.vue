@@ -183,7 +183,7 @@ watch(
   () => {
     initFromData()
   },
-  { deep: true, immediate: true }
+  { deep: true, immediate: true },
 )
 watch(switchData, async () => {
   await nextTick()

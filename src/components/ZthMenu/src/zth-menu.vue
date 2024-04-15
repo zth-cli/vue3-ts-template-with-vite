@@ -54,7 +54,7 @@ watch(
     if (value) {
       openedMenus.value = []
     }
-  }
+  },
 )
 provide('rootMenu', reactive({ props, openedMenus, isMenuPopup, handleSubMenuClick }))
 provide<SubMenuProvider>(`subMenu:${instance.uid}`, {

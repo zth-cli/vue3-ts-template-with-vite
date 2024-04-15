@@ -101,12 +101,12 @@
                     el.type === 'date'
                       ? '日'
                       : el.type === 'month'
-                      ? '月'
-                      : el.type === 'year'
-                      ? '年'
-                      : el.type === 'dates'
-                      ? '多日'
-                      : '时间'
+                        ? '月'
+                        : el.type === 'year'
+                          ? '年'
+                          : el.type === 'dates'
+                            ? '多日'
+                            : '时间'
                   }}</el-button
                 >
                 <el-date-picker
@@ -120,10 +120,10 @@
                     item.dateSwitch[switchIndex].type === 'date'
                       ? 'YYYY-MM-DD'
                       : item.dateSwitch[switchIndex].type === 'month'
-                      ? 'YYYY-MM'
-                      : item.dateSwitch[switchIndex].type === 'year'
-                      ? 'YYYY'
-                      : 'yyYYYYyy-MM-DD'
+                        ? 'YYYY-MM'
+                        : item.dateSwitch[switchIndex].type === 'year'
+                          ? 'YYYY'
+                          : 'yyYYYYyy-MM-DD'
                   "
                 ></el-date-picker>
               </div>

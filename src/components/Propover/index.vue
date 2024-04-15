@@ -27,7 +27,7 @@ const props = withDefaults(
     content: '确定删除吗？',
     subContent: '删除',
     size: 'samll',
-  }
+  },
 )
 const visible = ref(false)
 const confirmBtn = () => {

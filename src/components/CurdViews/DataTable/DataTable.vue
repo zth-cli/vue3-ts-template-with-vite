@@ -33,7 +33,7 @@ export default defineComponent({
       () => {
         tableColumns = useTableRender(props, slots)
       },
-      { deep: true }
+      { deep: true },
     )
     expose({
       // 对父级暴露方法和属性
@@ -81,7 +81,7 @@ export default defineComponent({
           default: () => {
             return tableColumns
           },
-        }
+        },
       )
   },
 })

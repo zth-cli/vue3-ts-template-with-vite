@@ -67,7 +67,7 @@ class FetchHttp {
         }
         return res
       },
-      []
+      [],
     )
   }
 
@@ -92,7 +92,7 @@ class FetchHttp {
       },
       (error: AxiosError) => {
         return Promise.reject(error)
-      }
+      },
     )
   }
 
@@ -113,11 +113,11 @@ class FetchHttp {
         // 判断当前的请求中是否在 取消token数组理存在，如果存在则移除（单次请求流程）
         if (this.currentCabcelToken) {
           const haskey = this.sourceTokenList.filter(
-            (cancelToken) => cancelToken.cancelKey === this.currentCabcelToken
+            (cancelToken) => cancelToken.cancelKey === this.currentCabcelToken,
           ).length
           if (haskey) {
             this.sourceTokenList = this.sourceTokenList.filter(
-              (cancelToken) => cancelToken.cancelKey !== this.currentCabcelToken
+              (cancelToken) => cancelToken.cancelKey !== this.currentCabcelToken,
             )
             this.currentCabcelToken = ''
           }
@@ -131,7 +131,7 @@ class FetchHttp {
           console.warn(error, '请求被取消！')
         }
         return Promise.reject($error)
-      }
+      },
     )
   }
 
@@ -140,7 +140,7 @@ class FetchHttp {
     method: Method,
     url: string,
     param?: Record<string | number | symbol, any>,
-    axiosConfig?: AxiosRequestConfigs
+    axiosConfig?: AxiosRequestConfigs,
   ): Promise<T> {
     const config = transformConfigByMethod(param, {
       method,

@@ -234,14 +234,14 @@ watch(
       queryData()
     }
     lazyLoad.value = false
-  }
+  },
 )
 watch(
   () => props.columns,
   (curVal: Icolumns[], _oldVal) => {
     mColumns.value = curVal.filter((item) => !item.disabled)
   },
-  { deep: true }
+  { deep: true },
 )
 watch(
   () => props.dataUrl,
@@ -250,14 +250,14 @@ watch(
       pageParam.pageIndex = 1
     }
     // queryData()
-  }
+  },
 )
 watch(
   () => props.initData,
   (_curVal, _oldVal) => {
     tableData.value = _curVal
   },
-  { deep: true, immediate: true }
+  { deep: true, immediate: true },
 )
 const toggleRowSelection = (rows: any) => {
   // @ts-ignore

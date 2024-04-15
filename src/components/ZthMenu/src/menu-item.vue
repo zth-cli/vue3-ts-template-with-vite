@@ -35,7 +35,10 @@ export default {
   cursor: pointer;
   position: relative;
   min-width: 200px;
-  transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+  transition:
+    border-color 0.3s,
+    background-color 0.3s,
+    color 0.3s;
   box-sizing: border-box;
   white-space: nowrap;
   color: #fff;

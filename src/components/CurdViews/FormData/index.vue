@@ -260,7 +260,7 @@ watch(
   (val) => {
     emit('from-change', val)
   },
-  { deep: true }
+  { deep: true },
 )
 watch(
   () => props.rowData,
@@ -271,7 +271,7 @@ watch(
       }
     }
   },
-  { deep: true }
+  { deep: true },
 )
 const getData = () => {
   return formData

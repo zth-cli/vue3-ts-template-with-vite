@@ -20,7 +20,7 @@ import useMenu from './use-menu'
 const instance = getCurrentInstance()!
 const { indexPath, parentMenu } = useMenu(
   instance,
-  computed(() => props.index)
+  computed(() => props.index),
 )
 const subMenu = inject<SubMenuProvider>(`subMenu:${parentMenu.value!.uid}`)
 const props = defineProps<{ index: any }>()
@@ -65,7 +65,10 @@ export default {
     list-style: none;
     cursor: pointer;
     position: relative;
-    transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+    transition:
+      border-color 0.3s,
+      background-color 0.3s,
+      color 0.3s;
     box-sizing: border-box;
     white-space: nowrap;
     color: #fff;

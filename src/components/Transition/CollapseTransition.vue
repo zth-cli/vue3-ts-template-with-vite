@@ -75,6 +75,9 @@ export default {
 <style lang="scss">
 .collapse-transition-leave-active,
 .collapse-transition-enter-active {
-  transition: 0.3s max-height ease-in-out, 0.3s padding-top ease-in-out, 0.3s padding-bottom ease-in-out;
+  transition:
+    0.3s max-height ease-in-out,
+    0.3s padding-top ease-in-out,
+    0.3s padding-bottom ease-in-out;
 }
 </style>

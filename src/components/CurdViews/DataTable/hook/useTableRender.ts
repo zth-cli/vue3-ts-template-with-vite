@@ -63,7 +63,7 @@ export default function renderFunc(props: any, slots: any) {
                 ]),
               ]
             },
-          }
+          },
         )
       }
       if (item.childrens?.length > 0) {
@@ -75,7 +75,7 @@ export default function renderFunc(props: any, slots: any) {
             default: () => {
               return renders(item.childrens)
             },
-          }
+          },
         )
       }
       // @ts-ignore
@@ -134,7 +134,7 @@ export function renderEnum(enums: { id: any; type?: any; value: any }[], scope: 
           default: () => {
             return element.value
           },
-        }
+        },
       )
       break
     }

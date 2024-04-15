@@ -21,7 +21,7 @@ const props = withDefaults(
   }>(),
   {
     trigger: 'contextmenu',
-  }
+  },
 )
 
 const emits = defineEmits<{

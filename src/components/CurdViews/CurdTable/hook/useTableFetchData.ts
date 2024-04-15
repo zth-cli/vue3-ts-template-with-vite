@@ -4,7 +4,7 @@ import { defaultTableData } from '../enums'
 export function useTableFetchData(
   props,
   emit: (arg0: string, arg1: any[] | Ref<any[]>) => void,
-  selection: Ref<any[]>
+  selection: Ref<any[]>,
 ) {
   const loading = ref<boolean>(false)
   const tableData = ref<any[]>(defaultTableData)

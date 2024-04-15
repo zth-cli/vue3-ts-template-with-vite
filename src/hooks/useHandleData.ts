@@ -14,7 +14,7 @@ export const useHandleData = <P = any, R = any>(
   api?: (params?: P) => Promise<R>,
   params?: Parameters<typeof api>[0],
   message = '删除',
-  confirmType: HandleData.MessageType = 'warning'
+  confirmType: HandleData.MessageType = 'warning',
 ) => {
   return new Promise((resolve, reject) => {
     ElMessageBox.confirm(`是否${message}?`, '温馨提示', {

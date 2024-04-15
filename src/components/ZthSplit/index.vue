@@ -147,8 +147,8 @@ export default defineComponent({
       return currentWidth <= this.miniPiexl
         ? miniValue
         : currentWidth >= this.wrapWidth - this.miniPiexl
-        ? 100 - miniValue
-        : percent
+          ? 100 - miniValue
+          : percent
     },
     triggerHandle() {
       this.trgger = !this.trgger

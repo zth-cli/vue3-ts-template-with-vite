@@ -31,8 +31,8 @@ export const useDefaultData = (props) => {
         const defaultValue = keys.includes(item.name)
           ? unref(props.postParams)[item.name]
           : item.default !== 'undefined'
-          ? item.default
-          : null
+            ? item.default
+            : null
         formData[item.name] = defaultValue
         if (dateType.includes(item.type) && !defaultValue) {
           formData[item.name] = dayjs().format(item.format)

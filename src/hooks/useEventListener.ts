@@ -51,7 +51,7 @@ export function useEventListener({
           })
         }
       },
-      { immediate: true }
+      { immediate: true },
     )
 
     removeEvent = () => {

@@ -70,7 +70,7 @@ const props = withDefaults(
         with: 200,
       },
     ],
-  }
+  },
 )
 
 const emit = defineEmits(['update:propData'])
@@ -91,14 +91,14 @@ watch(
   (newData) => {
     emit('update:propData', newData)
   },
-  { deep: true }
+  { deep: true },
 )
 watch(
   () => props.propData,
   (newData) => {
     TableData.value = newData
   },
-  { deep: true }
+  { deep: true },
 )
 </script>
 <style lang="scss">

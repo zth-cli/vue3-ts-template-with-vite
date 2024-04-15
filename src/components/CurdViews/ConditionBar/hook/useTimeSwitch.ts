@@ -8,10 +8,10 @@ export const useTimeSwitch = (fromData: { [x: string]: any }) => {
       typeObj.type === 'date'
         ? 'YYYY-MM-DD'
         : typeObj.type === 'month'
-        ? 'YYYY-MM'
-        : typeObj.type === 'year'
-        ? 'YYYY'
-        : 'YYYY-MM-DD'
+          ? 'YYYY-MM'
+          : typeObj.type === 'year'
+            ? 'YYYY'
+            : 'YYYY-MM-DD'
     // 解决日期选择多日后，切换为日和月报错问题
     const date = typeof fromData[prop] === 'string' ? fromData[prop] : fromData[prop][0]
     fromData[prop] = day(date).format(format.toUpperCase())

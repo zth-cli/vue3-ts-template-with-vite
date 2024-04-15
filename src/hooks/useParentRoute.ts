@@ -29,7 +29,7 @@ export function useParentRoute() {
     () => route.path,
     () => {
       findRouteById(routeArr.value, route.meta.rId)
-    }
+    },
   )
   return { parentRoute }
 }
