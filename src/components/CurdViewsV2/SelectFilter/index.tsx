@@ -1,4 +1,4 @@
-import { ref, watch, h, resolveComponent, defineOptions, defineEmits, PropType } from 'vue'
+import { ref, watch, h, resolveComponent } from 'vue'
 import { OptionsProps, SelectDataProps } from '..'
 import './style.scss'
 export const SelectFilter = defineComponent({
@@ -92,7 +92,7 @@ export const SelectFilter = defineComponent({
                           slots.default({ option })
                         ) : (
                           <>
-                            <>{option.icon && <el-icon>{h(resolveComponent(option.icon))}</el-icon>}</>
+                            {option.icon && <el-icon>{h(resolveComponent(option.icon))}</el-icon>}
                             <span>{option.label}</span>
                           </>
                         )}

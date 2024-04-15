@@ -9,10 +9,10 @@ export default defineComponent({
   },
   methods: {
     menuLoopHandle(data: IrouteItem[]) {
-      return data.map((item: IrouteItem) => {
+      return data.map((item: IrouteItem, index) => {
         if (item.children?.length) {
           return (
-            <sub-menu index={item.id}>
+            <sub-menu index={item.id} key={index}>
               {{
                 title: () => [
                   item.icon && <el-icon size={20}>{h(resolveComponent(item.icon))}</el-icon>,

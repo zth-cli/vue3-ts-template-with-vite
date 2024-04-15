@@ -26,14 +26,12 @@ export const ColSetting = defineComponent({
       },
     )
     return () => (
-      <>
-        <el-popover placement='bottom' trigger='click'>
-          {{
-            default: () => <span>{JSON.stringify(model)}</span>,
-            reference: () => slots.default(),
-          }}
-        </el-popover>
-      </>
+      <el-popover placement='bottom' trigger='click'>
+        {{
+          default: () => <span>{JSON.stringify(model)}</span>,
+          reference: () => slots.default(),
+        }}
+      </el-popover>
     )
   },
 })

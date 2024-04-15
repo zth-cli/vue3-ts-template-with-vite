@@ -10,24 +10,22 @@ export const SizeSetting = defineComponent({
     ]
     const dropRef = ref<InstanceType<typeof ElDropdown>>()
     return () => (
-      <>
-        <el-radio-group {...attrs}>
-          <el-dropdown ref={dropRef} trigger='click'>
-            {{
-              default: () => slots.default(),
-              dropdown: () => (
-                <el-dropdown-menu>
-                  {sizeArr.map((item) => (
-                    <el-dropdown-item key={item.value}>
-                      <el-radio value={item.value}>{item.label}</el-radio>
-                    </el-dropdown-item>
-                  ))}
-                </el-dropdown-menu>
-              ),
-            }}
-          </el-dropdown>
-        </el-radio-group>
-      </>
+      <el-radio-group {...attrs}>
+        <el-dropdown ref={dropRef} trigger='click'>
+          {{
+            default: () => slots.default(),
+            dropdown: () => (
+              <el-dropdown-menu>
+                {sizeArr.map((item) => (
+                  <el-dropdown-item key={item.value}>
+                    <el-radio value={item.value}>{item.label}</el-radio>
+                  </el-dropdown-item>
+                ))}
+              </el-dropdown-menu>
+            ),
+          }}
+        </el-dropdown>
+      </el-radio-group>
     )
   },
 })

@@ -24,20 +24,18 @@ export const useMenuStore = defineStore('menu', {
           redirect: routes[0].path,
           children: routes,
         })
-        router.options.routes.concat(
-          ...[
-            {
-              component: () => import('../views/Error/404.vue'),
-              meta: { title: '404', isCache: false, requiresAuth: true },
-              name: '404error',
-              path: '/404error',
-            },
-            {
-              path: '/:path(.*)*',
-              redirect: '/404error',
-            },
-          ],
-        )
+        router.options.routes.concat([
+          {
+            component: () => import('../views/Error/404.vue'),
+            meta: { title: '404', isCache: false, requiresAuth: true },
+            name: '404error',
+            path: '/404error',
+          },
+          {
+            path: '/:path(.*)*',
+            redirect: '/404error',
+          },
+        ])
         router.options.routes.forEach((item) => {
           router.addRoute(item)
         })
