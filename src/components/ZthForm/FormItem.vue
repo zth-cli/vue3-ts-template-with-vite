@@ -6,8 +6,30 @@
     class="plus-form-item"
     v-bind="customFormItemProps"
   >
-    {{ customFieldProps }}
+    <!-- 优先使用自定义插槽 -->
+    <slot
+      v-if="$slots[getFieldSlotName(prop)]"
+      :name="getFieldSlotName(prop)"
+      :prop="prop"
+      :label="label"
+      :field-props="customFieldProps"
+      :value-type="valueType"
+      :column="props"
+    />
+    <el-switch
+      v-else-if="valueType === 'switch'"
+      ref="fieldInstance"
+      v-model="state"
+      class="plus-form-item-field"
+      v-bind="customFieldProps"
+      @update:model-value="handleChange"
+    >
+      <template v-for="(fieldSlot, key) in fieldSlots" :key="key" #[key]="data">
+        <component :is="fieldSlot" v-bind="data" />
+      </template>
+    </el-switch>
     <el-input
+      v-else
       ref="fieldInstance"
       v-model="state"
       type="input"
@@ -22,7 +44,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { FieldValueType, ZthFormItemProp } from '.'
-import { getCustomProps } from './utils'
+import { getCustomProps, getFieldSlotName } from './utils'
 defineOptions({ name: 'FormItem' })
 
 export interface PlusFormItemEmits {
@@ -61,12 +83,14 @@ const props = withDefaults(defineProps<FormItemProps>(), {
   fieldChildrenSlot: undefined,
   index: 0,
 })
+const formItemInstance = ref()
 // 定义v-model
 const state = defineModel<FieldValueType>()
 
 const customFormItemProps = ref<any>({})
 const customFieldProps = ref<any>({})
 
+const fieldInstance = ref()
 /**
  * 监听formItemProps
  */
@@ -111,4 +135,8 @@ watch(
 const handleChange = (val: any) => {
   emit('change', val)
 }
+defineExpose({
+  formItemInstance,
+  fieldInstance,
+})
 </script>

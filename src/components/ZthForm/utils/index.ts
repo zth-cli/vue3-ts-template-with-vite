@@ -1,11 +1,29 @@
 import { isFunction, isObject, isPromise } from '@/utils'
 import { FieldValueType } from '..'
+import { SetupContext } from 'vue'
+
+/**
+ * @description 过滤slots
+ * @param slots
+ * @param name
+ * @returns
+ */
+export const filterSlots = (slots: RecordType, name: string): SetupContext['slots'] => {
+  const data: RecordType = {}
+  Object.keys(slots || {}).forEach((key) => {
+    if (key.startsWith(name)) {
+      data[key] = slots[key]
+    }
+  })
+
+  return data
+}
 
 /**
  * 处理slot名称
  */
 export const getSlotName = (type: string, prop?: string | number) => {
-  return prop ? `plus-${type}-${prop}` : `plus-${type}`
+  return prop ? `zth-${type}-${prop}` : `zth-${type}`
 }
 
 /**

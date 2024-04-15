@@ -17,7 +17,25 @@
       :columns="subColumns"
       :has-label="hasLabel"
       @change="handleChange"
-    ></FormContent>
+    >
+      <!--表单项插槽 -->
+      <template v-for="(_, key) in fieldSlots" :key="key" #[key]="data">
+        <slot :name="key" v-bind="data" />
+      </template>
+    </FormContent>
+    <div v-if="showFooter" :style="style">
+      <!-- 渲染 footer 默认插槽 -->
+      <slot name="footer" v-bind="{ handleReset, handleSubmit }">
+        <el-button v-if="hasReset" @click="handleReset">
+          <!-- 重置 -->
+          {{ resetText }}
+        </el-button>
+        <el-button type="primary" :loading="submitLoading" @click="handleSubmit">
+          <!-- 提交 -->
+          {{ submitText }}
+        </el-button>
+      </slot>
+    </div>
   </el-form>
 </template>
 <script setup lang="ts">
@@ -25,6 +43,7 @@ import { ref, defineModel, useSlots } from 'vue'
 import FormContent from './FormContent.vue'
 import { FieldValues, ZthFormItemProp } from '.'
 import { FormInstance, ElForm, FormProps, RowProps, ColProps, ElMessage } from 'element-plus'
+import { filterSlots, getFieldSlotName } from './utils'
 
 export interface ZthFormProp extends /* @vue-ignore */ Partial<Mutable<FormProps>> {
   defaultValues?: FieldValues
@@ -38,7 +57,7 @@ export interface ZthFormProp extends /* @vue-ignore */ Partial<Mutable<FormProps
   hasReset?: boolean
   hasLabel?: boolean
   hasErrorTip?: boolean
-  hasFooter?: boolean
+  showFooter?: boolean
   submitText?: string
   resetText?: string
   submitLoading?: boolean
@@ -59,6 +78,12 @@ const formInstance = ref<FormInstance>()
 // 获取slots
 const slots = useSlots()
 
+/**
+ * 表单field的插槽
+ */
+const fieldSlots = filterSlots(slots, getFieldSlotName())
+console.log(fieldSlots)
+
 // 定义v-model
 const model = defineModel<FieldValues>()
 
@@ -74,12 +99,12 @@ const props = withDefaults(defineProps<ZthFormProp>(), {
   colProps: () => ({}),
   labelSuffix: ':',
   hasErrorTip: true,
-  hasFooter: true,
+  showFooter: true,
   hasReset: true,
   hasLabel: true,
   submitLoading: false,
-  submitText: '',
-  resetText: '',
+  submitText: '提交',
+  resetText: '重置',
   footerAlign: 'left',
   columns: () => [],
   group: false,
@@ -90,6 +115,11 @@ const filterHide = (columns: ZthFormItemProp[]) => {
   return columns.filter((item) => unref(item.hideInForm) !== true)
 }
 const subColumns = computed<any>(() => filterHide(props.columns))
+
+// 底部样式
+const style = computed(() => ({
+  justifyContent: props.footerAlign === 'left' ? 'flex-start' : props.footerAlign === 'center' ? 'center' : 'flex-end',
+}))
 
 const handleChange = (_: FieldValues, column: ZthFormItemProp) => {
   emit('change', model.value, column)

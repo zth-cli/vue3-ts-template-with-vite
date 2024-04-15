@@ -150,7 +150,7 @@ export interface PlusFormProps extends /* @vue-ignore */ Partial<Mutable<FormPro
   colProps?: Partial<Mutable<ColProps>>
   labelSuffix?: string
   hasErrorTip?: boolean
-  hasFooter?: boolean
+  showFooter?: boolean
   hasReset?: boolean
   hasLabel?: boolean
   submitText?: string
@@ -349,7 +349,7 @@ export interface CommonType {
    * ```ts
    * import { h } from 'vue'
    * import { ElTag } from 'element-plus'
-   * import type { ZthFormProp } from 'plus-pro-components'
+   * import type { ZthFormProp } from '.'
    *
    * const tableColumns:ZthFormProp[] = [
    *  {
@@ -381,12 +381,12 @@ export interface FormColumnProps {
   fieldProps?: PropsItemType<FieldProps>
 
   /**
-   * @desc 自定义渲染 el-form-item 下的field-item组件。 
+   * @desc 使用渲染函数，自定义渲染 el-form-item 下的field-item组件。 
    * @example
    * ```ts
    * import { h } from 'vue'
    * import { ElTag } from 'element-plus'
-   * import type { ZthFormProp } from 'plus-pro-components'
+   * import type { ZthFormProp } from '.'
 
    * const columns:ZthFormProp[]= [
    *  {
@@ -421,12 +421,12 @@ export interface FormColumnProps {
   hasLabel?: boolean | Ref<boolean> | ComputedRef<boolean>
 
   /**
-   * @desc 渲染form表单的label
+   * @desc 使用渲染函数，渲染el-form-item的label
    * @example
    * ```ts
    * import { ref, h } from 'vue'
    * import { ElButton } from 'element-plus'
-   * import type { ZthFormProp } from 'plus-pro-components'
+   * import type { ZthFormProp } from '.'
    *
    * const columns: ZthFormProp[] = [
    *   {
@@ -446,12 +446,12 @@ export interface FormColumnProps {
   renderLabel?: (label: string, props: ZthFormProp) => VNode | string
 
   /**
-   * @desc  渲染el-form-item 下一行额外的内容
+   * @desc  使用渲染函数，渲染el-form-item 下一行额外的内容
    * @example
    * ```ts
    * import { ref, h } from 'vue'
    * import { ElButton } from 'element-plus'
-   * import type { ZthFormProp } from 'plus-pro-components'
+   * import type { ZthFormProp } from '.'
    *
    * const columns: ZthFormProp[] = [
    *   {
@@ -471,13 +471,13 @@ export interface FormColumnProps {
   renderExtra?: (column: ZthFormProp) => VNode | string
 
   /**
-   * @desc 表单（表格）单个项目的插槽，支持类似el-input，el-select， el-image ，el-link等所有表单（表格）单项的插槽
+   * @desc 使用渲染函数，传递表单组件的插槽，el-input，el-select等所有表单单项的插槽
    * @example
    * ```ts
    * import { ref, h } from 'vue'
    * import { Search } from '@element-plus/icons-vue'
    * import { ElIcon } from 'element-plus'
-   * import type { ZthFormProp } from 'plus-pro-components'
+   * import type { ZthFormProp } from '.'
    *
    * const columns: ZthFormProp[] = [
    *  {

@@ -9,7 +9,11 @@
         @submit="handleSubmit"
         @submit-error="handleSubmitError"
         @reset="handleReset"
-      ></ZthForm>
+      >
+        <template #zth-field-name>
+          <el-input v-model="state.name" placeholder="自定义输入框插槽" />
+        </template>
+      </ZthForm>
     </el-card>
   </Playground>
 </template>
@@ -20,7 +24,7 @@ import ZthForm from '@/components/ZthForm/index.vue'
 import { ref } from 'vue'
 const state = ref<FieldValues>({
   status: '0',
-  name: '',
+  name: 'rzxc',
   rate: 4,
   progress: 100,
   switch: true,
@@ -106,6 +110,15 @@ const columns: ZthFormItemProp[] = [
     width: 100,
     prop: 'switch',
     valueType: 'switch',
+    fieldSlots: {
+      // 向el-switch组件传递插槽, 使用渲染函数或者jsx
+      'active-action': () => {
+        return h('span', 'T')
+      },
+      'inactive-action': () => {
+        return h('span', 'F')
+      },
+    },
   },
   {
     label: '图片',
