@@ -8,7 +8,6 @@ export const TablePlayground = defineComponent({
       flexDirection: 'column',
       width: '100%',
       height: '100%',
-      paddingTop: '12px',
     }
     return () => (
       <Playground>

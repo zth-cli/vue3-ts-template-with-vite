@@ -23,9 +23,9 @@
           </el-form-item>
         </el-col>
         <el-col v-bind="btnSpan">
-          <div class="operation">
+          <div style="text-align: end">
             <el-button type="primary" :icon="Search" @click="search">搜索</el-button>
-            <el-button :icon="Delete" @click="reset">重置</el-button>
+            <el-button :icon="RefreshLeft" @click="reset">重置</el-button>
             <el-button v-if="showCollapse" type="primary" link @click="collapsed = !collapsed">
               {{ collapsed ? '展开' : '收起' }}
               <el-icon class="el-icon--right">
@@ -40,7 +40,7 @@
 </template>
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { Delete, Search, ArrowDown, ArrowUp } from '@element-plus/icons-vue'
+import { RefreshLeft, Search, ArrowDown, ArrowUp } from '@element-plus/icons-vue'
 import SearchFormItem from './components/SearchFormItem.vue'
 import { useBreakPoint } from '@/hooks'
 import { BreakPoint, ColumnProps } from '@/components/CurdViewsV2'
@@ -79,7 +79,7 @@ watch(
 // el-col响应式属性, 固定避免自定义不一致性
 const getResponsive = computed<Record<BreakPoint, number>>(() => ({
   xs: 24,
-  sm: 8,
+  sm: 12,
   md: 8,
   lg: 6,
   xl: 4,
@@ -94,6 +94,7 @@ const collapsedIndex = computed(() => {
 })
 
 const collapsed = ref(true)
+// 搜索项数量
 const searchNum = computed(() => {
   return props.columns.reduce((prev, current) => {
     prev += current.search ? 1 : 0
@@ -111,10 +112,10 @@ const btnSpan = computed(() => {
   const span = getResponsive.value[breakPoint.value]
   // 一行可显示的列数
   const col = MAX_COL / span
-  // 剩余的列数
+  // 剩余的列数, 分配给查询按钮
   const remainder = searchNum.value % col
   // 余下的列数分配给查询按钮项
   const span1 = (col - remainder) * span
-  return collapsed.value ? getResponsive.value : { span: span1 }
+  return collapsed.value && showCollapse.value ? getResponsive.value : { span: span1 }
 })
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <Playground>
+  <TablePlayground>
     <CurdTable
       ref="tableRef"
       title="用户列表"
@@ -15,19 +15,21 @@
     >
       <!-- 表格 header 按钮 -->
       <template #table-header="scope">
-        <el-button type="primary" :icon="CirclePlus" @click="tableRef?.el?.toggleAllSelection()">
-          全选 / 全不选
-        </el-button>
-        <el-button type="primary" :icon="Finished" plain @click="setCurrent">选中第二行</el-button>
-        <el-button
-          type="danger"
-          :icon="Delete"
-          plain
-          :disabled="!scope['isSelected']"
-          @click="batchDelete(scope['selectedRowsIds'])"
-        >
-          批量删除
-        </el-button>
+        <el-space>
+          <el-button type="primary" :icon="CirclePlus" @click="tableRef?.el?.toggleAllSelection()">
+            全选 / 全不选
+          </el-button>
+          <el-button type="primary" :icon="Finished" plain @click="setCurrent">选中第二行</el-button>
+          <el-button
+            type="danger"
+            :icon="Delete"
+            plain
+            :disabled="!scope['isSelected']"
+            @click="batchDelete(scope['selectedRowsIds'])"
+          >
+            批量删除
+          </el-button>
+        </el-space>
       </template>
       <!-- Expand -->
       <template #expand="scope">
@@ -48,12 +50,13 @@
         </span>
       </template>
     </CurdTable>
-  </Playground>
+  </TablePlayground>
 </template>
 
 <script setup lang="tsx">
 import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
+import { TablePlayground } from '@/components/TablePlayground'
 import { ColumnProps } from '@/components/CurdViewsV2'
 import { useHandleData } from '@/hooks/useHandleData'
 import CurdTable from '@/components/CurdViewsV2/CurdTable/index.vue'

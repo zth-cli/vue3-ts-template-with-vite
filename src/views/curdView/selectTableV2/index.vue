@@ -10,10 +10,12 @@
     >
       <!-- 表格 header 按钮 -->
       <template #table-header>
-        <el-button type="primary" :icon="CirclePlus">新增用户</el-button>
-        <el-button type="primary" :icon="Upload" plain>批量添加用户</el-button>
-        <el-button type="primary" :icon="Download" plain>导出用户数据</el-button>
-        <el-button type="primary" :icon="Pointer" plain @click="setCurrent">选中第二行</el-button>
+        <el-space>
+          <el-button type="primary" :icon="CirclePlus">新增用户</el-button>
+          <el-button type="primary" :icon="Upload" plain>批量添加用户</el-button>
+          <el-button type="primary" :icon="Download" plain>导出用户数据</el-button>
+          <el-button type="primary" :icon="Pointer" plain @click="setCurrent">选中第二行</el-button>
+        </el-space>
       </template>
       <!-- 表格操作 -->
       <template #operation>

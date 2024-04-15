@@ -11,6 +11,7 @@
     range-separator="至"
     start-placeholder="开始时间"
     end-placeholder="结束时间"
+    style="width: 100%"
   >
     <template v-if="search.type === 'cascader'" #default="{ data }">
       <!-- 自定义节点 -->
