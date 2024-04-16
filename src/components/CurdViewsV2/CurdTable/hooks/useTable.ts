@@ -101,6 +101,9 @@ export const useTable = (
 
   // 分页, 当前页改变
   const handleCurrentChange = (pageIndex: number) => {
+    if (pageIndex === state.pageParams.pageIndex) {
+      return
+    }
     state.pageParams.pageIndex = pageIndex
     fetchTableData()
   }

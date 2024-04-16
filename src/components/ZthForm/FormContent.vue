@@ -34,9 +34,8 @@
 import type { Ref, ComputedRef } from 'vue'
 import { unref, defineModel } from 'vue'
 import type { FormProps, RowProps, ColProps } from 'element-plus'
-import { ElRow, ElCol } from 'element-plus'
 import FormItem from './FormItem.vue'
-import type { ZthFormItemProp, FieldValues, FieldValueType } from '.'
+import type { ZthFormItemProp, ModelValues, ModelValueType } from '.'
 import { getLabelSlotName, getFieldSlotName } from './utils'
 import { Mutable } from 'element-plus/es/utils'
 
@@ -48,7 +47,7 @@ export interface PlusFormContentProps extends /* @vue-ignore */ Partial<Mutable<
 }
 
 export interface PlusFormContentEmits {
-  (e: 'change', values: FieldValues, column: ZthFormItemProp): void
+  (e: 'change', values: ModelValues, column: ZthFormItemProp): void
 }
 
 defineOptions({ name: 'FormContent' })
@@ -62,7 +61,7 @@ const props = withDefaults(defineProps<PlusFormContentProps>(), {
 const emit = defineEmits<PlusFormContentEmits>()
 
 // 定义v-model
-const model = defineModel<FieldValues>()
+const model = defineModel<ModelValues>()
 
 const getHasLabel = (hasLabel?: boolean | Ref<boolean> | ComputedRef<boolean>) => {
   const has = unref(hasLabel) as boolean
@@ -72,7 +71,7 @@ const getHasLabel = (hasLabel?: boolean | Ref<boolean> | ComputedRef<boolean>) =
   return props.hasLabel
 }
 
-const handleChange = (_: FieldValueType, column: ZthFormItemProp) => {
+const handleChange = (_: ModelValueType, column: ZthFormItemProp) => {
   emit('change', model.value, column)
 }
 </script>

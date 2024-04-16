@@ -1,5 +1,5 @@
-import { isFunction, isObject, isPromise } from '@/utils'
-import { FieldValueType } from '..'
+import { isFunction, isObject, isPromise, isString } from '@/utils'
+import { ModelValueType, ZthFormItemProp } from '..'
 import { SetupContext } from 'vue'
 
 /**
@@ -74,7 +74,7 @@ const throwError = (data: any, type: string) => {
  */
 export const getCustomProps = async (
   props: RecordType | ((...arg: any) => RecordType | Promise<RecordType>) | undefined,
-  value: FieldValueType | undefined,
+  value: ModelValueType | undefined,
   row: RecordType,
   index: number,
   type: 'formItemProps' | 'fieldProps',
@@ -106,5 +106,19 @@ export const getCustomProps = async (
     return data
   } catch (error) {
     return Promise.reject(error)
+  }
+}
+
+/**
+ * @description 获取tooltip
+ * @param tooltip
+ * @returns
+ */
+export const getTooltip = (tooltip: ZthFormItemProp['tooltip']) => {
+  if (isString(tooltip)) {
+    return { content: tooltip }
+  }
+  if (isObject(tooltip)) {
+    return tooltip as RecordType
   }
 }

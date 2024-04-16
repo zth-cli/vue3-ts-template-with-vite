@@ -1,10 +1,14 @@
 <template>
   <Playground>
     <el-card>
+      <!-- {{ state }} -->
       <ZthForm
         v-model="state"
         :columns="columns"
         :rules="rules"
+        label-position="top"
+        :col-props="{ lg: 24, md: 24, sm: 24, xs: 24 }"
+        :row-props="{ gutter: 20 }"
         @change="handleChange"
         @submit="handleSubmit"
         @submit-error="handleSubmitError"
@@ -13,20 +17,23 @@
         <template #zth-field-name>
           <el-input v-model="state.name" placeholder="自定义输入框插槽" />
         </template>
+        <template #zth-label-name>
+          <span>slot自定义label</span>
+        </template>
       </ZthForm>
     </el-card>
   </Playground>
 </template>
 <script setup lang="ts">
 import { Playground } from '@/components/Playground'
-import { FieldValues, ZthFormItemProp } from '@/components/ZthForm'
+import { ModelValues, ZthFormItemProp } from '@/components/ZthForm'
 import ZthForm from '@/components/ZthForm/index.vue'
 import { ref } from 'vue'
-const state = ref<FieldValues>({
+const state = ref({
   status: '0',
-  name: 'rzxc',
+  name: '',
   rate: 4,
-  progress: 100,
+  progress: 70,
   switch: true,
   time: new Date().toString(),
   endTime: [],
@@ -66,6 +73,10 @@ const columns: ZthFormItemProp[] = [
     width: 120,
     prop: 'status',
     valueType: 'select',
+    renderLabel(label, props) {
+      console.log(label, props)
+      return h('span', { style: { color: 'blue' } }, `渲染函数自定义标签-${label}`)
+    },
     options: [
       {
         label: '未解决',
@@ -98,6 +109,7 @@ const columns: ZthFormItemProp[] = [
     label: '执行进度',
     width: 200,
     prop: 'progress',
+    valueType: 'slider',
   },
   {
     label: '评分',
@@ -106,7 +118,7 @@ const columns: ZthFormItemProp[] = [
     valueType: 'rate',
   },
   {
-    label: '是否显示',
+    label: '是否显示(给el-switch传递插槽)',
     width: 100,
     prop: 'switch',
     valueType: 'switch',
@@ -125,6 +137,37 @@ const columns: ZthFormItemProp[] = [
     prop: 'img',
     width: 100,
     valueType: 'img',
+    renderField(value, onChange, _props) {
+      return h('div', {}, [
+        h('p', { style: { color: 'red' } }, '渲染函数渲染'),
+        h('img', {
+          src: value,
+          style: {
+            width: '100px',
+            height: '100px',
+          },
+          onClick: () => {
+            onChange('https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg')
+          },
+          onError: () => {
+            onChange('https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg')
+          },
+        }),
+        h(
+          'span',
+          {
+            style: {
+              color: 'red',
+              cursor: 'pointer',
+            },
+            onClick: () => {
+              onChange('')
+            },
+          },
+          '删除',
+        ),
+      ])
+    },
   },
   {
     label: '时间',
@@ -260,10 +303,10 @@ const columns: ZthFormItemProp[] = [
   },
 ]
 
-const handleChange = (values: FieldValues, prop: ZthFormItemProp) => {
+const handleChange = (values: ModelValues, prop: ZthFormItemProp) => {
   console.log(values, prop, 'change')
 }
-const handleSubmit = (values: FieldValues) => {
+const handleSubmit = (values: ModelValues) => {
   console.log(values, 'Submit')
 }
 const handleSubmitError = (err: any) => {

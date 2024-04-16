@@ -18,6 +18,10 @@
       :has-label="hasLabel"
       @change="handleChange"
     >
+      <!--表单项label插槽 -->
+      <template v-for="(_, key) in labelSlots" :key="key" #[key]="data">
+        <slot :name="key" v-bind="data" />
+      </template>
       <!--表单项插槽 -->
       <template v-for="(_, key) in fieldSlots" :key="key" #[key]="data">
         <slot :name="key" v-bind="data" />
@@ -41,12 +45,12 @@
 <script setup lang="ts">
 import { ref, defineModel, useSlots } from 'vue'
 import FormContent from './FormContent.vue'
-import { FieldValues, ZthFormItemProp } from '.'
-import { FormInstance, ElForm, FormProps, RowProps, ColProps, ElMessage } from 'element-plus'
-import { filterSlots, getFieldSlotName } from './utils'
+import { ModelValues, ZthFormItemProp } from '.'
+import { FormInstance, FormProps, RowProps, ColProps, ElMessage } from 'element-plus'
+import { filterSlots, getFieldSlotName, getLabelSlotName } from './utils'
 
 export interface ZthFormProp extends /* @vue-ignore */ Partial<Mutable<FormProps>> {
-  defaultValues?: FieldValues
+  defaultValues?: ModelValues
   columns?: ZthFormItemProp[]
   labelWidth?: string
   labelSuffix?: string
@@ -65,9 +69,9 @@ export interface ZthFormProp extends /* @vue-ignore */ Partial<Mutable<FormProps
 }
 
 export interface PlusFormEmits {
-  (e: 'submit', values: FieldValues): void
-  (e: 'change', values: FieldValues, column: ZthFormItemProp): void
-  (e: 'reset', values: FieldValues): void
+  (e: 'submit', values: ModelValues): void
+  (e: 'change', values: ModelValues, column: ZthFormItemProp): void
+  (e: 'reset', values: ModelValues): void
   (e: 'submitError', errors: any): void
 }
 
@@ -82,10 +86,13 @@ const slots = useSlots()
  * 表单field的插槽
  */
 const fieldSlots = filterSlots(slots, getFieldSlotName())
-console.log(fieldSlots)
+/**
+ * 表单label的插槽
+ */
+const labelSlots = filterSlots(slots, getLabelSlotName())
 
 // 定义v-model
-const model = defineModel<FieldValues>()
+const model = defineModel<ModelValues>()
 
 // 定义事件
 const emit = defineEmits<PlusFormEmits>()
@@ -121,7 +128,7 @@ const style = computed(() => ({
   justifyContent: props.footerAlign === 'left' ? 'flex-start' : props.footerAlign === 'center' ? 'center' : 'flex-end',
 }))
 
-const handleChange = (_: FieldValues, column: ZthFormItemProp) => {
+const handleChange = (_: ModelValues, column: ZthFormItemProp) => {
   emit('change', model.value, column)
 }
 

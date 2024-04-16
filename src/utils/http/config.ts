@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from 'axios'
 
 export const defaultConfig: AxiosRequestConfig = {
-  baseURL: import.meta.env.PROD ? '' : '',
+  baseURL: import.meta.env.PROD ? '' : '/api',
   timeout: 30000,
   headers: {
     Accept: 'application/json, text/plain, */*',
