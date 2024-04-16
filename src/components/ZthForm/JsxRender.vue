@@ -47,7 +47,7 @@ watch(
 )
 
 /**
- * 渲染自定义
+ * @description 调用renderField或renderLabel, 如果是VNode, 添加属性再返回，如果是string, 直接返回
  */
 const renderComponent = () => {
   if (!props.render) {
