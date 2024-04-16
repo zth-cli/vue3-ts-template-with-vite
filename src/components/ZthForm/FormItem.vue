@@ -153,7 +153,7 @@
       ref="fieldInstance"
       v-model="state"
       :placeholder="label"
-      class="plus-form-item-field"
+      class="zth-form-item-field"
       clearable
       v-bind="customFieldProps"
       @update:model-value="handleChange"
@@ -206,7 +206,7 @@
       v-else-if="valueType === 'input-number'"
       ref="fieldInstance"
       v-model="state"
-      class="plus-form-item-field"
+      class="zth-form-item-field"
       :placeholder="label"
       autocomplete="off"
       v-bind="customFieldProps"
@@ -218,7 +218,7 @@
       v-else-if="valueType === 'rate'"
       ref="fieldInstance"
       v-model="state"
-      class="plus-form-item-field"
+      class="zth-form-item-field"
       v-bind="customFieldProps"
       @update:model-value="handleChange"
     />
@@ -228,7 +228,7 @@
       ref="fieldInstance"
       v-model="state"
       :placeholder="label"
-      class="plus-form-item-field"
+      class="zth-form-item-field"
       clearable
       v-bind="customFieldProps"
       @update:model-value="handleChange"
@@ -258,7 +258,7 @@
       ref="fieldInstance"
       v-model="state"
       :placeholder="label"
-      class="plus-form-item-field"
+      class="zth-form-item-field"
       clearable
       value-format="YYYY-MM-DD HH:mm:ss"
       v-bind="customFieldProps"
@@ -269,7 +269,7 @@
       v-else-if="valueType === 'time-select'"
       ref="fieldInstance"
       v-model="state"
-      class="plus-form-item-field"
+      class="zth-form-item-field"
       :placeholder="label"
       clearable
       v-bind="customFieldProps"
@@ -281,7 +281,7 @@
       ref="fieldInstance"
       v-model="state"
       type="textarea"
-      class="plus-form-item-field"
+      class="zth-form-item-field"
       :placeholder="label"
       autocomplete="off"
       v-bind="customFieldProps"
@@ -423,3 +423,10 @@ defineExpose({
   fieldInstance,
 })
 </script>
+<style lang="scss">
+.zth-form-item {
+  .zth-form-item-field {
+    width: 100%;
+  }
+}
+</style>
