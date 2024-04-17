@@ -14,7 +14,7 @@
           <JsxRender
             :render="renderLabel"
             :params="props"
-            :callback-value="currentLabel"
+            :model-value="currentLabel"
             :custom-field-props="customFieldProps"
           />
         </template>
@@ -45,7 +45,7 @@
       <JsxRender
         :render="renderField"
         :params="props"
-        :callback-value="state"
+        :model-value="state"
         :custom-field-props="customFieldProps"
         render-type="form"
         :handle-change="handleRenderChange"
@@ -310,11 +310,11 @@ import { ModelValueType, ZthFormItemProp } from '.'
 import { getCustomProps, getFieldSlotName, getLabelSlotName, getTooltip } from './utils'
 defineOptions({ name: 'FormItem' })
 
-export interface PlusFormItemEmits {
+export interface ZthFormItemEmits {
   (e: 'change', data: ModelValueType): void
 }
 
-export interface FormItemProps {
+export interface ZthFormItemProps {
   hasLabel?: ZthFormItemProp['hasLabel']
   label?: ZthFormItemProp['label']
   prop: ZthFormItemProp['prop']
@@ -330,9 +330,9 @@ export interface FormItemProps {
   index?: number
 }
 
-const emit = defineEmits<PlusFormItemEmits>()
+const emit = defineEmits<ZthFormItemEmits>()
 
-const props = withDefaults(defineProps<FormItemProps>(), {
+const props = withDefaults(defineProps<ZthFormItemProps>(), {
   label: '',
   hasLabel: true,
   tooltip: '',

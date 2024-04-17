@@ -47,34 +47,34 @@ declare interface Fn<T = any, R = T> {
   (...arg: T[]): R
 }
 /**
- * ref 绑定的元素类型
+ * @description  ref 绑定的元素类型
  */
-type ElementRefType = HTMLElement | null
+type ElementRef = HTMLElement | null
 
 /**
- * setTimeout 类型
+ * @description  setTimeout 类型
  */
 type Timeout = ReturnType<typeof setTimeout>
 
 /**
- * setInterval 类型
+ * @description setInterval 类型
  */
 type Interval = ReturnType<typeof setInterval>
 
 /**
- * 普通的对象的泛型
+ * @description 普通的对象的泛型
  */
 type RecordType = {
   [index: string]: any
 }
 
 /**
- * 允许null的泛型
+ * @description  允许null的泛型
  */
 type Nullable<T> = T | null
 
 /**
- * 去除只读状态
+ * @description 去除只读状态
  */
 type Mutable<T extends Record<string, any>> = {
   -readonly [K in keyof T]: T[K]

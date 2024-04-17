@@ -9,26 +9,26 @@ import type { VNode } from 'vue'
 import type { ZthFormItemProp, ModelValueType } from '.'
 import { isString } from '@/utils'
 
+defineOptions({ name: 'JsxRender' })
+
 export interface PlusRenderProps {
   /**
    * 渲染的类型
    */
   renderType?: 'form'
   /**
-   * 回调参数的第一个值
+   * @description 表单组件(wl-input等)绑定的值
    */
-  callbackValue?: ModelValueType
+  modelValue?: ModelValueType
   customFieldProps?: ZthFormItemProp['fieldProps'] | ZthFormItemProp['formItemProps']
-  render?: ZthFormItemProp['renderField'] | ((...arg: any[]) => void)
+  render?: ZthFormItemProp['renderField'] | ZthFormItemProp['renderLabel'] | ((...arg: any[]) => void)
   params?: Partial<ZthFormItemProp>
   handleChange?: (...arg: any[]) => void
 }
 
-defineOptions({ name: 'JsxRender' })
-
 const props = withDefaults(defineProps<PlusRenderProps>(), {
   renderType: undefined,
-  callbackValue: '',
+  modelValue: '',
   customFieldProps: () => ({}),
   params: () => ({}),
 })
@@ -36,7 +36,7 @@ const props = withDefaults(defineProps<PlusRenderProps>(), {
 const state = ref()
 
 watch(
-  () => props.callbackValue,
+  () => props.modelValue,
   (val) => {
     state.value = val
   },

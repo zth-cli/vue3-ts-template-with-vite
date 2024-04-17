@@ -68,7 +68,7 @@ export interface ZthFormProp extends /* @vue-ignore */ Partial<Mutable<FormProps
   footerAlign?: 'left' | 'right' | 'center'
 }
 
-export interface PlusFormEmits {
+export interface ZthFormEmits {
   (e: 'submit', values: ModelValues): void
   (e: 'change', values: ModelValues, column: ZthFormItemProp): void
   (e: 'reset', values: ModelValues): void
@@ -95,7 +95,7 @@ const labelSlots = filterSlots(slots, getLabelSlotName())
 const model = defineModel<ModelValues>()
 
 // 定义事件
-const emit = defineEmits<PlusFormEmits>()
+const emit = defineEmits<ZthFormEmits>()
 
 // 定义props
 const props = withDefaults(defineProps<ZthFormProp>(), {

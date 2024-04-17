@@ -368,7 +368,7 @@ export interface CommonType {
 /**
  * 表单项的props
  */
-export interface FormColumnProps {
+export interface BaseFormItemProps {
   /**
    * @description  传递给 el-form-item 的配置， 支持所有 el-form-item的props。值支持对象 object，computed，函数和 Promise。
    */
@@ -378,6 +378,16 @@ export interface FormColumnProps {
    * @description  支持类似el-input，el-select等所有表单项的props 以及 表格显示的每行 props。值支持对象 object，computed，函数和 Promise。
    */
   fieldProps?: PropsItemType<FieldProps>
+
+  /**
+   * @description  el-col 的 props
+   */
+  colProps?: Partial<Mutable<ColProps>>
+
+  /**
+   * 表单中单个项目是否需要 label，默认undefined，优先级高于表单的整体 hasLabel
+   */
+  hasLabel?: boolean | Ref<boolean> | ComputedRef<boolean>
 
   /**
    * @description  使用渲染函数，自定义渲染 el-form-item 下的field-item组件。 
@@ -412,16 +422,6 @@ export interface FormColumnProps {
     onChange: (value: ModelValueType) => void,
     props: ZthFormItemProp,
   ) => VNode | string
-
-  /**
-   * @description  el-col 的 props
-   */
-  colProps?: Partial<Mutable<ColProps>>
-
-  /**
-   * 表单中单个项目是否需要 label，默认undefined，优先级高于表单的整体 hasLabel
-   */
-  hasLabel?: boolean | Ref<boolean> | ComputedRef<boolean>
 
   /**
    * @description  使用渲染函数，渲染el-form-item的label
@@ -534,4 +534,4 @@ export type ZthFormProp = PropsItemType<PlusFormProps>
 /**
  * @description  传递给 ZthFormItem的配置， 支持所有 el-form-item的props。及el-form-item子组件的props
  */
-export interface ZthFormItemProp extends FormColumnProps, CommonType {}
+export interface ZthFormItemProp extends BaseFormItemProps, CommonType {}

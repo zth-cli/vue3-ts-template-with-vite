@@ -37,28 +37,27 @@ import type { FormProps, RowProps, ColProps } from 'element-plus'
 import FormItem from './FormItem.vue'
 import type { ZthFormItemProp, ModelValues, ModelValueType } from '.'
 import { getLabelSlotName, getFieldSlotName } from './utils'
-import { Mutable } from 'element-plus/es/utils'
 
-export interface PlusFormContentProps extends /* @vue-ignore */ Partial<Mutable<FormProps>> {
+export interface ZthFormContentProps extends /* @vue-ignore */ Partial<Mutable<FormProps>> {
   hasLabel?: boolean
   columns?: ZthFormItemProp[]
   rowProps?: Partial<Mutable<RowProps>>
   colProps?: Partial<Mutable<ColProps>>
 }
 
-export interface PlusFormContentEmits {
+export interface ZthFormContentEmits {
   (e: 'change', values: ModelValues, column: ZthFormItemProp): void
 }
 
 defineOptions({ name: 'FormContent' })
 
-const props = withDefaults(defineProps<PlusFormContentProps>(), {
+const props = withDefaults(defineProps<ZthFormContentProps>(), {
   hasLabel: true,
   rowProps: () => ({}),
   colProps: () => ({}),
   columns: () => [],
 })
-const emit = defineEmits<PlusFormContentEmits>()
+const emit = defineEmits<ZthFormContentEmits>()
 
 // 定义v-model
 const model = defineModel<ModelValues>()
