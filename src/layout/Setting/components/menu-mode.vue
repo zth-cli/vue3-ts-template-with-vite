@@ -6,26 +6,32 @@
       :class="['drawer-block-checkbox-item', 'drawer-block-checkbox-item-' + item.value]"
       @click="setMenuMode(item.value)"
     >
-      <el-icon v-show="configStroe.menuMode === item.value" class="selectIcon"><Select /></el-icon>
+      <el-icon v-show="menuMode === item.value" class="selectIcon"><Select /></el-icon>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { useConfigStroe } from '@/store/modules/appSetting'
-const configStroe = useConfigStroe()
+const { menuMode, isMobile } = inject<any>('layout-provide')
 const setMenuMode = (mode: 'vertical' | 'horizontal') => {
-  configStroe.menuMode = mode
+  menuMode.value = mode
 }
 const list: Array<{ label: string; value: 'vertical' | 'horizontal' }> = [
   {
     label: 'vertical',
     value: 'vertical',
   },
-  {
-    label: 'horizontal',
-    value: 'horizontal',
-  },
 ]
+watch(
+  isMobile,
+  (val) => {
+    if (!val) {
+      list.push({ label: 'horizontal', value: 'horizontal' })
+    } else {
+      list.length > 1 && list.pop()
+    }
+  },
+  { immediate: true },
+)
 </script>
 <style lang="scss">
 .drawer-block-checkbox {

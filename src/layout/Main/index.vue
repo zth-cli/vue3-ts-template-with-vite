@@ -1,7 +1,7 @@
 <template>
   <router-view>
     <template #default="{ Component }">
-      <transition :name="menuMode === 'horizontal' ? 'slide-fade-Y' : 'slide-fade-X'" appear>
+      <transition :name="isHorizontal ? 'slide-fade-Y' : 'slide-fade-X'" appear>
         <keep-alive v-if="route.meta.isCache">
           <component :is="Component" :key="route.fullPath" />
         </keep-alive>
@@ -14,13 +14,7 @@
 <script lang="ts" setup>
 import { RouterView } from 'vue-router'
 import { useRoute } from 'vue-router'
-defineProps({
-  menuMode: {
-    type: String,
-    default: 'vertical',
-  },
-})
-
+const { isHorizontal } = inject<any>('layout-provide')
 const route = useRoute()
 console.log(route.fullPath)
 </script>

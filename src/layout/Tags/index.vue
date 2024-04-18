@@ -1,5 +1,5 @@
 <template>
-  <div v-if="showTags" class="tags">
+  <div v-if="showTags" class="zth-tags">
     <el-tabs
       v-model="activeValue"
       class="tage-main"
@@ -11,17 +11,15 @@
     >
       <el-tab-pane v-for="item in tagsList" :key="item.path" :label="item.title" :name="item.title"></el-tab-pane>
     </el-tabs>
-    <div class="tags-close-box">
-      <el-dropdown placement="bottom" @command="handleTags">
-        <el-button icon="ArrowDown" style="border: none"></el-button>
-        <template #dropdown>
-          <el-dropdown-menu size="small">
-            <el-dropdown-item command="other">关闭其他</el-dropdown-item>
-            <el-dropdown-item command="all">关闭所有</el-dropdown-item>
-          </el-dropdown-menu>
-        </template>
-      </el-dropdown>
-    </div>
+    <el-dropdown placement="bottom" @command="handleTags">
+      <el-button icon="ArrowDown" text size="small"></el-button>
+      <template #dropdown>
+        <el-dropdown-menu size="small">
+          <el-dropdown-item command="other">关闭其他</el-dropdown-item>
+          <el-dropdown-item command="all">关闭所有</el-dropdown-item>
+        </el-dropdown-menu>
+      </template>
+    </el-dropdown>
   </div>
 </template>
 <script setup lang="ts">
@@ -101,7 +99,7 @@ const showTags = computed(() => tagsList.value.length > 0)
 </script>
 
 <style lang="scss">
-.tags {
+.zth-tags {
   position: relative;
   height: 34px;
   overflow: hidden;
@@ -109,10 +107,14 @@ const showTags = computed(() => tagsList.value.length > 0)
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 19px 0px 10px;
+  padding: 0 4px 0px 10px;
+  border-bottom: 1px solid var(--el-border-color-lighter);
   .tage-main {
     overflow: hidden;
     overflow-x: auto;
+  }
+  .el-tag {
+    --el-tabs-header-height: 34px !important;
   }
   // @include box-shadow();
   .el-tabs--top.el-tabs--card > .el-tabs__header {
@@ -153,30 +155,8 @@ const showTags = computed(() => tagsList.value.length > 0)
         background: transparent;
       }
     }
-    .el-tabs__nav-next,
-    .el-tabs__nav-prev {
-      line-height: 32px;
-    }
     .el-tabs__nav {
       border: none;
-    }
-  }
-  .tags-close-box {
-    box-sizing: border-box;
-    padding-top: 1px;
-    text-align: center;
-
-    line-height: 30px;
-    // box-shadow: -3px 0 15px 3px rgba(0, 0, 0, 0.1);
-    z-index: 10;
-    cursor: pointer;
-    .drop-icon {
-      font-size: 18px;
-      font-weight: bolder;
-      transition: all 0.2s ease-in-out;
-      &:hover {
-        // transform: rotate(90deg);
-      }
     }
   }
 }

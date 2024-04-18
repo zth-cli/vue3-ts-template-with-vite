@@ -1,6 +1,12 @@
 <template>
   <el-menu unique-opened :collapse="collapse" router v-bind="$attrs">
-    <SidebarItem v-for="item in routeArr" :key="item.path" :item="item" :mode="($attrs?.mode as string) || ''" />
+    <SidebarItem
+      v-for="item in routeArr"
+      :key="item.path"
+      :is-collapse="collapse"
+      :item="item"
+      :mode="($attrs?.mode as string) || ''"
+    />
   </el-menu>
 </template>
 <script setup lang="ts">

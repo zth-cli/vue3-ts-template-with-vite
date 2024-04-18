@@ -1,16 +1,16 @@
 <template>
-  <el-container class="layout">
-    <el-aside v-if="menuMode === 'vertical'" width="auto">
+  <el-container :class="['zth-layout', { 'zth-layout-mobile': isMobile }]">
+    <SidebarContainer v-if="isVertical || isMobile">
       <Vertical></Vertical>
-    </el-aside>
-    <el-container style="overflow: hidden; position: relative">
+    </SidebarContainer>
+    <el-container class="zth-container">
       <el-header class="zth-header">
-        <Header :menu-mode="menuMode"></Header>
+        <Header :is-horizontal="isHorizontal"></Header>
       </el-header>
       <el-main class="zth-main">
         <Tags v-if="showTags"></Tags>
         <section class="zth-view">
-          <MainView :menu-mode="menuMode" />
+          <MainView :is-horizontal="isHorizontal" />
         </section>
       </el-main>
     </el-container>
@@ -19,22 +19,43 @@
 
 <script lang="ts" setup>
 import Vertical from './Menu/vertical.vue'
+import { SidebarContainer } from './SidebarContainer'
 import { Header } from './Header'
 import { MainView } from './Main'
 import { Tags } from './Tags'
-import { useConfigStroe } from '@/store/modules/appSetting'
+import { useAppStore } from '@/store/modules/app'
 import { computed } from 'vue'
 
-const configStroe = useConfigStroe()
-
-const menuMode = computed(() => configStroe.menuMode)
+const configStroe = useAppStore()
+const menuMode = computed({
+  get: () => configStroe.menuMode,
+  set: (val) => {
+    configStroe.menuMode = val
+  },
+})
 const showTags = computed(() => configStroe.showTag)
-provide('layout-provide', { menuMode, showTags })
+
+const isMobile = computed(() => configStroe.isMobile)
+const isCollapse = computed({
+  get: () => configStroe.collapse,
+  set: (val) => {
+    configStroe.collapse = val
+  },
+})
+const isVertical = computed(() => menuMode.value === 'vertical')
+const isHorizontal = computed(() => menuMode.value === 'horizontal')
+
+const marginLeft = computed(() => {
+  return isMobile.value || isHorizontal.value ? '0' : isCollapse.value ? '54px' : '208px'
+})
+
+provide('layout-provide', { isVertical, isHorizontal, isCollapse, isMobile, menuMode })
 </script>
 <style lang="scss">
-.layout {
+.zth-layout {
   height: 100vh;
   overflow: hidden;
+  position: relative;
   .zth-header {
     padding: 0;
     height: auto;
@@ -42,6 +63,13 @@ provide('layout-provide', { menuMode, showTags })
     border-bottom: 1px solid var(--el-border-color-lighter);
     transition: all 0.2s ease-in-out;
     z-index: 11;
+  }
+  .zth-container {
+    height: 100vh;
+    margin-left: v-bind('marginLeft');
+    min-height: 100%;
+    position: relative;
+    transition: margin-left 0.2s ease-in;
   }
   .zth-main {
     padding: 0;
@@ -54,6 +82,11 @@ provide('layout-provide', { menuMode, showTags })
       width: 100%;
       flex: 1;
     }
+  }
+}
+.hiden-sidebar-layout {
+  .zth-container {
+    margin-left: 54px !important;
   }
 }
 </style>

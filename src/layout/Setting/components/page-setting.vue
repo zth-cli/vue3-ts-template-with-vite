@@ -5,8 +5,8 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useConfigStroe } from '@/store/modules/appSetting'
-const configStroe = useConfigStroe()
+import { useAppStore } from '@/store/modules/app'
+const configStroe = useAppStore()
 const setTagVisible = (val: boolean) => {
   configStroe.showTag = val
 }

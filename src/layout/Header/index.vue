@@ -1,26 +1,24 @@
 <template>
-  <div class="header" :class="{ 'horizontal-header': isHor }">
+  <div class="vertical-header" :class="{ 'horizontal-header': isHorizontal, 'mobile-header': isMobile }">
     <!-- 折叠按钮 -->
-    <div v-if="!isHor" class="collapse-btn">
-      <el-icon :size="20">
-        <component :is="collapse ? 'expand' : 'fold'" style="font-size: 20px" @click="handleCollapse()" />
+    <div v-if="!isHorizontal || isMobile" class="collapse-btn">
+      <el-icon :size="16">
+        <component :is="isCollapse ? 'expand' : 'fold'" @click="handleCollapse()" />
       </el-icon>
     </div>
-    <Breadcrumb v-if="!isHor"></Breadcrumb>
-    <div v-if="isHor" class="logo">
+    <Breadcrumb v-if="!isHorizontal"></Breadcrumb>
+    <div v-if="isHorizontal && !isMobile" class="logo">
       <img src="@/assets/img/logo.png" />
     </div>
     <div class="header-menu">
-      <slot>
-        <Horizontal v-if="isHor"></Horizontal>
-      </slot>
+      <Horizontal v-if="isHorizontal && !isMobile"></Horizontal>
     </div>
     <div class="header-right">
       <div class="header-user-con">
         <!-- 全屏显示 -->
         <el-tooltip :content="fullscreen ? `取消全屏` : `全屏`" placement="bottom">
-          <el-icon :size="16" class="icon-cammand">
-            <component is="rank" @click="handleFullScreen()" />
+          <el-icon :size="15" class="icon-cammand">
+            <component is="FullScreen" @click="handleFullScreen()" />
           </el-icon>
         </el-tooltip>
         <el-tooltip content="系统设置" placement="bottom">
@@ -29,17 +27,17 @@
           </el-icon>
         </el-tooltip>
         <el-tooltip content="重载" placement="bottom">
-          <el-icon v-if="props.showThemeBar" :size="16" class="icon-cammand">
+          <el-icon :size="16" class="icon-cammand">
             <component is="refresh-right" @click="reloadPage" />
           </el-icon>
         </el-tooltip>
         <el-avatar icon="el-icon-user-solid" :size="30" style="margin-left: 10px"></el-avatar>
         <!-- 用户名下拉菜单 -->
         <el-dropdown class="user-name" trigger="click" @command="handleCommand">
-          <span>
-            管理员
+          <div class="user-name-con">
+            {{ '管理员' }}
             <el-icon><arrow-down /></el-icon>
-          </span>
+          </div>
           <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item icon="mouse" command="updataPassword">密码修改</el-dropdown-item>
@@ -58,28 +56,23 @@ import { Breadcrumb } from '../Breadcrumb'
 import Setting from '../Setting/index.vue'
 import { removeAllStorge } from '@/utils/auth'
 import { useRouter, useRoute } from 'vue-router'
-import { Ref, ref, unref, computed } from 'vue'
-import bus from '@/utils/bus'
+import { Ref, ref, unref } from 'vue'
 
+const { isCollapse, isMobile } = inject<any>('layout-provide')
 const router = useRouter()
 const route = useRoute()
 
 const settingBarStatus = ref<boolean>(false)
 const fullscreen: Ref<boolean> = ref(false)
-const collapse: Ref<boolean> = ref(false)
 
-const props = withDefaults(defineProps<{ showThemeBar?: boolean; menuMode: 'vertical' | 'horizontal' }>(), {
+const props = withDefaults(defineProps<{ showThemeBar?: boolean; isHorizontal: boolean }>(), {
   showThemeBar: true,
-  menuMode: 'vertical',
+  isHorizontal: false,
 })
-
-// 获取layout状态peovide
-const isHor = computed(() => props.menuMode === 'horizontal')
 
 // 收起展开侧边菜单
 const handleCollapse = () => {
-  collapse.value = !collapse.value
-  bus.emit('swithCollapse', collapse.value)
+  isCollapse.value = !isCollapse.value
 }
 
 const handleCommand = (command: string) => {
@@ -113,9 +106,8 @@ const reloadPage = () => {
 </script>
 <style lang="scss">
 $headerHeight: 48px;
-.header {
+.vertical-header {
   background-color: var(--content-background);
-  padding: 0 20px;
   position: relative;
   box-sizing: border-box;
   display: flex;
@@ -129,33 +121,28 @@ $headerHeight: 48px;
   }
   .collapse-btn {
     color: var(--el-text-color-regular);
-    margin-right: 12px;
+    margin-right: 4px;
     cursor: pointer;
     display: flex;
     align-items: center;
+    padding: 12px;
     &:hover {
       color: var(--color-primary);
     }
   }
-  .solgan {
-    cursor: pointer;
-    max-width: 250px;
-    line-height: 50px;
-    margin-right: 24px;
-    font-weight: bolder;
-  }
   .header-menu {
     flex: 1;
+    min-width: 0;
   }
   .header-right {
-    padding-right: 20px;
+    padding-right: 12px;
+    min-width: 204px;
     .header-user-con {
       display: flex;
       align-items: center;
     }
     .icon-cammand {
       color: var(--menu-text);
-      transform: rotate(45deg);
       margin-left: 12px;
       font-weight: lighter;
     }
@@ -163,6 +150,10 @@ $headerHeight: 48px;
       margin-left: 10px;
       font-size: 14px;
       color: var(--menu-text);
+      .el-text {
+        color: var(--menu-text);
+        max-width: 120px;
+      }
       cursor: pointer;
       .el-dropdown-link {
         cursor: pointer;
@@ -173,10 +164,11 @@ $headerHeight: 48px;
     }
   }
 }
-.horizontal-header {
+.horizontal-header:not(.mobile-header) {
   background-color: var(--menu-background) !important;
 }
-body[layout='vertical'] {
+body[layout='vertical'] .vertical-header,
+.mobile-header {
   .icon-cammand {
     color: var(--el-text-color-regular) !important;
   }
