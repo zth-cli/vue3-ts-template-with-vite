@@ -33,6 +33,10 @@ const tagsList: Ref<Array<any>> = ref([])
 const activeValue: Ref<string> = ref('')
 // 设置标签route
 const setTags = (route: RouteLocationNormalizedLoaded) => {
+  if (route.path.match(/\/redirect\//)) {
+    // 重载时不添加
+    return
+  }
   const routeObj = {
     title: route.meta.title,
     fullPath: route.fullPath,
