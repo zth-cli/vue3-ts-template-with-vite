@@ -1,0 +1,16 @@
+# .editorconfig
+root = true
+
+[*]
+charset = utf-8                   # 字符编码 utf-8
+indent_style = space              # 输入的 tab 都用空格代替
+indent_size = 2                   # 一个 tab 用 2 个空格代替
+end_of_line = auto                  # 换行符
+trim_trailing_whitespace = true   # 去掉每行末尾的空格
+insert_final_newline = true       # 文件末尾都加一个空行
+jsx_bracket_same_line = true
+arrow_parens = always
+
+
+[*.md]
+trim_trailing_whitespace = false  # .md 文件不去掉每行末尾的空格
