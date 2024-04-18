@@ -3,29 +3,29 @@ interface ImportMetaEnv {
   /**
    * port
    */
-  readonly VITE_PORT: number
+  VITE_PORT: number
   /**
    * title
    */
-  readonly VITE_TITLE: string
+  VITE_TITLE: string
   /**
    * version
    */
-  readonly VITE_VERSION: string
+  VITE_VERSION: string
   /**
    * open
    */
-  readonly VITE_OPEN: boolean
+  VITE_OPEN: boolean
   /**
    * public path
    */
-  readonly VITE_PUBLIC_PATH: string
+  VITE_PUBLIC_PATH: string
   /**
    * Cross-domain proxy, you can configure multiple
    */
-  readonly VITE_PROXY: string
-  readonly VITE_SIDEBAR_LOGO: boolean
-  readonly VITE_MENU_MODE: string
-  readonly VITE_SHOW_TAG: boolean
-  readonly VITE_SHOW_THEME: boolean
+  VITE_PROXY: string
+  VITE_SIDEBAR_LOGO: boolean
+  VITE_MENU_MODE: string
+  VITE_SHOW_TAG: boolean
+  VITE_SHOW_THEME: boolean
 }

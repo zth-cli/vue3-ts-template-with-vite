@@ -1,6 +1,10 @@
 import { computed } from 'vue'
 import { useMenuStore } from '@/store/menu'
 import { SidebarItem } from './SidebarItem'
+
+/**
+ * @description 侧边栏菜单(水平菜单bug)
+ */
 export const SidebarMenu = defineComponent({
   name: 'SidebarMenu',
   props: { collapse: { type: Boolean, default: false } },

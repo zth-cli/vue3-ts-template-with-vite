@@ -88,7 +88,7 @@ const changeSelectFilter = (value: typeof selectFilterValues.value) => {
   ElMessage({
     type: 'success',
     message: `当前筛选参数为【${JSON.stringify(value)}】`,
-    duration: 2000 * 20,
+    duration: 2000,
   })
   proTable.value!.pageParams.pageIndex = 1
   selectFilterValues.value = value

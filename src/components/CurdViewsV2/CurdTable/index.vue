@@ -12,14 +12,16 @@
     <div class="table-main">
       <div class="table-header">
         <div class="header-lf">
-          <slot
-            name="table-header"
-            :selected-rows-keys="selectedRowsKeys"
-            :selected-rows="selectedRows"
-            :is-selected="isSelected"
-          />
+          <el-scrollbar>
+            <slot
+              name="table-header"
+              :selected-rows-keys="selectedRowsKeys"
+              :selected-rows="selectedRows"
+              :is-selected="isSelected"
+            />
+          </el-scrollbar>
         </div>
-        <div class="header-ri">
+        <div class="header-ri hidden-xs-only">
           <slot name="table-tool">
             <el-space wrap>
               <el-icon :class="['ri-icon', { refresh: loading }]" title="刷新" @click="fetchTableData">

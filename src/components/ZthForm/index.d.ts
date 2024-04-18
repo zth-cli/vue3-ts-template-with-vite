@@ -138,7 +138,7 @@ export type PropsItemType<T extends Record<string, any> = any> =
 /**
  * 拓展el-form组件类型
  */
-export interface PlusFormProps extends /* @vue-ignore */ Partial<Mutable<FormProps>> {
+export interface BaseFormProps extends /* @vue-ignore */ Partial<Mutable<FormProps>> {
   defaultValues?: ModelValues
   columns?: ZthFormItemProp[]
   labelWidth?: string
@@ -529,7 +529,7 @@ export type ModelValues = Record<string, ModelValueType>
 /**
  * @description  传递给 ZthForm的配置， 支持所有 el-form的props。值支持对象object。
  */
-export type ZthFormProp = PropsItemType<PlusFormProps>
+export type ZthFormProp = PropsItemType<BaseFormProps>
 
 /**
  * @description  传递给 ZthFormItem的配置， 支持所有 el-form-item的props。及el-form-item子组件的props

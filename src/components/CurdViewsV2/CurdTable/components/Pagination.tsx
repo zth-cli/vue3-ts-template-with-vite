@@ -20,9 +20,10 @@ export const Pagination = defineComponent({
       required: true,
     },
   },
-  setup(props) {
+  setup(props, { attrs }) {
     return () => (
       <el-pagination
+        {...attrs}
         current-page={props.pageable.pageIndex}
         page-size={props.pageable.pageSize}
         page-sizes={[10, 25, 50, 100]}

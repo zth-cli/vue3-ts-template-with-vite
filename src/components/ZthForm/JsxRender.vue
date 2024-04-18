@@ -11,7 +11,7 @@ import { isString } from '@/utils'
 
 defineOptions({ name: 'JsxRender' })
 
-export interface PlusRenderProps {
+export interface JsxRenderProps {
   /**
    * 渲染的类型
    */
@@ -26,7 +26,7 @@ export interface PlusRenderProps {
   handleChange?: (...arg: any[]) => void
 }
 
-const props = withDefaults(defineProps<PlusRenderProps>(), {
+const props = withDefaults(defineProps<JsxRenderProps>(), {
   renderType: undefined,
   modelValue: '',
   customFieldProps: () => ({}),

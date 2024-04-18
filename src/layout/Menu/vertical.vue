@@ -10,10 +10,10 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
-import { SidebarMenu } from './SidebarMenu'
+import SidebarMenu from './SidebarMenu.vue'
 import bus from '@/utils/bus'
-const isCollapse = ref<boolean>(false)
 
+const isCollapse = ref<boolean>(false)
 bus.on('swithCollapse', (bool: boolean) => {
   isCollapse.value = bool
 })
