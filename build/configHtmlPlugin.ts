@@ -5,7 +5,7 @@ import { createHtmlPlugin } from 'vite-plugin-html'
 import pkg from '../package.json'
 
 export function configHtmlPlugin(env: { [x: string]: string }, isBuild: boolean) {
-  const { VITE_TITLE, VITE_PUBLIC_PATH } = env
+  const { VITE_APP_TITLE, VITE_PUBLIC_PATH } = env
 
   const path = isBuild ? './' : VITE_PUBLIC_PATH
 
@@ -17,7 +17,7 @@ export function configHtmlPlugin(env: { [x: string]: string }, isBuild: boolean)
     minify: isBuild,
     inject: {
       data: {
-        title: VITE_TITLE,
+        title: VITE_APP_TITLE,
       },
       tags: isBuild
         ? [

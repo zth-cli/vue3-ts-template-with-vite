@@ -41,9 +41,13 @@ export function useTheme() {
   const getDarkMode = () => {
     return localStorage.getItem('_theme_') === DARK_MODE
   }
+  const getThemeMode = () => {
+    return localStorage.getItem('_theme_')
+  }
   return {
     getTheme,
     setTheme,
     getDarkMode,
+    getThemeMode,
   }
 }

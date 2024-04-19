@@ -1,0 +1,21 @@
+.zth-logo {
+  align-items: center;
+  display: flex;
+  flex-wrap: nowrap;
+  height: 100%;
+  padding-left: 10px;
+  img {
+    display: inline-block;
+  }
+  .zth-logo-title {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 600;
+    height: 32px;
+    line-height: 32px;
+    margin: 2px 0 0 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

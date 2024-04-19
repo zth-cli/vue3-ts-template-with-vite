@@ -7,8 +7,8 @@
       </el-icon>
     </div>
     <Breadcrumb v-if="!isHorizontal"></Breadcrumb>
-    <div v-if="isHorizontal && !isMobile" class="logo">
-      <img src="@/assets/img/logo.png" />
+    <div v-if="isHorizontal && !isMobile" class="header-logo">
+      <Logo />
     </div>
     <div class="header-menu">
       <Horizontal v-if="isHorizontal && !isMobile"></Horizontal>
@@ -52,8 +52,9 @@
 </template>
 <script setup lang="ts">
 import Horizontal from '../Menu/horizontal.vue'
-import { Breadcrumb } from '../Breadcrumb'
-import Setting from '../Setting/index.vue'
+import { Logo } from '@/layout/Logo'
+import { Breadcrumb } from '@/layout/Breadcrumb'
+import Setting from '@/layout/Setting/index.vue'
 import { removeAllStorge } from '@/utils/auth'
 import { useRouter, useRoute } from 'vue-router'
 import { Ref, ref, unref } from 'vue'
@@ -115,9 +116,16 @@ $headerHeight: 48px;
   width: 100%;
   height: $headerHeight;
   color: var(--el-text-color-regular);
-  i {
-    font-size: 16px;
+  .header-logo {
+    align-items: center;
     cursor: pointer;
+    display: flex;
+    height: 100%;
+    min-width: 200px;
+    padding-left: 10px;
+    transition: all 0.3s ease;
+    width: auto;
+    color: var(--menu-active-text);
   }
   .collapse-btn {
     color: var(--el-text-color-regular);
@@ -169,6 +177,9 @@ $headerHeight: 48px;
 }
 body[layout='vertical'] .vertical-header,
 .mobile-header {
+  .header-logo {
+    color: var(--el-text-color-regular) !important;
+  }
   .icon-cammand {
     color: var(--el-text-color-regular) !important;
   }

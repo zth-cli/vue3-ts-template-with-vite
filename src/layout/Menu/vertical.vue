@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar-container" :class="{ 'menu-collapse': isCollapse }">
     <div class="slide-logo">
-      <!-- <img src="@/assets/img/logo.png" /> -->
+      <Logo />
     </div>
     <el-scrollbar wrap-class="scrollbar-wrapper" class="sidebar-wraper">
       <SidebarMenu :collapse="isCollapse" :default-active="defaultActive" :collapse-transition="false" />
@@ -10,6 +10,7 @@
 </template>
 <script setup lang="ts">
 import { useDefaultActive } from './hooks/useDefaultActive'
+import { Logo } from '@/layout/Logo'
 import SidebarMenu from './SidebarMenu.vue'
 import { useAppStore } from '@/store/modules/app'
 
@@ -42,9 +43,9 @@ const { defaultActive } = useDefaultActive()
   }
 }
 .slide-logo {
-  height: 36px;
-  margin-left: 4px;
-  // margin-top: 8px;
+  width: 100%;
+  height: 48px;
+  color: var(--menu-text);
 }
 .menu-collapse {
   width: 54px !important;

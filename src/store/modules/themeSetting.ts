@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { useTheme } from '@/hooks'
-const { getTheme, setTheme, getDarkMode } = useTheme()
+const { getTheme, setTheme, getDarkMode, getThemeMode } = useTheme()
 
 export const useThemeStore = defineStore('theme', {
   state() {
@@ -14,6 +14,9 @@ export const useThemeStore = defineStore('theme', {
       const list = setTheme(themeName)
       this.colorList = list
       this.isDark = getDarkMode()
+    },
+    getThemeMode() {
+      return getThemeMode
     },
   },
 })
