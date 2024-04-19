@@ -3,14 +3,6 @@ import { useTheme } from '@/hooks'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 const { setTheme } = useTheme()
 setTheme()
-console.log('hello script setup')
-// window.addEventListener(
-//   'click',
-//   (event: Event) => {
-//     console.log(event)
-//   },
-//   false
-// )
 </script>
 
 <template>

@@ -31,7 +31,7 @@
             <component is="refresh-right" @click="reloadPage" />
           </el-icon>
         </el-tooltip>
-        <el-avatar icon="el-icon-user-solid" :size="30" style="margin-left: 10px"></el-avatar>
+        <el-avatar :src="avater" :size="30" style="margin-left: 10px"></el-avatar>
         <!-- 用户名下拉菜单 -->
         <el-dropdown class="user-name" trigger="click" @command="handleCommand">
           <div class="user-name-con">
@@ -51,6 +51,7 @@
   </div>
 </template>
 <script setup lang="ts">
+import avater from '@/assets/img/avater.svg'
 import Horizontal from '../Menu/horizontal.vue'
 import { Logo } from '@/layout/Logo'
 import { Breadcrumb } from '@/layout/Breadcrumb'
