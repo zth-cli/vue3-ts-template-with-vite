@@ -54,6 +54,7 @@
     "unplugin-auto-import": "^0.17.5",
     "unplugin-vue-components": "^0.26.0",
     "unplugin-vue-define-options": "^1.4.3",
+    "unplugin-vue-router": "^0.8.6",
     "vite": "^5.2.7",
     "vite-plugin-env-parse": "^1.0.9",
     "vite-plugin-html": "^3.2.2",
