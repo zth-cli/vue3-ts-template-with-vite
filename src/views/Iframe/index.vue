@@ -1,12 +1,12 @@
 <template>
-  <Playground :full="true">
+  <Layout :full="true">
     <div v-loading="loading" class="frame">
       <iframe ref="frameRef" :src="frameSrc" class="frame-iframe"></iframe>
     </div>
-  </Playground>
+  </Layout>
 </template>
 <script lang="ts" setup>
-import { Playground } from '@/components/Playground'
+import { Layout } from '@/components/Layout'
 import { ref, unref, onMounted, nextTick } from 'vue'
 import { useRoute } from 'vue-router'
 

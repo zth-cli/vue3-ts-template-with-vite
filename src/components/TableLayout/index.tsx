@@ -1,6 +1,7 @@
 import { CSSProperties } from 'vue'
-import { Playground } from '../Playground'
-export const TablePlayground = defineComponent({
+import { Layout } from '../Layout'
+export const TableLayout = defineComponent({
+  name: 'TableLayout',
   setup(_, { slots }) {
     const style: CSSProperties = {
       display: 'flex',
@@ -10,9 +11,9 @@ export const TablePlayground = defineComponent({
       height: '100%',
     }
     return () => (
-      <Playground>
+      <Layout>
         <div style={style}>{slots.default?.()}</div>
-      </Playground>
+      </Layout>
     )
   },
 })

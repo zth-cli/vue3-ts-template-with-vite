@@ -1,11 +1,11 @@
 <template>
-  <Playground>
+  <Layout>
     <section class="error-page">
       <el-empty description="404">
         <el-button type="primary" @click="router.push('/')">返回首页</el-button>
       </el-empty>
     </section>
-  </Playground>
+  </Layout>
 </template>
 
 <script lang="ts" setup>

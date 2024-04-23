@@ -74,6 +74,7 @@ declare module 'vue' {
     FormContent: typeof import('./src/components/ZthForm/FormContent.vue')['default']
     FormData: typeof import('./src/components/CurdViews/FormData/index.vue')['default']
     FormItem: typeof import('./src/components/ZthForm/FormItem.vue')['default']
+    GridBackground: typeof import('./src/components/GridBackground/index.vue')['default']
     JsxRender: typeof import('./src/components/ZthForm/JsxRender.vue')['default']
     LazyTree: typeof import('./src/components/CurdViews/LazyTree.vue')['default']
     MenuItem: typeof import('./src/components/ZthMenu/src/menu-item.vue')['default']

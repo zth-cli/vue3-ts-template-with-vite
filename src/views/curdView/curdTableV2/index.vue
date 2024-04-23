@@ -1,5 +1,5 @@
 <template>
-  <TablePlayground>
+  <TableLayout>
     <CurdTable
       ref="tableRef"
       title="用户列表"
@@ -50,13 +50,13 @@
         </span>
       </template>
     </CurdTable>
-  </TablePlayground>
+  </TableLayout>
 </template>
 
 <script setup lang="tsx">
 import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
-import { TablePlayground } from '@/components/TablePlayground'
+import { TableLayout } from '@/components/TableLayout'
 import { ColumnProps } from '@/components/CurdViewsV2'
 import { useHandleData } from '@/hooks/useHandleData'
 import CurdTable from '@/components/CurdViewsV2/CurdTable/index.vue'

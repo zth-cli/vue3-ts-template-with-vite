@@ -1,5 +1,5 @@
 <template>
-  <Playground>
+  <Layout>
     <div class="home-main">
       <el-row :gutter="18">
         <el-col
@@ -48,7 +48,7 @@
         </el-col>
       </el-row>
     </div>
-  </Playground>
+  </Layout>
 </template>
 
 <script lang="ts">

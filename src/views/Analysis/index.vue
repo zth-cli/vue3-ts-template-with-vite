@@ -1,5 +1,5 @@
 <template>
-  <Playground>
+  <Layout>
     <el-row :gutter="10">
       <el-col :span="12"> <div ref="chartRef" :style="{ height: '280px', width: '100%' }"></div></el-col>
       <el-col :span="12"><div ref="chartRef1" :style="{ height: '280px', width: '100%' }"></div></el-col>
@@ -18,7 +18,8 @@
         </div>
       </el-col>
     </el-row>
-  </Playground>
+    <GridBackground></GridBackground>
+  </Layout>
 </template>
 <script lang="ts">
 import NewMenu from '@/layout/newMenu'

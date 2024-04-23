@@ -1,5 +1,5 @@
 <template>
-  <Playground>
+  <Layout>
     <el-card>
       <!-- {{ state }} -->
       <ZthForm
@@ -22,10 +22,10 @@
         </template>
       </ZthForm>
     </el-card>
-  </Playground>
+  </Layout>
 </template>
 <script setup lang="ts">
-import { Playground } from '@/components/Playground'
+import { Layout } from '@/components/Layout'
 import { ModelValues, ZthFormItemProp } from '@/components/ZthForm'
 import ZthForm from '@/components/ZthForm/index.vue'
 import { ref } from 'vue'

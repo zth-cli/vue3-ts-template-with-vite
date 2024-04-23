@@ -1,5 +1,5 @@
 <template>
-  <Playground>
+  <Layout>
     <!-- <FlowBar :options="fromOptions" :multiple="false"></FlowBar> -->
     <CurdView
       :table-options="tableOptions"
@@ -22,7 +22,7 @@
     <Overlay v-model="close" title="表单录入">
       <FormData v-bind="fromDataOptions" :before-submit="beforeSubmit" @submit="close = false"></FormData>
     </Overlay>
-  </Playground>
+  </Layout>
 </template>
 
 <script lang="ts" setup>

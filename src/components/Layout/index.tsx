@@ -1,7 +1,7 @@
 import { CSSProperties } from 'vue'
 
-export const Playground = defineComponent({
-  name: 'Playground',
+export const Layout = defineComponent({
+  name: 'Layout',
   props: {
     full: { type: Boolean, default: false },
   },

@@ -1,5 +1,5 @@
 <template>
-  <Playground>
+  <Layout>
     <CurdView
       :table-options="tableOptions"
       :from-options="fromOptions"
@@ -18,7 +18,7 @@
         <el-button size="small" @click="getRow(row)">operation</el-button>
       </template>
     </CurdView>
-  </Playground>
+  </Layout>
 </template>
 
 <script lang="ts">
