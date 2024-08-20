@@ -28,7 +28,7 @@
 import { Layout } from '@/components/Layout'
 import { ModelValues, ZthFormItemProp } from '@/components/ZthForm'
 import ZthForm from '@/components/ZthForm/index.vue'
-import { ref } from 'vue'
+import { ref, h } from 'vue'
 const state = ref({
   status: '0',
   name: '',
@@ -137,7 +137,7 @@ const columns: ZthFormItemProp[] = [
     prop: 'img',
     width: 100,
     valueType: 'img',
-    renderField(value, onChange, _props) {
+    renderField(value, onChange) {
       return h('div', {}, [
         h('p', { style: { color: 'red' } }, '渲染函数渲染'),
         h('img', {
@@ -309,7 +309,7 @@ const handleChange = (values: ModelValues, prop: ZthFormItemProp) => {
 const handleSubmit = (values: ModelValues) => {
   console.log(values, 'Submit')
 }
-const handleSubmitError = (err: any) => {
+const handleSubmitError = (err: unknown) => {
   console.log(err, 'err')
 }
 const handleReset = () => {

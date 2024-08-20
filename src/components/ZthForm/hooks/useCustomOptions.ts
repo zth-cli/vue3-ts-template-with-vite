@@ -46,7 +46,6 @@ export const useCustomOptions = (
     const result = getValue(props)
     // 函数返回一个Promise
     if (isPromise(result)) {
-      // eslint-disable-next-line @typescript-eslint/no-extra-semi
       ;(result as Promise<OptionsRow[]>)
         .then((res: OptionsRow[]) => {
           options.value = res

@@ -26,25 +26,23 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       configMockPlugin(command),
       configHtmlPlugin(loadEnv(mode, root), isBuild),
       envParse({
-        dtsPath: './types/env.d.ts'
+        dtsPath: './types/env.d.ts',
       }),
       AutoImport({
-        include: [ /\.[tj]sx?$/, /\.vue$/, /\.md$/],
+        include: [/\.[tj]sx?$/, /\.vue$/, /\.md$/],
         imports: ['vue', 'vue-router', 'vuex'], // 自动导入vue和vue-router等相关函数
         eslintrc: {
           enabled: false, // 若没此json文件，先开启，生成后在关闭
           filepath: './.eslintrc-auto-import.json', // 默认
           globalsPropValue: true,
         },
-        dirs: [
-          'src/store',
-        ],
+        dirs: ['src/store'],
         vueTemplate: true,
         resolvers: [ElementPlusResolver()],
       }),
       //
       Components({
-        include: [ /\.[tj]sx?$/, /\.vue$/, /\.md$/],
+        include: [/\.[tj]sx?$/, /\.vue$/, /\.md$/],
         dirs: ['src/components'],
         deep: true,
         resolvers: [ElementPlusResolver()],

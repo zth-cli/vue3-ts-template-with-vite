@@ -21,7 +21,7 @@
       <Tree v-bind="props.treeOptions" @change-satus="triggerTree" @node-click="treeNodeClick">
         <template #default="{ node, data }">
           <slot v-bind="{ node, data }">
-            <i class="el-icon-folder"> </i>
+            <i class="el-icon-folder" />
             <span>{{ data[props.treeOptions.treeProps['label']] }}</span>
           </slot>
         </template>
@@ -39,13 +39,13 @@
           @params-change="paramsChange"
         >
           <template #tool>
-            <slot name="tool"></slot>
+            <slot name="tool" />
           </template>
           <template #rtool>
-            <slot name="rtool"></slot>
+            <slot name="rtool" />
           </template>
           <template #ltool>
-            <slot name="ltool"></slot>
+            <slot name="ltool" />
           </template>
         </ConditionBar>
       </div>
@@ -65,13 +65,13 @@
           <!-- 自定义表格slot -->
           <template v-for="item in slotArr" #[item.slot]="Props">
             <!--  父组件调用  老版本为：slot-scope="{ row, index }" -->
-            <slot :name="item.slot" v-bind="Props"></slot>
+            <slot :name="item.slot" v-bind="Props" />
           </template>
           <template v-for="item in headerSlotArr" #[item.headerSlot]="Props">
-            <slot :name="item.headerSlot" v-bind="Props"></slot>
+            <slot :name="item.headerSlot" v-bind="Props" />
           </template>
           <template #panel>
-            <slot name="panel"></slot>
+            <slot name="panel" />
           </template>
         </CurdTable>
       </div>
@@ -150,7 +150,7 @@ const addRow = (bool) => {
 }
 const paramsChange = (params) => {
   emit('params-change', params)
-  // eslint-disable-next-line vue/no-mutating-props
+
   props.tableOptions.params = Object.assign({}, props.tableOptions.params, params)
 }
 const triggerTree = (bool: boolean) => {

@@ -1,4 +1,3 @@
-/* eslint-disable no-redeclare */
 import { isString } from './types'
 
 class ZthError extends Error {
@@ -17,7 +16,7 @@ export function debugWarn(scope: string, message: string): void
 export function debugWarn(scope: string | Error, message?: string): void {
   if (import.meta.env.NODE_ENV !== 'production') {
     const error: Error = isString(scope) ? new ZthError(`[${scope}] ${message}`) : scope
-    // eslint-disable-next-line no-console
+
     console.warn(error)
   }
 }

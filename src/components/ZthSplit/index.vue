@@ -2,7 +2,7 @@
   <div ref="split-block" class="co-split">
     <div v-if="modeStr === 'vertical'" class="co-split-vertical">
       <div class="co-left-pane co-split-pane-vertical" :style="leftTopStyle">
-        <slot name="left"></slot>
+        <slot name="left" />
       </div>
       <div
         :class="['co-split-trigger', 'trigger-vertical', { 'c-disbale': forbind }]"
@@ -10,15 +10,15 @@
         @mousedown="triggerMousedown"
         @mouseup="triggerMouseup()"
       >
-        <div class="co-split-button co-split-button-vertical" @click.stop="triggerHandle"></div>
+        <div class="co-split-button co-split-button-vertical" @click.stop="triggerHandle" />
       </div>
       <div class="co-right-pane co-split-pane-vertical" :style="rightBottomStyle">
-        <slot name="right"></slot>
+        <slot name="right" />
       </div>
     </div>
     <div v-if="modeStr === 'horizontal'" class="co-split-horizontal">
       <div class="co-top-pane co-split-pane-horizontal" :style="leftTopStyle">
-        <slot name="top"></slot>
+        <slot name="top" />
       </div>
       <div
         :class="['co-split-trigger', 'trigger-horizontal', { 'c-disbale': forbind }]"
@@ -26,10 +26,10 @@
         @mousedown="triggerMousedown"
         @mouseup="triggerMouseup()"
       >
-        <div class="co-split-button co-split-button-horizontal" @click.stop="triggerHandle"></div>
+        <div class="co-split-button co-split-button-horizontal" @click.stop="triggerHandle" />
       </div>
       <div class="co-bottom-pane co-split-pane-horizontal" :style="rightBottomStyle">
-        <slot name="bottom"></slot>
+        <slot name="bottom" />
       </div>
     </div>
   </div>

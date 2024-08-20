@@ -9,13 +9,13 @@
       @row-add="rowAdd"
     >
       <template #action="{ row }">
-        <el-button size="small" @click="getRow(row)">action</el-button>
+        <el-button size="small" @click="getRow(row)"> action </el-button>
       </template>
       <template #proflies="{ row }">
-        <el-button size="small" @click="getRow(row)">proflies</el-button>
+        <el-button size="small" @click="getRow(row)"> proflies </el-button>
       </template>
       <template #operation="{ row }">
-        <el-button size="small" @click="getRow(row)">operation</el-button>
+        <el-button size="small" @click="getRow(row)"> operation </el-button>
       </template>
     </CurdView>
   </Layout>

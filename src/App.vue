@@ -15,6 +15,7 @@ setTheme()
   font-family: Avenir, Helvetica, Arial, sans-serif;
   width: 100%;
   height: 100vh;
+
   .content {
     height: 100%;
     width: 100%;

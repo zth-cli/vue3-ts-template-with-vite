@@ -28,11 +28,15 @@
                 <RefreshRight />
               </el-icon>
               <SizeSetting v-model="tableSize">
-                <el-icon class="ri-icon" title="密度"><Operation /></el-icon>
+                <el-icon class="ri-icon" title="密度">
+                  <Operation />
+                </el-icon>
               </SizeSetting>
               <!-- <el-button v-if="columns.length" :icon="Operation" circle @click="openColSetting" /> -->
               <ColSetting v-model="colSetting">
-                <el-icon class="ri-icon" title="表格列"><Setting /></el-icon>
+                <el-icon class="ri-icon" title="表格列">
+                  <Setting />
+                </el-icon>
               </ColSetting>
               <el-icon v-if="searchColumns.length" class="ri-icon" @click="isShowSearch = !isShowSearch">
                 <Search />
@@ -50,7 +54,7 @@
         @selection-change="selectionChange"
       >
         <!-- 默认插槽, el-table-column -->
-        <slot></slot>
+        <slot />
         <template v-for="item in tableColumns" :key="item">
           <!-- 处理特殊 column -->
           <el-table-column
@@ -62,22 +66,24 @@
               <!-- expand 支持 tsx 语法 && 作用域插槽 -->
               <template v-if="item.type == 'expand'">
                 <!-- 支持render函数 -->
-                <component :is="item.renderCell" v-bind="scope" v-if="item.renderCell"> </component>
-                <slot v-else :name="item.type" v-bind="scope"></slot>
+                <component :is="item.renderCell" v-bind="scope" v-if="item.renderCell" />
+                <slot v-else :name="item.type" v-bind="scope" />
               </template>
               <!-- 单选时 -->
-              <el-radio v-if="item.type == 'radio'" v-model="radio" :label="scope.row[rowKey]"><span></span></el-radio>
+              <el-radio v-if="item.type == 'radio'" v-model="radio" :label="scope.row[rowKey]">
+                <span />
+              </el-radio>
             </template>
           </el-table-column>
           <!-- 其他常规 el-table-column -->
           <TableColumn v-if="!item.type && item.prop && !item.hidden" :column="item">
             <template v-for="slot in Object.keys($slots)" #[slot]="scope">
-              <slot :name="slot" v-bind="scope"></slot>
+              <slot :name="slot" v-bind="scope" />
             </template>
           </TableColumn>
         </template>
         <template #append>
-          <slot name="append"> </slot>
+          <slot name="append" />
         </template>
         <template #empty>
           <div class="table-empty">

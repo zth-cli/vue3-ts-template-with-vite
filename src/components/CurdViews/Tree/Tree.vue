@@ -4,7 +4,7 @@
       <el-icon @click="changeSatus"><ArrowLeft v-show="toggle" /> <ArrowRight v-show="!toggle" /></el-icon>
     </span>
     <div v-show="toggle" class="tree_main">
-      <el-input v-if="search" v-model="filterText" placeholder="输入关键字进行过滤" size="small"></el-input>
+      <el-input v-if="search" v-model="filterText" placeholder="输入关键字进行过滤" size="small" />
       <div v-loading="loading" class="tree_list">
         <el-tree
           ref="tree"
@@ -21,7 +21,7 @@
         >
           <template #default="{ node, data }">
             <slot v-bind="{ node, data }">
-              <i class="el-icon-folder"> </i>
+              <i class="el-icon-folder" />
               <span>{{ data[treeProps['label']] }}</span>
             </slot>
           </template>
@@ -34,7 +34,7 @@
 <script lang="ts" setup>
 import { http } from '@/utils/http'
 import type Node from 'element-plus/es/components/tree/src/model/node'
-import { ref, watch, h, VNode } from 'vue'
+import { ref, watch, VNode } from 'vue'
 import { defaultTreeData, defaultProps } from './enums'
 
 const loading = ref<boolean>(false)

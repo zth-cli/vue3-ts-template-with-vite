@@ -11,30 +11,30 @@
       <!-- 表格 header 按钮 -->
       <template #table-header>
         <el-space>
-          <el-button type="primary" :icon="CirclePlus">新增用户</el-button>
-          <el-button type="primary" :icon="Upload" plain>批量添加用户</el-button>
-          <el-button type="primary" :icon="Download" plain>导出用户数据</el-button>
-          <el-button type="primary" :icon="Pointer" plain @click="setCurrent">选中第二行</el-button>
+          <el-button type="primary" :icon="CirclePlus"> 新增用户 </el-button>
+          <el-button type="primary" :icon="Upload" plain> 批量添加用户 </el-button>
+          <el-button type="primary" :icon="Download" plain> 导出用户数据 </el-button>
+          <el-button type="primary" :icon="Pointer" plain @click="setCurrent"> 选中第二行 </el-button>
         </el-space>
       </template>
       <!-- 表格操作 -->
       <template #operation>
-        <el-button type="primary" link :icon="View">查看</el-button>
-        <el-button type="primary" link :icon="EditPen">编辑</el-button>
-        <el-button type="primary" link :icon="Refresh">重置密码</el-button>
-        <el-button type="primary" link :icon="Delete">删除</el-button>
+        <el-button type="primary" link :icon="View"> 查看 </el-button>
+        <el-button type="primary" link :icon="EditPen"> 编辑 </el-button>
+        <el-button type="primary" link :icon="Refresh"> 重置密码 </el-button>
+        <el-button type="primary" link :icon="Delete"> 删除 </el-button>
       </template>
     </CurdTable>
   </TableLayout>
 </template>
 <script setup lang="ts" name="useSelectFilter">
+import { ref, reactive, watch } from 'vue'
 import { ElMessage } from 'element-plus'
 import { TableLayout } from '@/components/TableLayout'
 import { SelectFilter } from '@/components/CurdViewsV2/SelectFilter'
 import CurdTable from '@/components/CurdViewsV2/CurdTable/index.vue'
 import { CirclePlus, Delete, EditPen, Pointer, Download, Upload, View, Refresh } from '@element-plus/icons-vue'
 import { CurdTableInstance, ColumnProps, SelectDataProps } from '@/components/CurdViewsV2'
-import { useHandleData } from '@/hooks/useHandleData'
 import { getGiftlist } from '@/api'
 // ProTable 实例
 const proTable = ref<CurdTableInstance>()

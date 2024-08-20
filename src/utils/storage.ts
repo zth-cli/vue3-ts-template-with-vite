@@ -19,7 +19,9 @@ export function createStorage<T extends object>(type: StorageType) {
 
         try {
           storageData = JSON.parse(json)
-        } catch {}
+        } catch {
+          /* empty */
+        }
 
         if (storageData) {
           return storageData as T[K]

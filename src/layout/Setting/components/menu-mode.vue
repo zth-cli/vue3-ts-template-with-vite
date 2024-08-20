@@ -6,7 +6,9 @@
       :class="['drawer-block-checkbox-item', 'drawer-block-checkbox-item-' + item.value]"
       @click="setMenuMode(item.value)"
     >
-      <el-icon v-show="menuMode === item.value" class="selectIcon"><Select /></el-icon>
+      <el-icon v-show="menuMode === item.value" class="selectIcon">
+        <Select />
+      </el-icon>
     </div>
   </div>
 </template>

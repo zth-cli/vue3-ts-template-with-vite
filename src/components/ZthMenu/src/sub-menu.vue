@@ -1,7 +1,7 @@
 <template>
   <li class="zth-sub-menu" :style="{ 'padding-left': paddingLeft }" :data-level="subMenu.level">
     <div class="zth-sub-menu__title" @click="handleClick">
-      <slot name="title"></slot>
+      <slot name="title" />
       <el-icon :size="14" class="zth-sub-menu__icon-arrow" :style="{ transform: opened ? 'rotateZ(180deg)' : 'none' }">
         <component is="ArrowDown" />
       </el-icon>

@@ -6,7 +6,7 @@
       </div>
     </template>
 
-    <div id="charts02" class="charts_main"></div>
+    <div id="charts02" class="charts_main" />
   </el-card>
 </template>
 

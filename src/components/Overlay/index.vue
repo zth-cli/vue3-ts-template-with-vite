@@ -26,7 +26,7 @@
           </div>
         </div>
         <div class="overlay_view">
-          <slot></slot>
+          <slot />
         </div>
       </div>
     </div>

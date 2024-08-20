@@ -3,7 +3,7 @@ interface IrouteItem {
   title: string
   componentName?: string
   componentPath?: string
-  icon?: String
+  icon?: string
   frameSrc?: string
   parentId: number
   id: number

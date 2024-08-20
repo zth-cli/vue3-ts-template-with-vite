@@ -24,9 +24,9 @@
         :key="index"
         :label="col[fieldNames.label]"
         :value="col[fieldNames.value]"
-      ></component>
+      />
     </template>
-    <slot v-else></slot>
+    <slot v-else />
   </component>
 </template>
 

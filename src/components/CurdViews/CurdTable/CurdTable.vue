@@ -1,6 +1,8 @@
 <template>
   <div class="curd_table">
-    <h5 v-if="tableTitle" class="curd_title">{{ tableTitle }}</h5>
+    <h5 v-if="tableTitle" class="curd_title">
+      {{ tableTitle }}
+    </h5>
     <div class="panel_tool">
       <div v-if="props.mode !== 'simple'" class="panel_tool_left">
         <template v-if="props.showPanelTool">
@@ -10,8 +12,9 @@
             icon="plus"
             type="success"
             @click="addRow()"
-            >新增</el-button
           >
+            新增
+          </el-button>
           <el-button
             v-if="props.defaultPanel.includes('edit')"
             icon="edit"
@@ -19,8 +22,9 @@
             :size="tableSize"
             :disabled="isSingle"
             @click="editRow()"
-            >修改</el-button
           >
+            修改
+          </el-button>
           <el-popconfirm
             confirm-button-text="确定"
             cancel-button-text="取消"
@@ -35,8 +39,9 @@
                 type="danger"
                 :size="tableSize"
                 :disabled="isMultiple"
-                >删除</el-button
               >
+                删除
+              </el-button>
             </template>
           </el-popconfirm>
           <el-button
@@ -45,38 +50,47 @@
             icon="download"
             type="primary"
             @click="exportData()"
-            >导出</el-button
           >
-          <slot name="panel"></slot>
+            导出
+          </el-button>
+          <slot name="panel" />
         </template>
       </div>
       <div v-if="props.showSettingTool && props.mode !== 'simple'" class="panel_tool_right">
-        <el-icon :class="['icon', { refresh: loading }]" title="刷新" @click="queryData"><RefreshRight /></el-icon>
+        <el-icon :class="['icon', { refresh: loading }]" title="刷新" @click="queryData">
+          <RefreshRight />
+        </el-icon>
         <el-popover placement="bottom-end" :width="80" trigger="click">
           <div style="margin: 5px 0">
             <div v-for="(col, index) in sizeArr" :key="index">
-              <el-radio v-model="size" :label="col.value" @change="sizeChange">{{ col.label }}</el-radio>
+              <el-radio v-model="size" :label="col.value" @change="sizeChange">
+                {{ col.label }}
+              </el-radio>
             </div>
           </div>
           <template #reference>
-            <el-icon class="icon" title="密度"><Operation /></el-icon>
+            <el-icon class="icon" title="密度">
+              <Operation />
+            </el-icon>
           </template>
         </el-popover>
         <el-popover placement="bottom-end" :width="160" trigger="click">
           <div style="margin: 5px 0">
             <div v-for="(col, index) in props.columns" :key="index">
-              <el-checkbox v-if="col.label" v-model="col.show" :label="col.label" @change="columnsChange">{{
-                col.label
-              }}</el-checkbox>
+              <el-checkbox v-if="col.label" v-model="col.show" :label="col.label" @change="columnsChange">
+                {{ col.label }}
+              </el-checkbox>
             </div>
           </div>
           <template #reference>
-            <el-icon class="icon" title="表格列"><Setting /></el-icon>
+            <el-icon class="icon" title="表格列">
+              <Setting />
+            </el-icon>
           </template>
         </el-popover>
       </div>
     </div>
-    <slot name="panel-gap"></slot>
+    <slot name="panel-gap" />
     <div class="curd_table_main">
       <DataTable
         ref="tableView"
@@ -104,16 +118,18 @@
         @current-change="handleCurrentChange"
       >
         <template v-for="item in slotArr" #[item.slot]="Props">
-          <slot :name="item.slot" v-bind="Props"></slot>
+          <slot :name="item.slot" v-bind="Props" />
         </template>
         <template v-for="item in headerSlotArr" #[item.headerSlot]="Props">
-          <slot :name="item.headerSlot" v-bind="Props"></slot>
+          <slot :name="item.headerSlot" v-bind="Props" />
         </template>
         <template #index="Props">
-          <slot v-if="props.showPage" name="index">{{
-            Props.index + (pageParam.pageIndex - 1) * pageParam.pageSize + 1
-          }}</slot>
-          <slot v-else name="index">{{ Props.index + 1 }}</slot>
+          <slot v-if="props.showPage" name="index">
+            {{ Props.index + (pageParam.pageIndex - 1) * pageParam.pageSize + 1 }}
+          </slot>
+          <slot v-else name="index">
+            {{ Props.index + 1 }}
+          </slot>
         </template>
       </DataTable>
     </div>
@@ -129,7 +145,7 @@
           background
           @current-change="changePage"
           @size-change="changePageSize"
-        ></el-pagination>
+        />
       </div>
     </div>
   </div>

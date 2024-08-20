@@ -6,14 +6,16 @@
           <span> {{ parentRoute[0].title }} </span>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item v-for="(item, index) in parentRoute[0].children" :key="index" :command="item.path">{{
-                item.title
-              }}</el-dropdown-item>
+              <el-dropdown-item v-for="(item, index) in parentRoute[0].children" :key="index" :command="item.path">
+                {{ item.title }}
+              </el-dropdown-item>
             </el-dropdown-menu>
           </template>
         </el-dropdown>
       </el-breadcrumb-item>
-      <el-breadcrumb-item :key="route.meta.title" :to="{ path: route.path }">{{ route.meta.title }}</el-breadcrumb-item>
+      <el-breadcrumb-item :key="route.meta.title" :to="{ path: route.path }">
+        {{ route.meta.title }}
+      </el-breadcrumb-item>
     </transition-group>
   </el-breadcrumb>
 </template>

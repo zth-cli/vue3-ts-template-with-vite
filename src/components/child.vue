@@ -2,28 +2,28 @@
   <div>
     <h1>{{ title }}</h1>
     <el-icon color="red">
-      <edit></edit>
+      <edit />
     </el-icon>
     <h2>{{ props.name }}</h2>
-    <el-button type="primary" @click="clickHandle">点击</el-button>
-    <el-button type="primary" @click="clickHandles">提示</el-button>
-    <el-button v-auth="{ action: ['admin'], effect: 'disabled' }" type="primary">鉴权</el-button>
-    <el-button type="warning" @click="warn('控制台抛异常')">控制台抛异常</el-button>
+    <el-button type="primary" @click="clickHandle"> 点击 </el-button>
+    <el-button type="primary" @click="clickHandles"> 提示 </el-button>
+    <el-button v-auth="{ action: ['admin'], effect: 'disabled' }" type="primary"> 鉴权 </el-button>
+    <el-button type="warning" @click="warn('控制台抛异常')"> 控制台抛异常 </el-button>
     <el-button
       type="primary"
       @click="downloadByUrl({ url: 'http://localhost:8889/src/assets/img/logo.png', fileName: 'a.png' })"
     >
       下载
     </el-button>
-    <slot name="default"></slot>
+    <slot name="default" />
     {{ loading }}
-    <p></p>
+    <p />
     <CountNum prefix="$" :start-val="1" :end-val="100" />
     <renderJsx>
       <strong>这是默认插槽内容</strong>
-      <template #footer="{ text }"
-        ><strong>具名插槽内容：{{ text }}</strong></template
-      >
+      <template #footer="{ text }">
+        <strong>具名插槽内容：{{ text }}</strong>
+      </template>
     </renderJsx>
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <li class="zth-menu-item" :data-level="subMenu.level" :style="{ 'padding-left': paddingLeft }">
-    <slot></slot>
+    <slot />
   </li>
 </template>
 <script setup lang="ts">

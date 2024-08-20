@@ -4,15 +4,15 @@
       <div class="t-header">
         <span>地区发电统计图</span>
         <el-radio-group v-model="typeName" size="small" style="float: right; padding: 3px 0">
-          <el-radio-button label="台数"></el-radio-button>
-          <el-radio-button label="座数"></el-radio-button>
-          <el-radio-button label="容量"></el-radio-button>
+          <el-radio-button label="台数" />
+          <el-radio-button label="座数" />
+          <el-radio-button label="容量" />
         </el-radio-group>
       </div>
     </template>
     <el-row :gutter="18" style="margin-bottom: 16px">
       <el-col :xs="24" :sm="24" :md="24" :lg="18" :xl="18">
-        <div id="charts03" class="charts_main"></div>
+        <div id="charts03" class="charts_main" />
       </el-col>
       <el-col :xs="24" :sm="24" :md="24" :lg="6" :xl="6">
         <el-table :data="tableData" height="300" style="width: 100%" size="large">
@@ -21,10 +21,10 @@
               <span :class="['aindex', $index <= 2 ? 'active' : '']">{{ $index + 1 }}</span>
             </template>
           </el-table-column>
-          <el-table-column prop="typeName" label="地区" align="center" width="100"> </el-table-column>
-          <el-table-column prop="tcount" label="台数" align="center"> </el-table-column>
-          <el-table-column prop="zcount" label="座数" align="center"> </el-table-column>
-          <el-table-column prop="rcount" label="容量" align="center"> </el-table-column>
+          <el-table-column prop="typeName" label="地区" align="center" width="100" />
+          <el-table-column prop="tcount" label="台数" align="center" />
+          <el-table-column prop="zcount" label="座数" align="center" />
+          <el-table-column prop="rcount" label="容量" align="center" />
         </el-table>
       </el-col>
     </el-row>

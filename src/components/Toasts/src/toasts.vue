@@ -12,14 +12,14 @@
       <!-- icon -->
       <template v-if="type || type != 'custom'">
         <div v-if="type === 'success'" class="toast-icon success">
-          <i class="fi fi-br-check"></i>
+          <i class="fi fi-br-check" />
         </div>
         <div v-if="type === 'warning'" class="toast-icon warning">?</div>
         <div v-if="type === 'info'" class="toast-icon info">
-          <i class="fi fi-sr-bell-ring"></i>
+          <i class="fi fi-sr-bell-ring" />
         </div>
         <div v-if="type === 'error'" class="toast-icon error">
-          <i class="fi fi-br-cross-small"></i>
+          <i class="fi fi-br-cross-small" />
         </div>
       </template>
       <div
@@ -27,7 +27,7 @@
         :style="{ backgroundColor: customIconBackground }"
         class="toast-icon"
         v-html="customIcon"
-      ></div>
+      />
       <img v-if="type === 'img'" class="toast-custom-img" :src="customImg" />
       <!-- content -->
       <div class="toast-content">
@@ -39,7 +39,7 @@
           <span class="toast-countdown">{{ countDown }}</span>
         </div>
         <!-- body -->
-        <div v-if="message" class="toast-body" v-html="message"></div>
+        <div v-if="message" class="toast-body" v-html="message" />
         <!-- operate -->
         <div class="toast-operate">
           <a
@@ -56,7 +56,7 @@
       </div>
       <!-- 关闭 -->
       <div v-if="closeIcon" class="toast-close" @click="destruction">
-        <i class="fi fi-rr-cross-small"></i>
+        <i class="fi fi-rr-cross-small" />
       </div>
     </div>
   </transition>

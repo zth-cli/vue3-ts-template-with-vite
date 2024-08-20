@@ -1,12 +1,12 @@
 <template>
   <collapse-transition>
     <ul :class="['zth-menu', { 'zth-menu--collapse': collapse }]">
-      <slot></slot>
+      <slot />
     </ul>
   </collapse-transition>
 </template>
 <script setup lang="ts">
-import { h, ref } from 'vue'
+import { getCurrentInstance, ref } from 'vue'
 import { MenuProvider, SubMenuProvider } from './types'
 
 type menuProps = { mode?: boolean; uniqueOpened?: boolean; collapse?: boolean }

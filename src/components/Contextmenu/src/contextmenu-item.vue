@@ -1,6 +1,6 @@
 <template>
   <p @click.stop="itemClickHnadle()">
-    <slot></slot>
+    <slot />
   </p>
 </template>
 <script setup lang="ts">

@@ -54,7 +54,12 @@ export default {
         return []
       },
     },
-    param: {},
+    param: {
+      type: Object,
+      default: function () {
+        return {}
+      },
+    },
     search: {
       type: Boolean,
       default: true,
@@ -83,6 +88,7 @@ export default {
       default: false,
     },
   },
+  emits: ['changeSatus', 'nodeClick', 'node-expand', 'tab-click'],
   data() {
     return {
       loading: false,
@@ -122,8 +128,7 @@ export default {
       )
         .then((res) => {
           this.loading = false
-          if (res.code === 0) {
-          } else {
+          if (res.code === 0) { /* empty */ } else {
             const data = res.data[this.dataUrlArr[this.activeIndex].urlArr[index].responseName]
 
             if (index === this.dataUrlArr[this.activeIndex].urlArr.length - 1) {
@@ -189,7 +194,7 @@ export default {
 
 function renderContent(h, { node }) {
   // console.log(node);
-  // eslint-disable-next-line no-unused-vars
+
   let icon = 'el-icon-folder'
   switch (node.level) {
     case 1:

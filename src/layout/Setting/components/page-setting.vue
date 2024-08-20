@@ -1,7 +1,7 @@
 <template>
   <div class="theme-item-sub">
     <span>多标签:</span>
-    <el-switch v-model="configStroe.showTag" inline-prompt @change="setTagVisible"></el-switch>
+    <el-switch v-model="configStroe.showTag" inline-prompt @change="setTagVisible" />
   </div>
 </template>
 <script setup lang="ts">

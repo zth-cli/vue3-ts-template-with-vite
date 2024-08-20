@@ -7,7 +7,7 @@
  * @FilePath: \vue3-template-with-ts\src\views\About.vue
 -->
 <template>
-  <div></div>
+  <div />
 </template>
 
 <script lang="ts">

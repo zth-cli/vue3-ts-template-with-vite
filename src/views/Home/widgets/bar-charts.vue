@@ -5,7 +5,7 @@
         <span>发电类型统计图</span>
       </div>
     </template>
-    <div id="charts01" class="charts_main"></div>
+    <div id="charts01" class="charts_main" />
   </el-card>
 </template>
 

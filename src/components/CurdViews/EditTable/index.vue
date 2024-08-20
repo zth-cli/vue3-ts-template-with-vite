@@ -4,7 +4,7 @@
       <el-table-column v-for="col in columns" :key="col.name" :prop="col.name" :label="col.label">
         <template #default="Scope">
           <template v-if="col.type === 'text'">
-            <el-input v-model="Scope.row[col.name]" :placeholder="col.label" clearable></el-input>
+            <el-input v-model="Scope.row[col.name]" :placeholder="col.label" clearable />
           </template>
           <template v-if="col.type === 'select'">
             <el-select
@@ -14,8 +14,7 @@
               filterable
               :multiple="col.multiple ? col.multiple : false"
             >
-              <el-option v-for="item in col.options" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
+              <el-option v-for="item in col.options" :key="item.value" :label="item.label" :value="item.value" />
             </el-select>
           </template>
           <template v-if="col.type === 'textarea'">
@@ -26,13 +25,13 @@
               :placeholder="col.label"
               type="textarea"
               clearable
-            ></el-input>
+            />
           </template>
         </template>
       </el-table-column>
       <el-table-column label="操作" width="120" align="center">
         <template #default="scope">
-          <el-button type="danger" @click="TableData.splice(scope.$index, 1)">移除</el-button>
+          <el-button type="danger" @click="TableData.splice(scope.$index, 1)"> 移除 </el-button>
         </template>
       </el-table-column>
     </el-table>

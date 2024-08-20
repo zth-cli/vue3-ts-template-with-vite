@@ -1,7 +1,7 @@
 <template>
   <div class="curd_tool_bar">
     <div class="curd_tool_content">
-      <slot name="ltool"></slot>
+      <slot name="ltool" />
       <div ref="tools" class="curd_tools" :class="{ ellipsis_curd_tools: expend }">
         <template v-for="(item, index) in fromOptions" :key="'item' + index">
           <template v-if="item.type && allowType.includes(item.type)">
@@ -18,7 +18,7 @@
                   clearable
                   :style="{ width: width }"
                   :value-format="item.format"
-                ></el-date-picker>
+                />
               </div>
             </template>
             <template v-else-if="item.type === 'datetime'">
@@ -33,7 +33,7 @@
                   :style="{ width: width }"
                   :format="item.format"
                   :value-format="item.format"
-                ></el-date-picker>
+                />
               </div>
             </template>
             <template v-else-if="!item.dateSwitch && item.type === 'daterange'">
@@ -49,7 +49,7 @@
                   range-separator="至"
                   start-placeholder="开始日期"
                   end-placeholder="结束日期"
-                ></el-date-picker>
+                />
               </div>
             </template>
             <template v-else-if="item.type === 'select'">
@@ -69,7 +69,7 @@
                     :key="i"
                     :value="item.prop && item.prop['value'] ? ele[item.prop['value']] : ele.value"
                     :label="item.prop && item.prop['label'] ? ele[item.prop['label']] : ele.label"
-                  ></el-option>
+                  />
                 </el-select>
               </div>
             </template>
@@ -78,14 +78,16 @@
                 <template v-if="item.options && item.options.length > 0">
                   <el-checkbox-group v-model="fromData[item.name]">
                     <template v-for="ele in item.options" :key="ele.value">
-                      <el-checkbox :disabled="item.disabled" :label="ele.value">{{ ele.label }}</el-checkbox>
+                      <el-checkbox :disabled="item.disabled" :label="ele.value">
+                        {{ ele.label }}
+                      </el-checkbox>
                     </template>
                   </el-checkbox-group>
                 </template>
                 <template v-else>
-                  <el-checkbox v-model="fromData[item.name]" true-label="1" false-label="0">{{
-                    item.label
-                  }}</el-checkbox>
+                  <el-checkbox v-model="fromData[item.name]" true-label="1" false-label="0">
+                    {{ item.label }}
+                  </el-checkbox>
                 </template>
               </div>
             </template>
@@ -97,7 +99,8 @@
                   class="mini_btns"
                   :type="switchIndex === i ? 'danger' : 'primary'"
                   @click="switchDate(item.name, el, item.dateTypeParamName, i)"
-                  >{{
+                >
+                  {{
                     el.type === 'date'
                       ? '日'
                       : el.type === 'month'
@@ -107,8 +110,8 @@
                           : el.type === 'dates'
                             ? '多日'
                             : '时间'
-                  }}</el-button
-                >
+                  }}
+                </el-button>
                 <el-date-picker
                   v-model="fromData[item.name]"
                   :style="{ width: width }"
@@ -125,33 +128,29 @@
                           ? 'YYYY'
                           : 'yyYYYYyy-MM-DD'
                   "
-                ></el-date-picker>
+                />
               </div>
             </template>
             <template v-else>
               <div ref="itemRefs" class="curd_tool_item">
                 <label v-if="mode !== 'simple'" class="label">{{ item.label }}：</label>
-                <el-input
-                  v-model="fromData[item.name]"
-                  :style="{ width: width }"
-                  :placeholder="usePlaceholder(item)"
-                ></el-input>
+                <el-input v-model="fromData[item.name]" :style="{ width: width }" :placeholder="usePlaceholder(item)" />
               </div>
             </template>
           </template>
         </template>
-        <slot name="rtool"></slot>
+        <slot name="rtool" />
       </div>
       <div v-if="ellipsis" class="ellipsis_icon a" @click="expend = !expend">
         <span>{{ expend ? '隐藏' : '展开' }}</span>
-        <i :class="[expend ? 'el-icon-arrow-up' : 'el-icon-arrow-down']"></i>
+        <i :class="[expend ? 'el-icon-arrow-up' : 'el-icon-arrow-down']" />
       </div>
       <div class="btns">
-        <el-button v-if="fromOptions.length > 0 && mode !== 'simple'" type="primary" icon="search" @click="query()"
-          >查询</el-button
-        >
-        <el-button @click="flowBarResetData">重置</el-button>
-        <slot name="tool"></slot>
+        <el-button v-if="fromOptions.length > 0 && mode !== 'simple'" type="primary" icon="search" @click="query()">
+          查询
+        </el-button>
+        <el-button @click="flowBarResetData"> 重置 </el-button>
+        <slot name="tool" />
       </div>
     </div>
   </div>

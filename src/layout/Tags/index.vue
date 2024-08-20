@@ -9,14 +9,14 @@
       @tab-click="changeTab"
       @tab-remove="closeTags"
     >
-      <el-tab-pane v-for="item in tagsList" :key="item.path" :label="item.title" :name="item.title"></el-tab-pane>
+      <el-tab-pane v-for="item in tagsList" :key="item.path" :label="item.title" :name="item.title" />
     </el-tabs>
     <el-dropdown placement="bottom" @command="handleTags">
-      <el-button icon="ArrowDown" text size="small"></el-button>
+      <el-button icon="ArrowDown" text size="small" />
       <template #dropdown>
         <el-dropdown-menu size="small">
-          <el-dropdown-item command="other">关闭其他</el-dropdown-item>
-          <el-dropdown-item command="all">关闭所有</el-dropdown-item>
+          <el-dropdown-item command="other"> 关闭其他 </el-dropdown-item>
+          <el-dropdown-item command="all"> 关闭所有 </el-dropdown-item>
         </el-dropdown-menu>
       </template>
     </el-dropdown>

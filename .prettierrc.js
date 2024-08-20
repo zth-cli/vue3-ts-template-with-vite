@@ -5,7 +5,7 @@ module.exports = {
   printWidth: 120, // 一行最多 120 字符
   singleQuote: true, // 使用单引号
   semi: false, // 不添加尾部分号
-  arrowParens: 'always',// 箭头函数，只有一个参数的时候，也需要括号
+  arrowParens: 'always', // 箭头函数，只有一个参数的时候，也需要括号
   endOfLine: 'auto',
   overrides: [
     {

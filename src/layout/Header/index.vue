@@ -6,12 +6,12 @@
         <component :is="isCollapse ? 'expand' : 'fold'" @click="handleCollapse()" />
       </el-icon>
     </div>
-    <Breadcrumb v-if="!isHorizontal"></Breadcrumb>
+    <Breadcrumb v-if="!isHorizontal" />
     <div v-if="isHorizontal && !isMobile" class="header-logo">
       <Logo />
     </div>
     <div class="header-menu">
-      <Horizontal v-if="isHorizontal && !isMobile"></Horizontal>
+      <Horizontal v-if="isHorizontal && !isMobile" />
     </div>
     <div class="header-right">
       <div class="header-user-con">
@@ -31,7 +31,7 @@
             <component is="refresh-right" @click="reloadPage" />
           </el-icon>
         </el-tooltip>
-        <el-avatar :src="avater" :size="30" style="margin-left: 10px"></el-avatar>
+        <el-avatar :src="avater" :size="30" style="margin-left: 10px" />
         <!-- 用户名下拉菜单 -->
         <el-dropdown class="user-name" trigger="click" @command="handleCommand">
           <div class="user-name-con">
@@ -40,14 +40,14 @@
           </div>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item icon="mouse" command="updataPassword">密码修改</el-dropdown-item>
-              <el-dropdown-item icon="switch-button" command="loginout">注销</el-dropdown-item>
+              <el-dropdown-item icon="mouse" command="updataPassword"> 密码修改 </el-dropdown-item>
+              <el-dropdown-item icon="switch-button" command="loginout"> 注销 </el-dropdown-item>
             </el-dropdown-menu>
           </template>
         </el-dropdown>
       </div>
     </div>
-    <Setting v-model="settingBarStatus"></Setting>
+    <Setting v-model="settingBarStatus" />
   </div>
 </template>
 <script setup lang="ts">

@@ -13,7 +13,7 @@
       </div>
       <div class="dashboard-item-left">
         <span>
-          <zth-icon :icon="icon" style="font-size: 120px"></zth-icon>
+          <zth-icon :icon="icon" style="font-size: 120px" />
         </span>
       </div>
     </div>
@@ -22,18 +22,18 @@
         <div class="dashboard-item-bottom">
           <div class="dashboard-item-block">
             座数
-            <el-tag size="small" style="margin: 0 8px" effect="plain">123</el-tag>
+            <el-tag size="small" style="margin: 0 8px" effect="plain"> 123 </el-tag>
             台数
-            <el-tag size="small" style="margin: 0 8px" effect="plain">123</el-tag>
+            <el-tag size="small" style="margin: 0 8px" effect="plain"> 123 </el-tag>
             容量
-            <el-tag size="small" style="margin: 0 8px" effect="plain">123</el-tag>
+            <el-tag size="small" style="margin: 0 8px" effect="plain"> 123 </el-tag>
           </div>
-          <i class="el-icon-arrow-right"></i>
+          <i class="el-icon-arrow-right" />
         </div>
       </div>
     </div>
     <div class="t-card_mask">
-      <zth-icon :icon="icon" style="font-size: 120px"></zth-icon>
+      <zth-icon :icon="icon" style="font-size: 120px" />
     </div>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <Layout :full="true">
     <div v-loading="loading" class="frame">
-      <iframe ref="frameRef" :src="frameSrc" class="frame-iframe"></iframe>
+      <iframe ref="frameRef" :src="frameSrc" class="frame-iframe" />
     </div>
   </Layout>
 </template>

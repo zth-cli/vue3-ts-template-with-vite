@@ -11,16 +11,18 @@
               :disabled="item.disabledAll"
               :type="formData[item.name].length ? '' : 'primary'"
               @click="resetItemActive(item, index)"
-              >全部</el-button
             >
+              全部
+            </el-button>
             <ul class="item-ul">
               <li v-for="(ele, inde) in item.options" :key="ele.value" class="item-li">
                 <el-button
                   size="small"
                   :type="isActive(index, inde) ? 'primary' : ''"
                   @click="setFlowSatus(item, index, inde, ele.value)"
-                  >{{ ele.label }}</el-button
                 >
+                  {{ ele.label }}
+                </el-button>
               </li>
             </ul>
           </div>
@@ -31,21 +33,22 @@
               type="info"
               :icon="!switchData[item.name] ? 'arrow-down' : 'arrow-up'"
               @click="switchData[item.name] = !switchData[item.name]"
-              >{{ !switchData[item.name] ? '展开' : '收起' }}</el-button
             >
+              {{ !switchData[item.name] ? '展开' : '收起' }}
+            </el-button>
           </div>
         </section>
       </template>
     </template>
     <ConditionBar :from-options="options" @query="query" @params-change="paramsChange" @reset-data="resetData">
       <template #tool>
-        <slot name="tool"></slot>
+        <slot name="tool" />
       </template>
       <template #ltool>
-        <slot name="ltool"></slot>
+        <slot name="ltool" />
       </template>
       <template #rtool>
-        <slot name="rtool"></slot>
+        <slot name="rtool" />
       </template>
     </ConditionBar>
   </div>

@@ -23,28 +23,28 @@
           :lg="6"
           :xl="6"
         >
-          <dashboardItem v-bind="item" style="margin-bottom: 16px"></dashboardItem>
+          <dashboardItem v-bind="item" style="margin-bottom: 16px" />
         </el-col>
       </el-row>
       <el-row :gutter="18">
         <el-col :xs="24" :sm="24" :md="24" :lg="19" :xl="19" style="margin-bottom: 16px">
-          <bar-charts></bar-charts>
+          <bar-charts />
         </el-col>
         <el-col :xs="24" :sm="24" :md="24" :lg="5" :xl="5" style="margin-bottom: 16px">
-          <pie-charts></pie-charts
-        ></el-col>
+          <pie-charts />
+        </el-col>
       </el-row>
       <el-row>
         <el-col style="margin-bottom: 16px">
-          <line-charts></line-charts>
+          <line-charts />
         </el-col>
       </el-row>
       <el-row :gutter="18">
         <el-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12" style="margin-bottom: 16px">
-          <card-one></card-one>
+          <card-one />
         </el-col>
         <el-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12" style="margin-bottom: 16px">
-          <card-tow></card-tow>
+          <card-tow />
         </el-col>
       </el-row>
     </div>

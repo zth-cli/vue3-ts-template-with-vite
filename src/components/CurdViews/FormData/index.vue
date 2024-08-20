@@ -15,7 +15,7 @@
                   clearable
                   :format="item.format || 'YYYY-MM-DD'"
                   :value-format="item.format || 'YYYY-MM-DD'"
-                ></el-date-picker>
+                />
               </el-form-item>
             </el-col>
           </template>
@@ -30,7 +30,7 @@
                   :placeholder="getPlaceholder(item)"
                   clearable
                   :value-format="item.format"
-                ></el-date-picker>
+                />
               </el-form-item>
             </el-col>
           </template>
@@ -47,7 +47,7 @@
                   range-separator="至"
                   start-placeholder="开始日期"
                   end-placeholder="结束日期"
-                ></el-date-picker>
+                />
               </el-form-item>
             </el-col>
           </template>
@@ -70,8 +70,7 @@
                     :value="item.prop && item.prop['value'] ? ele[item.prop['value']] : ele.value"
                     :label="item.prop && item.prop['label'] ? ele[item.prop['label']] : ele.label"
                     :disabled="ele.disabled"
-                  >
-                  </el-option>
+                  />
                 </el-select>
               </el-form-item>
             </el-col>
@@ -81,7 +80,9 @@
               <el-form-item :key="item.name" class="from_item" :label="item.label" :prop="item.name">
                 <el-radio-group v-model="formData[item.name]">
                   <template v-for="ele in item.options" :key="ele.value">
-                    <el-radio :disabled="item.disabled" :label="ele.value">{{ ele.label }}</el-radio>
+                    <el-radio :disabled="item.disabled" :label="ele.value">
+                      {{ ele.label }}
+                    </el-radio>
                   </template>
                 </el-radio-group>
               </el-form-item>
@@ -92,7 +93,9 @@
               <el-form-item :key="item.name" class="from_item" :label="item.label" :prop="item.name">
                 <el-checkbox-group v-model="formData[item.name]">
                   <template v-for="ele in item.options" :key="ele.value">
-                    <el-checkbox :disabled="item.disabled" :label="ele.value">{{ ele.label }}</el-checkbox>
+                    <el-checkbox :disabled="item.disabled" :label="ele.value">
+                      {{ ele.label }}
+                    </el-checkbox>
                   </template>
                 </el-checkbox-group>
               </el-form-item>
@@ -101,14 +104,14 @@
           <template v-else-if="item.type === 'editTable'">
             <el-col :key="item.name" :span="item.span || 12">
               <el-form-item :key="item.name" class="from_item" :label="item.label" :prop="item.name">
-                <EditTable v-model:propData="formData[item.name]" :columns="item.columns"></EditTable>
+                <EditTable v-model:propData="formData[item.name]" :columns="item.columns" />
               </el-form-item>
             </el-col>
           </template>
           <template v-else-if="item.type === 'upload'">
             <el-col :key="item.name" :span="item.span || 12">
               <el-form-item :key="item.name" class="from_item" :label="item.label" :prop="item.name">
-                <zth-upload v-model="formData[item.name]" :data="item.params" :url="item.url"></zth-upload>
+                <zth-upload v-model="formData[item.name]" :data="item.params" :url="item.url" />
               </el-form-item>
             </el-col>
           </template>
@@ -122,10 +125,10 @@
                   :placeholder="getPlaceholder(item)"
                 >
                   <template v-if="item.append" #append>
-                    <slot :name="item.append" :form-data="{ data: formData, key: item.name }"></slot>
+                    <slot :name="item.append" :form-data="{ data: formData, key: item.name }" />
                   </template>
                   <template v-if="item.prepend" #prepend>
-                    <slot :name="item.prepend" :form-data="{ data: formData, key: item.name }"></slot>
+                    <slot :name="item.prepend" :form-data="{ data: formData, key: item.name }" />
                   </template>
                 </el-input>
               </el-form-item>
@@ -141,10 +144,10 @@
                   :placeholder="getPlaceholder(item)"
                 >
                   <template v-if="item.append" #append>
-                    <slot :name="item.append" :form-data="{ data: formData, key: item.name }"></slot>
+                    <slot :name="item.append" :form-data="{ data: formData, key: item.name }" />
                   </template>
                   <template v-if="item.prepend" #prepend>
-                    <slot :name="item.prepend" :form-data="{ data: formData, key: item.name }"></slot>
+                    <slot :name="item.prepend" :form-data="{ data: formData, key: item.name }" />
                   </template>
                 </el-input>
               </el-form-item>
@@ -154,8 +157,8 @@
       </el-row>
     </el-form>
     <div v-show="postUrl ? true : false" class="btns">
-      <el-button type="primary" @click="submitForm(ruleForm)">提交</el-button>
-      <el-button class="warning" @click="resetForm(ruleForm)">重置</el-button>
+      <el-button type="primary" @click="submitForm(ruleForm)"> 提交 </el-button>
+      <el-button class="warning" @click="resetForm(ruleForm)"> 重置 </el-button>
     </div>
   </div>
 </template>

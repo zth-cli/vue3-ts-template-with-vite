@@ -65,14 +65,6 @@ import { getGiftlist } from '@/api'
 
 // 获取 CurdTable DOM
 const tableRef = ref(null)
-// 自定义渲染表头（使用tsx语法）
-const renderHeader = (scope) => {
-  return (
-    <el-button type='primary' onClick={() => ElMessage.success('我是通过 tsx 语法渲染的表头')}>
-      {scope.column.label}
-    </el-button>
-  )
-}
 // 表格配置项
 const columns: ColumnProps<any>[] = [
   { type: 'selection', fixed: 'left', width: 80 },

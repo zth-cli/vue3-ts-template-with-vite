@@ -9,7 +9,9 @@
           <span>{{ item.title }}</span>
         </template>
       </sub-menu>
-      <menu-item v-else :index="item.id">{{ item.title }}</menu-item>
+      <menu-item v-else :index="item.id">
+        {{ item.title }}
+      </menu-item>
     </template>
   </zth-menu>
 </template>

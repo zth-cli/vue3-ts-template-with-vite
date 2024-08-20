@@ -85,7 +85,7 @@
       class="zth-form-item-field"
       v-bind="customFieldProps"
       @update:model-value="handleChange"
-    ></el-slider>
+    />
 
     <!-- el-autocomplete -->
     <el-autocomplete
@@ -142,7 +142,9 @@
         <template #default>
           <component :is="item.fieldSlot" v-if="isFunction(item.fieldSlot)" v-bind="item" />
           <component :is="fieldChildrenSlot" v-else-if="isFunction(fieldChildrenSlot)" v-bind="item" />
-          <template v-else> {{ item.label }} </template>
+          <template v-else>
+            {{ item.label }}
+          </template>
         </template>
       </el-checkbox>
     </el-checkbox-group>
@@ -166,7 +168,9 @@
         <template #default>
           <component :is="item.fieldSlot" v-if="isFunction(item.fieldSlot)" v-bind="item" />
           <component :is="fieldChildrenSlot" v-else-if="isFunction(fieldChildrenSlot)" v-bind="item" />
-          <template v-else> {{ item.label }} </template>
+          <template v-else>
+            {{ item.label }}
+          </template>
         </template>
       </el-radio>
     </el-radio-group>
@@ -248,7 +252,9 @@
         <template #default>
           <component :is="item.fieldSlot" v-if="isFunction(item.fieldSlot)" v-bind="item" />
           <component :is="fieldChildrenSlot" v-else-if="isFunction(fieldChildrenSlot)" v-bind="item" />
-          <template v-else> {{ item.label }} </template>
+          <template v-else>
+            {{ item.label }}
+          </template>
         </template>
       </el-option>
     </el-select>

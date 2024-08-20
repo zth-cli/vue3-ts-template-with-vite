@@ -6,10 +6,10 @@
       </div>
     </template>
     <el-table :data="tableData" height="300" style="width: 100%" size="large">
-      <el-table-column prop="typeName" label="" align="center" width="100"> </el-table-column>
-      <el-table-column prop="tcount" label="台数" align="center"> </el-table-column>
-      <el-table-column prop="zcount" label="座数" align="center"> </el-table-column>
-      <el-table-column prop="rcount" label="容量" align="center"> </el-table-column>
+      <el-table-column prop="typeName" label="" align="center" width="100" />
+      <el-table-column prop="tcount" label="台数" align="center" />
+      <el-table-column prop="zcount" label="座数" align="center" />
+      <el-table-column prop="rcount" label="容量" align="center" />
     </el-table>
   </el-card>
 </template>

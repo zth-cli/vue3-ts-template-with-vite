@@ -10,7 +10,7 @@ const permission: Directive = {
     const { action, effect } = binding.value
 
     // 此处应该权限判断
-    // eslint-disable-next-line no-constant-condition
+
     if (action.includes('admin')) {
       if (effect === 'disabled') {
         el.disabled = true

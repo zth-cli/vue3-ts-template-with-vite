@@ -1,8 +1,10 @@
 <template>
-  <slot></slot>
-  <Teleport to="body"><div v-show="showContext" ref="mask" class="zth-context-mask"></div></Teleport>
+  <slot />
+  <Teleport to="body">
+    <div v-show="showContext" ref="mask" class="zth-context-mask" />
+  </Teleport>
   <div v-show="showContext" ref="contextDom" class="zth-context" :style="{ left: left + 'px', top: top + 'px' }">
-    <slot name="menu"> </slot>
+    <slot name="menu" />
   </div>
 </template>
 <script setup lang="ts">

@@ -2,7 +2,9 @@
   <div class="drawer-block-checkbox">
     <template v-for="(item, index) in colors" :key="index">
       <div class="theme-color-block" :style="{ background: item.color }" @click="changeTheme(item)">
-        <el-icon v-show="themeName === item.theme" class="selectIcon"><Select /></el-icon>
+        <el-icon v-show="themeName === item.theme" class="selectIcon">
+          <Select />
+        </el-icon>
       </div>
     </template>
   </div>

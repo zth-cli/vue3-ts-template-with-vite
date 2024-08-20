@@ -1,14 +1,14 @@
 <template>
   <el-container :class="['zth-layout', { 'zth-layout-mobile': isMobile }]">
     <SidebarContainer v-if="isVertical || isMobile">
-      <Vertical></Vertical>
+      <Vertical />
     </SidebarContainer>
     <el-container class="zth-container">
       <el-header class="zth-header">
-        <Header :is-horizontal="isHorizontal"></Header>
+        <Header :is-horizontal="isHorizontal" />
       </el-header>
       <el-main class="zth-main">
-        <Tags v-if="showTags"></Tags>
+        <Tags v-if="showTags" />
         <section class="zth-view">
           <MainView :is-horizontal="isHorizontal" />
         </section>

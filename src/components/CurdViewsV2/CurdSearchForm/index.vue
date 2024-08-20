@@ -24,12 +24,12 @@
         </el-col>
         <el-col v-bind="btnSpan">
           <div style="text-align: end">
-            <el-button type="primary" :icon="Search" @click="search">搜索</el-button>
-            <el-button :icon="RefreshLeft" @click="reset">重置</el-button>
+            <el-button type="primary" :icon="Search" @click="search"> 搜索 </el-button>
+            <el-button :icon="RefreshLeft" @click="reset"> 重置 </el-button>
             <el-button v-if="showCollapse" type="primary" link @click="collapsed = !collapsed">
               {{ collapsed ? '展开' : '收起' }}
               <el-icon class="el-icon--right">
-                <component :is="collapsed ? ArrowDown : ArrowUp"></component>
+                <component :is="collapsed ? ArrowDown : ArrowUp" />
               </el-icon>
             </el-button>
           </div>
